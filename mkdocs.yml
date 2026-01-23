@@ -1,0 +1,100 @@
+site_name: Claude Code Media Generator
+site_url: https://darkwingtm.github.io/claude-code-media-generator/
+site_author: DarKWinGTM
+site_description: Generate AI videos and images using Google Veo and Gemini models
+
+repo_name: DarKWinGTM/claude-code-media-generator
+repo_url: https://github.com/DarKWinGTM/claude-code-media-generator
+
+theme:
+  name: material
+  language: en
+  palette:
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Authentication: getting-started/authentication.md
+    - Quick Start: getting-started/quick-start.md
+  - Video Generation:
+    - Overview: video/overview.md
+    - Generation Modes: video/modes.md
+    - Video Models: video/models.md
+    - Reference Images: video/reference-images.md
+    - Video Extension: video/extension.md
+  - Image Generation:
+    - Overview: image/index.md
+  - CLI Reference:
+    - video_gen.py: cli/video_gen.md
+    - image_gen.py: cli/image_gen.md
+    - check_api.py: cli/check_api.md
+  - Guides:
+    - GCS Storage: guides/gcs-storage.md
+    - Presets: guides/presets.md
+    - Troubleshooting: guides/troubleshooting.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/DarKWinGTM
+  generator: false
+
+copyright: Copyright &copy; 2026 DarKWinGTM
