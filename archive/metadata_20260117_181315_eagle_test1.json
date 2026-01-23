@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "type": "video",
+  "legacy": true,
+  "timestamp": "2026-01-17T18:13:15.380593",
+  "command_args": {
+    "prompt": "An eagle soaring in the sky",
+    "model": "[Unknown - legacy]",
+    "duration": 6,
+    "aspect_ratio": "16:9",
+    "resolution": "720p",
+    "auth_method": "[Unknown - legacy]",
+    "mode": "text_to_video"
+  },
+  "generation": {
+    "mode": "text_to_video",
+    "model": "[Unknown - legacy]",
+    "duration_seconds": 6,
+    "aspect_ratio": "16:9",
+    "resolution": "720p",
+    "has_audio": true,
+    "frame_rate": 24
+  },
+  "input_files": {
+    "image": null,
+    "last_frame": null,
+    "reference_assets": [],
+    "reference_style": null,
+    "video": null,
+    "extend_video": null,
+    "mask": null,
+    "mask_mode": null
+  },
+  "output": {
+    "filename": "eagle_test1.mp4",
+    "path": "/home/node/workplace/AWCLOUD/CLAUDE/claude-code-media-generator/generated_videos/eagle_test1.mp4",
+    "file_size_bytes": 3302191,
+    "mime_type": "video/mp4"
+  },
+  "api_response": {
+    "operation_name": "[Unknown - legacy]",
+    "video_uri": "[Unknown - legacy]",
+    "processing_time_seconds": null
+  },
+  "cost_estimate": {
+    "duration_seconds": 6,
+    "price_per_second": 0.35,
+    "estimated_cost_usd": 2.1,
+    "model_tier": "veo-2.0"
+  },
+  "prompt": "An eagle soaring in the sky"
+}
