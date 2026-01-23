@@ -226,9 +226,41 @@ python video_gen.py "Your prompt" --dry-run
 
 ## 📚 Documentation
 
-- [Design Documents](./design/) - Technical specifications
+### 📖 Online Documentation
+
+**Full documentation:** [https://darkwingtm.github.io/claude-code-media-generator/](https://darkwingtm.github.io/claude-code-media-generator/)
+
+### 🌿 Branch Structure
+
+| Branch | Purpose | Content |
+|--------|---------|---------|
+| **main** | Public release | README.md, TODO.md |
+| **pages** | Documentation source | MkDocs files, workflows |
+| **gh-pages** | Built documentation | Auto-generated HTML |
+
+```
+main branch (you are here)
+├── README.md          ← Project overview
+└── TODO.md            ← Development roadmap
+
+pages branch (documentation source)
+├── .github/workflows/docs.yml  ← GitHub Actions
+├── mkdocs.yml                  ← MkDocs config
+└── docs/                       ← Markdown files
+    ├── index.md
+    ├── getting-started/
+    ├── video/
+    ├── image/
+    ├── cli/
+    └── guides/
+
+gh-pages branch (auto-generated)
+└── [Built HTML site]
+```
+
+### 📄 Local Documentation
+
 - [TODO](./TODO.md) - Development roadmap
-- [API Reference](./design/video.design.md) - Detailed API documentation
 
 ---
 
