@@ -16,11 +16,11 @@ AI-Powered Video & Image Generation
 Create stunning videos and images using Google Veo & Imagen APIs
 </p>
 
-<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;" markdown>
 
-[:rocket: Get Started](getting-started/installation.md){ .md-button .md-button--primary }
-[:material-github: View on GitHub](https://github.com/DarKWinGTM/claude-code-media-generator){ .md-button }
-[:material-book-open-variant: Documentation](video/overview.md){ .md-button }
+[Get Started :rocket:](getting-started/installation.md){ .md-button .md-button--primary }
+[View on GitHub :material-github:](https://github.com/DarKWinGTM/claude-code-media-generator){ .md-button }
+[Documentation :material-book-open-variant:](video/overview.md){ .md-button }
 
 </div>
 
