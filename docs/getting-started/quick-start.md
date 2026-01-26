@@ -48,7 +48,7 @@ python video_gen.py "A cat walking" --preset quality
 
 ---
 
-## :frame_with_picture: Image Generation
+## :material-image: Image Generation
 
 ### Your First Image
 
