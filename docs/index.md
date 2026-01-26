@@ -147,7 +147,7 @@ Create stunning videos and images using Google Veo & Imagen APIs
         --storage-uri "gs://PROJECT_ID-media-output/videos/"
     ```
 
-=== ":framed_picture: Generate Image"
+=== ":frame_with_picture: Generate Image"
 
     ```bash
     # Simple text-to-image
@@ -232,7 +232,7 @@ Create stunning videos and images using Google Veo & Imagen APIs
 
     [:octicons-arrow-right-24: Video docs](video/overview.md)
 
--   :framed_picture:{ .lg .middle } **Image Generation**
+-   :frame_with_picture:{ .lg .middle } **Image Generation**
 
     ---
 
