@@ -1,7 +1,7 @@
 # 📋 TODO - Claude Code Media Generator
 
-> **Last Updated:** 2026-01-23
-> **Version:** 1.7
+> **Last Updated:** 2026-01-27
+> **Version:** 1.9
 
 ---
 
@@ -105,6 +105,15 @@
     - docs/guides/presets.md
     - docs/guides/troubleshooting.md
   - [x] **GitHub Pages URL:** https://darkwingtm.github.io/claude-code-media-generator/
+
+### ✅ Completed: GitHub Pages Modernization (2026-01-27)
+- [x] **Glassmorphism Design Overhaul**
+  - [x] Complete redesign with modern 2026 design
+  - [x] Design style: Glassmorphism + Gradient + Bento Grid
+  - [x] `extra.css` - Frosted glass cards, gradient backgrounds, animations
+  - [x] `index.md` - New hero section, bento grid, tabbed quick start
+  - [x] `mkdocs.yml` - Plus Jakarta Sans font
+  - [x] Created overrides templates (main.html, footer.html, header.html)
 
 ### High Priority
 - [ ] **README.md** - Redesign for GitHub
@@ -216,39 +225,56 @@
   - [ ] Tool definitions (generate_video, generate_image, etc.)
   - [ ] Dual transport (stdio + SSE)
 
-### Phase 2.7: External Video Extension Support (v2.25) 🆕
+### ✅ Completed: Phase 2.7 - External Video Extension (v2.26) - 2026-01-24
 
-> **Status:** 📋 Planned
+> **Status:** ✅ PRODUCTION READY
 > **Design:** [video.design.md Section 5.18](./design/video.design.md#518-video-extension-external-urls--fps-requirements-v225)
-> **Added:** 2026-01-23
+> **Updated:** 2026-01-25
 
-**Goal:** Enable video extension from external URLs by auto-downloading and converting to 24fps.
+**Key Features:**
+- [x] `--extend-video-from-url URL` parameter
+- [x] Auto download from HTTP/HTTPS URLs
+- [x] Auto FPS detection using ffprobe
+- [x] Auto convert to 24fps using ffmpeg
+- [x] GCS upload via REST API (not gsutil - less permissions required)
+- [x] Progress indicators for all steps
 
-**Key Discoveries (from testing 2026-01-23):**
-- External HTTP/HTTPS URLs → ❌ "video is empty" (API ไม่รองรับ)
-- GCS URI with non-24fps video → ❌ "fps mismatch" error
-- Veo-generated videos (24fps) → ✅ Works
+**Bug Fixes (2026-01-24):**
+- [x] FPS tolerance 0.1 → 0.01 (Veo requires exactly 24.0fps)
+- [x] Output path `-o` now always saves to `generated_videos/`
+- [x] **GCS Bucket Naming Convention** - MANDATORY pattern: `YOUR_PROJECT_ID-media-output`
 
-**Proposed Solution:**
+**Root Cause Analysis:**
+| Issue | Previously Documented | Actual Root Cause |
+|-------|----------------------|-------------------|
+| gsutil permission denied | gsutil requires `storage.objects.list` | ❌ **Wrong** |
+| | | GCS bucket name ไม่ตรง pattern `YOUR_PROJECT_ID-media-output` ✅ |
+
+**GCS Naming Standard (MANDATORY):**
 ```
-Download URL → FFmpeg Convert 24fps → Upload GCS → Use gcsUri
+Pattern: gs://YOUR_PROJECT_ID-media-output/
+
+Example:
+  Project ID:  gen-lang-client-0344941103
+  GCS Bucket:  gen-lang-client-0344941103-media-output
+  Storage URI: gs://gen-lang-client-0344941103-media-output/path/
 ```
 
-**Implementation Tasks:**
-- [ ] Add `--extend-video-from-url URL` parameter
-- [ ] Implement `download_video_url()` function
-- [ ] Implement `check_video_fps()` using ffprobe
-- [ ] Implement `convert_to_24fps()` using ffmpeg
-- [ ] Integrate with existing auto-upload to GCS
-- [ ] Add progress indicators
-- [ ] Error handling for missing ffmpeg/ffprobe
-- [ ] Add smart validation: warn if ffmpeg not available
-- [ ] Update documentation
+**Test Results:**
+| Step | Status | Details |
+|------|--------|---------|
+| Download from URL | ✅ | 16.63 MB |
+| Detect FPS | ✅ | 23.976fps detected |
+| Convert to 24fps | ✅ | Using ffmpeg |
+| GCS Upload (REST API) | ✅ | 15.70 MB |
+| Veo Extension | ✅ | 55 seconds |
+| Download Result | ✅ | 30 MB output |
 
-**Dependencies:**
-- `ffmpeg` - For video conversion
-- `ffprobe` - For FPS detection
-- `gsutil` or REST API - For GCS upload
+---
+
+### ~~Phase 2.7: External Video Extension Support (v2.25)~~ ✅ COMPLETED (2026-01-24)
+
+> **See:** [Phase 2.7 Completed section above](#-completed-phase-27---external-video-extension-v226---2026-01-24)
 
 ---
 
