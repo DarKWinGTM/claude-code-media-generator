@@ -252,14 +252,14 @@ Create stunning videos and images using Google Veo & Imagen APIs
 
 ---
 
-<div style="text-align: center; padding: 3rem 0;">
+<div style="text-align: center; padding: 3rem 0;" markdown>
 
-<p style="opacity: 0.6; margin-bottom: 1.5rem;">Made with :purple_heart: using Google Vertex AI</p>
+Made with :purple_heart: using Google Vertex AI
 
-<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+<div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;" markdown>
 
-[:material-github: Star on GitHub](https://github.com/DarKWinGTM/claude-code-media-generator){ .md-button }
-[:material-bug: Report Issue](https://github.com/DarKWinGTM/claude-code-media-generator/issues){ .md-button }
+[Star on GitHub :material-github:](https://github.com/DarKWinGTM/claude-code-media-generator){ .md-button }
+[Report Issue :material-bug:](https://github.com/DarKWinGTM/claude-code-media-generator/issues){ .md-button }
 
 </div>
 
