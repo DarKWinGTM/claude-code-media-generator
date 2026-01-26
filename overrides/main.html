@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  <!-- Preconnect for faster font loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Meta for better SEO -->
+  <meta name="author" content="DarKWinGTM">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ config.site_name }}">
+  <meta property="og:description" content="{{ config.site_description }}">
+  <meta property="og:url" content="{{ config.site_url }}">
+  <meta property="og:image" content="{{ config.site_url }}assets/og-image.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ config.site_name }}">
+  <meta name="twitter:description" content="{{ config.site_description }}">
+{% endblock %}
+
+{% block announce %}
+  <!-- Announcement banner (optional - uncomment to use) -->
+  <!--
+  <div class="announcement-banner">
+    <span class="twemoji">🎉</span>
+    <strong>New!</strong> Veo 3.1 support with 8 generation modes
+    <a href="video/modes/">Learn more →</a>
+  </div>
+  -->
+{% endblock %}
+
+{% block content %}
+  {{ super() }}
+{% endblock %}
+
+{% block footer %}
+  {{ super() }}
+
+  <!-- Custom footer scripts -->
+  <script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+
+    // Add loaded class for animations
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('loaded');
+
+      // Intersection Observer for fade-in animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      // Observe cards and sections
+      document.querySelectorAll('.grid.cards > li, .hero-section, .md-content > *').forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
+{% endblock %}

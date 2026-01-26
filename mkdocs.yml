@@ -9,23 +9,27 @@ repo_url: https://github.com/DarKWinGTM/claude-code-media-generator
 theme:
   name: material
   language: en
+  custom_dir: overrides
   palette:
+    # Dark mode (default - modern feel)
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
     # Light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
-      accent: deep purple
+      primary: deep purple
+      accent: cyan
       toggle:
-        icon: material/brightness-7
+        icon: material/weather-night
         name: Switch to dark mode
-    # Dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: indigo
-      accent: deep purple
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
+  font:
+    text: Plus Jakarta Sans
+    code: JetBrains Mono
   features:
     - navigation.tabs
     - navigation.tabs.sticky
@@ -34,16 +38,25 @@ theme:
     - navigation.path
     - navigation.top
     - navigation.footer
+    - navigation.instant
+    - navigation.instant.prefetch
     - search.suggest
     - search.highlight
+    - search.share
     - content.tabs.link
     - content.code.annotation
     - content.code.copy
+    - content.code.select
+    - toc.follow
+    - announce.dismiss
   icon:
     repo: fontawesome/brands/github
+    logo: material/video-box
+  favicon: assets/favicon.png
 
 plugins:
-  - search
+  - search:
+      separator: '[\s\-\.]+'
   - minify:
       minify_html: true
 
@@ -52,11 +65,26 @@ markdown_extensions:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
+      auto_title: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.mark
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.tilde
   - admonition
   - pymdownx.details
   - pymdownx.emoji:
@@ -65,8 +93,13 @@ markdown_extensions:
   - attr_list
   - md_in_html
   - tables
+  - def_list
+  - footnotes
+  - abbr
   - toc:
       permalink: true
+      permalink_title: Link to this section
+      toc_depth: 3
 
 nav:
   - Home: index.md
@@ -95,6 +128,18 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/DarKWinGTM
+      name: GitHub
   generator: false
+  analytics:
+    provider: google
+    property: G-XXXXXXXXXX
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences.
+      Your consent helps us improve the documentation.
 
-copyright: Copyright &copy; 2026 DarKWinGTM
+extra_css:
+  - stylesheets/extra.css
+
+copyright: Copyright &copy; 2026 DarKWinGTM - Made with ❤️ using Google Vertex AI

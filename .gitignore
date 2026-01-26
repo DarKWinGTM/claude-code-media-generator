@@ -16,6 +16,8 @@
 !mkdocs.yml
 !docs/
 !docs/**
+!overrides/
+!overrides/**
 !.github/
 !.github/**
 
