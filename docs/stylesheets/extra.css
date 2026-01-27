@@ -1,32 +1,52 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
+   v1.2 - MCP Round 2 Fixes
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* ===== Root Variables ===== */
+/* ===== Design Tokens (v1.2 - Unified Design System) ===== */
 :root {
-  /* Gradient Colors - More Subdued Professional Palette */
+  /* === Brand Colors === */
+  --brand-primary: #6366f1;      /* indigo-500 - Main brand */
+  --brand-secondary: #22d3ee;    /* cyan-400 - Accent */
+  --brand-accent: #a855f7;       /* purple-500 - Highlights */
+
+  /* === Semantic Colors === */
+  --color-primary: #818cf8;      /* indigo-400 */
+  --color-secondary: #22d3ee;    /* cyan-400 */
+  --color-accent: #f472b6;       /* pink-400 */
+  --color-success: #34d399;      /* emerald-400 */
+  --color-warning: #fbbf24;      /* amber-400 */
+  --color-error: #f87171;        /* red-400 */
+
+  /* === Text Colors (WCAG AA Compliant) === */
+  --text-primary: #f8fafc;       /* slate-50 - Headlines */
+  --text-secondary: #e2e8f0;     /* slate-200 - Body */
+  --text-muted: #94a3b8;         /* slate-400 - Subtle */
+  --text-on-brand: #ffffff;      /* White on brand colors */
+
+  /* === Background Colors === */
+  --bg-page: #0a0a0f;            /* Deep space */
+  --bg-elevated: #0f0f18;        /* Cards, sections */
+  --bg-surface: rgba(15, 15, 25, 0.6);  /* Glassmorphism */
+
+  /* === Gradients === */
   --gradient-primary: linear-gradient(135deg, #5a67d8 0%, #6366f1 50%, #8b5cf6 100%);
   --gradient-secondary: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
   --gradient-accent: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #06b6d4 100%);
   --gradient-dark: linear-gradient(135deg, #0a0a0f 0%, #13131d 50%, #0f0f18 100%);
   --gradient-glow: linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(6, 182, 212, 0.3) 100%);
+  --gradient-card: linear-gradient(145deg, rgba(99, 102, 241, 0.08) 0%, rgba(6, 182, 212, 0.05) 100%);
 
-  /* Colors - Less Vibrant, More Professional */
-  --color-primary: #818cf8;
-  --color-secondary: #22d3ee;
-  --color-accent: #f472b6;
-  --color-success: #34d399;
-  --color-warning: #fbbf24;
-  --color-error: #f87171;
+  /* === Glow Effects === */
   --color-glow-purple: rgba(129, 140, 248, 0.4);
   --color-glow-cyan: rgba(34, 211, 238, 0.4);
   --color-glow-pink: rgba(244, 114, 182, 0.4);
 
-  /* Glassmorphism - Stronger Definition */
+  /* === Glassmorphism === */
   --glass-bg: rgba(255, 255, 255, 0.04);
   --glass-bg-hover: rgba(255, 255, 255, 0.08);
   --glass-border: rgba(255, 255, 255, 0.12);
@@ -34,16 +54,61 @@
   --glass-blur: blur(20px);
   --glass-blur-strong: blur(40px);
 
-  /* Card Styles - Better Definition */
+  /* === Border Radius === */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
   --card-radius: 16px;
   --card-radius-lg: 24px;
+
+  /* === Shadows === */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.15);
   --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   --card-shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 30px rgba(99, 102, 241, 0.15);
   --card-shadow-glow: 0 0 40px rgba(99, 102, 241, 0.2), 0 0 80px rgba(6, 182, 212, 0.1);
 
-  /* Typography */
+  /* === Spacing Scale === */
+  --space-xs: 0.25rem;   /* 4px */
+  --space-sm: 0.5rem;    /* 8px */
+  --space-md: 1rem;      /* 16px */
+  --space-lg: 1.5rem;    /* 24px */
+  --space-xl: 2rem;      /* 32px */
+  --space-2xl: 3rem;     /* 48px */
+  --space-3xl: 4rem;     /* 64px */
+
+  /* === Typography Scale === */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 2rem;      /* 32px */
+  --text-4xl: 2.5rem;    /* 40px */
+  --text-5xl: 3rem;      /* 48px */
+
+  /* === Font === */
   --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* === Button Sizes === */
+  --btn-height-sm: 2rem;
+  --btn-height-md: 2.5rem;
+  --btn-height-lg: 3rem;
+  --btn-min-width: 140px;
+
+  /* === Card Heights === */
+  --card-min-height: 180px;
+
+  /* === Container === */
+  --container-max: 1200px;
+  --content-max: 900px;
 }
 
 /* ===== Base Typography ===== */
@@ -269,29 +334,33 @@ body, .md-typeset {
   background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
 }
 
-/* ===== Cards Grid - Bento Style with Strong Definition ===== */
+/* ===== Cards Grid - Bento Style with Strong Definition (v1.2 Fixed) ===== */
 .grid.cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+  gap: var(--space-lg);
   padding: 0;
-  margin: 2rem 0;
+  margin: var(--space-xl) 0;
+  align-items: stretch;  /* M6: Equal card heights */
 }
 
 .grid.cards > li,
 .grid.cards > ul > li {
   position: relative;
-  background: rgba(15, 15, 25, 0.6);
+  background: var(--gradient-card), var(--bg-surface);  /* H6: Subtle gradient instead of plain gray */
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid rgba(129, 140, 248, 0.2);
+  border: 1px solid rgba(129, 140, 248, 0.25);  /* H5: Stronger border */
   border-radius: var(--card-radius);
-  padding: 1.75rem;
+  padding: var(--space-lg);
   list-style: none;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   cursor: pointer;
   box-shadow: var(--card-shadow);
+  min-height: var(--card-min-height);  /* M6: Consistent height */
+  display: flex;
+  flex-direction: column;
 }
 
 .grid.cards > li::before,
@@ -310,8 +379,8 @@ body, .md-typeset {
 .grid.cards > li:hover,
 .grid.cards > ul > li:hover {
   transform: translateY(-8px) scale(1.02);
-  background: rgba(20, 20, 35, 0.8);
-  border-color: rgba(129, 140, 248, 0.4);
+  background: var(--gradient-card), rgba(20, 20, 35, 0.9);
+  border-color: rgba(129, 140, 248, 0.5);
   box-shadow: var(--card-shadow-hover);
 }
 
@@ -320,38 +389,59 @@ body, .md-typeset {
   opacity: 1;
 }
 
+/* Card content text - better contrast (M3) */
+.grid.cards > li p,
+.grid.cards > ul > li p {
+  color: var(--text-secondary);
+  flex-grow: 1;
+}
+
+.grid.cards > li a,
+.grid.cards > ul > li a {
+  color: var(--color-secondary);
+  font-weight: 600;
+  margin-top: auto;
+}
+
 /* ===== Feature Cards - Strong Definition ===== */
 .feature-card {
   position: relative;
-  background: rgba(15, 15, 25, 0.6);
+  background: var(--gradient-card), var(--bg-surface);
   backdrop-filter: var(--glass-blur);
-  border: 1px solid rgba(129, 140, 248, 0.2);
+  border: 1px solid rgba(129, 140, 248, 0.25);
   border-radius: var(--card-radius);
-  padding: 2rem;
-  margin: 1.5rem 0;
+  padding: var(--space-xl);
+  margin: var(--space-lg) 0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--card-shadow);
 }
 
 .feature-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(129, 140, 248, 0.4);
+  border-color: rgba(129, 140, 248, 0.5);
   box-shadow: var(--card-shadow-hover);
 }
 
 .feature-icon {
   font-size: 2.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
   filter: drop-shadow(0 0 10px var(--color-glow-purple));
 }
 
-/* ===== Buttons - Neon Glow ===== */
+/* ===== Buttons - Unified System (H1, M4 Fixed) ===== */
 .md-button {
   font-family: var(--font-main);
   font-weight: 600;
-  padding: 0.8rem 1.6rem;
-  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: var(--btn-min-width);  /* H1: Consistent button widths */
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: var(--btn-height-lg);
   text-transform: none;
   letter-spacing: 0;
 }
@@ -1145,6 +1235,251 @@ html {
 /* Light mode sidebar */
 [data-md-color-scheme="default"] .md-nav__item--active > .md-nav__link {
   background: rgba(139, 92, 246, 0.08);
+}
+
+/* =====================================================
+   v1.2 MCP Round 2 Fixes - Critical & High Priority
+   ===================================================== */
+
+/* ===== C1: Responsive Fluid Container ===== */
+.md-content__inner {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 2rem clamp(1rem, 5vw, 2.5rem) 4rem;
+}
+
+.md-main__inner {
+  max-width: 100%;
+}
+
+/* Ensure fluid grid layouts */
+@media screen and (min-width: 1220px) {
+  .md-content {
+    max-width: calc(100% - 240px);
+  }
+}
+
+/* ===== C2: Unified Brand Identity ===== */
+/* All brand elements use design tokens consistently */
+.md-typeset a:not(.md-button),
+.md-typeset .headerlink,
+.md-nav__link--active,
+.md-tabs__link--active {
+  color: var(--color-secondary) !important;
+}
+
+.md-typeset a:not(.md-button):hover {
+  color: var(--color-primary) !important;
+}
+
+/* Consistent accent usage */
+.md-header,
+.md-tabs {
+  background: rgba(10, 10, 15, 0.9) !important;
+}
+
+/* ===== H2: Code Block Contrast - Improved ===== */
+.md-typeset pre {
+  background: #0f0f1a !important;  /* Darker for better contrast */
+}
+
+.md-typeset pre > code {
+  color: #f1f5f9 !important;  /* slate-100 - high contrast */
+}
+
+.md-typeset code:not(pre code) {
+  background: rgba(99, 102, 241, 0.2);
+  color: #e0e7ff;  /* indigo-100 - high contrast */
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+[data-md-color-scheme="default"] .md-typeset code:not(pre code) {
+  background: rgba(99, 102, 241, 0.15);
+  color: #4338ca;  /* indigo-700 - high contrast on light */
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+/* ===== H3: Grid Responsive Breakpoints ===== */
+@media screen and (max-width: 1024px) {
+  .grid.cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .grid.cards {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
+/* ===== H4/H8: Stricter Typography Scale ===== */
+.md-typeset h1 {
+  font-size: clamp(2rem, 5vw, 3rem) !important;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.md-typeset h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem) !important;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin-top: 3rem;
+}
+
+.md-typeset h3 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem) !important;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  margin-top: 2.5rem;
+}
+
+.md-typeset h4 {
+  font-size: 1.25rem !important;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-top: 2rem;
+}
+
+.md-typeset h5 {
+  font-size: 1.125rem !important;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-top: 1.5rem;
+}
+
+.md-typeset h6 {
+  font-size: 1rem !important;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-top: 1.25rem;
+  color: var(--text-muted);
+}
+
+/* ===== M1/M5: Section Spacing & Visual Dividers ===== */
+.md-typeset > h2 {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(129, 140, 248, 0.15);
+}
+
+.md-typeset > h2:first-of-type {
+  margin-top: 2rem;
+  padding-top: 0;
+  border-top: none;
+}
+
+/* Section divider line */
+.md-typeset hr {
+  margin: 3rem 0;
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(129, 140, 248, 0.3) 20%,
+    rgba(34, 211, 238, 0.3) 80%,
+    transparent
+  );
+}
+
+/* ===== M7: Consistent Icon System ===== */
+.md-typeset .twemoji,
+.md-typeset .emojione,
+.md-typeset svg.twemoji {
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: -0.15em;
+  filter: drop-shadow(0 0 4px rgba(129, 140, 248, 0.3));
+}
+
+.grid.cards .twemoji,
+.grid.cards .emojione {
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: var(--space-sm);
+}
+
+/* Icon in headings */
+.md-typeset h2 .twemoji,
+.md-typeset h3 .twemoji {
+  margin-right: var(--space-xs);
+}
+
+/* ===== M8: Enhanced Code Block Design ===== */
+.md-typeset pre {
+  border-radius: var(--radius-lg);
+  padding: 0;
+  overflow: hidden;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Code block header bar */
+.md-typeset pre::before {
+  content: '';
+  display: block;
+  height: 32px;
+  background: linear-gradient(180deg, rgba(30, 30, 50, 0.8) 0%, rgba(20, 20, 40, 0.9) 100%);
+  border-bottom: 1px solid rgba(129, 140, 248, 0.2);
+  position: relative;
+}
+
+/* Terminal dots */
+.md-typeset pre::after {
+  content: '● ● ●';
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+}
+
+.md-typeset pre > code {
+  display: block;
+  padding: var(--space-lg);
+  overflow-x: auto;
+}
+
+/* ===== M9: Unified Table Design ===== */
+.md-typeset table:not([class]) {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(129, 140, 248, 0.2);
+  box-shadow: var(--shadow-md);
+}
+
+.md-typeset table:not([class]) th {
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0.15) 100%);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+  border-bottom: 2px solid rgba(129, 140, 248, 0.3);
+}
+
+.md-typeset table:not([class]) td {
+  border-bottom: 1px solid rgba(129, 140, 248, 0.1);
+}
+
+/* ===== L1: Footer Alignment ===== */
+.md-footer-meta__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
 }
 
 /* ===== Additional Polish ===== */
