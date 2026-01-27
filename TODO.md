@@ -1,7 +1,7 @@
 # 📋 TODO - Claude Code Media Generator
 
 > **Last Updated:** 2026-01-27
-> **Version:** 1.9
+> **Version:** 2.0
 
 ---
 
@@ -114,6 +114,53 @@
   - [x] `index.md` - New hero section, bento grid, tabbed quick start
   - [x] `mkdocs.yml` - Plus Jakarta Sans font
   - [x] Created overrides templates (main.html, footer.html, header.html)
+
+### ✅ Completed: GitHub Pages UI/UX Improvements (2026-01-27)
+
+> **Design Document:** [design/pages.design.md](design/pages.design.md) v1.1
+> **Changelog:** [changelog/pages.changelog.md](changelog/pages.changelog.md)
+> **25 Issues Identified via MCP + UI/UX Pro Max Analysis** - ✅ ALL RESOLVED
+
+#### ✅ Phase 1: Critical Fixes (Must Fix) - Complete
+- [x] Fix code syntax highlighting (mkdocs.yml - Monokai Pro theme)
+- [x] Fix text contrast ratio (extra.css - WCAG AA ≥4.5:1)
+- [x] Fix table row padding (extra.css - 1rem 1.25rem)
+- [x] Fix table header contrast (extra.css - bg-primary + white text)
+
+#### ✅ Phase 2: High Priority - Complete
+- [x] Add card hover effects (hover:shadow-lg, cursor-pointer)
+- [x] Fix line height (leading-relaxed 1.625)
+- [x] Standardize section spacing (space-y-8)
+- [x] Reduce cookie banner prominence
+- [x] Improve heading hierarchy (H2/H3 size/weight difference)
+- [x] Add code line numbers (linenums: true)
+
+#### ✅ Phase 3: Medium Priority - Complete
+- [x] Button hover states (hover:scale-105 transition)
+- [x] Unified shadow system for cards
+- [x] Consistent icon sizes (w-6 h-6)
+- [x] Table zebra striping (odd:bg-gray-50)
+- [x] Focus states for accessibility (focus:ring-2)
+- [x] Output label styling (font-semibold)
+- [x] Reduce content density (more whitespace)
+- [x] Warning box styling (stronger border + bg)
+
+#### ✅ Phase 4: Polish - Complete
+- [x] Breadcrumb navigation
+- [x] Footer improvements (larger links, more spacing)
+- [x] Smooth scroll (scroll-behavior: smooth)
+- [x] Code copy button size increase
+- [x] Responsive tables (horizontal scroll on mobile)
+- [x] Hero spacing improvement (more padding-y)
+- [x] Sidebar active state (bg-primary/10 border-left)
+
+#### ✅ MCP Re-analysis Fixes - Complete
+- [x] Hero text contrast: Dark bg (#0d0d14) + white text
+- [x] Color scheme: Subdued palette #818cf8 (was #a78bfa)
+- [x] Cards: Visible borders + stronger shadows
+- [x] Layout spacing: Section dividers, max-width 900px
+- [x] Typography: h2=2rem, h3=1.5rem, h4=1.25rem, h5=1.125rem
+- [x] Light mode: Purple-tinted borders, proper backgrounds
 
 ### High Priority
 - [ ] **README.md** - Redesign for GitHub
