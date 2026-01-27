@@ -1521,3 +1521,334 @@ a, button, input, .md-nav__link, .md-tabs__link {
 .md-typeset blockquote p {
   margin-bottom: 0;
 }
+
+/* =====================================================
+   v1.3 - User Feedback Fixes (2026-01-27)
+   - Buttons consistency
+   - Layout/viewport fixes
+   - Code block improvements (no line numbers)
+   - Better icons/colors
+   ===================================================== */
+
+/* ===== BUTTONS - Unified Sizing ===== */
+.md-button {
+  min-width: 160px !important;
+  height: 48px !important;
+  padding: 0 28px !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  border-radius: 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px;
+  text-decoration: none !important;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+/* Primary Button - Gradient Purple */
+.md-button--primary {
+  background: linear-gradient(135deg, #7c3aed 0%, #6366f1 50%, #8b5cf6 100%) !important;
+  border: none !important;
+  color: white !important;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+}
+
+.md-button--primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.5), 0 0 40px rgba(124, 58, 237, 0.2);
+}
+
+/* Secondary Button - Glass */
+.md-button:not(.md-button--primary) {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  color: #f1f5f9 !important;
+  backdrop-filter: blur(10px);
+}
+
+.md-button:not(.md-button--primary):hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: var(--color-secondary) !important;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 0 30px rgba(34, 211, 238, 0.3);
+}
+
+/* Button container alignment */
+.hero-section .md-button + .md-button,
+.md-typeset .md-button + .md-button {
+  margin-left: 12px;
+}
+
+/* ===== LAYOUT - Full Viewport Width ===== */
+.md-main {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.md-content {
+  max-width: 100%;
+}
+
+.md-content__inner {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem clamp(1.5rem, 4vw, 3rem) 4rem;
+}
+
+/* Hero Section - Full Bleed */
+.hero-section {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 5rem clamp(2rem, 8vw, 4rem);
+  text-align: center;
+}
+
+/* ===== CODE BLOCKS - Clean Design (No Line Numbers) ===== */
+/* Hide any remaining line numbers */
+.md-typeset .linenos,
+.md-typeset .linenodiv,
+.md-typeset .highlighttable td:first-child,
+.md-typeset pre .linenos,
+.highlighttable .linenos {
+  display: none !important;
+}
+
+/* Clean code block styling */
+.md-typeset pre {
+  background: linear-gradient(180deg, #12121f 0%, #0d0d18 100%) !important;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 16px;
+  padding: 0;
+  margin: 1.5rem 0;
+  overflow: hidden;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.md-typeset pre > code {
+  display: block;
+  padding: 1.25rem 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #e2e8f0;
+  background: transparent !important;
+  overflow-x: auto;
+}
+
+/* Code block hover effect */
+.md-typeset pre:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(99, 102, 241, 0.1);
+}
+
+/* Inline code */
+.md-typeset code:not(pre code) {
+  background: rgba(99, 102, 241, 0.15);
+  color: #c7d2fe;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: 6px;
+  padding: 0.15em 0.5em;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+/* ===== COLORS - Improved Palette ===== */
+:root {
+  /* More vivid primary colors */
+  --color-primary: #8b5cf6;    /* Vivid violet */
+  --color-secondary: #06b6d4;  /* Cyan 500 */
+  --color-accent: #f472b6;     /* Pink */
+
+  /* Better text contrast */
+  --text-hero: #ffffff;
+  --text-primary: #f8fafc;
+  --text-secondary: #e2e8f0;
+  --text-muted: #94a3b8;
+}
+
+/* Hero text - pure white */
+.hero-section h1,
+.hero-section .md-typeset h1 {
+  color: #ffffff !important;
+  text-shadow: 0 4px 30px rgba(139, 92, 246, 0.5);
+}
+
+.hero-section p,
+.hero-section .md-typeset p {
+  color: #e2e8f0 !important;
+}
+
+/* ===== CARDS - Better Gradient & Spacing ===== */
+.grid.cards > li {
+  background: linear-gradient(145deg,
+    rgba(99, 102, 241, 0.08) 0%,
+    rgba(15, 15, 25, 0.9) 50%,
+    rgba(6, 182, 212, 0.05) 100%
+  );
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 20px;
+  padding: 1.75rem;
+  min-height: 200px;
+}
+
+.grid.cards > li:hover {
+  border-color: rgba(99, 102, 241, 0.5);
+  transform: translateY(-8px);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    0 0 50px rgba(99, 102, 241, 0.15);
+}
+
+/* Card titles */
+.grid.cards > li strong,
+.grid.cards > li h3 {
+  color: #ffffff;
+  font-size: 1.15rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Card text */
+.grid.cards > li p {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ===== ICONS - Material Design Icons ===== */
+/* Twemoji sizing fix */
+.md-typeset .twemoji,
+.md-typeset .emojione,
+.md-typeset svg.twemoji {
+  width: 1.3em;
+  height: 1.3em;
+  vertical-align: -0.2em;
+}
+
+/* Card icons - larger */
+.grid.cards .twemoji,
+.grid.cards svg.twemoji {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.4));
+}
+
+/* Material icons (if used) */
+.md-typeset .material-icons,
+.md-typeset [class*="material-"] {
+  font-size: 1.25em;
+  vertical-align: -0.15em;
+  color: var(--color-secondary);
+}
+
+/* Heart icon - special styling */
+.heart-icon {
+  color: #e11d48 !important;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* ===== TABLES - Clean Design ===== */
+.md-typeset table:not([class]) {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  margin: 2rem 0;
+}
+
+.md-typeset table:not([class]) th {
+  background: linear-gradient(180deg,
+    rgba(99, 102, 241, 0.25) 0%,
+    rgba(99, 102, 241, 0.15) 100%
+  );
+  color: #ffffff;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  padding: 1rem 1.25rem;
+  border-bottom: 2px solid rgba(99, 102, 241, 0.3);
+}
+
+.md-typeset table:not([class]) td {
+  padding: 0.9rem 1.25rem;
+  color: #e2e8f0;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.08);
+}
+
+/* ===== RESPONSIVE - Mobile Fixes ===== */
+@media screen and (max-width: 768px) {
+  .md-button {
+    min-width: 140px !important;
+    height: 44px !important;
+    padding: 0 20px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .hero-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .hero-section h1 {
+    font-size: 1.75rem !important;
+  }
+
+  .grid.cards {
+    gap: 1rem;
+  }
+
+  .grid.cards > li {
+    padding: 1.25rem;
+    min-height: auto;
+  }
+}
+
+/* ===== LIGHT MODE ADJUSTMENTS ===== */
+[data-md-color-scheme="default"] .md-button--primary {
+  background: linear-gradient(135deg, #7c3aed 0%, #6366f1 100%) !important;
+}
+
+[data-md-color-scheme="default"] .md-button:not(.md-button--primary) {
+  background: rgba(99, 102, 241, 0.1) !important;
+  border-color: rgba(99, 102, 241, 0.3) !important;
+  color: #4338ca !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset pre {
+  background: #f8fafc !important;
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+[data-md-color-scheme="default"] .md-typeset pre > code {
+  color: #1e293b;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(99, 102, 241, 0.15);
+}
+
+[data-md-color-scheme="default"] .grid.cards > li strong,
+[data-md-color-scheme="default"] .grid.cards > li h3 {
+  color: #1e293b;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li p {
+  color: #475569;
+}
