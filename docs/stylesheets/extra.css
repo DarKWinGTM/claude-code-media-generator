@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.7 - Responsive & Contrast Improvements
+   v1.7.1 - Footer & Global Contrast Fixes
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -2735,4 +2735,145 @@ a, button, input, .md-nav__link, .md-tabs__link {
   .hero-section p {
     font-size: 0.95rem !important;
   }
+}
+
+/* =====================================================
+   v1.7.1 - FOOTER NAVIGATION & GLOBAL CONTRAST FIX
+   - Footer Previous/Next text visibility
+   - All muted/direction text enhanced
+   - Comprehensive Light Mode audit
+   ===================================================== */
+
+/* ===== LIGHT MODE - Footer Navigation ===== */
+[data-md-color-scheme="default"] .md-footer__link {
+  color: #475569 !important;
+}
+
+[data-md-color-scheme="default"] .md-footer__link:hover {
+  color: #4F46E5 !important;
+}
+
+[data-md-color-scheme="default"] .md-footer__title {
+  color: #1E293B !important;
+}
+
+[data-md-color-scheme="default"] .md-footer__direction {
+  color: #64748B !important;
+  font-weight: 500 !important;
+  opacity: 1 !important;
+}
+
+[data-md-color-scheme="default"] .md-footer__button svg,
+[data-md-color-scheme="default"] .md-footer__button svg path {
+  fill: #475569 !important;
+}
+
+[data-md-color-scheme="default"] .md-footer__link:hover .md-footer__button svg,
+[data-md-color-scheme="default"] .md-footer__link:hover .md-footer__button svg path {
+  fill: #4F46E5 !important;
+}
+
+[data-md-color-scheme="default"] .md-ellipsis {
+  color: #1E293B !important;
+}
+
+/* ===== LIGHT MODE - Global Muted Text Fix ===== */
+[data-md-color-scheme="default"] .md-typeset .muted,
+[data-md-color-scheme="default"] .md-typeset small,
+[data-md-color-scheme="default"] .md-typeset .caption {
+  color: #64748B !important;
+}
+
+/* ===== LIGHT MODE - TOC (Table of Contents) ===== */
+[data-md-color-scheme="default"] .md-nav--secondary .md-nav__link {
+  color: #475569 !important;
+}
+
+[data-md-color-scheme="default"] .md-nav--secondary .md-nav__link:hover {
+  color: #4F46E5 !important;
+}
+
+[data-md-color-scheme="default"] .md-nav--secondary .md-nav__link--active {
+  color: #4F46E5 !important;
+  font-weight: 600 !important;
+}
+
+/* ===== LIGHT MODE - Breadcrumbs ===== */
+[data-md-color-scheme="default"] .md-path__link {
+  color: #64748B !important;
+}
+
+[data-md-color-scheme="default"] .md-path__link:hover {
+  color: #4F46E5 !important;
+}
+
+/* ===== LIGHT MODE - Labels & Badges ===== */
+[data-md-color-scheme="default"] .md-typeset .md-tag {
+  background: #F1F5F9 !important;
+  color: #475569 !important;
+  border: 1px solid #E2E8F0 !important;
+}
+
+/* ===== LIGHT MODE - Status Icons ===== */
+[data-md-color-scheme="default"] .status-ready {
+  color: #16A34A !important;
+}
+
+[data-md-color-scheme="default"] .status-planned {
+  color: #D97706 !important;
+}
+
+/* ===== LIGHT MODE - Inline Code ===== */
+[data-md-color-scheme="default"] .md-typeset :not(pre) > code {
+  background: #F1F5F9 !important;
+  color: #BE185D !important;
+  border: 1px solid #E2E8F0 !important;
+  padding: 0.1rem 0.4rem !important;
+  border-radius: 4px !important;
+}
+
+/* ===== LIGHT MODE - Blockquotes ===== */
+[data-md-color-scheme="default"] .md-typeset blockquote {
+  background: #F8FAFC !important;
+  border-left: 4px solid #4F46E5 !important;
+  color: #475569 !important;
+}
+
+/* ===== LIGHT MODE - Tab Labels ===== */
+[data-md-color-scheme="default"] .md-typeset .tabbed-labels > label {
+  color: #475569 !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset .tabbed-labels > label:hover {
+  color: #4F46E5 !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset .tabbed-labels > label.tabbed-set--active {
+  color: #4F46E5 !important;
+  border-color: #4F46E5 !important;
+}
+
+/* ===== LIGHT MODE - Copy Button ===== */
+[data-md-color-scheme="default"] .md-clipboard {
+  color: #94A3B8 !important;
+}
+
+[data-md-color-scheme="default"] .md-clipboard:hover {
+  color: #4F46E5 !important;
+}
+
+/* ===== LIGHT MODE - Version Selector ===== */
+[data-md-color-scheme="default"] .md-version {
+  color: #475569 !important;
+}
+
+/* ===== LIGHT MODE - Announcement Bar ===== */
+[data-md-color-scheme="default"] .md-announce {
+  background: #4F46E5 !important;
+  color: #FFFFFF !important;
+}
+
+[data-md-color-scheme="default"] .md-announce a {
+  color: #FFFFFF !important;
+  text-decoration: underline !important;
 }

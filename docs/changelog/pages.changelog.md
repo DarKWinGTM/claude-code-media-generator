@@ -1,12 +1,54 @@
 # Changelog - GitHub Pages Design
 
 > **Parent Document:** [pages.design.md](../design/pages.design.md)
-> **Current Version:** 1.2
+> **Current Version:** 1.3
 > **Session:** 5584c223-ebff-4c03-b92c-697360841c5e
 
 ---
 
 ## Version History
+
+### Version 1.3 (2026-01-27)
+
+**CSS v1.7 Responsive & Contrast Improvements**
+
+**Session:** 5584c223-ebff-4c03-b92c-697360841c5e
+
+#### Changes
+
+- **Hero Buttons**: Row layout on Desktop, Column on Mobile
+- **Grid Cards**: Stronger icon contrast (#4F46E5 instead of #6366F1)
+- **Grid Cards**: Enhanced text readability with darker colors
+- **Body Text**: Improved line-height (1.7) and contrast
+- **Hero Section**: Gradient background with dark text for Light Mode
+- **Sticky Sidebar**: Sidebar stays visible during scroll
+
+#### Responsive Breakpoints
+
+| Breakpoint | Layout |
+|------------|--------|
+| Desktop (>960px) | Buttons in row, centered |
+| Tablet (<960px) | Buttons wrap with smaller gap |
+| Mobile (<768px) | Buttons stack vertically |
+| Small Mobile (<480px) | Full-width buttons |
+
+#### Technical Implementation
+
+| Component | Light Mode Value |
+|-----------|------------------|
+| Grid icons | #4F46E5 (stronger contrast) |
+| Card titles | #0F172A |
+| Card text | #334155 |
+| Card links | #4F46E5 → #3730A3 on hover |
+| Hero background | gradient(#F1F5F9 → #E2E8F0) |
+
+#### Commits
+
+| Commit | Description |
+|--------|-------------|
+| `04b3da0` | CSS v1.7 Responsive & Contrast Improvements |
+
+---
 
 ### Version 1.2 (2026-01-27)
 
@@ -131,6 +173,11 @@
 
 | Version | Date | Changes | Session ID |
 |---------|------|---------|------------|
+| 1.3 | 2026-01-27 | **[CSS v1.7 Responsive & Contrast](#version-13-2026-01-27)** | 5584c223... |
+| | | - Hero buttons: Row on Desktop, Column on Mobile | |
+| | | - Grid cards: Stronger icon contrast (#4F46E5) | |
+| | | - Sticky sidebar during scroll | |
+| | | Summary: Responsive layout and contrast improvements | |
 | 1.2 | 2026-01-27 | **[CSS v1.6 Professional Design System](#version-12-2026-01-27)** | 5584c223... |
 | | | - Complete Light Mode redesign with WCAG AA compliance | |
 | | | - Header, tabs, sidebar, grid cards, tables all fixed | |
