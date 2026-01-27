@@ -6,7 +6,7 @@ hide:
 
 <div class="hero-section" markdown>
 
-# :sparkles: Claude Code Media Generator
+# :material-movie-star: Claude Code Media Generator
 
 <p style="font-size: 1.4rem; opacity: 0.9; margin-bottom: 0.5rem; font-weight: 500;">
 AI-Powered Video & Image Generation
@@ -18,7 +18,7 @@ Create stunning videos and images using Google Veo & Imagen APIs
 
 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;" markdown>
 
-[Get Started :rocket:](getting-started/installation.md){ .md-button .md-button--primary }
+[Get Started :material-rocket-launch:](getting-started/installation.md){ .md-button .md-button--primary }
 [View on GitHub :material-github:](https://github.com/DarKWinGTM/claude-code-media-generator){ .md-button }
 [Documentation :material-book-open-variant:](video/overview.md){ .md-button }
 
@@ -28,91 +28,91 @@ Create stunning videos and images using Google Veo & Imagen APIs
 
 ---
 
-## :zap: Why Claude Code Media Generator?
+## :material-lightning-bolt: Why Claude Code Media Generator?
 
 <div class="grid cards" markdown>
 
--   :movie_camera:{ .lg .middle } **8 Video Generation Modes**
+-   :material-video-vintage:{ .lg .middle } **8 Video Generation Modes**
 
     ---
 
     From text-to-video to advanced video extension, style transfer, and object manipulation. All powered by Google Veo 3.1.
 
-    [:octicons-arrow-right-24: Explore all modes](video/modes.md)
+    [:material-arrow-right: Explore all modes](video/modes.md)
 
--   :art:{ .lg .middle } **Reference Image System**
+-   :material-palette:{ .lg .middle } **Reference Image System**
 
     ---
 
     Use up to 3 reference images for subject preservation or apply style transfer from any image.
 
-    [:octicons-arrow-right-24: Learn more](video/reference-images.md)
+    [:material-arrow-right: Learn more](video/reference-images.md)
 
--   :cloud:{ .lg .middle } **Cloud-Native Architecture**
+-   :material-cloud-upload:{ .lg .middle } **Cloud-Native Architecture**
 
     ---
 
     Direct GCS storage integration. Auto-upload for seamless video extension workflows.
 
-    [:octicons-arrow-right-24: GCS Setup Guide](guides/gcs-storage.md)
+    [:material-arrow-right: GCS Setup Guide](guides/gcs-storage.md)
 
--   :zap:{ .lg .middle } **Smart Presets**
+-   :material-flash:{ .lg .middle } **Smart Presets**
 
     ---
 
     Quick, Quality, Extend, Budget — choose the right balance of speed, quality, and cost.
 
-    [:octicons-arrow-right-24: View presets](guides/presets.md)
+    [:material-arrow-right: View presets](guides/presets.md)
 
 </div>
 
 ---
 
-## :clapper: Video Generation Modes
+## :material-movie-open: Video Generation Modes
 
 <div class="grid cards" markdown>
 
--   :abc: **Text-to-Video**
+-   :material-text-box: **Text-to-Video**
 
     Generate video from text prompt only
 
--   :frame_with_picture: **Image-to-Video**
+-   :material-image-move: **Image-to-Video**
 
     Animate a single image with AI
 
--   :film_frames: **First & Last Frames**
+-   :material-filmstrip-box-multiple: **First & Last Frames**
 
     Interpolate between two keyframes
 
--   :fast_forward: **Video Extension**
+-   :material-movie-plus: **Video Extension**
 
     Add 7 more seconds to any video
 
--   :bust_in_silhouette: **Reference Asset**
+-   :material-account-box: **Reference Asset**
 
     Preserve subject across generations
 
--   :paintbrush: **Reference Style**
+-   :material-brush: **Reference Style**
 
     Apply artistic style from an image
 
--   :sparkles: **Insert Objects**
+-   :material-shape-plus: **Insert Objects**
 
     Add objects using mask (Veo 3.1)
 
--   :wastebasket: **Remove Objects**
+-   :material-eraser: **Remove Objects**
 
     Remove objects using mask (Veo 3.1)
 
 </div>
 
-[:octicons-arrow-right-24: View all 8 modes in detail](video/modes.md){ .md-button }
+[:material-arrow-right: View all 8 modes in detail](video/modes.md){ .md-button }
 
 ---
 
-## :rocket: Quick Start
+## :material-rocket-launch-outline: Quick Start
 
-=== ":package: Install"
+=== ":material-package-variant: Install"
 
     ```bash
     # Clone the repository
@@ -123,7 +123,7 @@ Create stunning videos and images using Google Veo & Imagen APIs
     pip install requests google-auth
     ```
 
-=== ":key: Setup API"
+=== ":material-key-variant: Setup API"
 
     ```bash
     # Option 1: Environment variable
@@ -133,7 +133,7 @@ Create stunning videos and images using Google Veo & Imagen APIs
     python video_gen.py "prompt" --api-key "your-key"
     ```
 
-=== ":movie_camera: Generate Video"
+=== ":material-video-box: Generate Video"
 
     ```bash
     # Simple text-to-video
@@ -147,7 +147,7 @@ Create stunning videos and images using Google Veo & Imagen APIs
         --storage-uri "gs://PROJECT_ID-media-output/videos/"
     ```
 
-=== ":material-image: Generate Image"
+=== ":material-image-plus: Generate Image"
 
     ```bash
     # Simple text-to-image
@@ -159,7 +159,7 @@ Create stunning videos and images using Google Veo & Imagen APIs
 
 ---
 
-## :warning: Important: GCS Bucket Naming
+## :material-alert-circle: Important: GCS Bucket Naming
 
 !!! danger "Mandatory Naming Convention"
 
@@ -181,11 +181,11 @@ Create stunning videos and images using Google Veo & Imagen APIs
 --storage-uri "gs://my-custom-bucket/videos/"
 ```
 
-[:octicons-arrow-right-24: Full GCS Setup Guide](guides/gcs-storage.md){ .md-button }
+[:material-arrow-right: Full GCS Setup Guide](guides/gcs-storage.md){ .md-button }
 
 ---
 
-## :moneybag: Pricing Overview
+## :material-cash-multiple: Pricing Overview
 
 | Model | Type | Price/Second | 5-sec Video |
 |:------|:-----|:------------|:------------|
@@ -199,20 +199,20 @@ Create stunning videos and images using Google Veo & Imagen APIs
 
 ---
 
-## :chart_with_upwards_trend: Project Status
+## :material-chart-line: Project Status
 
 | Component | Version | Status |
 |:----------|:--------|:-------|
-| **video_gen.py** | v2.26 | :white_check_mark:{ .status-ready } Production Ready |
-| **image_gen.py** | v1.3 | :white_check_mark:{ .status-ready } Stable |
-| **check_api.py** | v2.1 | :white_check_mark:{ .status-ready } Stable |
-| **Documentation** | v3.8 | :white_check_mark:{ .status-ready } Updated |
-| **Claude Code Skill** | — | :construction:{ .status-planned } Phase 3 |
-| **MCP Server** | — | :construction:{ .status-planned } Phase 3 |
+| **video_gen.py** | v2.26 | :material-check-circle:{ .status-ready } Production Ready |
+| **image_gen.py** | v1.3 | :material-check-circle:{ .status-ready } Stable |
+| **check_api.py** | v2.1 | :material-check-circle:{ .status-ready } Stable |
+| **Documentation** | v3.8 | :material-check-circle:{ .status-ready } Updated |
+| **Claude Code Skill** | — | :material-progress-wrench:{ .status-planned } Phase 3 |
+| **MCP Server** | — | :material-progress-wrench:{ .status-planned } Phase 3 |
 
 ---
 
-## :books: Explore Documentation
+## :material-bookshelf: Explore Documentation
 
 <div class="grid cards" markdown>
 
@@ -222,15 +222,15 @@ Create stunning videos and images using Google Veo & Imagen APIs
 
     Installation, authentication setup, and creating your first video in minutes.
 
-    [:octicons-arrow-right-24: Start here](getting-started/installation.md)
+    [:material-arrow-right: Start here](getting-started/installation.md)
 
--   :movie_camera:{ .lg .middle } **Video Generation**
+-   :material-video-vintage:{ .lg .middle } **Video Generation**
 
     ---
 
     All 8 modes, model comparison, reference images, and advanced features.
 
-    [:octicons-arrow-right-24: Video docs](video/overview.md)
+    [:material-arrow-right: Video docs](video/overview.md)
 
 -   :material-image:{ .lg .middle } **Image Generation**
 
@@ -238,7 +238,7 @@ Create stunning videos and images using Google Veo & Imagen APIs
 
     Text-to-image with Gemini & Imagen models, aspect ratios, and templates.
 
-    [:octicons-arrow-right-24: Image docs](image/index.md)
+    [:material-arrow-right: Image docs](image/index.md)
 
 -   :material-console:{ .lg .middle } **CLI Reference**
 
@@ -246,7 +246,7 @@ Create stunning videos and images using Google Veo & Imagen APIs
 
     Complete command-line documentation for all tools.
 
-    [:octicons-arrow-right-24: CLI docs](cli/video_gen.md)
+    [:material-arrow-right: CLI docs](cli/video_gen.md)
 
 </div>
 
@@ -254,7 +254,7 @@ Create stunning videos and images using Google Veo & Imagen APIs
 
 <div style="text-align: center; padding: 3rem 0;" markdown>
 
-Made with :purple_heart: using Google Vertex AI
+Made with :material-heart:{ .heart-icon } using Google Vertex AI
 
 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;" markdown>
 
