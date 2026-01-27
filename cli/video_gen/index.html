@@ -85,41 +85,30 @@
     document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.add('loaded');
 
-      // CSS v1.7.8: Fix sidebar to use sticky position instead of fixed
-      // CRITICAL: Also fix parent container overflow for sticky to work
+      // CSS v1.7.9: Fixed sidebar - stays at viewport position
+      // Let MkDocs use position: fixed (default behavior)
       function fixSidebarPosition() {
-        // CRITICAL: Fix parent container overflow - required for sticky
-        const mdContainer = document.querySelector('.md-container');
-        const mdMain = document.querySelector('.md-main');
-        const mdMainInner = document.querySelector('.md-main__inner');
-
-        if (mdContainer) {
-          mdContainer.style.overflow = 'visible';
-        }
-        if (mdMain) {
-          mdMain.style.overflow = 'visible';
-        }
-        if (mdMainInner) {
-          mdMainInner.style.overflow = 'visible';
-        }
-
-        const primaryNav = document.querySelector('.md-nav--primary');
         const sidebars = document.querySelectorAll('.md-sidebar');
 
-        // Force sticky on nav element - remove fixed positioning
-        if (primaryNav) {
-          primaryNav.style.position = 'sticky';
-          primaryNav.style.top = '3.5rem';
-          primaryNav.style.maxHeight = 'calc(100vh - 3.5rem)';
-        }
-
-        // Force sticky on all sidebars
+        // Force fixed positioning on all sidebars
         sidebars.forEach(sidebar => {
-          sidebar.style.position = 'sticky';
+          sidebar.style.position = 'fixed';
           sidebar.style.top = '3.5rem';
-          sidebar.style.alignSelf = 'flex-start';
+          sidebar.style.height = 'calc(100vh - 3.5rem)';
           sidebar.style.maxHeight = 'calc(100vh - 3.5rem)';
         });
+
+        // Primary sidebar (left)
+        const primarySidebar = document.querySelector('.md-sidebar--primary');
+        if (primarySidebar) {
+          primarySidebar.style.left = '0';
+        }
+
+        // Secondary sidebar (right - TOC)
+        const secondarySidebar = document.querySelector('.md-sidebar--secondary');
+        if (secondarySidebar) {
+          secondarySidebar.style.right = '0';
+        }
       }
 
       // Run immediately
