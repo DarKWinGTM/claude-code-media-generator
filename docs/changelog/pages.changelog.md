@@ -1,12 +1,63 @@
 # Changelog - GitHub Pages Design
 
 > **Parent Document:** [pages.design.md](../design/pages.design.md)
-> **Current Version:** 1.3
+> **Current Version:** 1.4
 > **Session:** 5584c223-ebff-4c03-b92c-697360841c5e
 
 ---
 
 ## Version History
+
+### Version 1.4 (2026-01-27)
+
+**CSS v1.7.1-v1.7.2: Light Mode Audit & Sticky Sidebar**
+
+**Session:** 5584c223-ebff-4c03-b92c-697360841c5e
+
+#### Changes
+
+- **Footer Navigation**: Fixed "Previous/Next" text visibility in Light Mode
+- **Sticky Sidebar**: Sidebar now follows scroll on desktop (position: sticky)
+- **Light Mode Audit**: Comprehensive review and fixes:
+  - TOC navigation links (#334155)
+  - Breadcrumbs (#475569)
+  - Labels and tabs (#1E293B)
+  - Inline code background (rgba(79, 70, 229, 0.08))
+  - Blockquotes (#475569)
+  - Copy button (#475569)
+
+#### Technical Implementation
+
+| Component | Light Mode Value |
+|-----------|------------------|
+| Footer direction | #64748B |
+| Footer title | #1E293B |
+| TOC links | #334155 |
+| Breadcrumbs | #475569 |
+| Labels | #1E293B |
+| Inline code bg | rgba(79, 70, 229, 0.08) |
+
+#### Sticky Sidebar CSS
+
+```css
+@media screen and (min-width: 76.25em) {
+  .md-sidebar {
+    position: sticky !important;
+    top: 3.5rem !important;
+    align-self: flex-start !important;
+    max-height: calc(100vh - 3.5rem) !important;
+  }
+}
+```
+
+#### Commits
+
+| Commit | Description |
+|--------|-------------|
+| `02de71f` | CSS v1.7.1 Light Mode Audit - Footer, TOC, Labels |
+| `542736b` | CSS v1.7.2 Sticky Sidebar - Follows Scroll |
+
+---
 
 ### Version 1.3 (2026-01-27)
 
@@ -173,6 +224,11 @@
 
 | Version | Date | Changes | Session ID |
 |---------|------|---------|------------|
+| 1.4 | 2026-01-27 | **[CSS v1.7.1-v1.7.2 Light Mode & Sidebar](#version-14-2026-01-27)** | 5584c223... |
+| | | - Footer navigation visibility fixed | |
+| | | - Sticky sidebar follows scroll | |
+| | | - Comprehensive Light Mode audit | |
+| | | Summary: Light Mode audit + Sticky Sidebar | |
 | 1.3 | 2026-01-27 | **[CSS v1.7 Responsive & Contrast](#version-13-2026-01-27)** | 5584c223... |
 | | | - Hero buttons: Row on Desktop, Column on Mobile | |
 | | | - Grid cards: Stronger icon contrast (#4F46E5) | |
