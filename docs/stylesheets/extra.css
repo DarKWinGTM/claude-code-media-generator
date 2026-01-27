@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.7.3 - Hero Buttons: Row or Column Only
+   v1.7.4 - Light Mode: No Glass Effects
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -2581,15 +2581,28 @@ a, button, input, .md-nav__link, .md-tabs__link {
 }
 
 /* ===== LIGHT MODE - Enhanced Grid Cards ===== */
-[data-md-color-scheme="default"] .grid.cards > li {
+/* v1.7.4: Complete Light Mode Override - Pure White Background, No Glass Effect */
+[data-md-color-scheme="default"] .grid.cards > li,
+[data-md-color-scheme="default"] .grid.cards > ul > li {
   background: #FFFFFF !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   border: 1px solid #E2E8F0 !important;
   border-radius: 16px !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
   transition: all 0.25s ease !important;
 }
 
-[data-md-color-scheme="default"] .grid.cards > li:hover {
+[data-md-color-scheme="default"] .grid.cards > li::before,
+[data-md-color-scheme="default"] .grid.cards > ul > li::before {
+  display: none !important;  /* Hide gradient top line */
+}
+
+[data-md-color-scheme="default"] .grid.cards > li:hover,
+[data-md-color-scheme="default"] .grid.cards > ul > li:hover {
+  background: #FFFFFF !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   border-color: #6366F1 !important;
   box-shadow: 0 8px 24px rgba(99, 102, 241, 0.12) !important;
   transform: translateY(-2px) !important;
@@ -2902,4 +2915,121 @@ a, button, input, .md-nav__link, .md-tabs__link {
 [data-md-color-scheme="default"] .md-announce a {
   color: #FFFFFF !important;
   text-decoration: underline !important;
+}
+
+/* =====================================================
+   v1.7.4 - COMPREHENSIVE LIGHT MODE GLASS EFFECT FIX
+   - Remove ALL backdrop-filter/glass effects in Light Mode
+   - Ensure pure white/light backgrounds
+   - Fix any dark-themed elements bleeding through
+   ===================================================== */
+
+/* ===== LIGHT MODE - Feature Cards (No Glass) ===== */
+[data-md-color-scheme="default"] .feature-card {
+  background: #FFFFFF !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-md-color-scheme="default"] .feature-card:hover {
+  background: #FFFFFF !important;
+  backdrop-filter: none !important;
+  border-color: #6366F1 !important;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.12) !important;
+}
+
+/* ===== LIGHT MODE - Sidebar (No Glass) ===== */
+[data-md-color-scheme="default"] .md-sidebar {
+  background: #FFFFFF !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+[data-md-color-scheme="default"] .md-sidebar__scrollwrap {
+  background: transparent !important;
+}
+
+/* ===== LIGHT MODE - Tabs (No Glass) ===== */
+[data-md-color-scheme="default"] .md-tabs {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ===== LIGHT MODE - Search (No Glass) ===== */
+[data-md-color-scheme="default"] .md-search__form {
+  background: #FFFFFF !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid #E2E8F0 !important;
+}
+
+[data-md-color-scheme="default"] .md-search__input {
+  background: transparent !important;
+  color: #1E293B !important;
+}
+
+/* ===== LIGHT MODE - Dialog/Modal (No Glass) ===== */
+[data-md-color-scheme="default"] .md-dialog {
+  background: #FFFFFF !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid #E2E8F0 !important;
+}
+
+/* ===== LIGHT MODE - Content Area ===== */
+[data-md-color-scheme="default"] .md-content {
+  background: #FFFFFF !important;
+}
+
+[data-md-color-scheme="default"] .md-content__inner {
+  background: transparent !important;
+}
+
+/* ===== LIGHT MODE - Admonitions (Clean backgrounds) ===== */
+[data-md-color-scheme="default"] .md-typeset .admonition,
+[data-md-color-scheme="default"] .md-typeset details {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ===== LIGHT MODE - Tables (Clean) ===== */
+[data-md-color-scheme="default"] .md-typeset table:not([class]) {
+  background: #FFFFFF !important;
+  backdrop-filter: none !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) th {
+  background: #F1F5F9 !important;
+  color: #1E293B !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) td {
+  background: #FFFFFF !important;
+  color: #334155 !important;
+}
+
+/* ===== LIGHT MODE - Code Blocks (Clean) ===== */
+[data-md-color-scheme="default"] .md-typeset pre {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ===== LIGHT MODE - Footer (Clean) ===== */
+[data-md-color-scheme="default"] .md-footer {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ===== LIGHT MODE - Main container (Clean) ===== */
+[data-md-color-scheme="default"] .md-main {
+  background: #F8FAFC !important;
+}
+
+/* ===== LIGHT MODE - Hero Section (Clean) ===== */
+[data-md-color-scheme="default"] .hero-section {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
