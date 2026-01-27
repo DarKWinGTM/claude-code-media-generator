@@ -179,7 +179,68 @@ body, .md-typeset {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-shadow: none;
+  margin-bottom: 1rem;
+}
+
+/* ===== Heading Hierarchy - Clear Visual Structure ===== */
+.md-typeset h2 {
+  font-weight: 700;
+  font-size: 1.875rem !important;
+  letter-spacing: -0.02em;
+  color: #f8fafc;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.md-typeset h3 {
+  font-weight: 600;
+  font-size: 1.375rem !important;
+  letter-spacing: -0.01em;
+  color: #e2e8f0;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.md-typeset h4 {
+  font-weight: 600;
+  font-size: 1.125rem !important;
+  color: #cbd5e1;
+  margin-top: 1.5rem;
   margin-bottom: 0.5rem;
+}
+
+/* Light mode headings */
+[data-md-color-scheme="default"] .md-typeset h2 {
+  color: #0f172a;
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-md-color-scheme="default"] .md-typeset h3 {
+  color: #1e293b;
+}
+
+[data-md-color-scheme="default"] .md-typeset h4 {
+  color: #334155;
+}
+
+/* ===== Section Spacing - Consistent rhythm ===== */
+.md-typeset > * + * {
+  margin-top: 1.5rem;
+}
+
+.md-typeset > h2 + *,
+.md-typeset > h3 + *,
+.md-typeset > h4 + * {
+  margin-top: 1rem;
+}
+
+.md-typeset hr {
+  margin: 2.5rem 0;
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
 }
 
 /* ===== Cards Grid - Bento Style ===== */
@@ -203,6 +264,7 @@ body, .md-typeset {
   list-style: none;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
+  cursor: pointer;
 }
 
 .grid.cards > li::before,
@@ -585,6 +647,49 @@ body, .md-typeset {
   background: rgba(10, 10, 15, 0.9) !important;
   backdrop-filter: var(--glass-blur);
   border-top: 1px solid var(--glass-border);
+}
+
+/* ===== Cookie Consent Banner - Minimal & Non-intrusive ===== */
+.md-consent {
+  background: rgba(15, 15, 25, 0.95) !important;
+  backdrop-filter: var(--glass-blur);
+  border-top: 1px solid var(--glass-border);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+}
+
+.md-consent__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.md-consent__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.md-consent__description {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+.md-consent__button {
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+/* Light mode consent */
+[data-md-color-scheme="default"] .md-consent {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-top-color: rgba(0, 0, 0, 0.1);
 }
 
 /* ===== Scrollbar - Neon ===== */
