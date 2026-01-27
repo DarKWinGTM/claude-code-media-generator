@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.7.8 - Parent Overflow Fix for Sticky Sidebar
+   v1.7.9 - Fixed Sidebar (Not Sticky)
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -3035,64 +3035,35 @@ a, button, input, .md-nav__link, .md-tabs__link {
 }
 
 /* =====================================================
-   v1.7.8 - STICKY SIDEBAR FIX (Override JavaScript)
-   - Force position: sticky over MkDocs JavaScript
-   - CRITICAL: Fix parent container overflow for sticky to work
-   - Override inline styles from JS on BOTH sidebar AND nav
-   - Target .md-nav--primary which has inline position: fixed
+   v1.7.9 - FIXED SIDEBAR (MkDocs Default Behavior)
+   - Use position: fixed as MkDocs Material intends
+   - Sidebar stays at fixed position on viewport
+   - Internal content scrolls when needed
    - Works on Desktop (> 76.25em / 1220px)
    ===================================================== */
 
-/* CRITICAL FIX: Parent containers must have overflow: visible for sticky to work */
+/* Fixed sidebar - stays at viewport position */
 @media screen and (min-width: 76.25em) {
-  /* Fix all parent containers - overflow: visible is required for sticky */
-  html,
-  body,
-  .md-container,
-  .md-main {
-    overflow: visible !important;
-    overflow-x: visible !important;
-    overflow-y: visible !important;
-  }
-
-  /* The main content wrapper must allow normal document flow */
-  .md-main__inner {
-    overflow: visible !important;
-  }
-}
-
-/* Force sticky on ALL sidebar states - override JS inline styles */
-@media screen and (min-width: 76.25em) {
-  /* PRIMARY FIX: Override the inline position: fixed on nav element */
-  .md-nav--primary[style],
-  .md-nav--primary[style*="position"],
-  nav.md-nav--primary {
-    position: sticky !important;
-    top: 3.5rem !important;
-    height: auto !important;
-    max-height: calc(100vh - 3.5rem) !important;
-  }
-
-  /* Override the JavaScript-set inline style on sidebar */
-  .md-sidebar[style],
-  .md-sidebar--primary[style],
-  .md-sidebar--secondary[style] {
-    position: sticky !important;
-    top: 3.5rem !important;
-    height: auto !important;
-    max-height: calc(100vh - 3.5rem) !important;
-    align-self: flex-start !important;
-  }
-
-  /* Also target without [style] for initial load */
+  /* Let MkDocs handle the sidebar positioning (fixed by default) */
   .md-sidebar,
   .md-sidebar--primary,
   .md-sidebar--secondary {
-    position: sticky !important;
+    position: fixed !important;
     top: 3.5rem !important;
-    height: auto !important;
+    height: calc(100vh - 3.5rem) !important;
     max-height: calc(100vh - 3.5rem) !important;
-    align-self: flex-start !important;
+  }
+
+  /* Primary sidebar (left) */
+  .md-sidebar--primary {
+    left: 0 !important;
+    width: 12.1rem !important;
+  }
+
+  /* Secondary sidebar (right - TOC) */
+  .md-sidebar--secondary {
+    right: 0 !important;
+    width: 12.1rem !important;
   }
 
   /* Scrollable inner content */
@@ -3116,28 +3087,9 @@ a, button, input, .md-nav__link, .md-tabs__link {
     background: transparent !important;
   }
 
-  /* Parent container must be flex for sticky to work */
-  .md-main__inner {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    align-items: flex-start !important;
-  }
-
-  /* Content takes remaining space */
+  /* Content area - adjust margin for fixed sidebars */
   .md-content {
-    flex: 1 1 auto !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-  }
-
-  /* Sidebar width constraints */
-  .md-sidebar--primary {
-    width: 12.1rem !important;
-    flex-shrink: 0 !important;
-  }
-
-  .md-sidebar--secondary {
-    width: 12.1rem !important;
-    flex-shrink: 0 !important;
+    margin-left: 12.5rem !important;
+    margin-right: 12.5rem !important;
   }
 }
