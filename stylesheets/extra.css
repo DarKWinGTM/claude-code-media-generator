@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.6 - Professional Design System
+   v1.7 - Responsive & Contrast Improvements
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -2494,16 +2494,245 @@ a, button, input, .md-nav__link, .md-tabs__link {
   color: #64748B !important;
 }
 
-/* ===== RESPONSIVE - Mobile Fixes ===== */
-@media screen and (max-width: 768px) {
-  .md-button {
-    min-width: 160px !important;
-    height: 48px !important;
-    padding: 0 24px !important;
-    font-size: 0.9rem !important;
+/* =====================================================
+   v1.7 - RESPONSIVE & CONTRAST IMPROVEMENTS
+   - Hero buttons: Row on Desktop, Column on Mobile
+   - Grid cards: Enhanced icon contrast
+   - Light Mode: Improved text readability
+   - Sticky Sidebar: Always visible during scroll
+   - WCAG AA+ Compliant
+   ===================================================== */
+
+/* ===== STICKY SIDEBAR - Always Visible ===== */
+.md-sidebar--primary,
+.md-sidebar--secondary {
+  position: sticky !important;
+  top: 4rem !important;  /* Height of header */
+  height: calc(100vh - 4rem) !important;
+  overflow-y: auto !important;
+  scrollbar-width: thin !important;
+}
+
+.md-sidebar__scrollwrap {
+  overflow: visible !important;
+}
+
+.md-sidebar__inner {
+  position: sticky !important;
+  top: 0 !important;
+}
+
+/* ===== HERO BUTTONS - Professional Layout ===== */
+.hero-section > div[style*="display: flex"],
+.hero-section > p:has(.md-button),
+.md-typeset > p:has(.md-button),
+.hero-section p:has(.md-button) {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 1rem !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0 auto !important;
+  max-width: 720px !important;
+}
+
+/* Hero Buttons - Unified Size Desktop */
+.hero-section .md-button,
+.hero-section p .md-button {
+  min-width: 200px !important;
+  height: 54px !important;
+  padding: 0 28px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  border-radius: 14px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  transition: all 0.25s ease !important;
+}
+
+/* ===== LIGHT MODE - Enhanced Grid Cards ===== */
+[data-md-color-scheme="default"] .grid.cards > li {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+  transition: all 0.25s ease !important;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li:hover {
+  border-color: #6366F1 !important;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.12) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Grid Cards - Icon Colors (Stronger Contrast) */
+[data-md-color-scheme="default"] .grid.cards > li .twemoji,
+[data-md-color-scheme="default"] .grid.cards > li .md-icon {
+  color: #4F46E5 !important;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li .twemoji svg,
+[data-md-color-scheme="default"] .grid.cards > li .twemoji svg path,
+[data-md-color-scheme="default"] .grid.cards > li .md-icon svg,
+[data-md-color-scheme="default"] .grid.cards > li .md-icon svg path {
+  fill: #4F46E5 !important;
+  color: #4F46E5 !important;
+}
+
+/* Grid Cards - Large Icon Size */
+[data-md-color-scheme="default"] .grid.cards > li .twemoji.lg,
+[data-md-color-scheme="default"] .grid.cards > li .twemoji.lg svg {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+}
+
+/* Grid Cards - Text Colors (Enhanced Contrast) */
+[data-md-color-scheme="default"] .grid.cards > li strong,
+[data-md-color-scheme="default"] .grid.cards > li b {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li p {
+  color: #334155 !important;
+  line-height: 1.65 !important;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li hr {
+  border-color: #E2E8F0 !important;
+  margin: 1rem 0 !important;
+}
+
+/* Grid Cards - Link Colors */
+[data-md-color-scheme="default"] .grid.cards > li a {
+  color: #4F46E5 !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li a:hover {
+  color: #3730A3 !important;
+  text-decoration: underline !important;
+}
+
+/* Grid Cards - Arrow Icon in Links */
+[data-md-color-scheme="default"] .grid.cards > li a .twemoji svg,
+[data-md-color-scheme="default"] .grid.cards > li a .twemoji svg path {
+  fill: #4F46E5 !important;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li a:hover .twemoji svg,
+[data-md-color-scheme="default"] .grid.cards > li a:hover .twemoji svg path {
+  fill: #3730A3 !important;
+}
+
+/* ===== LIGHT MODE - Hero Section Contrast ===== */
+[data-md-color-scheme="default"] .hero-section {
+  background: linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 100%) !important;
+}
+
+[data-md-color-scheme="default"] .hero-section h1,
+[data-md-color-scheme="default"] .hero-section .md-typeset h1 {
+  color: #0F172A !important;
+  text-shadow: none !important;
+}
+
+[data-md-color-scheme="default"] .hero-section p,
+[data-md-color-scheme="default"] .hero-section .md-typeset p:not(:has(.md-button)) {
+  color: #334155 !important;
+}
+
+/* ===== LIGHT MODE - Body Text Improvements ===== */
+[data-md-color-scheme="default"] .md-typeset {
+  color: #1E293B !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset p {
+  color: #334155 !important;
+  line-height: 1.7 !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset h2 {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset h3 {
+  color: #1E293B !important;
+  font-weight: 600 !important;
+}
+
+/* ===== RESPONSIVE - Tablet (< 960px) ===== */
+@media screen and (max-width: 959px) {
+  .hero-section > div[style*="display: flex"],
+  .hero-section > p:has(.md-button),
+  .md-typeset > p:has(.md-button),
+  .hero-section p:has(.md-button) {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 0.875rem !important;
   }
 
-  .hero-section > div[style*="display: flex"] {
+  .hero-section .md-button,
+  .hero-section p .md-button {
+    min-width: 180px !important;
+    height: 50px !important;
+    padding: 0 24px !important;
+    font-size: 0.95rem !important;
+  }
+}
+
+/* ===== RESPONSIVE - Mobile (< 768px) ===== */
+@media screen and (max-width: 767px) {
+  .hero-section > div[style*="display: flex"],
+  .hero-section > p:has(.md-button),
+  .md-typeset > p:has(.md-button),
+  .hero-section p:has(.md-button) {
+    flex-direction: column !important;
+    align-items: center !important;
     gap: 0.75rem !important;
+    max-width: 100% !important;
+  }
+
+  .hero-section .md-button,
+  .hero-section p .md-button {
+    width: 100% !important;
+    max-width: 320px !important;
+    min-width: auto !important;
+    height: 52px !important;
+    font-size: 1rem !important;
+  }
+
+  /* Grid Cards - Full Width on Mobile */
+  .grid.cards {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+}
+
+/* ===== RESPONSIVE - Small Mobile (< 480px) ===== */
+@media screen and (max-width: 479px) {
+  .hero-section .md-button,
+  .hero-section p .md-button {
+    max-width: 100% !important;
+    height: 48px !important;
+    padding: 0 20px !important;
+    font-size: 0.9rem !important;
+    border-radius: 12px !important;
+  }
+
+  .hero-section h1,
+  .hero-section .md-typeset h1 {
+    font-size: 1.75rem !important;
+  }
+
+  .hero-section p {
+    font-size: 0.95rem !important;
   }
 }
