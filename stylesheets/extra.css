@@ -3035,15 +3035,26 @@ a, button, input, .md-nav__link, .md-tabs__link {
 }
 
 /* =====================================================
-   v1.7.5 - STICKY SIDEBAR FIX (Override JavaScript)
+   v1.7.6 - STICKY SIDEBAR FIX (Override JavaScript)
    - Force position: sticky over MkDocs JavaScript
-   - Override inline styles from JS
+   - Override inline styles from JS on BOTH sidebar AND nav
+   - Target .md-nav--primary which has inline position: fixed
    - Works on Desktop (> 76.25em / 1220px)
    ===================================================== */
 
 /* Force sticky on ALL sidebar states - override JS inline styles */
 @media screen and (min-width: 76.25em) {
-  /* Override the JavaScript-set inline style */
+  /* PRIMARY FIX: Override the inline position: fixed on nav element */
+  .md-nav--primary[style],
+  .md-nav--primary[style*="position"],
+  nav.md-nav--primary {
+    position: sticky !important;
+    top: 3.5rem !important;
+    height: auto !important;
+    max-height: calc(100vh - 3.5rem) !important;
+  }
+
+  /* Override the JavaScript-set inline style on sidebar */
   .md-sidebar[style],
   .md-sidebar--primary[style],
   .md-sidebar--secondary[style] {
