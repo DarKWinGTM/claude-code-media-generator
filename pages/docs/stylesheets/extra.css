@@ -1,0 +1,3124 @@
+/* ===========================================
+   Claude Code Media Generator - 2026 Design
+   Glassmorphism + Gradient + Bento Grid
+   v1.7.5 - Sticky Sidebar Override JS
+   =========================================== */
+
+/* ===== Google Fonts Import ===== */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ===== Design Tokens (v1.2 - Unified Design System) ===== */
+:root {
+  /* === Brand Colors === */
+  --brand-primary: #6366f1;      /* indigo-500 - Main brand */
+  --brand-secondary: #22d3ee;    /* cyan-400 - Accent */
+  --brand-accent: #a855f7;       /* purple-500 - Highlights */
+
+  /* === Semantic Colors === */
+  --color-primary: #818cf8;      /* indigo-400 */
+  --color-secondary: #22d3ee;    /* cyan-400 */
+  --color-accent: #f472b6;       /* pink-400 */
+  --color-success: #34d399;      /* emerald-400 */
+  --color-warning: #fbbf24;      /* amber-400 */
+  --color-error: #f87171;        /* red-400 */
+
+  /* === Text Colors (WCAG AA Compliant) === */
+  --text-primary: #f8fafc;       /* slate-50 - Headlines */
+  --text-secondary: #e2e8f0;     /* slate-200 - Body */
+  --text-muted: #94a3b8;         /* slate-400 - Subtle */
+  --text-on-brand: #ffffff;      /* White on brand colors */
+
+  /* === Background Colors === */
+  --bg-page: #0a0a0f;            /* Deep space */
+  --bg-elevated: #0f0f18;        /* Cards, sections */
+  --bg-surface: rgba(15, 15, 25, 0.6);  /* Glassmorphism */
+
+  /* === Gradients === */
+  --gradient-primary: linear-gradient(135deg, #5a67d8 0%, #6366f1 50%, #8b5cf6 100%);
+  --gradient-secondary: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+  --gradient-accent: linear-gradient(135deg, #ec4899 0%, #8b5cf6 50%, #06b6d4 100%);
+  --gradient-dark: linear-gradient(135deg, #0a0a0f 0%, #13131d 50%, #0f0f18 100%);
+  --gradient-glow: linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(6, 182, 212, 0.3) 100%);
+  --gradient-card: linear-gradient(145deg, rgba(99, 102, 241, 0.08) 0%, rgba(6, 182, 212, 0.05) 100%);
+
+  /* === Glow Effects === */
+  --color-glow-purple: rgba(129, 140, 248, 0.4);
+  --color-glow-cyan: rgba(34, 211, 238, 0.4);
+  --color-glow-pink: rgba(244, 114, 182, 0.4);
+
+  /* === Glassmorphism === */
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-bg-hover: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-hover: rgba(255, 255, 255, 0.25);
+  --glass-blur: blur(20px);
+  --glass-blur-strong: blur(40px);
+
+  /* === Border Radius === */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  --card-radius: 16px;
+  --card-radius-lg: 24px;
+
+  /* === Shadows === */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.15);
+  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --card-shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 30px rgba(99, 102, 241, 0.15);
+  --card-shadow-glow: 0 0 40px rgba(99, 102, 241, 0.2), 0 0 80px rgba(6, 182, 212, 0.1);
+
+  /* === Spacing Scale === */
+  --space-xs: 0.25rem;   /* 4px */
+  --space-sm: 0.5rem;    /* 8px */
+  --space-md: 1rem;      /* 16px */
+  --space-lg: 1.5rem;    /* 24px */
+  --space-xl: 2rem;      /* 32px */
+  --space-2xl: 3rem;     /* 48px */
+  --space-3xl: 4rem;     /* 64px */
+
+  /* === Typography Scale === */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 2rem;      /* 32px */
+  --text-4xl: 2.5rem;    /* 40px */
+  --text-5xl: 3rem;      /* 48px */
+
+  /* === Font === */
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* === Button Sizes === */
+  --btn-height-sm: 2rem;
+  --btn-height-md: 2.5rem;
+  --btn-height-lg: 3rem;
+  --btn-min-width: 140px;
+
+  /* === Card Heights === */
+  --card-min-height: 180px;
+
+  /* === Container === */
+  --container-max: 1200px;
+  --content-max: 900px;
+}
+
+/* ===== Base Typography ===== */
+body, .md-typeset {
+  font-family: var(--font-main) !important;
+  letter-spacing: -0.01em;
+  line-height: 1.625;
+}
+
+/* Text contrast fix - WCAG AA compliance (≥4.5:1) */
+.md-typeset {
+  color: #f1f5f9;  /* slate-100 - high contrast */
+}
+
+.md-typeset p,
+.md-typeset li,
+.md-typeset td {
+  color: #e2e8f0;  /* slate-200 - readable body text */
+}
+
+/* Light mode text contrast */
+[data-md-color-scheme="default"] .md-typeset {
+  color: #0f172a;  /* slate-900 - high contrast */
+}
+
+[data-md-color-scheme="default"] .md-typeset p,
+[data-md-color-scheme="default"] .md-typeset li,
+[data-md-color-scheme="default"] .md-typeset td {
+  color: #1e293b;  /* slate-800 - readable body text */
+}
+
+/* ===== Dark Mode - Deep Space Theme ===== */
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #0a0a0f;
+  --md-default-fg-color: #e2e8f0;
+  --md-primary-fg-color: var(--color-primary);
+  --md-accent-fg-color: var(--color-secondary);
+  --md-code-bg-color: rgba(30, 30, 60, 0.5);
+  --md-code-fg-color: #e2e8f0;
+}
+
+/* ===== Animated Background ===== */
+[data-md-color-scheme="slate"] .md-main {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 92, 246, 0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(6, 182, 212, 0.1), transparent),
+    radial-gradient(ellipse 60% 40% at 0% 100%, rgba(244, 114, 182, 0.08), transparent),
+    linear-gradient(180deg, #0a0a0f 0%, #0f0f1a 100%);
+}
+
+/* ===== Header - Glass Effect ===== */
+.md-header {
+  background: rgba(10, 10, 15, 0.8) !important;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.md-header[data-md-state="shadow"] {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), 0 0 40px rgba(139, 92, 246, 0.1);
+}
+
+/* ===== Navigation Tabs - Glow Effect ===== */
+.md-tabs {
+  background: rgba(15, 15, 25, 0.6);
+  backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.md-tabs__link {
+  font-weight: 500;
+  opacity: 0.7;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.md-tabs__link--active,
+.md-tabs__link:hover {
+  opacity: 1;
+  color: var(--color-secondary) !important;
+  text-shadow: 0 0 20px var(--color-glow-cyan);
+}
+
+/* ===== Sidebar - Glass Panel ===== */
+.md-sidebar {
+  background: rgba(15, 15, 25, 0.4);
+  backdrop-filter: var(--glass-blur);
+}
+
+.md-nav__link:hover {
+  color: var(--color-secondary) !important;
+}
+
+.md-nav__link--active {
+  color: var(--color-primary) !important;
+  font-weight: 600;
+}
+
+/* ===== Hero Section - Professional Dark Background ===== */
+.hero-section {
+  position: relative;
+  text-align: center;
+  padding: 4rem 2rem;
+  margin: -1rem -1rem 3rem -1rem;
+  /* Dark solid background for better text contrast */
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99, 102, 241, 0.25), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 10%, rgba(6, 182, 212, 0.15), transparent 50%),
+    radial-gradient(ellipse 50% 40% at 10% 90%, rgba(139, 92, 246, 0.1), transparent 50%),
+    linear-gradient(180deg, #0d0d14 0%, #0a0a0f 100%);
+  border-radius: 0 0 var(--card-radius-lg) var(--card-radius-lg);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+/* ===== Hero Title - Theme Aware ===== */
+.md-typeset h1 {
+  font-weight: 800;
+  font-size: 3rem !important;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+
+/* Dark Mode - White text */
+[data-md-color-scheme="slate"] .md-typeset h1 {
+  color: #ffffff;
+  text-shadow: 0 2px 20px rgba(139, 92, 246, 0.4);
+}
+
+/* Light Mode - Dark text */
+[data-md-color-scheme="default"] .md-typeset h1 {
+  color: #0f172a !important;
+  text-shadow: none;
+}
+
+/* Hero subtitle styling - Theme Aware */
+[data-md-color-scheme="slate"] .hero-section .md-typeset p,
+[data-md-color-scheme="slate"] .hero-section p {
+  color: #cbd5e1;
+}
+
+[data-md-color-scheme="default"] .hero-section .md-typeset p,
+[data-md-color-scheme="default"] .hero-section p {
+  color: #334155 !important;
+}
+
+.hero-section .md-typeset p,
+.hero-section p {
+  font-size: 1.25rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+/* ===== Heading Hierarchy - Theme Aware ===== */
+.md-typeset h2 {
+  font-weight: 700;
+  font-size: 2rem !important;
+  letter-spacing: -0.02em;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+}
+
+[data-md-color-scheme="slate"] .md-typeset h2 {
+  color: #ffffff;
+  border-bottom: 2px solid rgba(129, 140, 248, 0.3);
+}
+
+[data-md-color-scheme="default"] .md-typeset h2 {
+  color: #0f172a !important;
+  border-bottom: 2px solid rgba(99, 102, 241, 0.3);
+}
+
+.md-typeset h3 {
+  font-weight: 600;
+  font-size: 1.5rem !important;
+  letter-spacing: -0.01em;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+[data-md-color-scheme="slate"] .md-typeset h3 {
+  color: #f1f5f9;
+}
+
+[data-md-color-scheme="default"] .md-typeset h3 {
+  color: #1e293b !important;
+}
+
+.md-typeset h4 {
+  font-weight: 600;
+  font-size: 1.25rem !important;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+[data-md-color-scheme="slate"] .md-typeset h4 {
+  color: #e2e8f0;
+}
+
+[data-md-color-scheme="default"] .md-typeset h4 {
+  color: #334155 !important;
+}
+
+.md-typeset h5 {
+  font-weight: 600;
+  font-size: 1.125rem !important;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+[data-md-color-scheme="slate"] .md-typeset h5 {
+  color: #cbd5e1;
+}
+
+[data-md-color-scheme="default"] .md-typeset h5 {
+  color: #475569 !important;
+}
+
+/* ===== Section Spacing - Consistent rhythm ===== */
+.md-typeset > * + * {
+  margin-top: 1.5rem;
+}
+
+.md-typeset > h2 + *,
+.md-typeset > h3 + *,
+.md-typeset > h4 + * {
+  margin-top: 1rem;
+}
+
+.md-typeset hr {
+  margin: 2.5rem 0;
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+}
+
+/* ===== Cards Grid - Bento Style with Strong Definition (v1.2 Fixed) ===== */
+.grid.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+  padding: 0;
+  margin: var(--space-xl) 0;
+  align-items: stretch;  /* M6: Equal card heights */
+}
+
+.grid.cards > li,
+.grid.cards > ul > li {
+  position: relative;
+  background: var(--gradient-card), var(--bg-surface);  /* H6: Subtle gradient instead of plain gray */
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(129, 140, 248, 0.25);  /* H5: Stronger border */
+  border-radius: var(--card-radius);
+  padding: var(--space-lg);
+  list-style: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--card-shadow);
+  min-height: var(--card-min-height);  /* M6: Consistent height */
+  display: flex;
+  flex-direction: column;
+}
+
+.grid.cards > li::before,
+.grid.cards > ul > li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(129, 140, 248, 0.6), rgba(34, 211, 238, 0.6), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.grid.cards > li:hover,
+.grid.cards > ul > li:hover {
+  transform: translateY(-8px) scale(1.02);
+  background: var(--gradient-card), rgba(20, 20, 35, 0.9);
+  border-color: rgba(129, 140, 248, 0.5);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.grid.cards > li:hover::before,
+.grid.cards > ul > li:hover::before {
+  opacity: 1;
+}
+
+/* Card content text - better contrast (M3) */
+.grid.cards > li p,
+.grid.cards > ul > li p {
+  color: var(--text-secondary);
+  flex-grow: 1;
+}
+
+.grid.cards > li a,
+.grid.cards > ul > li a {
+  color: var(--color-secondary);
+  font-weight: 600;
+  margin-top: auto;
+}
+
+/* ===== Feature Cards - Strong Definition ===== */
+.feature-card {
+  position: relative;
+  background: var(--gradient-card), var(--bg-surface);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(129, 140, 248, 0.25);
+  border-radius: var(--card-radius);
+  padding: var(--space-xl);
+  margin: var(--space-lg) 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--card-shadow);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(129, 140, 248, 0.5);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-md);
+  filter: drop-shadow(0 0 10px var(--color-glow-purple));
+}
+
+/* ===== Buttons - Unified System (H1, M4 Fixed) ===== */
+.md-button {
+  font-family: var(--font-main);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: var(--btn-min-width);  /* H1: Consistent button widths */
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: var(--btn-height-lg);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.md-button--primary {
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%) !important;
+  border: none !important;
+  color: white !important;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+}
+
+.md-button--primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 8px 25px rgba(139, 92, 246, 0.5),
+    0 0 40px rgba(139, 92, 246, 0.3);
+}
+
+.md-button--primary:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(139, 92, 246, 0.4),
+    0 8px 25px rgba(139, 92, 246, 0.5);
+}
+
+.md-button:not(.md-button--primary) {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  backdrop-filter: var(--glass-blur);
+}
+
+.md-button:not(.md-button--primary):hover {
+  transform: translateY(-2px) scale(1.02);
+  background: var(--glass-bg-hover) !important;
+  border-color: var(--color-secondary) !important;
+  box-shadow: 0 0 20px var(--color-glow-cyan);
+}
+
+.md-button:not(.md-button--primary):focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.3);
+}
+
+/* ===== Tables - Glass Design ===== */
+.md-typeset table:not([class]) {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.md-typeset table:not([class]) th {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--glass-border);
+  text-align: left;
+}
+
+/* Dark Mode table header */
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* Light Mode table header - handled in Light Mode section */
+
+.md-typeset table:not([class]) td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  line-height: 1.6;
+}
+
+/* Zebra striping for better readability */
+.md-typeset table:not([class]) tr:nth-child(odd) td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.md-typeset table:not([class]) tr:hover td {
+  background: rgba(139, 92, 246, 0.08);
+}
+
+.md-typeset table:not([class]) tr:last-child td {
+  border-bottom: none;
+}
+
+/* Light mode table adjustments - REMOVED: Now handled in Light Mode section below */
+/* See "LIGHT MODE - Enhanced Text Contrast" section for table styles */
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) tr:nth-child(odd) td {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) tr:hover td {
+  background: rgba(139, 92, 246, 0.06);
+}
+
+/* ===== Code Blocks - Neon Terminal ===== */
+.md-typeset pre {
+  position: relative;
+  background: rgba(15, 15, 30, 0.8) !important;
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(139, 92, 246, 0.1);
+  overflow: hidden;
+}
+
+.md-typeset pre::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.5), rgba(34, 211, 238, 0.5), transparent);
+}
+
+.md-typeset pre > code {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.md-typeset code {
+  font-family: var(--font-mono);
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 6px;
+  padding: 0.15em 0.5em;
+  font-size: 0.875em;
+}
+
+/* ===== Syntax Highlighting - Monokai Pro Theme ===== */
+.highlight .hll { background-color: rgba(139, 92, 246, 0.2); }
+.highlight .c { color: #75715e; font-style: italic; }  /* Comment */
+.highlight .err { color: #f87171; }  /* Error */
+.highlight .k { color: #f472b6; font-weight: 600; }  /* Keyword */
+.highlight .l { color: #a78bfa; }  /* Literal */
+.highlight .n { color: #e2e8f0; }  /* Name */
+.highlight .o { color: #f472b6; }  /* Operator */
+.highlight .p { color: #e2e8f0; }  /* Punctuation */
+.highlight .cm { color: #75715e; font-style: italic; }  /* Comment.Multiline */
+.highlight .cp { color: #75715e; }  /* Comment.Preproc */
+.highlight .c1 { color: #75715e; font-style: italic; }  /* Comment.Single */
+.highlight .cs { color: #75715e; font-style: italic; }  /* Comment.Special */
+.highlight .gd { color: #f87171; }  /* Generic.Deleted */
+.highlight .ge { font-style: italic; }  /* Generic.Emph */
+.highlight .gi { color: #34d399; }  /* Generic.Inserted */
+.highlight .gs { font-weight: bold; }  /* Generic.Strong */
+.highlight .gu { color: #75715e; }  /* Generic.Subheading */
+.highlight .kc { color: #f472b6; font-weight: 600; }  /* Keyword.Constant */
+.highlight .kd { color: #f472b6; font-weight: 600; }  /* Keyword.Declaration */
+.highlight .kn { color: #f472b6; font-weight: 600; }  /* Keyword.Namespace */
+.highlight .kp { color: #f472b6; }  /* Keyword.Pseudo */
+.highlight .kr { color: #f472b6; font-weight: 600; }  /* Keyword.Reserved */
+.highlight .kt { color: #22d3ee; }  /* Keyword.Type */
+.highlight .ld { color: #fbbf24; }  /* Literal.Date */
+.highlight .m { color: #a78bfa; }  /* Literal.Number */
+.highlight .s { color: #fbbf24; }  /* Literal.String */
+.highlight .na { color: #34d399; }  /* Name.Attribute */
+.highlight .nb { color: #22d3ee; }  /* Name.Builtin */
+.highlight .nc { color: #34d399; font-weight: 600; }  /* Name.Class */
+.highlight .no { color: #22d3ee; }  /* Name.Constant */
+.highlight .nd { color: #34d399; }  /* Name.Decorator */
+.highlight .ni { color: #e2e8f0; }  /* Name.Entity */
+.highlight .ne { color: #34d399; font-weight: 600; }  /* Name.Exception */
+.highlight .nf { color: #34d399; }  /* Name.Function */
+.highlight .nl { color: #e2e8f0; }  /* Name.Label */
+.highlight .nn { color: #e2e8f0; }  /* Name.Namespace */
+.highlight .nx { color: #34d399; }  /* Name.Other */
+.highlight .py { color: #e2e8f0; }  /* Name.Property */
+.highlight .nt { color: #f472b6; }  /* Name.Tag */
+.highlight .nv { color: #e2e8f0; }  /* Name.Variable */
+.highlight .ow { color: #f472b6; font-weight: 600; }  /* Operator.Word */
+.highlight .w { color: #e2e8f0; }  /* Text.Whitespace */
+.highlight .mf { color: #a78bfa; }  /* Literal.Number.Float */
+.highlight .mh { color: #a78bfa; }  /* Literal.Number.Hex */
+.highlight .mi { color: #a78bfa; }  /* Literal.Number.Integer */
+.highlight .mo { color: #a78bfa; }  /* Literal.Number.Oct */
+.highlight .sb { color: #fbbf24; }  /* Literal.String.Backtick */
+.highlight .sc { color: #fbbf24; }  /* Literal.String.Char */
+.highlight .sd { color: #fbbf24; }  /* Literal.String.Doc */
+.highlight .s2 { color: #fbbf24; }  /* Literal.String.Double */
+.highlight .se { color: #a78bfa; }  /* Literal.String.Escape */
+.highlight .sh { color: #fbbf24; }  /* Literal.String.Heredoc */
+.highlight .si { color: #fbbf24; }  /* Literal.String.Interpol */
+.highlight .sx { color: #fbbf24; }  /* Literal.String.Other */
+.highlight .sr { color: #fbbf24; }  /* Literal.String.Regex */
+.highlight .s1 { color: #fbbf24; }  /* Literal.String.Single */
+.highlight .ss { color: #fbbf24; }  /* Literal.String.Symbol */
+.highlight .bp { color: #e2e8f0; }  /* Name.Builtin.Pseudo */
+.highlight .vc { color: #e2e8f0; }  /* Name.Variable.Class */
+.highlight .vg { color: #e2e8f0; }  /* Name.Variable.Global */
+.highlight .vi { color: #e2e8f0; }  /* Name.Variable.Instance */
+.highlight .il { color: #a78bfa; }  /* Literal.Number.Integer.Long */
+
+/* Line numbers styling */
+.md-typeset .highlight .linenos {
+  color: #64748b;
+  padding-right: 1rem;
+  margin-right: 1rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  user-select: none;
+}
+
+/* ===== Admonitions - Glass Cards ===== */
+.md-typeset .admonition,
+.md-typeset details {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+
+.md-typeset .admonition-title,
+.md-typeset details > summary {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-bottom: 1px solid var(--glass-border);
+  font-weight: 600;
+}
+
+.md-typeset .admonition.note {
+  border-left: 4px solid var(--color-primary) !important;
+}
+
+.md-typeset .admonition.tip {
+  border-left: 4px solid var(--color-success) !important;
+}
+
+.md-typeset .admonition.warning {
+  border-left: 4px solid var(--color-warning) !important;
+}
+
+.md-typeset .admonition.danger {
+  border-left: 4px solid var(--color-error) !important;
+}
+
+/* ===== Links - Glow Effect ===== */
+.md-typeset a {
+  color: var(--color-secondary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.md-typeset a:hover {
+  color: var(--color-primary);
+  text-shadow: 0 0 15px var(--color-glow-cyan);
+}
+
+.md-typeset a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  transition: width 0.3s ease;
+}
+
+.md-typeset a:hover::after {
+  width: 100%;
+}
+
+/* ===== Content Tabs - Pill Style ===== */
+.md-typeset .tabbed-labels {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 1rem;
+}
+
+.md-typeset .tabbed-labels > label {
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.md-typeset .tabbed-labels > label:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.md-typeset input.tabbed-check:checked + label {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(6, 182, 212, 0.3) 100%);
+  color: white;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+}
+
+/* ===== Status Badges ===== */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  backdrop-filter: var(--glass-blur);
+}
+
+.status-ready {
+  background: rgba(52, 211, 153, 0.15);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  color: var(--color-success);
+  box-shadow: 0 0 15px rgba(52, 211, 153, 0.2);
+}
+
+.status-planned {
+  background: rgba(251, 191, 36, 0.15);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  color: var(--color-warning);
+  box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
+}
+
+/* ===== Footer - Glass ===== */
+.md-footer {
+  background: rgba(10, 10, 15, 0.9) !important;
+  backdrop-filter: var(--glass-blur);
+  border-top: 1px solid var(--glass-border);
+}
+
+/* ===== Cookie Consent Banner - Minimal & Non-intrusive ===== */
+.md-consent {
+  background: rgba(15, 15, 25, 0.95) !important;
+  backdrop-filter: var(--glass-blur);
+  border-top: 1px solid var(--glass-border);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+}
+
+.md-consent__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.md-consent__title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.md-consent__description {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+.md-consent__button {
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+/* Light mode consent */
+[data-md-color-scheme="default"] .md-consent {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Scrollbar - Neon ===== */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 15, 30, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  border-radius: 5px;
+  border: 2px solid rgba(15, 15, 30, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-primary) 100%);
+}
+
+/* ===== Animations ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--color-glow-purple);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--color-glow-cyan);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.md-content {
+  animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== Floating Orbs (Background Decoration) ===== */
+.hero-section::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  top: -100px;
+  right: -100px;
+  filter: blur(60px);
+  animation: float 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-20px, 20px);
+  }
+}
+
+/* ===== Search - Glass Style ===== */
+.md-search__form {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  backdrop-filter: var(--glass-blur);
+}
+
+.md-search__form:hover {
+  border-color: var(--glass-border-hover);
+}
+
+.md-search__input {
+  font-family: var(--font-main);
+}
+
+/* ===== Mobile Responsive ===== */
+@media screen and (max-width: 768px) {
+  .grid.cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .hero-section {
+    padding: 2.5rem 1rem;
+    margin: -0.5rem -0.5rem 2rem -0.5rem;
+  }
+
+  .md-typeset h1 {
+    font-size: 2rem !important;
+  }
+
+  .grid.cards > li:hover,
+  .grid.cards > ul > li:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* ===== Light Mode Adjustments ===== */
+[data-md-color-scheme="default"] {
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-bg-hover: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(99, 102, 241, 0.15);
+  --glass-border-hover: rgba(99, 102, 241, 0.3);
+}
+
+[data-md-color-scheme="default"] .md-header {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+/* ===== Light Mode Header Text - MUST be dark ===== */
+[data-md-color-scheme="default"] .md-header__title,
+[data-md-color-scheme="default"] .md-header__topic,
+[data-md-color-scheme="default"] .md-header__ellipsis,
+[data-md-color-scheme="default"] .md-ellipsis {
+  color: #0f172a !important;
+}
+
+[data-md-color-scheme="default"] .md-header__button {
+  color: #334155 !important;
+}
+
+[data-md-color-scheme="default"] .md-header__button:hover {
+  color: #6366f1 !important;
+}
+
+/* Light Mode - Source (GitHub repo) */
+[data-md-color-scheme="default"] .md-source {
+  color: #334155 !important;
+}
+
+[data-md-color-scheme="default"] .md-source__repository {
+  color: #0f172a !important;
+}
+
+[data-md-color-scheme="default"] .md-source__fact {
+  color: #475569 !important;
+}
+
+/* Light Mode - Navigation Tabs */
+[data-md-color-scheme="default"] .md-tabs {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+[data-md-color-scheme="default"] .md-tabs__link {
+  color: #334155 !important;
+}
+
+[data-md-color-scheme="default"] .md-tabs__link--active,
+[data-md-color-scheme="default"] .md-tabs__link:hover {
+  color: #6366f1 !important;
+}
+
+/* Light Mode - Search */
+[data-md-color-scheme="default"] .md-search__input {
+  color: #0f172a !important;
+  background-color: rgba(241, 245, 249, 0.9) !important;
+}
+
+[data-md-color-scheme="default"] .md-search__input::placeholder {
+  color: #64748b !important;
+}
+
+[data-md-color-scheme="default"] .hero-section {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99, 102, 241, 0.15), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 10%, rgba(6, 182, 212, 0.1), transparent 50%),
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+[data-md-color-scheme="default"] .hero-section .md-typeset p,
+[data-md-color-scheme="default"] .hero-section p {
+  color: #475569;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li,
+[data-md-color-scheme="default"] .feature-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(99, 102, 241, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+[data-md-color-scheme="default"] .grid.cards > li:hover,
+[data-md-color-scheme="default"] .feature-card:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 0 20px rgba(99, 102, 241, 0.08);
+}
+
+/* =====================================================
+   Phase 3 & 4: Additional UI/UX Improvements
+   ===================================================== */
+
+/* ===== #12: Unified Shadow System ===== */
+.md-typeset .admonition,
+.md-typeset details,
+.md-typeset table:not([class]),
+.md-typeset pre,
+.grid.cards > li,
+.feature-card {
+  --shadow-base: 0 4px 20px rgba(0, 0, 0, 0.25);
+  --shadow-hover: 0 8px 40px rgba(0, 0, 0, 0.35), 0 0 30px rgba(139, 92, 246, 0.1);
+}
+
+/* ===== #13: Consistent Icon Sizes ===== */
+.md-typeset .twemoji,
+.md-typeset .emojione,
+.md-typeset svg.twemoji {
+  width: 1.25em;
+  height: 1.25em;
+  vertical-align: -0.15em;
+}
+
+.md-typeset h2 .twemoji,
+.md-typeset h3 .twemoji {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.grid.cards .twemoji.lg,
+.grid.cards .emojione.lg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* ===== #15: Focus States for Accessibility ===== */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+.md-nav__link:focus,
+.md-tabs__link:focus {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+.md-search__input:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2);
+}
+
+/* ===== #16: Output Label Styling ===== */
+.md-typeset p:has(+ pre),
+.md-typeset p + pre {
+  margin-top: 0.5rem;
+}
+
+.md-typeset code + pre,
+.md-typeset p > strong:first-child {
+  font-weight: 600;
+}
+
+/* Output: label styling */
+.md-typeset p > strong:only-child,
+.md-typeset p:has(code):has(strong) strong {
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
+/* ===== #17: Content Density - Better Spacing ===== */
+.md-content__inner {
+  padding: 2rem 2.5rem 4rem;
+  max-width: 900px;
+}
+
+.md-typeset p {
+  margin-bottom: 1.5rem;
+}
+
+.md-typeset ul,
+.md-typeset ol {
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+}
+
+.md-typeset li + li {
+  margin-top: 0.75rem;
+}
+
+/* Section spacing improvements */
+.md-typeset > section + section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(129, 140, 248, 0.1);
+}
+
+/* ===== #18: Warning Box Styling ===== */
+.md-typeset .admonition.warning,
+.md-typeset .admonition.caution {
+  border-left-width: 4px;
+  border-left-color: var(--color-warning);
+  background: rgba(251, 191, 36, 0.08) !important;
+}
+
+.md-typeset .admonition.warning .admonition-title,
+.md-typeset .admonition.caution .admonition-title {
+  background: rgba(251, 191, 36, 0.15) !important;
+}
+
+.md-typeset .admonition.danger,
+.md-typeset .admonition.error {
+  border-left-width: 4px;
+  border-left-color: var(--color-error);
+  background: rgba(248, 113, 113, 0.08) !important;
+}
+
+.md-typeset .admonition.danger .admonition-title,
+.md-typeset .admonition.error .admonition-title {
+  background: rgba(248, 113, 113, 0.15) !important;
+}
+
+/* ===== #19: Breadcrumb Navigation ===== */
+.md-nav--secondary .md-nav__title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+  opacity: 0.8;
+}
+
+/* ===== #20: Footer Improvements ===== */
+.md-footer-meta {
+  padding: 1.5rem 1rem;
+}
+
+.md-footer-meta__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.md-social {
+  gap: 1rem;
+}
+
+.md-social__link {
+  font-size: 1.25rem;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.md-social__link:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+  color: var(--color-secondary);
+}
+
+.md-copyright {
+  font-size: 0.875rem;
+  opacity: 0.7;
+}
+
+/* ===== #21: Smooth Scroll ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ===== #22: Code Copy Button Size ===== */
+.md-clipboard {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.md-clipboard:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-secondary);
+}
+
+.md-clipboard::after {
+  font-size: 0.9rem;
+}
+
+/* ===== #23: Responsive Tables ===== */
+.md-typeset__scrollwrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.md-typeset table:not([class]) {
+  min-width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .md-typeset table:not([class]) {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .md-typeset table:not([class]) th,
+  .md-typeset table:not([class]) td {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* ===== #24: Hero Spacing Improvement ===== */
+.hero-section {
+  padding: 5rem 2rem 4rem;
+  margin-bottom: 3rem;
+}
+
+@media screen and (max-width: 768px) {
+  .hero-section {
+    padding: 3rem 1.5rem 2.5rem;
+  }
+}
+
+/* ===== #25: Sidebar Active State ===== */
+.md-nav__item--active > .md-nav__link {
+  color: var(--color-primary) !important;
+  font-weight: 600;
+  background: rgba(167, 139, 250, 0.1);
+  border-left: 3px solid var(--color-primary);
+  margin-left: -0.75rem;
+  padding-left: calc(0.75rem + 9px);
+  border-radius: 0 8px 8px 0;
+}
+
+.md-nav__link--active {
+  position: relative;
+}
+
+.md-nav__link--active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 70%;
+  background: var(--color-primary);
+  border-radius: 0 2px 2px 0;
+}
+
+/* Light mode sidebar */
+[data-md-color-scheme="default"] .md-nav__item--active > .md-nav__link {
+  background: rgba(139, 92, 246, 0.08);
+}
+
+/* =====================================================
+   v1.2 MCP Round 2 Fixes - Critical & High Priority
+   ===================================================== */
+
+/* ===== C1: Responsive Fluid Container ===== */
+.md-content__inner {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 2rem clamp(1rem, 5vw, 2.5rem) 4rem;
+}
+
+.md-main__inner {
+  max-width: 100%;
+}
+
+/* Ensure fluid grid layouts */
+@media screen and (min-width: 1220px) {
+  .md-content {
+    max-width: calc(100% - 240px);
+  }
+}
+
+/* ===== C2: Unified Brand Identity ===== */
+/* All brand elements use design tokens consistently */
+.md-typeset a:not(.md-button),
+.md-typeset .headerlink,
+.md-nav__link--active,
+.md-tabs__link--active {
+  color: var(--color-secondary) !important;
+}
+
+.md-typeset a:not(.md-button):hover {
+  color: var(--color-primary) !important;
+}
+
+/* Consistent accent usage */
+.md-header,
+.md-tabs {
+  background: rgba(10, 10, 15, 0.9) !important;
+}
+
+/* ===== H2: Code Block Contrast - Improved ===== */
+.md-typeset pre {
+  background: #0f0f1a !important;  /* Darker for better contrast */
+}
+
+.md-typeset pre > code {
+  color: #f1f5f9 !important;  /* slate-100 - high contrast */
+}
+
+.md-typeset code:not(pre code) {
+  background: rgba(99, 102, 241, 0.2);
+  color: #e0e7ff;  /* indigo-100 - high contrast */
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+[data-md-color-scheme="default"] .md-typeset code:not(pre code) {
+  background: rgba(99, 102, 241, 0.15);
+  color: #4338ca;  /* indigo-700 - high contrast on light */
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+/* ===== H3: Grid Responsive Breakpoints ===== */
+@media screen and (max-width: 1024px) {
+  .grid.cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .grid.cards {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
+/* ===== H4/H8: Stricter Typography Scale ===== */
+.md-typeset h1 {
+  font-size: clamp(2rem, 5vw, 3rem) !important;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.md-typeset h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem) !important;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin-top: 3rem;
+}
+
+.md-typeset h3 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem) !important;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  margin-top: 2.5rem;
+}
+
+.md-typeset h4 {
+  font-size: 1.25rem !important;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-top: 2rem;
+}
+
+.md-typeset h5 {
+  font-size: 1.125rem !important;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-top: 1.5rem;
+}
+
+.md-typeset h6 {
+  font-size: 1rem !important;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-top: 1.25rem;
+  color: var(--text-muted);
+}
+
+/* ===== M1/M5: Section Spacing & Visual Dividers ===== */
+.md-typeset > h2 {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(129, 140, 248, 0.15);
+}
+
+.md-typeset > h2:first-of-type {
+  margin-top: 2rem;
+  padding-top: 0;
+  border-top: none;
+}
+
+/* Section divider line */
+.md-typeset hr {
+  margin: 3rem 0;
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(129, 140, 248, 0.3) 20%,
+    rgba(34, 211, 238, 0.3) 80%,
+    transparent
+  );
+}
+
+/* ===== M7: Consistent Icon System ===== */
+.md-typeset .twemoji,
+.md-typeset .emojione,
+.md-typeset svg.twemoji {
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: -0.15em;
+  filter: drop-shadow(0 0 4px rgba(129, 140, 248, 0.3));
+}
+
+.grid.cards .twemoji,
+.grid.cards .emojione {
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: var(--space-sm);
+}
+
+/* Icon in headings */
+.md-typeset h2 .twemoji,
+.md-typeset h3 .twemoji {
+  margin-right: var(--space-xs);
+}
+
+/* ===== M8: Enhanced Code Block Design ===== */
+.md-typeset pre {
+  border-radius: var(--radius-lg);
+  padding: 0;
+  overflow: hidden;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Code block header bar */
+.md-typeset pre::before {
+  content: '';
+  display: block;
+  height: 32px;
+  background: linear-gradient(180deg, rgba(30, 30, 50, 0.8) 0%, rgba(20, 20, 40, 0.9) 100%);
+  border-bottom: 1px solid rgba(129, 140, 248, 0.2);
+  position: relative;
+}
+
+/* Terminal dots */
+.md-typeset pre::after {
+  content: '● ● ●';
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+}
+
+.md-typeset pre > code {
+  display: block;
+  padding: var(--space-lg);
+  overflow-x: auto;
+}
+
+/* ===== M9: Unified Table Design ===== */
+.md-typeset table:not([class]) {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(129, 140, 248, 0.2);
+  box-shadow: var(--shadow-md);
+}
+
+.md-typeset table:not([class]) th {
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0.15) 100%);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+  border-bottom: 2px solid rgba(129, 140, 248, 0.3);
+}
+
+.md-typeset table:not([class]) td {
+  border-bottom: 1px solid rgba(129, 140, 248, 0.1);
+}
+
+/* ===== L1: Footer Alignment ===== */
+.md-footer-meta__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* ===== Additional Polish ===== */
+
+/* Smooth transitions for all interactive elements */
+a, button, input, .md-nav__link, .md-tabs__link {
+  transition: all 0.2s ease;
+}
+
+/* Better list styling */
+.md-typeset ul:not(.md-nav__list) > li::before {
+  color: var(--color-primary);
+}
+
+.md-typeset ol > li::marker {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* Code block title bar */
+.highlight .filename {
+  background: rgba(139, 92, 246, 0.2);
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  color: var(--color-secondary);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+/* Better blockquote styling */
+.md-typeset blockquote {
+  border-left: 4px solid var(--color-primary);
+  background: var(--glass-bg);
+  padding: 1rem 1.5rem;
+  border-radius: 0 var(--card-radius) var(--card-radius) 0;
+  margin: 1.5rem 0;
+}
+
+.md-typeset blockquote p {
+  margin-bottom: 0;
+}
+
+/* =====================================================
+   v1.3 - User Feedback Fixes (2026-01-27)
+   - Buttons consistency
+   - Layout/viewport fixes
+   - Code block improvements (no line numbers)
+   - Better icons/colors
+   ===================================================== */
+
+/* ===== BUTTONS - Unified Sizing ===== */
+.md-button {
+  min-width: 160px !important;
+  height: 48px !important;
+  padding: 0 28px !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  border-radius: 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px;
+  text-decoration: none !important;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+/* Primary Button - Gradient Purple */
+.md-button--primary {
+  background: linear-gradient(135deg, #7c3aed 0%, #6366f1 50%, #8b5cf6 100%) !important;
+  border: none !important;
+  color: white !important;
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+}
+
+.md-button--primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.5), 0 0 40px rgba(124, 58, 237, 0.2);
+}
+
+/* Secondary Button - Glass */
+.md-button:not(.md-button--primary) {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  color: #f1f5f9 !important;
+  backdrop-filter: blur(10px);
+}
+
+.md-button:not(.md-button--primary):hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: var(--color-secondary) !important;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 0 30px rgba(34, 211, 238, 0.3);
+}
+
+/* Button container alignment */
+.hero-section .md-button + .md-button,
+.md-typeset .md-button + .md-button {
+  margin-left: 12px;
+}
+
+/* ===== LAYOUT - Full Viewport Width ===== */
+.md-main {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.md-content {
+  max-width: 100%;
+}
+
+.md-content__inner {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem clamp(1.5rem, 4vw, 3rem) 4rem;
+}
+
+/* Hero Section - Full Bleed */
+.hero-section {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 5rem clamp(2rem, 8vw, 4rem);
+  text-align: center;
+}
+
+/* ===== CODE BLOCKS - Clean Design (No Line Numbers) ===== */
+/* Hide any remaining line numbers */
+.md-typeset .linenos,
+.md-typeset .linenodiv,
+.md-typeset .highlighttable td:first-child,
+.md-typeset pre .linenos,
+.highlighttable .linenos {
+  display: none !important;
+}
+
+/* Clean code block styling */
+.md-typeset pre {
+  background: linear-gradient(180deg, #12121f 0%, #0d0d18 100%) !important;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 16px;
+  padding: 0;
+  margin: 1.5rem 0;
+  overflow: hidden;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.md-typeset pre > code {
+  display: block;
+  padding: 1.25rem 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #e2e8f0;
+  background: transparent !important;
+  overflow-x: auto;
+}
+
+/* Code block hover effect */
+.md-typeset pre:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(99, 102, 241, 0.1);
+}
+
+/* Inline code */
+.md-typeset code:not(pre code) {
+  background: rgba(99, 102, 241, 0.15);
+  color: #c7d2fe;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  border-radius: 6px;
+  padding: 0.15em 0.5em;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+/* ===== COLORS - Improved Palette ===== */
+:root {
+  /* More vivid primary colors */
+  --color-primary: #8b5cf6;    /* Vivid violet */
+  --color-secondary: #06b6d4;  /* Cyan 500 */
+  --color-accent: #f472b6;     /* Pink */
+
+  /* Better text contrast */
+  --text-hero: #ffffff;
+  --text-primary: #f8fafc;
+  --text-secondary: #e2e8f0;
+  --text-muted: #94a3b8;
+}
+
+/* Hero text - pure white */
+.hero-section h1,
+.hero-section .md-typeset h1 {
+  color: #ffffff !important;
+  text-shadow: 0 4px 30px rgba(139, 92, 246, 0.5);
+}
+
+.hero-section p,
+.hero-section .md-typeset p {
+  color: #e2e8f0 !important;
+}
+
+/* ===== CARDS - Better Gradient & Spacing ===== */
+.grid.cards > li {
+  background: linear-gradient(145deg,
+    rgba(99, 102, 241, 0.08) 0%,
+    rgba(15, 15, 25, 0.9) 50%,
+    rgba(6, 182, 212, 0.05) 100%
+  );
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 20px;
+  padding: 1.75rem;
+  min-height: 200px;
+}
+
+.grid.cards > li:hover {
+  border-color: rgba(99, 102, 241, 0.5);
+  transform: translateY(-8px);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    0 0 50px rgba(99, 102, 241, 0.15);
+}
+
+/* Card titles - Theme Aware */
+.grid.cards > li strong,
+.grid.cards > li h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.75rem;
+}
+
+[data-md-color-scheme="slate"] .grid.cards > li strong,
+[data-md-color-scheme="slate"] .grid.cards > li h3 {
+  color: #ffffff;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li strong,
+[data-md-color-scheme="default"] .grid.cards > li h3 {
+  color: #0f172a !important;
+}
+
+/* Card text - Theme Aware */
+.grid.cards > li p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+[data-md-color-scheme="slate"] .grid.cards > li p {
+  color: #cbd5e1;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li p {
+  color: #334155 !important;
+}
+
+/* ===== ICONS - Material Design Icons ===== */
+/* Twemoji sizing fix */
+.md-typeset .twemoji,
+.md-typeset .emojione,
+.md-typeset svg.twemoji {
+  width: 1.3em;
+  height: 1.3em;
+  vertical-align: -0.2em;
+}
+
+/* Card icons - larger */
+.grid.cards .twemoji,
+.grid.cards svg.twemoji {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.4));
+}
+
+/* Material icons (if used) */
+.md-typeset .material-icons,
+.md-typeset [class*="material-"] {
+  font-size: 1.25em;
+  vertical-align: -0.15em;
+  color: var(--color-secondary);
+}
+
+/* Heart icon - special styling */
+.heart-icon {
+  color: #e11d48 !important;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* ===== TABLES - Clean Design (Theme Aware) ===== */
+.md-typeset table:not([class]) {
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 2rem 0;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) {
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  background: linear-gradient(180deg,
+    rgba(99, 102, 241, 0.25) 0%,
+    rgba(99, 102, 241, 0.15) 100%
+  );
+  color: #ffffff;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  padding: 1rem 1.25rem;
+  border-bottom: 2px solid rgba(99, 102, 241, 0.3);
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) td {
+  padding: 0.9rem 1.25rem;
+  color: #e2e8f0;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.08);
+}
+
+/* ===== RESPONSIVE - Mobile Fixes ===== */
+@media screen and (max-width: 768px) {
+  .md-button {
+    min-width: 140px !important;
+    height: 44px !important;
+    padding: 0 20px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .hero-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .hero-section h1 {
+    font-size: 1.75rem !important;
+  }
+
+  .grid.cards {
+    gap: 1rem;
+  }
+
+  .grid.cards > li {
+    padding: 1.25rem;
+    min-height: auto;
+  }
+}
+
+/* =====================================================
+   LIGHT MODE - Enhanced Text Contrast (v1.4)
+   WCAG AA Compliant: Minimum 4.5:1 contrast ratio
+   ===================================================== */
+
+/* === Light Mode Base Colors === */
+[data-md-color-scheme="default"] {
+  --text-light-primary: #0f172a;    /* slate-900 - Headlines */
+  --text-light-body: #1e293b;       /* slate-800 - Body text */
+  --text-light-secondary: #334155;  /* slate-700 - Secondary */
+  --text-light-muted: #475569;      /* slate-600 - Muted (minimum) */
+  --bg-light-card: rgba(255, 255, 255, 0.98);
+  --bg-light-surface: #f8fafc;
+}
+
+/* === General Text - High Contrast === */
+[data-md-color-scheme="default"] .md-typeset {
+  color: var(--text-light-body) !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset p,
+[data-md-color-scheme="default"] .md-typeset li,
+[data-md-color-scheme="default"] .md-typeset td,
+[data-md-color-scheme="default"] .md-typeset span {
+  color: var(--text-light-body) !important;
+}
+
+/* === Headings - Maximum Contrast === */
+[data-md-color-scheme="default"] .md-typeset h1,
+[data-md-color-scheme="default"] .md-typeset h2,
+[data-md-color-scheme="default"] .md-typeset h3 {
+  color: var(--text-light-primary) !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset h4,
+[data-md-color-scheme="default"] .md-typeset h5,
+[data-md-color-scheme="default"] .md-typeset h6 {
+  color: var(--text-light-body) !important;
+}
+
+/* === Buttons === */
+[data-md-color-scheme="default"] .md-button--primary {
+  background: linear-gradient(135deg, #7c3aed 0%, #6366f1 100%) !important;
+  color: #ffffff !important;
+}
+
+[data-md-color-scheme="default"] .md-button:not(.md-button--primary) {
+  background: rgba(99, 102, 241, 0.1) !important;
+  border-color: rgba(99, 102, 241, 0.4) !important;
+  color: #4338ca !important;
+}
+
+[data-md-color-scheme="default"] .md-button:not(.md-button--primary):hover {
+  background: rgba(99, 102, 241, 0.2) !important;
+  border-color: #6366f1 !important;
+}
+
+/* === Code Blocks === */
+[data-md-color-scheme="default"] .md-typeset pre {
+  background: #f1f5f9 !important;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+[data-md-color-scheme="default"] .md-typeset pre > code {
+  color: #0f172a !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset code:not(pre code) {
+  background: rgba(99, 102, 241, 0.12);
+  color: #4338ca !important;
+  border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+/* === Cards - Strong Text Contrast === */
+[data-md-color-scheme="default"] .grid.cards > li,
+[data-md-color-scheme="default"] .feature-card {
+  background: var(--bg-light-card);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+[data-md-color-scheme="default"] .grid.cards > li:hover,
+[data-md-color-scheme="default"] .feature-card:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 0 20px rgba(99, 102, 241, 0.08);
+}
+
+[data-md-color-scheme="default"] .grid.cards > li strong,
+[data-md-color-scheme="default"] .grid.cards > li h3,
+[data-md-color-scheme="default"] .grid.cards > li h4 {
+  color: var(--text-light-primary) !important;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li p {
+  color: var(--text-light-secondary) !important;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li a {
+  color: #4f46e5 !important;
+  font-weight: 600;
+}
+
+/* === Hero Section - Clear Readable Text === */
+[data-md-color-scheme="default"] .hero-section {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99, 102, 241, 0.12), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 10%, rgba(6, 182, 212, 0.08), transparent 50%),
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+[data-md-color-scheme="default"] .hero-section h1,
+[data-md-color-scheme="default"] .hero-section .md-typeset h1 {
+  color: var(--text-light-primary) !important;
+  text-shadow: none;
+}
+
+[data-md-color-scheme="default"] .hero-section p,
+[data-md-color-scheme="default"] .hero-section .md-typeset p {
+  color: var(--text-light-secondary) !important;
+}
+
+/* === Tables - High Contrast Text === */
+[data-md-color-scheme="default"] .md-typeset table:not([class]) {
+  background: #ffffff;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) th {
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0.1) 100%);
+  color: var(--text-light-primary) !important;
+  border-bottom: 2px solid rgba(99, 102, 241, 0.25);
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) td {
+  color: var(--text-light-body) !important;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) tr:nth-child(odd) td {
+  background: rgba(99, 102, 241, 0.03);
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) tr:hover td {
+  background: rgba(99, 102, 241, 0.08);
+}
+
+/* === Navigation & Sidebar === */
+[data-md-color-scheme="default"] .md-nav__link {
+  color: var(--text-light-body) !important;
+}
+
+[data-md-color-scheme="default"] .md-nav__link:hover {
+  color: #4f46e5 !important;
+}
+
+[data-md-color-scheme="default"] .md-nav__link--active {
+  color: #4f46e5 !important;
+  font-weight: 600;
+}
+
+[data-md-color-scheme="default"] .md-tabs__link {
+  color: var(--text-light-secondary) !important;
+}
+
+[data-md-color-scheme="default"] .md-tabs__link--active,
+[data-md-color-scheme="default"] .md-tabs__link:hover {
+  color: #4f46e5 !important;
+}
+
+/* ===== Light Mode - Sidebar ===== */
+[data-md-color-scheme="default"] .md-sidebar {
+  background: rgba(248, 250, 252, 0.95) !important;
+}
+
+[data-md-color-scheme="default"] .md-sidebar__scrollwrap {
+  background: transparent !important;
+}
+
+[data-md-color-scheme="default"] .md-nav__title {
+  color: #0f172a !important;
+}
+
+/* ===== Light Mode - Grid Cards (Icon Colors) ===== */
+[data-md-color-scheme="default"] .grid.cards > li .twemoji svg,
+[data-md-color-scheme="default"] .grid.cards > li .md-icon svg {
+  fill: #6366f1 !important;
+  color: #6366f1 !important;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li .twemoji svg path,
+[data-md-color-scheme="default"] .grid.cards > li .md-icon svg path {
+  fill: #6366f1 !important;
+}
+
+/* ===== Table Standardization - Fixed Width ===== */
+.md-typeset table:not([class]) {
+  width: 100% !important;
+  max-width: 100% !important;
+  table-layout: fixed !important;
+}
+
+/* === Admonitions === */
+[data-md-color-scheme="default"] .md-typeset .admonition,
+[data-md-color-scheme="default"] .md-typeset details {
+  background: var(--bg-light-card) !important;
+  border-color: rgba(99, 102, 241, 0.2) !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset .admonition p,
+[data-md-color-scheme="default"] .md-typeset details p {
+  color: var(--text-light-body) !important;
+}
+
+/* === Links === */
+[data-md-color-scheme="default"] .md-typeset a:not(.md-button) {
+  color: #4f46e5 !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset a:not(.md-button):hover {
+  color: #6366f1 !important;
+}
+
+/* === Status Badges === */
+[data-md-color-scheme="default"] .status-ready {
+  background: rgba(16, 185, 129, 0.15);
+  color: #047857 !important;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+[data-md-color-scheme="default"] .status-planned {
+  background: rgba(245, 158, 11, 0.15);
+  color: #b45309 !important;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+/* === Muted Text - Ensure Minimum Contrast === */
+[data-md-color-scheme="default"] .text-muted,
+[data-md-color-scheme="default"] .md-typeset .text-muted {
+  color: var(--text-light-muted) !important;
+}
+
+/* === Footer === */
+[data-md-color-scheme="default"] .md-footer {
+  background: #f1f5f9 !important;
+  border-top: 1px solid rgba(99, 102, 241, 0.15);
+}
+
+[data-md-color-scheme="default"] .md-footer-meta {
+  color: var(--text-light-secondary) !important;
+}
+
+[data-md-color-scheme="default"] .md-copyright {
+  color: var(--text-light-muted) !important;
+}
+
+/* =====================================================
+   v1.6 - PROFESSIONAL DESIGN SYSTEM
+   Complete Light/Dark Mode Overhaul
+   Based on UI/UX Pro Max Guidelines
+   WCAG AA Compliant (4.5:1 minimum contrast)
+   ===================================================== */
+
+/* ===== LIGHT MODE - Complete Navigation Fix ===== */
+
+/* --- Header - Professional Light Mode --- */
+[data-md-color-scheme="default"] .md-header {
+  background: rgba(248, 250, 252, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-md-color-scheme="default"] .md-header__title,
+[data-md-color-scheme="default"] .md-header__topic,
+[data-md-color-scheme="default"] .md-header__topic > .md-ellipsis,
+[data-md-color-scheme="default"] .md-header__ellipsis,
+[data-md-color-scheme="default"] .md-header .md-ellipsis {
+  color: #1E293B !important;
+}
+
+[data-md-color-scheme="default"] .md-header__button,
+[data-md-color-scheme="default"] .md-header__button svg,
+[data-md-color-scheme="default"] .md-header__button svg path {
+  color: #475569 !important;
+  fill: #475569 !important;
+}
+
+[data-md-color-scheme="default"] .md-header__button:hover,
+[data-md-color-scheme="default"] .md-header__button:hover svg,
+[data-md-color-scheme="default"] .md-header__button:hover svg path {
+  color: #6366F1 !important;
+  fill: #6366F1 !important;
+}
+
+/* --- Header Source (GitHub) --- */
+[data-md-color-scheme="default"] .md-source {
+  color: #475569 !important;
+}
+
+[data-md-color-scheme="default"] .md-source__repository {
+  color: #1E293B !important;
+}
+
+[data-md-color-scheme="default"] .md-source__fact {
+  color: #64748B !important;
+}
+
+[data-md-color-scheme="default"] .md-source__icon svg,
+[data-md-color-scheme="default"] .md-source__icon svg path {
+  fill: #475569 !important;
+}
+
+/* --- Navigation Tabs - Light Mode --- */
+[data-md-color-scheme="default"] .md-tabs {
+  background: rgba(248, 250, 252, 0.9) !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+}
+
+[data-md-color-scheme="default"] .md-tabs__link {
+  color: #475569 !important;
+  opacity: 1 !important;
+}
+
+[data-md-color-scheme="default"] .md-tabs__link--active,
+[data-md-color-scheme="default"] .md-tabs__link:hover {
+  color: #6366F1 !important;
+  font-weight: 600 !important;
+}
+
+/* --- Sidebar - Professional Light Mode --- */
+[data-md-color-scheme="default"] .md-sidebar {
+  background: #F8FAFC !important;
+  border-right: 1px solid #E2E8F0 !important;
+}
+
+[data-md-color-scheme="default"] .md-sidebar__scrollwrap {
+  background: transparent !important;
+}
+
+[data-md-color-scheme="default"] .md-sidebar__inner {
+  background: transparent !important;
+}
+
+[data-md-color-scheme="default"] .md-nav__title {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+}
+
+[data-md-color-scheme="default"] .md-nav__link {
+  color: #475569 !important;
+}
+
+[data-md-color-scheme="default"] .md-nav__link:hover {
+  color: #6366F1 !important;
+}
+
+[data-md-color-scheme="default"] .md-nav__link--active,
+[data-md-color-scheme="default"] .md-nav__item--active > .md-nav__link {
+  color: #6366F1 !important;
+  font-weight: 600 !important;
+}
+
+/* --- Search - Light Mode --- */
+[data-md-color-scheme="default"] .md-search__input {
+  background: #FFFFFF !important;
+  color: #1E293B !important;
+  border: 1px solid #E2E8F0 !important;
+}
+
+[data-md-color-scheme="default"] .md-search__input::placeholder {
+  color: #94A3B8 !important;
+}
+
+[data-md-color-scheme="default"] .md-search__icon svg,
+[data-md-color-scheme="default"] .md-search__icon svg path {
+  fill: #64748B !important;
+}
+
+/* ===== LIGHT MODE - Buttons Professional ===== */
+
+/* Button Container - Flexbox Alignment */
+.hero-section > div[style*="display: flex"],
+.md-typeset > p:has(.md-button) {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 1rem !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+}
+
+/* All Buttons - Unified Sizing */
+.md-button {
+  min-width: 180px !important;
+  height: 52px !important;
+  padding: 0 32px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  border-radius: 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Primary Button - Both Modes */
+.md-button--primary {
+  background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%) !important;
+  border: none !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4) !important;
+}
+
+.md-button--primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5) !important;
+}
+
+/* Secondary Button - Light Mode */
+[data-md-color-scheme="default"] .md-button:not(.md-button--primary) {
+  background: #FFFFFF !important;
+  border: 2px solid #E2E8F0 !important;
+  color: #1E293B !important;
+}
+
+[data-md-color-scheme="default"] .md-button:not(.md-button--primary):hover {
+  background: #F8FAFC !important;
+  border-color: #6366F1 !important;
+  color: #6366F1 !important;
+}
+
+/* Secondary Button - Dark Mode */
+[data-md-color-scheme="slate"] .md-button:not(.md-button--primary) {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  color: #F1F5F9 !important;
+}
+
+[data-md-color-scheme="slate"] .md-button:not(.md-button--primary):hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: #22D3EE !important;
+  color: #22D3EE !important;
+}
+
+/* Button Icons */
+.md-button .twemoji svg,
+.md-button .md-icon svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+[data-md-color-scheme="default"] .md-button:not(.md-button--primary) .twemoji svg,
+[data-md-color-scheme="default"] .md-button:not(.md-button--primary) .twemoji svg path {
+  fill: #1E293B !important;
+}
+
+[data-md-color-scheme="default"] .md-button:not(.md-button--primary):hover .twemoji svg,
+[data-md-color-scheme="default"] .md-button:not(.md-button--primary):hover .twemoji svg path {
+  fill: #6366F1 !important;
+}
+
+/* ===== LIGHT MODE - Grid Cards Icons ===== */
+[data-md-color-scheme="default"] .grid.cards > li .twemoji svg,
+[data-md-color-scheme="default"] .grid.cards > li .twemoji svg path,
+[data-md-color-scheme="default"] .grid.cards > li .md-icon svg,
+[data-md-color-scheme="default"] .grid.cards > li .md-icon svg path {
+  fill: #6366F1 !important;
+  color: #6366F1 !important;
+}
+
+/* ===== LIGHT MODE - Tables Standardized ===== */
+.md-typeset table:not([class]) {
+  width: 100% !important;
+  max-width: 100% !important;
+  table-layout: auto !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  margin: 1.5rem 0 !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) th {
+  background: #F1F5F9 !important;
+  color: #0F172A !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.05em !important;
+  padding: 1rem 1.25rem !important;
+  border-bottom: 2px solid #E2E8F0 !important;
+  text-align: left !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) td {
+  color: #1E293B !important;
+  padding: 0.875rem 1.25rem !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) tr:last-child td {
+  border-bottom: none !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) tr:hover td {
+  background: #F8FAFC !important;
+}
+
+/* ===== LIGHT MODE - Code Blocks ===== */
+[data-md-color-scheme="default"] .md-typeset pre {
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset code {
+  color: #1E293B !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset pre code {
+  color: #334155 !important;
+}
+
+/* ===== LIGHT MODE - Admonitions ===== */
+[data-md-color-scheme="default"] .md-typeset .admonition,
+[data-md-color-scheme="default"] .md-typeset details {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset .admonition p,
+[data-md-color-scheme="default"] .md-typeset details p {
+  color: #334155 !important;
+}
+
+/* ===== LIGHT MODE - Content Area ===== */
+[data-md-color-scheme="default"] .md-content {
+  background: #FFFFFF !important;
+}
+
+[data-md-color-scheme="default"] .md-main {
+  background: #F8FAFC !important;
+}
+
+/* ===== LIGHT MODE - Footer ===== */
+[data-md-color-scheme="default"] .md-footer {
+  background: #F1F5F9 !important;
+  border-top: 1px solid #E2E8F0 !important;
+}
+
+[data-md-color-scheme="default"] .md-footer-nav__link {
+  color: #475569 !important;
+}
+
+[data-md-color-scheme="default"] .md-footer-nav__link:hover {
+  color: #6366F1 !important;
+}
+
+[data-md-color-scheme="default"] .md-footer-meta__inner {
+  color: #64748B !important;
+}
+
+/* =====================================================
+   v1.7 - RESPONSIVE & CONTRAST IMPROVEMENTS
+   - Hero buttons: Row on Desktop, Column on Mobile
+   - Grid cards: Enhanced icon contrast
+   - Light Mode: Improved text readability
+   - Sticky Sidebar: Always visible during scroll
+   - WCAG AA+ Compliant
+   ===================================================== */
+
+/* ===== STICKY SIDEBAR - Always Follows Scroll ===== */
+/* Override MkDocs Material default behavior */
+@media screen and (min-width: 76.25em) {
+  .md-sidebar {
+    position: sticky !important;
+    top: 3.5rem !important;
+    align-self: flex-start !important;
+    max-height: calc(100vh - 3.5rem) !important;
+    height: auto !important;
+  }
+
+  .md-sidebar--primary {
+    position: sticky !important;
+    top: 3.5rem !important;
+  }
+
+  .md-sidebar--secondary {
+    position: sticky !important;
+    top: 3.5rem !important;
+  }
+
+  .md-sidebar__scrollwrap {
+    overflow-y: auto !important;
+    max-height: calc(100vh - 4rem) !important;
+    scrollbar-width: thin !important;
+    height: auto !important;
+  }
+
+  .md-sidebar__inner {
+    padding-bottom: 2rem !important;
+  }
+
+  /* Ensure main content area allows sticky to work */
+  .md-main__inner {
+    display: flex !important;
+    align-items: flex-start !important;
+  }
+
+  .md-content {
+    flex: 1 !important;
+    min-width: 0 !important;
+  }
+}
+
+/* ===== HERO BUTTONS - Professional Layout ===== */
+/* v1.7.3: Only 2 states - Row (Desktop) or Column (Mobile), NO wrap */
+.hero-section > div[style*="display: flex"],
+.hero-section > p:has(.md-button),
+.md-typeset > p:has(.md-button),
+.hero-section p:has(.md-button) {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;  /* NO WRAP - single row only */
+  gap: 1rem !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0 auto !important;
+}
+
+/* Hero Buttons - Unified Size Desktop */
+.hero-section .md-button,
+.hero-section p .md-button {
+  min-width: 200px !important;
+  height: 54px !important;
+  padding: 0 28px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  border-radius: 14px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  transition: all 0.25s ease !important;
+}
+
+/* ===== LIGHT MODE - Enhanced Grid Cards ===== */
+/* v1.7.4: Complete Light Mode Override - Pure White Background, No Glass Effect */
+[data-md-color-scheme="default"] .grid.cards > li,
+[data-md-color-scheme="default"] .grid.cards > ul > li {
+  background: #FFFFFF !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+  transition: all 0.25s ease !important;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li::before,
+[data-md-color-scheme="default"] .grid.cards > ul > li::before {
+  display: none !important;  /* Hide gradient top line */
+}
+
+[data-md-color-scheme="default"] .grid.cards > li:hover,
+[data-md-color-scheme="default"] .grid.cards > ul > li:hover {
+  background: #FFFFFF !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-color: #6366F1 !important;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.12) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Grid Cards - Icon Colors (Stronger Contrast) */
+[data-md-color-scheme="default"] .grid.cards > li .twemoji,
+[data-md-color-scheme="default"] .grid.cards > li .md-icon {
+  color: #4F46E5 !important;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li .twemoji svg,
+[data-md-color-scheme="default"] .grid.cards > li .twemoji svg path,
+[data-md-color-scheme="default"] .grid.cards > li .md-icon svg,
+[data-md-color-scheme="default"] .grid.cards > li .md-icon svg path {
+  fill: #4F46E5 !important;
+  color: #4F46E5 !important;
+}
+
+/* Grid Cards - Large Icon Size */
+[data-md-color-scheme="default"] .grid.cards > li .twemoji.lg,
+[data-md-color-scheme="default"] .grid.cards > li .twemoji.lg svg {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+}
+
+/* Grid Cards - Text Colors (Enhanced Contrast) */
+[data-md-color-scheme="default"] .grid.cards > li strong,
+[data-md-color-scheme="default"] .grid.cards > li b {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li p {
+  color: #334155 !important;
+  line-height: 1.65 !important;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li hr {
+  border-color: #E2E8F0 !important;
+  margin: 1rem 0 !important;
+}
+
+/* Grid Cards - Link Colors */
+[data-md-color-scheme="default"] .grid.cards > li a {
+  color: #4F46E5 !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li a:hover {
+  color: #3730A3 !important;
+  text-decoration: underline !important;
+}
+
+/* Grid Cards - Arrow Icon in Links */
+[data-md-color-scheme="default"] .grid.cards > li a .twemoji svg,
+[data-md-color-scheme="default"] .grid.cards > li a .twemoji svg path {
+  fill: #4F46E5 !important;
+}
+
+[data-md-color-scheme="default"] .grid.cards > li a:hover .twemoji svg,
+[data-md-color-scheme="default"] .grid.cards > li a:hover .twemoji svg path {
+  fill: #3730A3 !important;
+}
+
+/* ===== LIGHT MODE - Hero Section Contrast ===== */
+[data-md-color-scheme="default"] .hero-section {
+  background: linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 100%) !important;
+}
+
+[data-md-color-scheme="default"] .hero-section h1,
+[data-md-color-scheme="default"] .hero-section .md-typeset h1 {
+  color: #0F172A !important;
+  text-shadow: none !important;
+}
+
+[data-md-color-scheme="default"] .hero-section p,
+[data-md-color-scheme="default"] .hero-section .md-typeset p:not(:has(.md-button)) {
+  color: #334155 !important;
+}
+
+/* ===== LIGHT MODE - Body Text Improvements ===== */
+[data-md-color-scheme="default"] .md-typeset {
+  color: #1E293B !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset p {
+  color: #334155 !important;
+  line-height: 1.7 !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset h2 {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset h3 {
+  color: #1E293B !important;
+  font-weight: 600 !important;
+}
+
+/* ===== RESPONSIVE - Tablet (< 960px) ===== */
+/* v1.7.3: Keep row layout, just smaller buttons - NO wrap */
+@media screen and (max-width: 959px) {
+  .hero-section > div[style*="display: flex"],
+  .hero-section > p:has(.md-button),
+  .md-typeset > p:has(.md-button),
+  .hero-section p:has(.md-button) {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;  /* NO WRAP */
+    gap: 0.75rem !important;
+  }
+
+  .hero-section .md-button,
+  .hero-section p .md-button {
+    min-width: 150px !important;
+    height: 48px !important;
+    padding: 0 20px !important;
+    font-size: 0.875rem !important;
+  }
+}
+
+/* ===== RESPONSIVE - Mobile (< 768px) ===== */
+@media screen and (max-width: 767px) {
+  .hero-section > div[style*="display: flex"],
+  .hero-section > p:has(.md-button),
+  .md-typeset > p:has(.md-button),
+  .hero-section p:has(.md-button) {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    max-width: 100% !important;
+  }
+
+  .hero-section .md-button,
+  .hero-section p .md-button {
+    width: 100% !important;
+    max-width: 320px !important;
+    min-width: auto !important;
+    height: 52px !important;
+    font-size: 1rem !important;
+  }
+
+  /* Grid Cards - Full Width on Mobile */
+  .grid.cards {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+}
+
+/* ===== RESPONSIVE - Small Mobile (< 480px) ===== */
+@media screen and (max-width: 479px) {
+  .hero-section .md-button,
+  .hero-section p .md-button {
+    max-width: 100% !important;
+    height: 48px !important;
+    padding: 0 20px !important;
+    font-size: 0.9rem !important;
+    border-radius: 12px !important;
+  }
+
+  .hero-section h1,
+  .hero-section .md-typeset h1 {
+    font-size: 1.75rem !important;
+  }
+
+  .hero-section p {
+    font-size: 0.95rem !important;
+  }
+}
+
+/* =====================================================
+   v1.7.1 - FOOTER NAVIGATION & GLOBAL CONTRAST FIX
+   - Footer Previous/Next text visibility
+   - All muted/direction text enhanced
+   - Comprehensive Light Mode audit
+   ===================================================== */
+
+/* ===== LIGHT MODE - Footer Navigation ===== */
+[data-md-color-scheme="default"] .md-footer__link {
+  color: #475569 !important;
+}
+
+[data-md-color-scheme="default"] .md-footer__link:hover {
+  color: #4F46E5 !important;
+}
+
+[data-md-color-scheme="default"] .md-footer__title {
+  color: #1E293B !important;
+}
+
+[data-md-color-scheme="default"] .md-footer__direction {
+  color: #64748B !important;
+  font-weight: 500 !important;
+  opacity: 1 !important;
+}
+
+[data-md-color-scheme="default"] .md-footer__button svg,
+[data-md-color-scheme="default"] .md-footer__button svg path {
+  fill: #475569 !important;
+}
+
+[data-md-color-scheme="default"] .md-footer__link:hover .md-footer__button svg,
+[data-md-color-scheme="default"] .md-footer__link:hover .md-footer__button svg path {
+  fill: #4F46E5 !important;
+}
+
+[data-md-color-scheme="default"] .md-ellipsis {
+  color: #1E293B !important;
+}
+
+/* ===== LIGHT MODE - Global Muted Text Fix ===== */
+[data-md-color-scheme="default"] .md-typeset .muted,
+[data-md-color-scheme="default"] .md-typeset small,
+[data-md-color-scheme="default"] .md-typeset .caption {
+  color: #64748B !important;
+}
+
+/* ===== LIGHT MODE - TOC (Table of Contents) ===== */
+[data-md-color-scheme="default"] .md-nav--secondary .md-nav__link {
+  color: #475569 !important;
+}
+
+[data-md-color-scheme="default"] .md-nav--secondary .md-nav__link:hover {
+  color: #4F46E5 !important;
+}
+
+[data-md-color-scheme="default"] .md-nav--secondary .md-nav__link--active {
+  color: #4F46E5 !important;
+  font-weight: 600 !important;
+}
+
+/* ===== LIGHT MODE - Breadcrumbs ===== */
+[data-md-color-scheme="default"] .md-path__link {
+  color: #64748B !important;
+}
+
+[data-md-color-scheme="default"] .md-path__link:hover {
+  color: #4F46E5 !important;
+}
+
+/* ===== LIGHT MODE - Labels & Badges ===== */
+[data-md-color-scheme="default"] .md-typeset .md-tag {
+  background: #F1F5F9 !important;
+  color: #475569 !important;
+  border: 1px solid #E2E8F0 !important;
+}
+
+/* ===== LIGHT MODE - Status Icons ===== */
+[data-md-color-scheme="default"] .status-ready {
+  color: #16A34A !important;
+}
+
+[data-md-color-scheme="default"] .status-planned {
+  color: #D97706 !important;
+}
+
+/* ===== LIGHT MODE - Inline Code ===== */
+[data-md-color-scheme="default"] .md-typeset :not(pre) > code {
+  background: #F1F5F9 !important;
+  color: #BE185D !important;
+  border: 1px solid #E2E8F0 !important;
+  padding: 0.1rem 0.4rem !important;
+  border-radius: 4px !important;
+}
+
+/* ===== LIGHT MODE - Blockquotes ===== */
+[data-md-color-scheme="default"] .md-typeset blockquote {
+  background: #F8FAFC !important;
+  border-left: 4px solid #4F46E5 !important;
+  color: #475569 !important;
+}
+
+/* ===== LIGHT MODE - Tab Labels ===== */
+[data-md-color-scheme="default"] .md-typeset .tabbed-labels > label {
+  color: #475569 !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset .tabbed-labels > label:hover {
+  color: #4F46E5 !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset .tabbed-labels > label.tabbed-set--active {
+  color: #4F46E5 !important;
+  border-color: #4F46E5 !important;
+}
+
+/* ===== LIGHT MODE - Copy Button ===== */
+[data-md-color-scheme="default"] .md-clipboard {
+  color: #94A3B8 !important;
+}
+
+[data-md-color-scheme="default"] .md-clipboard:hover {
+  color: #4F46E5 !important;
+}
+
+/* ===== LIGHT MODE - Version Selector ===== */
+[data-md-color-scheme="default"] .md-version {
+  color: #475569 !important;
+}
+
+/* ===== LIGHT MODE - Announcement Bar ===== */
+[data-md-color-scheme="default"] .md-announce {
+  background: #4F46E5 !important;
+  color: #FFFFFF !important;
+}
+
+[data-md-color-scheme="default"] .md-announce a {
+  color: #FFFFFF !important;
+  text-decoration: underline !important;
+}
+
+/* =====================================================
+   v1.7.4 - COMPREHENSIVE LIGHT MODE GLASS EFFECT FIX
+   - Remove ALL backdrop-filter/glass effects in Light Mode
+   - Ensure pure white/light backgrounds
+   - Fix any dark-themed elements bleeding through
+   ===================================================== */
+
+/* ===== LIGHT MODE - Feature Cards (No Glass) ===== */
+[data-md-color-scheme="default"] .feature-card {
+  background: #FFFFFF !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-md-color-scheme="default"] .feature-card:hover {
+  background: #FFFFFF !important;
+  backdrop-filter: none !important;
+  border-color: #6366F1 !important;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.12) !important;
+}
+
+/* ===== LIGHT MODE - Sidebar (No Glass) ===== */
+[data-md-color-scheme="default"] .md-sidebar {
+  background: #FFFFFF !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+[data-md-color-scheme="default"] .md-sidebar__scrollwrap {
+  background: transparent !important;
+}
+
+/* ===== LIGHT MODE - Tabs (No Glass) ===== */
+[data-md-color-scheme="default"] .md-tabs {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ===== LIGHT MODE - Search (No Glass) ===== */
+[data-md-color-scheme="default"] .md-search__form {
+  background: #FFFFFF !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid #E2E8F0 !important;
+}
+
+[data-md-color-scheme="default"] .md-search__input {
+  background: transparent !important;
+  color: #1E293B !important;
+}
+
+/* ===== LIGHT MODE - Dialog/Modal (No Glass) ===== */
+[data-md-color-scheme="default"] .md-dialog {
+  background: #FFFFFF !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid #E2E8F0 !important;
+}
+
+/* ===== LIGHT MODE - Content Area ===== */
+[data-md-color-scheme="default"] .md-content {
+  background: #FFFFFF !important;
+}
+
+[data-md-color-scheme="default"] .md-content__inner {
+  background: transparent !important;
+}
+
+/* ===== LIGHT MODE - Admonitions (Clean backgrounds) ===== */
+[data-md-color-scheme="default"] .md-typeset .admonition,
+[data-md-color-scheme="default"] .md-typeset details {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ===== LIGHT MODE - Tables (Clean) ===== */
+[data-md-color-scheme="default"] .md-typeset table:not([class]) {
+  background: #FFFFFF !important;
+  backdrop-filter: none !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) th {
+  background: #F1F5F9 !important;
+  color: #1E293B !important;
+}
+
+[data-md-color-scheme="default"] .md-typeset table:not([class]) td {
+  background: #FFFFFF !important;
+  color: #334155 !important;
+}
+
+/* ===== LIGHT MODE - Code Blocks (Clean) ===== */
+[data-md-color-scheme="default"] .md-typeset pre {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ===== LIGHT MODE - Footer (Clean) ===== */
+[data-md-color-scheme="default"] .md-footer {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ===== LIGHT MODE - Main container (Clean) ===== */
+[data-md-color-scheme="default"] .md-main {
+  background: #F8FAFC !important;
+}
+
+/* ===== LIGHT MODE - Hero Section (Clean) ===== */
+[data-md-color-scheme="default"] .hero-section {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* =====================================================
+   v1.7.6 - STICKY SIDEBAR FIX (Override JavaScript)
+   - Force position: sticky over MkDocs JavaScript
+   - Override inline styles from JS on BOTH sidebar AND nav
+   - Target .md-nav--primary which has inline position: fixed
+   - Works on Desktop (> 76.25em / 1220px)
+   ===================================================== */
+
+/* Force sticky on ALL sidebar states - override JS inline styles */
+@media screen and (min-width: 76.25em) {
+  /* PRIMARY FIX: Override the inline position: fixed on nav element */
+  .md-nav--primary[style],
+  .md-nav--primary[style*="position"],
+  nav.md-nav--primary {
+    position: sticky !important;
+    top: 3.5rem !important;
+    height: auto !important;
+    max-height: calc(100vh - 3.5rem) !important;
+  }
+
+  /* Override the JavaScript-set inline style on sidebar */
+  .md-sidebar[style],
+  .md-sidebar--primary[style],
+  .md-sidebar--secondary[style] {
+    position: sticky !important;
+    top: 3.5rem !important;
+    height: auto !important;
+    max-height: calc(100vh - 3.5rem) !important;
+    align-self: flex-start !important;
+  }
+
+  /* Also target without [style] for initial load */
+  .md-sidebar,
+  .md-sidebar--primary,
+  .md-sidebar--secondary {
+    position: sticky !important;
+    top: 3.5rem !important;
+    height: auto !important;
+    max-height: calc(100vh - 3.5rem) !important;
+    align-self: flex-start !important;
+  }
+
+  /* Scrollable inner content */
+  .md-sidebar__scrollwrap {
+    overflow-y: auto !important;
+    max-height: calc(100vh - 4.5rem) !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #CBD5E1 transparent !important;
+  }
+
+  .md-sidebar__scrollwrap::-webkit-scrollbar {
+    width: 6px !important;
+  }
+
+  .md-sidebar__scrollwrap::-webkit-scrollbar-thumb {
+    background: #CBD5E1 !important;
+    border-radius: 3px !important;
+  }
+
+  .md-sidebar__scrollwrap::-webkit-scrollbar-track {
+    background: transparent !important;
+  }
+
+  /* Parent container must be flex for sticky to work */
+  .md-main__inner {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+  }
+
+  /* Content takes remaining space */
+  .md-content {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Sidebar width constraints */
+  .md-sidebar--primary {
+    width: 12.1rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  .md-sidebar--secondary {
+    width: 12.1rem !important;
+    flex-shrink: 0 !important;
+  }
+}
