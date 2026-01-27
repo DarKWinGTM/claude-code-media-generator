@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.7.7 - JavaScript Sidebar Sticky Fix
+   v1.7.8 - Parent Overflow Fix for Sticky Sidebar
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -3035,12 +3035,31 @@ a, button, input, .md-nav__link, .md-tabs__link {
 }
 
 /* =====================================================
-   v1.7.6 - STICKY SIDEBAR FIX (Override JavaScript)
+   v1.7.8 - STICKY SIDEBAR FIX (Override JavaScript)
    - Force position: sticky over MkDocs JavaScript
+   - CRITICAL: Fix parent container overflow for sticky to work
    - Override inline styles from JS on BOTH sidebar AND nav
    - Target .md-nav--primary which has inline position: fixed
    - Works on Desktop (> 76.25em / 1220px)
    ===================================================== */
+
+/* CRITICAL FIX: Parent containers must have overflow: visible for sticky to work */
+@media screen and (min-width: 76.25em) {
+  /* Fix all parent containers - overflow: visible is required for sticky */
+  html,
+  body,
+  .md-container,
+  .md-main {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+  }
+
+  /* The main content wrapper must allow normal document flow */
+  .md-main__inner {
+    overflow: visible !important;
+  }
+}
 
 /* Force sticky on ALL sidebar states - override JS inline styles */
 @media screen and (min-width: 76.25em) {
