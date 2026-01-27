@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.7.4 - Light Mode: No Glass Effects
+   v1.7.5 - Sticky Sidebar Override JS
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -3032,4 +3032,82 @@ a, button, input, .md-nav__link, .md-tabs__link {
 [data-md-color-scheme="default"] .hero-section {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
+}
+
+/* =====================================================
+   v1.7.5 - STICKY SIDEBAR FIX (Override JavaScript)
+   - Force position: sticky over MkDocs JavaScript
+   - Override inline styles from JS
+   - Works on Desktop (> 76.25em / 1220px)
+   ===================================================== */
+
+/* Force sticky on ALL sidebar states - override JS inline styles */
+@media screen and (min-width: 76.25em) {
+  /* Override the JavaScript-set inline style */
+  .md-sidebar[style],
+  .md-sidebar--primary[style],
+  .md-sidebar--secondary[style] {
+    position: sticky !important;
+    top: 3.5rem !important;
+    height: auto !important;
+    max-height: calc(100vh - 3.5rem) !important;
+    align-self: flex-start !important;
+  }
+
+  /* Also target without [style] for initial load */
+  .md-sidebar,
+  .md-sidebar--primary,
+  .md-sidebar--secondary {
+    position: sticky !important;
+    top: 3.5rem !important;
+    height: auto !important;
+    max-height: calc(100vh - 3.5rem) !important;
+    align-self: flex-start !important;
+  }
+
+  /* Scrollable inner content */
+  .md-sidebar__scrollwrap {
+    overflow-y: auto !important;
+    max-height: calc(100vh - 4.5rem) !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #CBD5E1 transparent !important;
+  }
+
+  .md-sidebar__scrollwrap::-webkit-scrollbar {
+    width: 6px !important;
+  }
+
+  .md-sidebar__scrollwrap::-webkit-scrollbar-thumb {
+    background: #CBD5E1 !important;
+    border-radius: 3px !important;
+  }
+
+  .md-sidebar__scrollwrap::-webkit-scrollbar-track {
+    background: transparent !important;
+  }
+
+  /* Parent container must be flex for sticky to work */
+  .md-main__inner {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+  }
+
+  /* Content takes remaining space */
+  .md-content {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Sidebar width constraints */
+  .md-sidebar--primary {
+    width: 12.1rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  .md-sidebar--secondary {
+    width: 12.1rem !important;
+    flex-shrink: 0 !important;
+  }
 }
