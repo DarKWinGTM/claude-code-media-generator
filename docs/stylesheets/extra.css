@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.7.1 - Footer & Global Contrast Fixes
+   v1.7.3 - Hero Buttons: Row or Column Only
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -2548,18 +2548,18 @@ a, button, input, .md-nav__link, .md-tabs__link {
 }
 
 /* ===== HERO BUTTONS - Professional Layout ===== */
+/* v1.7.3: Only 2 states - Row (Desktop) or Column (Mobile), NO wrap */
 .hero-section > div[style*="display: flex"],
 .hero-section > p:has(.md-button),
 .md-typeset > p:has(.md-button),
 .hero-section p:has(.md-button) {
   display: flex !important;
   flex-direction: row !important;
-  flex-wrap: wrap !important;
+  flex-wrap: nowrap !important;  /* NO WRAP - single row only */
   gap: 1rem !important;
   justify-content: center !important;
   align-items: center !important;
   margin: 0 auto !important;
-  max-width: 720px !important;
 }
 
 /* Hero Buttons - Unified Size Desktop */
@@ -2694,22 +2694,23 @@ a, button, input, .md-nav__link, .md-tabs__link {
 }
 
 /* ===== RESPONSIVE - Tablet (< 960px) ===== */
+/* v1.7.3: Keep row layout, just smaller buttons - NO wrap */
 @media screen and (max-width: 959px) {
   .hero-section > div[style*="display: flex"],
   .hero-section > p:has(.md-button),
   .md-typeset > p:has(.md-button),
   .hero-section p:has(.md-button) {
     flex-direction: row !important;
-    flex-wrap: wrap !important;
-    gap: 0.875rem !important;
+    flex-wrap: nowrap !important;  /* NO WRAP */
+    gap: 0.75rem !important;
   }
 
   .hero-section .md-button,
   .hero-section p .md-button {
-    min-width: 180px !important;
-    height: 50px !important;
-    padding: 0 24px !important;
-    font-size: 0.95rem !important;
+    min-width: 150px !important;
+    height: 48px !important;
+    padding: 0 20px !important;
+    font-size: 0.875rem !important;
   }
 }
 
