@@ -2503,23 +2503,48 @@ a, button, input, .md-nav__link, .md-tabs__link {
    - WCAG AA+ Compliant
    ===================================================== */
 
-/* ===== STICKY SIDEBAR - Always Visible ===== */
-.md-sidebar--primary,
-.md-sidebar--secondary {
-  position: sticky !important;
-  top: 4rem !important;  /* Height of header */
-  height: calc(100vh - 4rem) !important;
-  overflow-y: auto !important;
-  scrollbar-width: thin !important;
-}
+/* ===== STICKY SIDEBAR - Always Follows Scroll ===== */
+/* Override MkDocs Material default behavior */
+@media screen and (min-width: 76.25em) {
+  .md-sidebar {
+    position: sticky !important;
+    top: 3.5rem !important;
+    align-self: flex-start !important;
+    max-height: calc(100vh - 3.5rem) !important;
+    height: auto !important;
+  }
 
-.md-sidebar__scrollwrap {
-  overflow: visible !important;
-}
+  .md-sidebar--primary {
+    position: sticky !important;
+    top: 3.5rem !important;
+  }
 
-.md-sidebar__inner {
-  position: sticky !important;
-  top: 0 !important;
+  .md-sidebar--secondary {
+    position: sticky !important;
+    top: 3.5rem !important;
+  }
+
+  .md-sidebar__scrollwrap {
+    overflow-y: auto !important;
+    max-height: calc(100vh - 4rem) !important;
+    scrollbar-width: thin !important;
+    height: auto !important;
+  }
+
+  .md-sidebar__inner {
+    padding-bottom: 2rem !important;
+  }
+
+  /* Ensure main content area allows sticky to work */
+  .md-main__inner {
+    display: flex !important;
+    align-items: flex-start !important;
+  }
+
+  .md-content {
+    flex: 1 !important;
+    min-width: 0 !important;
+  }
 }
 
 /* ===== HERO BUTTONS - Professional Layout ===== */
