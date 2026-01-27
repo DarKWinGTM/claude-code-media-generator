@@ -249,6 +249,40 @@
     document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.add('loaded');
 
+      // CSS v1.7.7: Fix sidebar to use sticky position instead of fixed
+      // Override MkDocs inline style that sets position: fixed
+      function fixSidebarPosition() {
+        const primaryNav = document.querySelector('.md-nav--primary');
+        const sidebars = document.querySelectorAll('.md-sidebar');
+
+        if (primaryNav && primaryNav.style.position === 'fixed') {
+          primaryNav.style.position = 'sticky';
+          primaryNav.style.top = '3.5rem';
+          primaryNav.style.maxHeight = 'calc(100vh - 3.5rem)';
+        }
+
+        sidebars.forEach(sidebar => {
+          sidebar.style.position = 'sticky';
+          sidebar.style.top = '3.5rem';
+          sidebar.style.alignSelf = 'flex-start';
+          sidebar.style.maxHeight = 'calc(100vh - 3.5rem)';
+        });
+      }
+
+      // Run immediately
+      fixSidebarPosition();
+
+      // Also run after a short delay (in case MkDocs sets it later)
+      setTimeout(fixSidebarPosition, 100);
+      setTimeout(fixSidebarPosition, 500);
+
+      // Watch for DOM changes that might reset the style
+      const navObserver = new MutationObserver(fixSidebarPosition);
+      const primaryNav = document.querySelector('.md-nav--primary');
+      if (primaryNav) {
+        navObserver.observe(primaryNav, { attributes: true, attributeFilter: ['style'] });
+      }
+
       // Intersection Observer for fade-in animations
       const observerOptions = {
         threshold: 0.1,
