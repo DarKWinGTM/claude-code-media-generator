@@ -119,19 +119,24 @@
     document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.add('loaded');
 
-      // CSS v1.8.0: Sidebar + Footer Layout Consistency
-      // Sidebar: fixed, z-index 100, full viewport height
+      // CSS v1.8.1: Sidebar + Footer Layout Consistency
+      // Sidebar: fixed, z-index 100, top matches header height
       // Footer: centered with margins to avoid overlap
       function fixSidebarPosition() {
+        // Get actual header height from MkDocs CSS variable or computed style
+        const header = document.querySelector('.md-header');
+        const headerHeight = header ? header.offsetHeight + 'px' : '48px';
+
         const sidebars = document.querySelectorAll('.md-sidebar');
 
         // Force fixed positioning on all sidebars with high z-index
         sidebars.forEach(sidebar => {
           sidebar.style.position = 'fixed';
-          sidebar.style.top = '3.5rem';
-          sidebar.style.height = 'calc(100vh - 3.5rem)';
-          sidebar.style.maxHeight = 'calc(100vh - 3.5rem)';
+          sidebar.style.top = headerHeight;  // Match header height exactly
+          sidebar.style.height = `calc(100vh - ${headerHeight})`;
+          sidebar.style.maxHeight = `calc(100vh - ${headerHeight})`;
           sidebar.style.zIndex = '100';  // Above footer
+          sidebar.style.paddingTop = '0';  // Remove extra padding
         });
 
         // Primary sidebar (left)
