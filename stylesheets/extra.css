@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.7.9 - Fixed Sidebar (Not Sticky)
+   v1.8.0 - Sidebar + Footer Layout Consistency
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -3035,16 +3035,16 @@ a, button, input, .md-nav__link, .md-tabs__link {
 }
 
 /* =====================================================
-   v1.7.9 - FIXED SIDEBAR (MkDocs Default Behavior)
-   - Use position: fixed as MkDocs Material intends
-   - Sidebar stays at fixed position on viewport
-   - Internal content scrolls when needed
+   v1.8.0 - SIDEBAR + FOOTER LAYOUT CONSISTENCY
+   - Sidebar: position fixed, z-index 100, full viewport height
+   - Footer: centered with margins to avoid sidebar overlap
+   - Same behavior for BOTH Dark and Light Mode
    - Works on Desktop (> 76.25em / 1220px)
    ===================================================== */
 
-/* Fixed sidebar - stays at viewport position */
+/* Fixed sidebar - full viewport height, above footer */
 @media screen and (min-width: 76.25em) {
-  /* Let MkDocs handle the sidebar positioning (fixed by default) */
+  /* Sidebar: Fixed position, high z-index, full height */
   .md-sidebar,
   .md-sidebar--primary,
   .md-sidebar--secondary {
@@ -3052,6 +3052,7 @@ a, button, input, .md-nav__link, .md-tabs__link {
     top: 3.5rem !important;
     height: calc(100vh - 3.5rem) !important;
     max-height: calc(100vh - 3.5rem) !important;
+    z-index: 100 !important;  /* Above footer */
   }
 
   /* Primary sidebar (left) */
@@ -3091,5 +3092,23 @@ a, button, input, .md-nav__link, .md-tabs__link {
   .md-content {
     margin-left: 12.5rem !important;
     margin-right: 12.5rem !important;
+  }
+
+  /* Footer: Centered, with margins to avoid sidebar overlap */
+  .md-footer {
+    margin-left: 12.5rem !important;
+    margin-right: 12.5rem !important;
+    z-index: 50 !important;  /* Below sidebar */
+  }
+
+  /* Footer inner content - ensure proper centering */
+  .md-footer-meta,
+  .md-footer-nav {
+    max-width: 100% !important;
+  }
+
+  /* Footer copyright - center aligned */
+  .md-footer-copyright {
+    text-align: center !important;
   }
 }

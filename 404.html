@@ -29,17 +29,19 @@
     document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.add('loaded');
 
-      // CSS v1.7.9: Fixed sidebar - stays at viewport position
-      // Let MkDocs use position: fixed (default behavior)
+      // CSS v1.8.0: Sidebar + Footer Layout Consistency
+      // Sidebar: fixed, z-index 100, full viewport height
+      // Footer: centered with margins to avoid overlap
       function fixSidebarPosition() {
         const sidebars = document.querySelectorAll('.md-sidebar');
 
-        // Force fixed positioning on all sidebars
+        // Force fixed positioning on all sidebars with high z-index
         sidebars.forEach(sidebar => {
           sidebar.style.position = 'fixed';
           sidebar.style.top = '3.5rem';
           sidebar.style.height = 'calc(100vh - 3.5rem)';
           sidebar.style.maxHeight = 'calc(100vh - 3.5rem)';
+          sidebar.style.zIndex = '100';  // Above footer
         });
 
         // Primary sidebar (left)
@@ -52,6 +54,14 @@
         const secondarySidebar = document.querySelector('.md-sidebar--secondary');
         if (secondarySidebar) {
           secondarySidebar.style.right = '0';
+        }
+
+        // Footer: centered with margins
+        const footer = document.querySelector('.md-footer');
+        if (footer) {
+          footer.style.marginLeft = '12.5rem';
+          footer.style.marginRight = '12.5rem';
+          footer.style.zIndex = '50';  // Below sidebar
         }
       }
 
