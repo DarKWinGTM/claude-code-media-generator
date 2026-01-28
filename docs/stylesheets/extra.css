@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.8.0 - Sidebar + Footer Layout Consistency
+   v1.8.1 - Fix Sidebar Top Position to Match Header
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -3035,8 +3035,9 @@ a, button, input, .md-nav__link, .md-tabs__link {
 }
 
 /* =====================================================
-   v1.8.0 - SIDEBAR + FOOTER LAYOUT CONSISTENCY
+   v1.8.1 - SIDEBAR + FOOTER LAYOUT CONSISTENCY
    - Sidebar: position fixed, z-index 100, full viewport height
+   - Sidebar: top matches header height exactly (var(--md-header-height))
    - Footer: centered with margins to avoid sidebar overlap
    - Same behavior for BOTH Dark and Light Mode
    - Works on Desktop (> 76.25em / 1220px)
@@ -3045,14 +3046,21 @@ a, button, input, .md-nav__link, .md-tabs__link {
 /* Fixed sidebar - full viewport height, above footer */
 @media screen and (min-width: 76.25em) {
   /* Sidebar: Fixed position, high z-index, full height */
+  /* Use MkDocs CSS variable for header height (default: 3rem = 48px) */
   .md-sidebar,
   .md-sidebar--primary,
   .md-sidebar--secondary {
     position: fixed !important;
-    top: 3.5rem !important;
-    height: calc(100vh - 3.5rem) !important;
-    max-height: calc(100vh - 3.5rem) !important;
+    top: var(--md-header-height, 3rem) !important;  /* Match header height exactly */
+    height: calc(100vh - var(--md-header-height, 3rem)) !important;
+    max-height: calc(100vh - var(--md-header-height, 3rem)) !important;
     z-index: 100 !important;  /* Above footer */
+    padding-top: 0 !important;  /* Remove extra padding */
+  }
+
+  /* Remove inner padding that creates gap */
+  .md-sidebar__inner {
+    padding-top: 0.6rem !important;  /* Minimal padding */
   }
 
   /* Primary sidebar (left) */
@@ -3070,7 +3078,7 @@ a, button, input, .md-nav__link, .md-tabs__link {
   /* Scrollable inner content */
   .md-sidebar__scrollwrap {
     overflow-y: auto !important;
-    max-height: calc(100vh - 4.5rem) !important;
+    max-height: calc(100vh - var(--md-header-height, 3rem) - 1rem) !important;
     scrollbar-width: thin !important;
     scrollbar-color: #CBD5E1 transparent !important;
   }
