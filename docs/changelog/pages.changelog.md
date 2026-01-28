@@ -1,12 +1,62 @@
 # Changelog - GitHub Pages Design
 
 > **Parent Document:** [pages.design.md](../design/pages.design.md)
-> **Current Version:** 1.4
+> **Current Version:** 1.5
 > **Session:** 5584c223-ebff-4c03-b92c-697360841c5e
 
 ---
 
 ## Version History
+
+### Version 1.5 (2026-01-28)
+
+**CSS v1.8.0: Sidebar + Footer Layout Consistency**
+
+**Session:** 5584c223-ebff-4c03-b92c-697360841c5e
+
+#### Changes
+
+- **Sidebar z-index: 100**: Sidebar always appears above Footer
+- **Footer Centered**: Footer has margin-left/right to avoid sidebar overlap
+- **Footer z-index: 50**: Footer appears below Sidebar
+- **Consistent Layout**: Same behavior for BOTH Dark and Light Mode
+- **Fixed Position**: Sidebar stays fixed to viewport with full height
+
+#### Layout Design
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                         Header                              │
+├──────────┬───────────────────────────────────┬──────────────┤
+│ Sidebar  │         Main Content              │   Sidebar    │
+│ (Left)   │                                   │   (Right)    │
+│ z-index  │                                   │   z-index    │
+│ 100      │                                   │   100        │
+│          ├───────────────────────────────────┤              │
+│          │      Footer (Centered, z-50)      │              │
+│          │   ← margin-left   margin-right →  │              │
+├──────────┴───────────────────────────────────┴──────────────┤
+│ Sidebar extends to bottom of viewport                       │
+└─────────────────────────────────────────────────────────────┘
+```
+
+#### Technical Implementation
+
+| Component | CSS Property | Value |
+|-----------|--------------|-------|
+| Sidebar | position | fixed |
+| Sidebar | z-index | 100 |
+| Sidebar | height | calc(100vh - 3.5rem) |
+| Footer | margin-left/right | 12.5rem |
+| Footer | z-index | 50 |
+
+#### Commits
+
+| Commit | Description |
+|--------|-------------|
+| TBD | CSS v1.8.0 Sidebar + Footer Layout Consistency |
+
+---
 
 ### Version 1.4 (2026-01-27)
 
