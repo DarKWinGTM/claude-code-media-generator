@@ -3,8 +3,8 @@
 ## 0) Document Control
 
 > **Parent Scope:** Claude Code Media Generator Project
-> **Current Version:** 1.1
-> **Session:** 5584c223-ebff-4c03-b92c-697360841c5e (2026-01-27)
+> **Current Version:** 1.3
+> **Session:** 5584c223-ebff-4c03-b92c-697360841c5e (2026-01-29)
 
 ---
 
@@ -204,6 +204,60 @@ pages/                              # pages branch
 | **Interactive Feedback** | All elements | ✅ Complete |
 | **Card Definition** | Visible borders + shadows | ✅ Implemented |
 | **Typography Hierarchy** | Clear H1-H5 distinction | ✅ Implemented |
+
+---
+
+## 7) Layout Architecture (v1.2 - CSS v1.8.1)
+
+### 7.1 Sidebar + Footer Layout
+
+**Design Principle:** Sidebar always above Footer, consistent in both Dark and Light modes.
+
+```
+Header (md-header)
+  ↓
+Sidebar (Left)     Main Content     Sidebar (Right)
+z-index: 100       scrollable       z-index: 100
+position: fixed                     position: fixed
+  ↓                    ↓                ↓
+  │              Footer (Centered)      │
+  │              z-index: 50            │
+  │              margin-left: 12.5rem   │
+  │              margin-right: 12.5rem  │
+  └──────────────────────────────────────┘
+  Sidebar extends to bottom of viewport
+```
+
+### 7.2 Technical Implementation
+
+| Component | Property | Value |
+|-----------|----------|-------|
+| .md-sidebar | position | fixed |
+| .md-sidebar | z-index | 100 |
+| .md-sidebar | top | var(--md-header-height, 3rem) |
+| .md-sidebar | height | calc(100vh - header height) |
+| .md-sidebar--primary | left | 0 |
+| .md-sidebar--primary | width | 12.1rem |
+| .md-sidebar--secondary | right | 0 |
+| .md-sidebar--secondary | width | 12.1rem |
+| .md-sidebar__inner | padding-top | 0.6rem |
+| .md-footer | margin-left | 12.5rem |
+| .md-footer | margin-right | 12.5rem |
+| .md-footer | z-index | 50 |
+
+### 7.3 JavaScript Dynamic Height
+
+```javascript
+function fixSidebarPosition() {
+  const header = document.querySelector('.md-header');
+  const headerHeight = header ? header.offsetHeight + 'px' : '48px';
+
+  sidebars.forEach(sidebar => {
+    sidebar.style.top = headerHeight;
+    sidebar.style.height = `calc(100vh - ${headerHeight})`;
+  });
+}
+```
 
 ---
 

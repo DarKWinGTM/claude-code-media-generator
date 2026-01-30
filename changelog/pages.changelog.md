@@ -1,12 +1,138 @@
 # Changelog - GitHub Pages Design
 
 > **Parent Document:** [pages.design.md](../design/pages.design.md)
-> **Current Version:** 1.2
+> **Current Version:** 1.5
 > **Session:** 5584c223-ebff-4c03-b92c-697360841c5e
 
 ---
 
 ## Version History
+
+### Version 1.5 (2026-01-29)
+
+**CSS v1.8.2: Prominent Sidebar Headers + Fix Button Underline**
+
+**Session:** 5584c223-ebff-4c03-b92c-697360841c5e
+
+#### Changes
+
+- **Prominent Section Headers**: Sidebar หัวข้อหลัก (Video Generation, Getting Started) โดดเด่นขึ้น
+  - Uppercase text-transform
+  - Bold font-weight (700)
+  - Accent border-left (3px)
+  - Letter-spacing for readability
+- **Fix Button Underline Animation**: ลบ underline animation จาก `.md-button`
+  - เปลี่ยน selector เป็น `.md-typeset a:not(.md-button):not(.md-nav__link)...`
+- **Light Mode Support**: เพิ่ม styles สำหรับ Light Mode ครบถ้วน
+
+#### Technical Implementation
+
+| Component | Property | Dark Mode | Light Mode |
+|-----------|----------|-----------|------------|
+| Section header | font-weight | 700 | 700 |
+| Section header | text-transform | uppercase | uppercase |
+| Section header | border-left | 3px solid cyan | 3px solid indigo |
+| Section header | color | #818cf8 | #4F46E5 |
+| Sub-item | font-weight | 400 | 400 |
+| Sub-item | padding-left | 1.5rem | 1.5rem |
+
+#### Commits
+
+| Commit | Description |
+|--------|-------------|
+| TBD | CSS v1.8.2 Prominent Sidebar Headers + Fix Button Underline |
+
+---
+
+### Version 1.4 (2026-01-28)
+
+**CSS v1.8.1: Dynamic Header Height + Reduced Sidebar Padding**
+
+**Session:** 5584c223-ebff-4c03-b92c-697360841c5e
+
+#### Changes
+
+- **Dynamic Header Height**: Changed from hardcoded `3.5rem` to `var(--md-header-height, 3rem)`
+- **JavaScript Header Detection**: Reads actual `header.offsetHeight` for precise positioning
+- **Reduced Sidebar Padding**: `.md-sidebar__inner` padding reduced from 1.2rem to 0.6rem
+- **Fixed Header-Sidebar Gap**: Eliminated gap between header and sidebar
+
+#### Problem Solved
+
+Before v1.8.1:
+- Hardcoded `top: 3.5rem` (56px) didn't match actual header height
+- Visible gap between header and sidebar
+
+After v1.8.1:
+- CSS uses `var(--md-header-height, 3rem)` for flexibility
+- JavaScript reads actual header height dynamically
+- No gap between header and sidebar
+
+#### Technical Implementation
+
+| Component | Property | Value |
+|-----------|----------|-------|
+| .md-sidebar | top | var(--md-header-height, 3rem) |
+| .md-sidebar | height | calc(100vh - var(--md-header-height, 3rem)) |
+| .md-sidebar__inner | padding-top | 0.6rem |
+| JavaScript | headerHeight | header.offsetHeight + 'px' |
+
+#### Commits
+
+| Commit | Description |
+|--------|-------------|
+| `1048fb6` | CSS v1.8.1 Dynamic Header Height + Reduced Padding |
+
+---
+
+### Version 1.3 (2026-01-28)
+
+**CSS v1.8.0: Sidebar + Footer Layout Consistency**
+
+**Session:** 5584c223-ebff-4c03-b92c-697360841c5e
+
+#### Changes
+
+- **Sidebar z-index: 100**: Sidebar always appears above Footer
+- **Footer Centered**: Footer has margin-left/right to avoid sidebar overlap
+- **Footer z-index: 50**: Footer appears below Sidebar
+- **Consistent Layout**: Same behavior for BOTH Dark and Light Mode
+- **Fixed Position**: Sidebar stays fixed to viewport with full height
+
+#### Layout Design
+
+```
+Header (md-header)
+  ↓
+Sidebar (Left)     Main Content     Sidebar (Right)
+z-index: 100       scrollable       z-index: 100
+position: fixed                     position: fixed
+  ↓                    ↓                ↓
+  │              Footer (Centered)      │
+  │              z-index: 50            │
+  │              margin-left: 12.5rem   │
+  │              margin-right: 12.5rem  │
+  └──────────────────────────────────────┘
+  Sidebar extends to bottom of viewport
+```
+
+#### Technical Implementation
+
+| Component | CSS Property | Value |
+|-----------|--------------|-------|
+| Sidebar | position | fixed |
+| Sidebar | z-index | 100 |
+| Sidebar | height | calc(100vh - header height) |
+| Footer | margin-left/right | 12.5rem |
+| Footer | z-index | 50 |
+
+#### Commits
+
+| Commit | Description |
+|--------|-------------|
+| `edbb1d3` | CSS v1.8.0 Sidebar + Footer Layout Consistency |
+
+---
 
 ### Version 1.2 (2026-01-27)
 
@@ -131,6 +257,21 @@
 
 | Version | Date | Changes | Session ID |
 |---------|------|---------|------------|
+| 1.5 | 2026-01-29 | **[CSS v1.8.2 Prominent Sidebar Headers](#version-15-2026-01-29)** | 5584c223... |
+| | | - Prominent section headers (uppercase, bold, accent border) | |
+| | | - Fix button underline animation | |
+| | | - Light Mode support | |
+| | | Summary: Sidebar UX improvement + button animation fix | |
+| 1.4 | 2026-01-28 | **[CSS v1.8.1 Dynamic Header Height](#version-14-2026-01-28)** | 5584c223... |
+| | | - Dynamic header height with CSS variable | |
+| | | - JavaScript reads actual header.offsetHeight | |
+| | | - Reduced sidebar padding (0.6rem) | |
+| | | Summary: Fixed header-sidebar gap with dynamic height | |
+| 1.3 | 2026-01-28 | **[CSS v1.8.0 Sidebar + Footer Layout](#version-13-2026-01-28)** | 5584c223... |
+| | | - Sidebar z-index: 100 (above footer) | |
+| | | - Footer centered with margins | |
+| | | - Consistent Dark/Light Mode layout | |
+| | | Summary: Sidebar + Footer layout consistency | |
 | 1.2 | 2026-01-27 | **[CSS v1.6 Professional Design System](#version-12-2026-01-27)** | 5584c223... |
 | | | - Complete Light Mode redesign with WCAG AA compliance | |
 | | | - Header, tabs, sidebar, grid cards, tables all fixed | |
