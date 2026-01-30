@@ -17,6 +17,12 @@
 !README.md
 !TODO.md
 
+# Design & Changelog directories
+!design/
+!design/**
+!changelog/
+!changelog/**
+
 # ─────────────────────────────────────────────────────────────────────────────────
 # PAGES BRANCH (Git Worktree - managed separately)
 # ─────────────────────────────────────────────────────────────────────────────────
