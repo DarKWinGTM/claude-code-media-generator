@@ -3,8 +3,8 @@
 ## 0) Document Control
 
 > **Parent Scope:** Claude Code Media Generator Project
-> **Current Version:** 1.3
-> **Session:** 5584c223-ebff-4c03-b92c-697360841c5e (2026-01-29)
+> **Current Version:** 1.4
+> **Session:** 5584c223-ebff-4c03-b92c-697360841c5e (2026-01-30)
 
 ---
 
@@ -257,6 +257,114 @@ function fixSidebarPosition() {
     sidebar.style.height = `calc(100vh - ${headerHeight})`;
   });
 }
+```
+
+---
+
+## 8) Git Workflow & Branch Strategy (v1.4)
+
+### 8.1 Branch Architecture
+
+**⚠️ CRITICAL: Two separate branches with different purposes**
+
+| Branch | Purpose | Location | Content |
+|--------|---------|----------|---------|
+| **main** | Source code, design docs, changelogs | Project root | Python scripts, design/, changelog/, README.md |
+| **pages** | MkDocs documentation site | Git worktree at `./pages/` | docs/, mkdocs.yml, overrides/ |
+
+### 8.2 Git Worktree Setup
+
+```
+claude-code-media-generator/     # main branch
+├── design/                      # ✅ Track in main
+├── changelog/                   # ✅ Track in main
+├── src/                         # ✅ Track in main
+├── README.md                    # ✅ Track in main
+└── pages/                       # ⚠️ Git worktree (pages branch)
+    ├── docs/                    # ✅ Track in pages ONLY
+    ├── mkdocs.yml               # ✅ Track in pages ONLY
+    └── overrides/               # ✅ Track in pages ONLY
+```
+
+### 8.3 ⛔ PROHIBITED Actions
+
+| Action | Why Prohibited |
+|--------|----------------|
+| `git add pages/*` ใน main branch | pages/ เป็น worktree แยก ไม่ควร track ใน main |
+| `git add -f pages/*` ใน main branch | แม้ใช้ `-f` ก็ห้าม เพราะจะทำให้ files ซ้ำซ้อน |
+| Commit `pages/docs/stylesheets/extra.css` ใน main | CSS อยู่ใน pages branch เท่านั้น |
+
+### 8.4 ✅ Correct Git Workflow
+
+**เมื่อแก้ไข CSS หรือ MkDocs content:**
+
+```bash
+# Step 1: เข้าไปใน pages worktree
+cd pages/
+
+# Step 2: ตรวจสอบว่าอยู่ถูก branch
+git branch
+# Output: * pages
+
+# Step 3: Add, commit, push ใน pages branch
+git add docs/stylesheets/extra.css
+git commit -m "CSS v1.8.x: Description"
+git push origin pages
+```
+
+**เมื่อแก้ไข design docs หรือ changelog:**
+
+```bash
+# Step 1: อยู่ที่ project root (main branch)
+cd /path/to/claude-code-media-generator/
+
+# Step 2: ตรวจสอบว่าอยู่ถูก branch
+git branch
+# Output: * main
+
+# Step 3: Add, commit, push ใน main branch
+git add design/pages.design.md changelog/pages.changelog.md
+git commit -m "docs: Update design and changelog"
+git push origin main
+```
+
+### 8.5 Branch-File Mapping
+
+| File/Folder | ✅ Correct Branch | ❌ Wrong Branch |
+|-------------|-------------------|-----------------|
+| `design/*.design.md` | main | pages |
+| `changelog/*.changelog.md` | main | pages |
+| `README.md` | main | pages |
+| `pages/docs/*` | pages | main |
+| `pages/mkdocs.yml` | pages | main |
+| `pages/overrides/*` | pages | main |
+| `pages/docs/stylesheets/extra.css` | pages | main |
+
+### 8.6 Verification Commands
+
+```bash
+# ตรวจสอบว่า pages/ ถูก ignore ใน main
+cat .gitignore | grep pages
+
+# ตรวจสอบว่าไม่มี pages files ถูก track ใน main
+git ls-files | grep "^pages/"
+# Should return empty
+
+# ตรวจสอบ worktree status
+git worktree list
+```
+
+### 8.7 Recovery: ถ้า commit pages files ไป main ผิดพลาด
+
+```bash
+# Step 1: ลบ pages files ออกจาก git tracking (ไม่ลบ file จริง)
+git rm --cached pages/docs/stylesheets/extra.css
+
+# Step 2: Commit การลบ
+git commit -m "chore: Remove pages/ files from main branch tracking"
+
+# Step 3: Push
+git push origin main
 ```
 
 ---

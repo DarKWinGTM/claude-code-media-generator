@@ -1,12 +1,44 @@
 # Changelog - GitHub Pages Design
 
 > **Parent Document:** [pages.design.md](../design/pages.design.md)
-> **Current Version:** 1.6
+> **Current Version:** 1.7
 > **Session:** 5584c223-ebff-4c03-b92c-697360841c5e
 
 ---
 
 ## Version History
+
+### Version 1.7 (2026-01-30)
+
+**Design v1.4: Added Git Workflow & Branch Strategy Documentation**
+
+**Session:** 5584c223-ebff-4c03-b92c-697360841c5e
+
+#### Changes
+
+- **Section 8: Git Workflow & Branch Strategy**: เพิ่ม documentation ครบถ้วนเกี่ยวกับ git workflow
+  - 8.1 Branch Architecture: อธิบาย main vs pages branch
+  - 8.2 Git Worktree Setup: แสดงโครงสร้าง directory
+  - 8.3 ⛔ PROHIBITED Actions: สิ่งที่ห้ามทำ
+  - 8.4 ✅ Correct Git Workflow: วิธีการที่ถูกต้อง
+  - 8.5 Branch-File Mapping: ตาราง file → branch
+  - 8.6 Verification Commands: คำสั่งตรวจสอบ
+  - 8.7 Recovery: วิธีแก้ไขถ้าทำผิด
+
+#### Rationale
+
+ป้องกันปัญหาที่เคยเกิดขึ้น:
+- `pages/docs/stylesheets/extra.css` ถูก commit ไป main branch ผิดพลาด
+- ใช้ `git add -f` โดยไม่ตรวจสอบ branch
+- ไม่เข้าใจว่า `pages/` เป็น git worktree แยกต่างหาก
+
+#### Commits
+
+| Commit | Description |
+|--------|-------------|
+| TBD | docs: Add Git Workflow & Branch Strategy section |
+
+---
 
 ### Version 1.6 (2026-01-30)
 
