@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.8.2 - Prominent Sidebar Headers + Fix Button Underline
+   v1.8.3 - Explicit Button ::after Reset
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -514,6 +514,16 @@ body, .md-typeset {
   height: var(--btn-height-lg);
   text-transform: none;
   letter-spacing: 0;
+  position: relative;
+}
+
+/* v1.8.3: Explicitly disable underline animation for buttons */
+.md-button::after,
+.md-button::before {
+  display: none !important;
+  content: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 .md-button--primary {

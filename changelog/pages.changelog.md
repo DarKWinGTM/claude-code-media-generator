@@ -1,12 +1,43 @@
 # Changelog - GitHub Pages Design
 
 > **Parent Document:** [pages.design.md](../design/pages.design.md)
-> **Current Version:** 1.5
+> **Current Version:** 1.6
 > **Session:** 5584c223-ebff-4c03-b92c-697360841c5e
 
 ---
 
 ## Version History
+
+### Version 1.6 (2026-01-30)
+
+**CSS v1.8.3: Explicit Button ::after Reset**
+
+**Session:** 5584c223-ebff-4c03-b92c-697360841c5e
+
+#### Changes
+
+- **Explicit Button ::after Reset**: เพิ่ม rule เฉพาะเพื่อปิด underline effect บน `.md-button`
+  - `.md-button::after, .md-button::before { display: none !important; content: none !important; }`
+  - ป้องกัน inheritance จาก `.md-typeset a::after`
+- **Position Relative**: เพิ่ม `position: relative` ใน `.md-button` base styles
+
+#### Technical Implementation
+
+| Selector | Property | Value |
+|----------|----------|-------|
+| `.md-button::after, .md-button::before` | display | none !important |
+| `.md-button::after, .md-button::before` | content | none !important |
+| `.md-button::after, .md-button::before` | width | 0 !important |
+| `.md-button::after, .md-button::before` | height | 0 !important |
+| `.md-button` | position | relative |
+
+#### Commits
+
+| Commit | Description |
+|--------|-------------|
+| TBD | CSS v1.8.3 Explicit Button ::after Reset |
+
+---
 
 ### Version 1.5 (2026-01-29)
 
