@@ -1,5 +1,10 @@
 <div align="center">
 
+<!-- Hero Banner -->
+<img src="https://img.shields.io/badge/Claude_Code-Media_Generator-8b5cf6?style=for-the-badge&logo=google-cloud&logoColor=white&labelColor=1e1e2e" alt="Claude Code Media Generator" height="60">
+
+<br><br>
+
 # 🎬 Claude Code Media Generator
 
 ### **AI-Powered Video & Image Generation**
@@ -8,16 +13,50 @@
 
 <br>
 
-[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![Vertex AI](https://img.shields.io/badge/Vertex_AI-Veo_3.1-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)](https://cloud.google.com/vertex-ai)
-[![License](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)](LICENSE)
-[![Docs](https://img.shields.io/badge/Docs-Online-8b5cf6?style=for-the-badge&logo=readthedocs&logoColor=white)](https://darkwingtm.github.io/claude-code-media-generator/)
+<!-- Badges Row 1 -->
+[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
+[![Vertex AI](https://img.shields.io/badge/Vertex_AI-Veo_3.1-4285F4?style=flat-square&logo=google-cloud&logoColor=white)](https://cloud.google.com/vertex-ai)
+[![License](https://img.shields.io/badge/License-MIT-22c55e?style=flat-square)](LICENSE)
+[![Docs](https://img.shields.io/badge/Docs-Online-8b5cf6?style=flat-square&logo=readthedocs&logoColor=white)](https://darkwingtm.github.io/claude-code-media-generator/)
+
+<!-- Badges Row 2 -->
+[![GitHub Stars](https://img.shields.io/github/stars/DarKWinGTM/claude-code-media-generator?style=flat-square&logo=github&color=yellow)](https://github.com/DarKWinGTM/claude-code-media-generator/stargazers)
+[![Last Commit](https://img.shields.io/github/last-commit/DarKWinGTM/claude-code-media-generator?style=flat-square&color=blue)](https://github.com/DarKWinGTM/claude-code-media-generator/commits)
 
 <br>
 
-[**📖 Documentation**](https://darkwingtm.github.io/claude-code-media-generator/) · [**🚀 Quick Start**](#-quick-start) · [**💡 Examples**](#-usage-examples)
+**[📖 Documentation](https://darkwingtm.github.io/claude-code-media-generator/)** · **[🚀 Quick Start](#-quick-start)** · **[💡 Examples](#-usage-examples)** · **[📋 Roadmap](TODO.md)**
 
 </div>
+
+---
+
+## 🌟 Why Claude Code Media Generator?
+
+<table>
+<tr>
+<td width="25%" align="center">
+<h3>🚀</h3>
+<b>Simple CLI</b><br>
+<sub>One command to generate</sub>
+</td>
+<td width="25%" align="center">
+<h3>🎬</h3>
+<b>8 Video Modes</b><br>
+<sub>Text, Image, Extension & more</sub>
+</td>
+<td width="25%" align="center">
+<h3>☁️</h3>
+<b>Cloud Native</b><br>
+<sub>Direct GCS integration</sub>
+</td>
+<td width="25%" align="center">
+<h3>🔒</h3>
+<b>Secure</b><br>
+<sub>OAuth & API Key support</sub>
+</td>
+</tr>
+</table>
 
 ---
 
@@ -232,12 +271,16 @@ claude-code-media-generator/
 ├── 🎬 video_gen.py      # Video generation CLI
 ├── 🖼️ image_gen.py      # Image generation CLI
 ├── 🔍 check_api.py      # API verification tool
+├── 📄 README.md         # This file
 ├── 📋 TODO.md           # Development roadmap
 ├── 📁 design/           # Design documents
-├── 📁 pages/            # MkDocs documentation
-├── 📁 wiki/             # GitHub Wiki source
-├── 📁 mcp/              # MCP server (planned)
-└── 📁 skill/            # Claude Code skill (planned)
+│   ├── design.md        # Main project design
+│   ├── video.design.md  # Video module design
+│   ├── image.design.md  # Image module design
+│   └── ...
+├── 📁 changelog/        # Version history
+├── 📁 pages/            # MkDocs documentation (pages branch)
+└── 📁 wiki/             # GitHub Wiki source
 ```
 
 ---
@@ -290,7 +333,7 @@ claude-code-media-generator/
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please read the design documents before making changes.
+Contributions are welcome! Please read the design documents in `design/` before making changes.
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
@@ -310,6 +353,6 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ### Made with ❤️ using Google Vertex AI
 
-[⬆️ Back to Top](#-claude-code-media-generator)
+**[⬆️ Back to Top](#-claude-code-media-generator)**
 
 </div>
