@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.8.1 - Fix Sidebar Top Position to Match Header
+   v1.8.3 - Explicit Button ::after Reset
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -196,6 +196,51 @@ body, .md-typeset {
 .md-sidebar {
   background: rgba(15, 15, 25, 0.4);
   backdrop-filter: var(--glass-blur);
+}
+
+/* v1.8.2: Prominent Section Headers in Sidebar */
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link,
+.md-nav--primary > .md-nav__list > .md-nav__item > label {
+  font-weight: 700 !important;
+  font-size: 0.72rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  color: var(--color-primary) !important;
+  border-left: 3px solid var(--color-secondary) !important;
+  padding-left: 0.75rem !important;
+  margin-left: 0 !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.25rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link:hover,
+.md-nav--primary > .md-nav__list > .md-nav__item > label:hover {
+  color: var(--color-secondary) !important;
+  border-left-color: var(--color-primary) !important;
+  background: rgba(99, 102, 241, 0.1) !important;
+  padding-left: 1rem !important;
+}
+
+/* Sub-items remain normal */
+.md-nav--primary .md-nav__item .md-nav__item .md-nav__link {
+  font-weight: 400 !important;
+  font-size: 0.7rem !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  border-left: none !important;
+  padding-left: 1.5rem !important;
+  color: var(--md-default-fg-color--light) !important;
+}
+
+.md-nav--primary .md-nav__item .md-nav__item .md-nav__link:hover {
+  color: var(--color-secondary) !important;
+  background: rgba(99, 102, 241, 0.05) !important;
+}
+
+.md-nav--primary .md-nav__item .md-nav__item .md-nav__link--active {
+  color: var(--color-primary) !important;
+  font-weight: 600 !important;
 }
 
 .md-nav__link:hover {
@@ -469,6 +514,16 @@ body, .md-typeset {
   height: var(--btn-height-lg);
   text-transform: none;
   letter-spacing: 0;
+  position: relative;
+}
+
+/* v1.8.3: Explicitly disable underline animation for buttons */
+.md-button::after,
+.md-button::before {
+  display: none !important;
+  content: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 .md-button--primary {
@@ -729,7 +784,7 @@ body, .md-typeset {
   text-shadow: 0 0 15px var(--color-glow-cyan);
 }
 
-.md-typeset a::after {
+.md-typeset a:not(.md-button):not(.md-nav__link):not(.md-tabs__link):not(.headerlink)::after {
   content: '';
   position: absolute;
   bottom: -2px;
@@ -740,7 +795,7 @@ body, .md-typeset {
   transition: width 0.3s ease;
 }
 
-.md-typeset a:hover::after {
+.md-typeset a:not(.md-button):not(.md-nav__link):not(.md-tabs__link):not(.headerlink):hover::after {
   width: 100%;
 }
 
@@ -2282,6 +2337,43 @@ a, button, input, .md-nav__link, .md-tabs__link {
 [data-md-color-scheme="default"] .md-nav__item--active > .md-nav__link {
   color: #6366F1 !important;
   font-weight: 600 !important;
+}
+
+/* v1.8.2: Light Mode Prominent Section Headers */
+[data-md-color-scheme="default"] .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link,
+[data-md-color-scheme="default"] .md-nav--primary > .md-nav__list > .md-nav__item > label {
+  font-weight: 700 !important;
+  font-size: 0.72rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  color: #4F46E5 !important;
+  border-left: 3px solid #6366F1 !important;
+  padding-left: 0.75rem !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.25rem !important;
+}
+
+[data-md-color-scheme="default"] .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link:hover,
+[data-md-color-scheme="default"] .md-nav--primary > .md-nav__list > .md-nav__item > label:hover {
+  color: #3730A3 !important;
+  border-left-color: #4F46E5 !important;
+  background: rgba(99, 102, 241, 0.08) !important;
+  padding-left: 1rem !important;
+}
+
+[data-md-color-scheme="default"] .md-nav--primary .md-nav__item .md-nav__item .md-nav__link {
+  font-weight: 400 !important;
+  font-size: 0.7rem !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  border-left: none !important;
+  padding-left: 1.5rem !important;
+  color: #475569 !important;
+}
+
+[data-md-color-scheme="default"] .md-nav--primary .md-nav__item .md-nav__item .md-nav__link:hover {
+  color: #6366F1 !important;
+  background: rgba(99, 102, 241, 0.05) !important;
 }
 
 /* --- Search - Light Mode --- */
