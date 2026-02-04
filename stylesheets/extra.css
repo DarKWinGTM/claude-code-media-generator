@@ -1,11 +1,14 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.8.3 - Explicit Button ::after Reset
+   v1.9.0 - Metro Cyberpunk Theme
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ===== Metro Cyberpunk Fonts Import ===== */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
 
 /* ===== Design Tokens (v1.2 - Unified Design System) ===== */
 :root {
@@ -96,6 +99,43 @@
   /* === Font === */
   --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* === Metro Cyberpunk Font System === */
+  --font-cyber-heading: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+  --font-cyber-body: 'DM Sans', 'Plus Jakarta Sans', sans-serif;
+  --font-cyber-mono: 'Fira Code', 'Share Tech Mono', monospace;
+  --font-cyber-hud: 'Share Tech Mono', monospace;
+
+  /* === Metro Cyberpunk Colors === */
+  --cyber-bg-deep: #0a0a0f;
+  --cyber-bg-dark: #0d0d12;
+  --cyber-bg-surface: #12121a;
+  --cyber-bg-elevated: #1a1a24;
+  --cyber-bg-glass: rgba(18, 18, 26, 0.85);
+
+  /* Neon Colors */
+  --neon-cyan: #00ffff;
+  --neon-cyan-dim: #00d4d4;
+  --neon-magenta: #ff00ff;
+  --neon-magenta-dim: #d400d4;
+  --neon-green: #00ff00;
+  --neon-green-dim: #00d400;
+  --neon-blue: #0080ff;
+  --neon-purple: #8b5cf6;
+  --neon-pink: #ff0080;
+  --neon-yellow: #ffff00;
+  --neon-orange: #ff8000;
+
+  /* Cyberpunk Glow Effects */
+  --cyber-glow-cyan: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3), 0 0 40px rgba(0, 255, 255, 0.1);
+  --cyber-glow-magenta: 0 0 10px rgba(255, 0, 255, 0.5), 0 0 20px rgba(255, 0, 255, 0.3), 0 0 40px rgba(255, 0, 255, 0.1);
+  --cyber-glow-green: 0 0 10px rgba(0, 255, 0, 0.5), 0 0 20px rgba(0, 255, 0, 0.3), 0 0 40px rgba(0, 255, 0, 0.1);
+  --cyber-glow-text: 0 0 5px currentColor, 0 0 10px currentColor;
+
+  /* Cyberpunk Borders */
+  --cyber-border: rgba(0, 255, 255, 0.2);
+  --cyber-border-hover: rgba(0, 255, 255, 0.4);
+  --cyber-border-active: rgba(0, 255, 255, 0.6);
 
   /* === Button Sizes === */
   --btn-height-sm: 2rem;
@@ -3426,3 +3466,297 @@ a, button, input, .md-nav__link, .md-tabs__link {
   background: rgba(99, 102, 241, 0.03);
   border-color: rgba(99, 102, 241, 0.12);
 }
+
+/* ====================================================================
+   METRO CYBERPUNK THEME v1.0
+   Terminal-style navigation with neon glow effects
+   ==================================================================== */
+
+/* ===== Cyberpunk - Background & Grid Pattern ===== */
+[data-md-color-scheme="slate"] body {
+  background: 
+    /* Grid pattern */
+    linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+    /* Radial glow */
+    radial-gradient(ellipse at 50% 0%, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
+    /* Base */
+    var(--cyber-bg-deep, #0a0a0f);
+  background-size: 50px 50px, 50px 50px, 100% 100%, 100% 100%;
+}
+
+/* ===== Cyberpunk - Typography ===== */
+[data-md-color-scheme="slate"] .md-typeset h1,
+[data-md-color-scheme="slate"] .md-typeset h2,
+[data-md-color-scheme="slate"] .md-typeset h3 {
+  font-family: var(--font-cyber-heading, 'Space Grotesk', sans-serif);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+[data-md-color-scheme="slate"] .md-typeset h1 {
+  color: var(--neon-cyan, #00ffff);
+  text-shadow: var(--cyber-glow-text);
+}
+
+[data-md-color-scheme="slate"] .md-typeset h2 {
+  color: var(--neon-magenta, #ff00ff);
+}
+
+[data-md-color-scheme="slate"] .md-typeset h3 {
+  color: var(--neon-green, #00ff00);
+}
+
+/* ===== Cyberpunk - Section Navigator Terminal Style ===== */
+[data-md-color-scheme="slate"] .section-navigator {
+  background: var(--cyber-bg-glass, rgba(18, 18, 26, 0.85));
+  border: 1px solid var(--cyber-border, rgba(0, 255, 255, 0.2));
+  backdrop-filter: blur(10px);
+}
+
+[data-md-color-scheme="slate"] .section-navigator__title {
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace);
+  color: var(--neon-cyan, #00ffff);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+[data-md-color-scheme="slate"] .section-navigator__title::before {
+  content: "> ";
+  color: var(--neon-green, #00ff00);
+}
+
+/* Terminal-style nav links with index numbers */
+[data-md-color-scheme="slate"] .section-navigator__list a {
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace);
+  color: var(--text-secondary, #e2e8f0);
+  background: transparent;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+/* Neon hover effect */
+[data-md-color-scheme="slate"] .section-navigator__list a:hover {
+  color: var(--neon-cyan, #00ffff);
+  background: rgba(0, 255, 255, 0.1);
+  border-color: var(--cyber-border-hover, rgba(0, 255, 255, 0.4));
+  box-shadow: var(--cyber-glow-cyan);
+}
+
+/* Active state */
+[data-md-color-scheme="slate"] .section-navigator__list a[aria-current="page"],
+[data-md-color-scheme="slate"] .section-navigator__list a.active {
+  color: var(--neon-cyan, #00ffff);
+  background: rgba(0, 255, 255, 0.15);
+  border-left: 3px solid var(--neon-cyan, #00ffff);
+  box-shadow: var(--cyber-glow-cyan);
+}
+
+/* ===== Cyberpunk - Header ===== */
+[data-md-color-scheme="slate"] .md-header {
+  background: var(--cyber-bg-glass, rgba(18, 18, 26, 0.85));
+  border-bottom: 1px solid var(--cyber-border, rgba(0, 255, 255, 0.2));
+  backdrop-filter: blur(10px);
+}
+
+[data-md-color-scheme="slate"] .md-header__title {
+  font-family: var(--font-cyber-heading, 'Space Grotesk', sans-serif);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ===== Cyberpunk - Nav Tabs ===== */
+[data-md-color-scheme="slate"] .md-tabs {
+  background: var(--cyber-bg-surface, #12121a);
+  border-bottom: 1px solid var(--cyber-border, rgba(0, 255, 255, 0.2));
+}
+
+[data-md-color-scheme="slate"] .md-tabs__link {
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+}
+
+[data-md-color-scheme="slate"] .md-tabs__link:hover,
+[data-md-color-scheme="slate"] .md-tabs__link--active {
+  color: var(--neon-cyan, #00ffff);
+  text-shadow: var(--cyber-glow-text);
+}
+
+/* ===== Cyberpunk - Sidebar ===== */
+[data-md-color-scheme="slate"] .md-sidebar {
+  background: var(--cyber-bg-glass, rgba(18, 18, 26, 0.85));
+  border-right: 1px solid var(--cyber-border, rgba(0, 255, 255, 0.2));
+}
+
+[data-md-color-scheme="slate"] .md-nav__link {
+  font-family: var(--font-cyber-body, 'DM Sans', sans-serif);
+  transition: all 0.2s ease;
+}
+
+[data-md-color-scheme="slate"] .md-nav__link:hover {
+  color: var(--neon-cyan, #00ffff);
+}
+
+[data-md-color-scheme="slate"] .md-nav__link--active {
+  color: var(--neon-cyan, #00ffff);
+  font-weight: 600;
+}
+
+/* ===== Cyberpunk - Code Blocks ===== */
+[data-md-color-scheme="slate"] .md-typeset code,
+[data-md-color-scheme="slate"] .md-typeset pre code {
+  font-family: var(--font-cyber-mono, 'Fira Code', monospace);
+}
+
+[data-md-color-scheme="slate"] .md-typeset pre {
+  background: var(--cyber-bg-surface, #12121a);
+  border: 1px solid var(--cyber-border, rgba(0, 255, 255, 0.2));
+  border-radius: 0;
+  position: relative;
+}
+
+/* Terminal header for code blocks */
+[data-md-color-scheme="slate"] .md-typeset pre::before {
+  content: "$ TERMINAL_";
+  display: block;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace);
+  font-size: 0.7rem;
+  color: var(--neon-green, #00ff00);
+  background: var(--cyber-bg-dark, #0d0d12);
+  border-bottom: 1px solid var(--cyber-border, rgba(0, 255, 255, 0.2));
+  letter-spacing: 0.1em;
+}
+
+/* ===== Cyberpunk - Cards ===== */
+[data-md-color-scheme="slate"] .grid-card,
+[data-md-color-scheme="slate"] .md-typeset .admonition {
+  background: var(--cyber-bg-glass, rgba(18, 18, 26, 0.85));
+  border: 1px solid var(--cyber-border, rgba(0, 255, 255, 0.2));
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+[data-md-color-scheme="slate"] .grid-card:hover,
+[data-md-color-scheme="slate"] .md-typeset .admonition:hover {
+  border-color: var(--cyber-border-hover, rgba(0, 255, 255, 0.4));
+  box-shadow: var(--cyber-glow-cyan);
+}
+
+/* ===== Cyberpunk - Tables ===== */
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) {
+  background: var(--cyber-bg-surface, #12121a);
+  border: 1px solid var(--cyber-border, rgba(0, 255, 255, 0.2));
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--neon-cyan, #00ffff);
+  background: var(--cyber-bg-dark, #0d0d12);
+  border-bottom: 1px solid var(--cyber-border, rgba(0, 255, 255, 0.3));
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) td {
+  border-color: var(--cyber-border, rgba(0, 255, 255, 0.1));
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) tr:hover td {
+  background: rgba(0, 255, 255, 0.05);
+}
+
+/* ===== Cyberpunk - Links ===== */
+[data-md-color-scheme="slate"] .md-typeset a:not(.md-button):not(.md-nav__link) {
+  color: var(--neon-cyan, #00ffff);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+[data-md-color-scheme="slate"] .md-typeset a:not(.md-button):not(.md-nav__link):hover {
+  color: var(--neon-magenta, #ff00ff);
+  text-shadow: var(--cyber-glow-text);
+}
+
+/* ===== Cyberpunk - Buttons ===== */
+[data-md-color-scheme="slate"] .md-button {
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 1px solid var(--neon-cyan, #00ffff);
+  background: transparent;
+  color: var(--neon-cyan, #00ffff);
+  transition: all 0.3s ease;
+}
+
+[data-md-color-scheme="slate"] .md-button:hover {
+  background: rgba(0, 255, 255, 0.1);
+  box-shadow: var(--cyber-glow-cyan);
+}
+
+[data-md-color-scheme="slate"] .md-button--primary {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.1));
+  border-color: var(--neon-cyan, #00ffff);
+}
+
+[data-md-color-scheme="slate"] .md-button--primary:hover {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.2));
+  box-shadow: var(--cyber-glow-cyan), var(--cyber-glow-magenta);
+}
+
+/* ===== Cyberpunk - Footer ===== */
+[data-md-color-scheme="slate"] .md-footer {
+  background: var(--cyber-bg-dark, #0d0d12);
+  border-top: 1px solid var(--cyber-border, rgba(0, 255, 255, 0.2));
+}
+
+/* ===== Cyberpunk - Scrollbar ===== */
+[data-md-color-scheme="slate"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-md-color-scheme="slate"] ::-webkit-scrollbar-track {
+  background: var(--cyber-bg-deep, #0a0a0f);
+}
+
+[data-md-color-scheme="slate"] ::-webkit-scrollbar-thumb {
+  background: var(--cyber-border, rgba(0, 255, 255, 0.3));
+  border-radius: 4px;
+}
+
+[data-md-color-scheme="slate"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-cyan, #00ffff);
+  box-shadow: var(--cyber-glow-cyan);
+}
+
+/* ===== Cyberpunk - Selection ===== */
+[data-md-color-scheme="slate"] ::selection {
+  background: rgba(0, 255, 255, 0.3);
+  color: var(--text-primary, #f8fafc);
+}
+
+/* ===== Cyberpunk - Scanlines Overlay (Optional - subtle) ===== */
+[data-md-color-scheme="slate"] .md-content::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.03) 0px,
+    rgba(0, 0, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  z-index: 9999;
+  opacity: 0.3;
+}
+
+/* ===== End Metro Cyberpunk Theme ===== */
