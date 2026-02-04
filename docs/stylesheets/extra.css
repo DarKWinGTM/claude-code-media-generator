@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.9.3 - TOC Scroll-Spy Fix for Left Sidebar
+   v1.9.4 - Full Metro Cyberpunk Font System
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -3971,3 +3971,179 @@ a, button, input, .md-nav__link, .md-tabs__link {
 }
 
 /* ===== End Metro Cyberpunk Theme ===== */
+
+/* ===========================================
+   Metro Cyberpunk Font System v1.9.4
+   Full typography overhaul to match demo
+   =========================================== */
+
+/* ===== Dark Mode Base Typography ===== */
+[data-md-color-scheme="slate"] body,
+[data-md-color-scheme="slate"] .md-typeset {
+  font-family: var(--font-cyber-body, 'DM Sans', sans-serif) !important;
+}
+
+/* ===== Headings - Space Grotesk ===== */
+[data-md-color-scheme="slate"] .md-typeset h1,
+[data-md-color-scheme="slate"] .md-typeset h2,
+[data-md-color-scheme="slate"] .md-typeset h3,
+[data-md-color-scheme="slate"] .md-typeset h4,
+[data-md-color-scheme="slate"] .md-typeset h5,
+[data-md-color-scheme="slate"] .md-typeset h6 {
+  font-family: var(--font-cyber-heading, 'Space Grotesk', sans-serif) !important;
+}
+
+/* ===== Header Logo - HUD Font with // prefix ===== */
+[data-md-color-scheme="slate"] .md-header__topic:first-child .md-ellipsis {
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace) !important;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  color: var(--neon-cyan, #00ffff);
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+[data-md-color-scheme="slate"] .md-header__topic:first-child .md-ellipsis::before {
+  content: '// ';
+  color: var(--neon-magenta, #ff00ff);
+}
+
+/* ===== Navigation Tabs - Mono Font ===== */
+[data-md-color-scheme="slate"] .md-tabs__link {
+  font-family: var(--font-cyber-mono, 'Fira Code', monospace) !important;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+/* ===== Sidebar Navigation - Enhanced Typography ===== */
+[data-md-color-scheme="slate"] .md-nav__link {
+  font-family: var(--font-cyber-body, 'DM Sans', sans-serif) !important;
+  font-size: 0.85rem;
+}
+
+/* Section headers in sidebar */
+[data-md-color-scheme="slate"] .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link,
+[data-md-color-scheme="slate"] .md-nav--primary > .md-nav__list > .md-nav__item > label {
+  font-family: var(--font-cyber-heading, 'Space Grotesk', sans-serif) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ===== Section Navigator - HUD Terminal Style ===== */
+[data-md-color-scheme="slate"] .section-navigator__title {
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace) !important;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--neon-cyan, #00ffff);
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+}
+
+/* Add "> " prefix like demo */
+[data-md-color-scheme="slate"] .section-navigator__title::before {
+  content: '> ';
+  color: var(--neon-magenta, #ff00ff);
+}
+
+/* Section Navigator Links */
+[data-md-color-scheme="slate"] .section-navigator__list a {
+  font-family: var(--font-cyber-body, 'DM Sans', sans-serif) !important;
+  font-size: 0.85rem;
+}
+
+/* ===== TOC Title - HUD Style ===== */
+[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__title,
+[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__title {
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace) !important;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-muted, #606060);
+  border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ===== Table Headers - HUD Style ===== */
+[data-md-color-scheme="slate"] .md-typeset table th {
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace) !important;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--neon-cyan, #00ffff);
+  background: rgba(0, 255, 255, 0.03);
+}
+
+/* ===== Code Blocks - Fira Code / Share Tech Mono ===== */
+[data-md-color-scheme="slate"] .md-typeset code,
+[data-md-color-scheme="slate"] .md-typeset pre code {
+  font-family: var(--font-cyber-mono, 'Fira Code', 'Share Tech Mono', monospace) !important;
+}
+
+/* ===== Code Block Header - Terminal Style ===== */
+[data-md-color-scheme="slate"] .md-typeset pre {
+  position: relative;
+}
+
+[data-md-color-scheme="slate"] .highlight > pre::before,
+[data-md-color-scheme="slate"] .md-typeset pre:not(.mermaid pre)::before {
+  content: '> TERMINAL';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0.3rem 0.75rem;
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace);
+  font-size: 0.65rem;
+  color: var(--neon-green, #00ff00);
+  background: rgba(0, 255, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 255, 0, 0.15);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+[data-md-color-scheme="slate"] .highlight > pre > code,
+[data-md-color-scheme="slate"] .md-typeset pre:not(.mermaid pre) > code {
+  padding-top: 2rem !important;
+}
+
+/* ===== Inline Code - Cyberpunk Style ===== */
+[data-md-color-scheme="slate"] .md-typeset code:not(pre code) {
+  background: rgba(0, 255, 255, 0.08);
+  color: var(--neon-cyan, #00ffff);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.85em;
+  border: 1px solid rgba(0, 255, 255, 0.15);
+}
+
+/* ===== Buttons - Mono Font ===== */
+[data-md-color-scheme="slate"] .md-button,
+[data-md-color-scheme="slate"] .btn {
+  font-family: var(--font-cyber-mono, 'Fira Code', monospace) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ===== Search - Mono Font ===== */
+[data-md-color-scheme="slate"] .md-search__input {
+  font-family: var(--font-cyber-mono, 'Fira Code', monospace) !important;
+}
+
+/* ===== Footer - Body Font ===== */
+[data-md-color-scheme="slate"] .md-footer {
+  font-family: var(--font-cyber-body, 'DM Sans', sans-serif) !important;
+}
+
+/* ===== Admonition Titles - Heading Font ===== */
+[data-md-color-scheme="slate"] .md-typeset .admonition-title,
+[data-md-color-scheme="slate"] .md-typeset details summary {
+  font-family: var(--font-cyber-heading, 'Space Grotesk', sans-serif) !important;
+}
+
+/* ===== H2 with Neon Glow (like demo) ===== */
+[data-md-color-scheme="slate"] .md-typeset h2 {
+  color: var(--neon-cyan, #00ffff);
+  text-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+/* ===== End Metro Cyberpunk Font System v1.9.4 ===== */
