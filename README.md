@@ -256,17 +256,53 @@ After restarting Claude Code:
 /generative help
 ```
 
+### 📚 Skill Commands Reference
+
+#### Main Commands
+
+| Command | Description |
+|---------|-------------|
+| `/generative image "prompt"` | Generate image from text |
+| `/generative video "prompt"` | Generate video from text |
+| `/generative info` | Show capabilities overview |
+| `/generative config` | Configuration management |
+| `/generative help` | Detailed help system |
+
+#### Help Topics
+
+| Command | Description |
+|---------|-------------|
+| `/generative help image` | Image generation guide |
+| `/generative help video` | Video generation guide |
+| `/generative help examples` | 10+ usage examples |
+| `/generative help modes` | All 8 video modes explained |
+
+#### Config Sub-commands
+
+| Command | Description |
+|---------|-------------|
+| `/generative config setup` | Guided setup wizard |
+| `/generative config show` | Show current settings |
+| `/generative config gemini` | Setup Gemini API |
+| `/generative config vertex` | Setup Vertex AI |
+| `/generative config gcloud` | Setup gcloud CLI |
+| `/generative config reset` | Reset to defaults |
+
 ### 🔧 Configuration
 
 After installation, configure your API:
 
 ```bash
-# Start setup wizard
+# Start setup wizard (recommended)
 /generative config setup
 
 # Or configure manually
 /generative config gemini    # For Gemini API
 /generative config vertex    # For Vertex AI
+/generative config gcloud    # Setup gcloud CLI
+
+# View current configuration
+/generative config show
 ```
 
 ### 📁 Directory Structure After Installation
