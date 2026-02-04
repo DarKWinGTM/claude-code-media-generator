@@ -12,10 +12,10 @@ Comparison of available Veo models.
 |---------|-------|
 | **Audio** | :white_check_mark: Yes - generates with sound |
 | **Quality** | Best - highest resolution |
-| **Video Extension** | :x: Not supported |
+| **Video Extension** | :white_check_mark: Supported |
 | **Cost** | $$$ Higher |
 
-**Best for:** Final production, videos with audio
+**Best for:** Final production, videos with audio, video extension
 
 ```bash
 python video_gen.py "A waterfall" --model veo-3.1-generate-preview
@@ -51,11 +51,11 @@ python video_gen.py "A waterfall" --preset quick
 | **Video Extension** | :white_check_mark: Supported |
 | **Cost** | $$ Medium |
 
-**Best for:** Video extension, chaining videos
+**Best for:** Video extension without audio, chaining videos
 
 ```bash
 python video_gen.py "A waterfall" --model veo-2.0
-# Required for video extension
+# Also supports video extension
 python video_gen.py "Continue scene" --extend-video input.mp4 --model veo-2.0
 ```
 
@@ -86,7 +86,7 @@ python video_gen.py "A cityscape" \
 | Feature | veo-3.1 | veo-3.1-fast | veo-2.0 | veo-2.0-exp |
 |---------|---------|--------------|---------|-------------|
 | Audio Generation | :white_check_mark: | :white_check_mark: | :x: | :x: |
-| Video Extension | :x: | :x: | :white_check_mark: | :white_check_mark: |
+| Video Extension | :white_check_mark: | :x: | :white_check_mark: | :white_check_mark: |
 | Reference Style | :x: | :x: | :x: | :white_check_mark: |
 | Reference Asset | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Insert/Remove Objects | :x: | :x: | :white_check_mark: | :white_check_mark: |
@@ -99,11 +99,11 @@ python video_gen.py "A cityscape" \
 
 ```
 Need audio?
-  → YES: veo-3.1-generate-preview
+  → YES: veo-3.1-generate-preview (also supports extension)
   → NO: Continue below
 
 Need video extension?
-  → YES: veo-2.0 or veo-2.0-exp
+  → YES: veo-3.1-generate-preview, veo-2.0, or veo-2.0-exp
   → NO: Continue below
 
 Need style transfer?
@@ -125,8 +125,8 @@ Presets automatically select the best model:
 |--------|-------|----------|----------|
 | `quick` | veo-3.1-fast | 5s | Fast preview |
 | `quality` | veo-3.1-generate | 8s | Production |
-| `extend` | veo-2.0 | 8s | Video extension |
-| `budget` | veo-2.0 | 5s | Cost saving |
+| `extend` | veo-3.1-generate | 7s | Video extension |
+| `budget` | veo-3.0-fast | 5s | Cost saving |
 
 ```bash
 python video_gen.py "A waterfall" --preset quality

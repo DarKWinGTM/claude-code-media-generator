@@ -51,6 +51,12 @@ python image_gen.py PROMPT [OPTIONS]
 |--------|------|---------|-------------|
 | `--estimate-cost` | flag | - | Show cost without generating |
 
+### Debug
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `--show-defaults` | flag | - | Show current defaults and exit (v1.4) |
+
 ---
 
 ## Examples

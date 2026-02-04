@@ -83,6 +83,7 @@ python video_gen.py PROMPT [OPTIONS]
 |--------|------|---------|-------------|
 | `--verbose` | flag | - | Show detailed output |
 | `--dry-run` | flag | - | Show request without sending |
+| `--show-defaults` | flag | - | Show current defaults and exit (v2.25) |
 
 ---
 
@@ -192,6 +193,59 @@ Create `config.json` for multi-project support:
 
 ```bash
 python video_gen.py "prompt" --project default
+```
+
+---
+
+## Smart Defaults (v2.25.1)
+
+When extending a video, settings are automatically inherited from the source video's metadata:
+
+### Automatic Inheritance
+
+```bash
+# Original video was created with veo-2.0, 1080p, project-1
+python video_gen.py "Continue the scene" --extend-video video_20260201_123456_0.mp4
+
+# Output:
+# ℹ Found source metadata for inheritance
+# ℹ Inherited project from source metadata: project-1
+# ℹ Inherited model from metadata: veo-2.0
+# ℹ Inherited resolution from metadata: 1080p
+```
+
+!!! info "Video Extension Models"
+    Video extension is supported by `veo-2.0`, `veo-2.0-exp`, and `veo-3.1-generate-preview`.
+
+### Priority Chain
+
+Settings are resolved in this order:
+
+1. **CLI Arguments** (highest) - Explicitly specified options
+2. **Source Metadata** - From `--extend-video` source
+3. **config.json** - Project settings
+4. **Code Defaults** (lowest) - Built-in fallbacks
+
+### Inheritable Fields
+
+| Field | Description |
+|-------|-------------|
+| `model` | Video generation model |
+| `resolution` | Output resolution (720p, 1080p) |
+| `aspect_ratio` | 16:9, 9:16, 1:1 |
+| `storage_uri` | GCS bucket for uploads |
+| `location` | GCP region |
+| `project_id` | GCP project ID |
+
+### Override Inheritance
+
+You can always override inherited values:
+
+```bash
+# Override model from metadata
+python video_gen.py "Continue" \
+  --extend-video video.mp4 \
+  --model veo-2.0
 ```
 
 ---

@@ -203,12 +203,12 @@ Create stunning videos and images using Google Veo & Imagen APIs
 
 | Component | Version | Status |
 |:----------|:--------|:-------|
-| **video_gen.py** | v2.26 | :material-check-circle:{ .status-ready } Production Ready |
-| **image_gen.py** | v1.3 | :material-check-circle:{ .status-ready } Stable |
+| **video_gen.py** | v2.27 | :material-check-circle:{ .status-ready } Production Ready |
+| **image_gen.py** | v1.4 | :material-check-circle:{ .status-ready } Stable |
 | **check_api.py** | v2.1 | :material-check-circle:{ .status-ready } Stable |
-| **Documentation** | v3.8 | :material-check-circle:{ .status-ready } Updated |
-| **Claude Code Skill** | — | :material-progress-wrench:{ .status-planned } Phase 3 |
-| **MCP Server** | — | :material-progress-wrench:{ .status-planned } Phase 3 |
+| **Documentation** | v3.10 | :material-check-circle:{ .status-ready } Updated |
+| **Claude Code Skill** | v3.2.1 | :material-check-circle:{ .status-ready } Available |
+| **MCP Server** | — | :material-progress-wrench:{ .status-planned } Planned |
 
 ---
 

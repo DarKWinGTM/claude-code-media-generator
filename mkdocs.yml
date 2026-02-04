@@ -124,6 +124,7 @@ nav:
     - image_gen.py: cli/image_gen.md
     - check_api.py: cli/check_api.md
   - Guides:
+    - Skill Installation: guides/skill-installation.md
     - GCS Storage: guides/gcs-storage.md
     - Presets: guides/presets.md
     - Troubleshooting: guides/troubleshooting.md

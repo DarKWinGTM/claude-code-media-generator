@@ -2,6 +2,16 @@
 
 Claude Code Media Generator supports multiple authentication methods for Google APIs.
 
+!!! tip "Using Claude Code Skill?"
+
+    If you have the `/generative` skill installed, use the built-in setup wizard:
+
+    ```bash
+    /generative config setup
+    ```
+
+    This will guide you through API configuration step-by-step.
+
 ---
 
 ## Authentication Methods Overview
@@ -164,3 +174,4 @@ python video_gen.py "prompt" --project work
 
 - [Quick Start](quick-start.md) - Generate your first video
 - [GCS Storage](../guides/gcs-storage.md) - Set up cloud storage
+- [Skill Installation](../guides/skill-installation.md) - Install Claude Code Skill

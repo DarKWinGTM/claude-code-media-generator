@@ -42,7 +42,8 @@ claude-code-media-generator/
 ├── video_gen.py        # Video generation CLI
 ├── image_gen.py        # Image generation CLI
 ├── check_api.py        # API verification tool
-├── config_loader.py    # Multi-project config
+├── config.py           # Configuration module
+├── video_utils.py      # Video utilities
 ├── config.json         # Your configuration
 ├── config.example.json # Example config
 ├── design/             # Design documents
@@ -71,3 +72,4 @@ python check_api.py --key "YOUR_API_KEY"
 
 - [Authentication](authentication.md) - Set up your API key
 - [Quick Start](quick-start.md) - Generate your first video
+- [Skill Installation](../guides/skill-installation.md) - Install Claude Code Skill

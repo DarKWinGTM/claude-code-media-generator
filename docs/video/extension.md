@@ -17,7 +17,7 @@ Video extension allows you to continue an existing video with new AI-generated c
 | Requirement | Details |
 |-------------|---------|
 | **Frame Rate** | Source video MUST be 24fps |
-| **Model** | Must use veo-2.0 or veo-2.0-exp |
+| **Model** | veo-2.0, veo-2.0-exp, or veo-3.1-generate-preview |
 | **Source** | Local file or GCS URI (NOT external URLs) |
 
 ### Why 24fps?
@@ -151,15 +151,76 @@ python video_gen.py "Continue" --extend-video local_24fps.mp4
 
 ### "Model does not support video_extension"
 
-**Problem:** Using veo-3.1 models
+**Problem:** Using unsupported model (e.g., veo-3.0)
 
-**Solution:** Use veo-2.0:
+**Solution:** Use supported models:
 
 ```bash
 python video_gen.py "Continue" \
   --extend-video input.mp4 \
-  --model veo-2.0
+  --model veo-3.1-generate-preview  # or veo-2.0
 ```
+
+Supported models for video extension:
+- `veo-3.1-generate-preview` ✅
+- `veo-2.0` ✅
+- `veo-2.0-exp` ✅
+
+---
+
+## Smart Defaults (New in v2.25.1)
+
+When extending a video, settings are automatically inherited from the source video's metadata:
+
+### How It Works
+
+```bash
+# Original video was created with:
+# - model: veo-2.0
+# - resolution: 1080p
+# - storage-uri: gs://my-bucket/videos
+
+# Just specify the prompt - settings are inherited
+python video_gen.py "Continue the scene" --extend-video video_20260201_123456_0.mp4
+
+# Output:
+# ℹ Found source metadata for inheritance
+# ℹ Inherited model from metadata: veo-2.0
+# ℹ Inherited resolution from metadata: 1080p
+# ℹ Inherited storage_uri from metadata: gs://my-bucket/videos
+```
+
+### Priority Chain
+
+Settings are resolved in this order:
+
+1. **CLI Arguments** (highest) - What you type
+2. **Source Metadata** - From the source video
+3. **config.json** - Your project settings
+4. **Code Defaults** (lowest) - Built-in fallbacks
+
+### Override When Needed
+
+You can always override inherited values:
+
+```bash
+# Override model (ignore metadata)
+python video_gen.py "Continue" \
+  --extend-video video.mp4 \
+  --model veo-2.0-exp
+
+# Override resolution
+python video_gen.py "Continue" \
+  --extend-video video.mp4 \
+  --resolution 720p
+```
+
+!!! tip "Chained Extensions"
+    Smart Defaults work perfectly for chained extensions. Each video inherits from its predecessor:
+    ```bash
+    video_001.mp4 → video_002.mp4 → video_003.mp4
+    # All use same model, resolution, storage settings
+    ```
 
 ---
 
@@ -186,13 +247,13 @@ Local file → Upload to GCS → Use gcsUri in API → Generate → Download
 
 - :white_check_mark: Use Veo-generated videos (always 24fps)
 - :white_check_mark: Use `--storage-uri` for reliable uploads
-- :white_check_mark: Use `--model veo-2.0` for extension
+- :white_check_mark: Use supported models (`veo-2.0`, `veo-2.0-exp`, or `veo-3.1-generate-preview`)
 - :white_check_mark: Keep prompts consistent with source video
 
 ### Don't
 
 - :x: Use external URLs directly
-- :x: Use veo-3.1 models for extension
+- :x: Use unsupported models (e.g., veo-3.0)
 - :x: Use videos with non-24fps frame rate
 - :x: Create drastic scene changes
 

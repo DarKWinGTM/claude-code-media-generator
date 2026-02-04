@@ -8,7 +8,7 @@ Generate AI videos using Google Veo models with 8 different generation modes.
 
 | Model | Audio | Extension | Quality | Cost |
 |-------|-------|-----------|---------|------|
-| **veo-3.1-generate-preview** | :white_check_mark: Yes | :x: No | Best | $$$ |
+| **veo-3.1-generate-preview** | :white_check_mark: Yes | :white_check_mark: Yes | Best | $$$ |
 | **veo-3.1-fast-generate-preview** | :white_check_mark: Yes | :x: No | Good | $$ |
 | **veo-2.0** | :x: No | :white_check_mark: Yes | Good | $$ |
 | **veo-2.0-exp** | :x: No | :white_check_mark: Yes | Good | $$ |
@@ -85,6 +85,25 @@ Typical generation time: 60-180 seconds
 
 !!! info "Cost Estimation"
     Use `--estimate-cost` to preview cost before generating.
+
+---
+
+## Smart Defaults (New in v2.25.1)
+
+When extending a video, settings are automatically inherited from the source:
+
+```bash
+# Settings inherited automatically from source video
+python video_gen.py "Continue the scene" --extend-video video.mp4
+
+# ℹ Inherited model from metadata: veo-2.0
+# ℹ Inherited resolution from metadata: 1080p
+```
+
+!!! info "Video Extension Models"
+    Video extension is supported by `veo-2.0`, `veo-2.0-exp`, and `veo-3.1-generate-preview`.
+
+See [CLI Reference - Smart Defaults](../cli/video_gen.md#smart-defaults-v2251) for details.
 
 ---
 
