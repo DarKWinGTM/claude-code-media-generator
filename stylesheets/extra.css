@@ -4570,51 +4570,81 @@ a, button, input, .md-nav__link, .md-tabs__link {
 /* Override Material theme's visibility: collapse for TOC in left sidebar */
 /* This fixes the issue where nested TOC items are hidden by default */
 
-/* Force all nested .md-nav elements in TOC to be visible */
-.md-sidebar--primary .toc-for-left-sidebar .md-nav__toggle ~ .md-nav,
-.md-sidebar--primary .toc-for-left-sidebar .md-nav {
+/* CRITICAL: Override the exact Material theme selector */
+/* Original: .md-nav__toggle~.md-nav { visibility: collapse; opacity: 0; } */
+.md-sidebar--primary .toc-for-left-sidebar .md-nav__toggle ~ .md-nav {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
-  grid-template-rows: 1fr !important;
+  grid-template-rows: none !important;
+  height: auto !important;
+  transition: none !important;
+}
+
+/* Target .md-nav--secondary which is what the TOC uses */
+.md-sidebar--primary .md-nav--secondary .md-nav__toggle ~ .md-nav,
+.md-sidebar--primary nav.md-nav--secondary .md-nav {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  grid-template-rows: none !important;
+  height: auto !important;
+  transition: none !important;
+}
+
+/* Force all nested .md-nav elements in TOC to be visible */
+.md-sidebar--primary .toc-for-left-sidebar .md-nav,
+.md-sidebar--primary .toc-for-left-sidebar nav.md-nav {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   height: auto !important;
 }
 
 /* Ensure all nested lists are visible */
-.md-sidebar--primary .toc-for-left-sidebar .md-nav__list {
+.md-sidebar--primary .toc-for-left-sidebar .md-nav__list,
+.md-sidebar--primary .md-nav--secondary .md-nav__list {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
 
 /* Style nested TOC items with indentation */
-.md-sidebar--primary .toc-for-left-sidebar .md-nav .md-nav {
+.md-sidebar--primary .toc-for-left-sidebar .md-nav .md-nav,
+.md-sidebar--primary .md-nav--secondary .md-nav .md-nav {
   margin-left: 0.75rem !important;
   padding-left: 0.5rem !important;
   border-left: 1px solid rgba(0, 255, 255, 0.15) !important;
 }
 
-/* Hide toggle icons - we want all items expanded */
+/* Hide toggle icons and checkboxes - we want all items expanded */
 .md-sidebar--primary .toc-for-left-sidebar .md-nav__toggle,
-.md-sidebar--primary .toc-for-left-sidebar .md-nav__icon {
+.md-sidebar--primary .toc-for-left-sidebar .md-nav__icon,
+.md-sidebar--primary .md-nav--secondary .md-nav__toggle,
+.md-sidebar--primary .md-nav--secondary .md-nav__icon {
   display: none !important;
 }
 
-/* Ensure labels are visible when we have nested nav */
-.md-sidebar--primary .toc-for-left-sidebar .md-nav__link {
+/* Ensure all links are visible */
+.md-sidebar--primary .toc-for-left-sidebar .md-nav__link,
+.md-sidebar--primary .md-nav--secondary .md-nav__link {
   visibility: visible !important;
   opacity: 1 !important;
 }
 
 /* Fix for light mode */
 [data-md-color-scheme="default"] .md-sidebar--primary .toc-for-left-sidebar .md-nav__toggle ~ .md-nav,
-[data-md-color-scheme="default"] .md-sidebar--primary .toc-for-left-sidebar .md-nav {
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav--secondary .md-nav__toggle ~ .md-nav,
+[data-md-color-scheme="default"] .md-sidebar--primary .toc-for-left-sidebar .md-nav,
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav--secondary .md-nav {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
+  transition: none !important;
 }
 
-[data-md-color-scheme="default"] .md-sidebar--primary .toc-for-left-sidebar .md-nav .md-nav {
+[data-md-color-scheme="default"] .md-sidebar--primary .toc-for-left-sidebar .md-nav .md-nav,
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav--secondary .md-nav .md-nav {
   border-left: 1px solid rgba(99, 102, 241, 0.2) !important;
 }
 
