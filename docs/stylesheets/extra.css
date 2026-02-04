@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.9.6 - Section Navigator CLI Sub-items
+   v1.9.7 - Compact Left Navigator Spacing
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -249,8 +249,8 @@ body, .md-typeset {
   border-left: 3px solid var(--color-secondary) !important;
   padding-left: 0.75rem !important;
   margin-left: 0 !important;
-  margin-top: 0.5rem !important;
-  margin-bottom: 0.25rem !important;
+  margin-top: 0.35rem !important;
+  margin-bottom: 0.15rem !important;
   transition: all 0.3s ease !important;
 }
 
@@ -270,7 +270,20 @@ body, .md-typeset {
   letter-spacing: normal !important;
   border-left: none !important;
   padding-left: 1.5rem !important;
+  padding-top: 0.2rem !important;
+  padding-bottom: 0.2rem !important;
   color: var(--md-default-fg-color--light) !important;
+}
+
+/* Compact nav list spacing */
+.md-nav--primary .md-nav__list {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.md-nav--primary .md-nav__item {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .md-nav--primary .md-nav__item .md-nav__item .md-nav__link:hover {
@@ -2389,8 +2402,8 @@ a, button, input, .md-nav__link, .md-tabs__link {
   color: #4F46E5 !important;
   border-left: 3px solid #6366F1 !important;
   padding-left: 0.75rem !important;
-  margin-top: 0.5rem !important;
-  margin-bottom: 0.25rem !important;
+  margin-top: 0.35rem !important;
+  margin-bottom: 0.15rem !important;
 }
 
 [data-md-color-scheme="default"] .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link:hover,
@@ -2408,6 +2421,8 @@ a, button, input, .md-nav__link, .md-tabs__link {
   letter-spacing: normal !important;
   border-left: none !important;
   padding-left: 1.5rem !important;
+  padding-top: 0.2rem !important;
+  padding-bottom: 0.2rem !important;
   color: #475569 !important;
 }
 
