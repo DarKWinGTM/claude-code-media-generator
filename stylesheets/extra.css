@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.9.2 - Full Metro Cyberpunk Features
+   v1.9.3 - TOC Scroll-Spy Fix for Left Sidebar
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -3903,16 +3903,18 @@ a, button, input, .md-nav__link, .md-tabs__link {
 
 /* ===== Cyberpunk - TOC Scroll-Spy Animation ===== */
 
-/* Base transition for all TOC links */
-[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link {
+/* Base transition for all TOC links (both sidebars) */
+[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link,
+[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__link {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   padding-left: 0.75rem;
   border-left: 2px solid transparent;
 }
 
-/* Active TOC item with neon glow */
-[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link--active {
+/* Active TOC item with neon glow (both sidebars) */
+[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link--active,
+[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__link--active {
   color: var(--neon-cyan, #00ffff) !important;
   font-weight: 600;
   border-left: 2px solid var(--neon-cyan, #00ffff);
@@ -3920,15 +3922,24 @@ a, button, input, .md-nav__link, .md-tabs__link {
   background: linear-gradient(90deg, rgba(0, 255, 255, 0.1) 0%, transparent 100%);
 }
 
-/* Hover effect for TOC links */
-[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link:hover {
+/* Passed TOC items (scrolled past) */
+[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link--passed,
+[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__link--passed {
+  color: var(--text-muted, #64748b);
+  border-left-color: rgba(0, 255, 255, 0.2);
+}
+
+/* Hover effect for TOC links (both sidebars) */
+[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link:hover,
+[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__link:hover {
   color: var(--neon-cyan, #00ffff);
   border-left-color: rgba(0, 255, 255, 0.5);
   background: linear-gradient(90deg, rgba(0, 255, 255, 0.05) 0%, transparent 100%);
 }
 
-/* Smooth scroll indicator animation */
-[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link--active::before {
+/* Smooth scroll indicator animation (both sidebars) */
+[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link--active::before,
+[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__link--active::before {
   content: "›";
   position: absolute;
   left: -0.5rem;
@@ -3949,8 +3960,9 @@ a, button, input, .md-nav__link, .md-tabs__link {
   }
 }
 
-/* TOC Title styling */
-[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__title {
+/* TOC Title styling (both sidebars) */
+[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__title,
+[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__title {
   font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace);
   color: var(--neon-magenta, #ff00ff);
   text-transform: uppercase;
