@@ -1,12 +1,91 @@
 # Changelog - GitHub Pages Design
 
 > **Parent Document:** [pages.design.md](../design/pages.design.md)
-> **Current Version:** 1.8
+> **Current Version:** 2.0
 > **Session:** (current session)
 
 ---
 
 ## Version History
+
+### Version 2.0 (2026-02-05)
+
+**Design v1.8: Metro Cyberpunk Theme + Section Navigator Fix**
+
+**Session:** (current session)
+
+#### Changes
+
+- **Section 11: Metro Cyberpunk Theme** - New full-page Cyberpunk theme design
+  - Option 2: Metro Cyberpunk selected (Balanced - ชัดเจนแต่อ่านง่าย)
+  - Terminal-style index from Option 3: `[1] [2] [3]` และ `> NAVIGATE_`
+  - Color palette: Neon Cyan (#00ffff), Neon Magenta (#ff00ff), Neon Green (#00ff00)
+  - Typography: Share Tech Mono, Fira Code, Space Grotesk
+  - Neon glow effects, optional scanlines
+  - Responsive behavior for desktop/tablet/mobile
+  - Performance considerations and accessibility targets
+
+- **Section 10 Updated** - Marked as Implemented (was Planned)
+
+- **toc.html Bug Fix (v1.1)** - Fixed redundant wrapper
+  - Removed duplicate `md-sidebar__scrollwrap` wrapper
+  - MkDocs Material already provides this wrapper
+  - This fix resolves the sidebar showing same content on left and right issue
+
+- **Demo Files Created**:
+  - `demo-cyberpunk-styles.html` - 3 options comparison demo
+  - `demo-metro-cyberpunk-full.html` - Full page Metro Cyberpunk demo
+
+#### Files Modified
+
+| File | Changes |
+|------|---------|
+| `design/pages.design.md` | v1.8: Added Section 11, updated Section 10 |
+| `pages/overrides/partials/toc.html` | v1.1: Removed redundant wrapper |
+| `pages/demo-cyberpunk-styles.html` | NEW: 3 options demo |
+| `pages/demo-metro-cyberpunk-full.html` | NEW: Full theme demo |
+| `TODO.md` | v3.3: Added Metro Cyberpunk tasks |
+| `changelog/pages.changelog.md` | This entry |
+
+#### Summary
+
+Designed Metro Cyberpunk theme for entire site and fixed sidebar bug from Section Navigator implementation.
+
+---
+
+### Version 1.9 (2026-02-04)
+
+**Design v1.6: Section Navigator Feature**
+
+**Session:** (current session)
+
+#### Changes
+
+- **Added Section 10: Section Navigator Feature** - New responsive navigation component
+  - 10.1 Overview: Problem statement and purpose
+  - 10.2 Design Specification: Target sections, responsive behavior
+  - 10.3 Technical Implementation: mkdocs.yml, toc.html, CSS
+  - 10.4 Implementation Checklist
+  - 10.5 Quality Metrics
+- **Responsive Design Strategy:**
+  - Desktop (≥1220px): Right Sidebar above TOC
+  - Tablet (960-1219px): Inline in content area
+  - Mobile (<960px): Inline compact mode
+- **Updated TODO.md**: Added Section Navigator implementation tasks
+
+#### Files Modified
+
+| File | Changes |
+|------|---------|
+| `design/pages.design.md` | Added Section 10, updated version to 1.6 |
+| `TODO.md` | Added Section Navigator tasks |
+| `changelog/pages.changelog.md` | This entry |
+
+#### Summary
+
+Designed Section Navigator feature with responsive layout for all screen sizes.
+
+---
 
 ### Version 1.8 (2026-02-04)
 

@@ -3,8 +3,8 @@
 ## 0) Document Control
 
 > **Parent Scope:** Claude Code Media Generator Project
-> **Current Version:** 1.5
-> **Session:** (current session) (2026-02-04)
+> **Current Version:** 1.8
+> **Session:** (current session) (2026-02-05)
 
 ---
 
@@ -425,6 +425,275 @@ Based on Skill v3.2.1 release, the following pages need content updates:
 - [ ] Create `guides/skill-installation.md`
 - [ ] Add navigation entry to `mkdocs.yml`
 - [ ] Update `authentication.md` with config wizard reference
+
+---
+
+## 10) Section Navigator Feature (v1.6 - Implemented)
+
+### 10.1 Overview
+
+**Purpose:** เพิ่ม Section Navigator ใน Right Sidebar เพื่อให้ผู้ใช้สามารถ navigate ไปยังหัวข้อหลักได้รวดเร็ว
+
+**Problem Statement:**
+- ปัจจุบัน ผู้ใช้ต้องไล่ดู Left Sidebar ทีละหัวข้อ
+- ไม่มี quick access ไปยัง major sections
+- Mobile experience ขาด section navigation
+
+### 10.2 Design Specification
+
+#### Target Sections
+
+| Section | Icon | Link |
+|---------|------|------|
+| Getting Started | 🚀 | `/getting-started/installation/` |
+| Video Generation | 🎬 | `/video/overview/` |
+| Image Generation | 🖼️ | `/image/` |
+| CLI Reference | 💻 | `/cli/video_gen/` |
+| Guides | 📖 | `/guides/skill-installation/` |
+
+#### Responsive Behavior
+
+| Breakpoint | Screen Size | Navigator Location |
+|------------|-------------|-------------------|
+| Desktop | ≥1220px | Right Sidebar (above TOC) |
+| Tablet | 960-1219px | Inline in content area |
+| Mobile | <960px | Inline in content area (compact) |
+
+### 10.3 Technical Implementation
+
+#### 10.3.1 mkdocs.yml Changes
+
+```yaml
+features:
+  # Remove or comment out:
+  # - toc.integrate  # Disable to show Right Sidebar
+```
+
+#### 10.3.2 Template Override: `overrides/partials/toc.html`
+
+```html
+<!-- Section Navigator -->
+<nav class="section-navigator" aria-label="Section Navigation">
+  <span class="section-navigator__title">Sections</span>
+  <ul class="section-navigator__list">
+    <li><a href="{{ base_url }}/getting-started/installation/">🚀 Getting Started</a></li>
+    <li><a href="{{ base_url }}/video/overview/">🎬 Video Generation</a></li>
+    <li><a href="{{ base_url }}/image/">🖼️ Image Generation</a></li>
+    <li><a href="{{ base_url }}/cli/video_gen/">💻 CLI Reference</a></li>
+    <li><a href="{{ base_url }}/guides/skill-installation/">📖 Guides</a></li>
+  </ul>
+</nav>
+
+<!-- Original TOC -->
+{% include "partials/toc-original.html" %}
+```
+
+#### 10.3.3 CSS: `extra.css` additions
+
+```css
+/* Section Navigator - Desktop */
+.section-navigator {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(129, 140, 248, 0.2);
+}
+
+.section-navigator__title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--md-default-fg-color--light);
+}
+
+.section-navigator__list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+}
+
+.section-navigator__list li {
+  margin: 0.25rem 0;
+}
+
+.section-navigator__list a {
+  display: block;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: var(--md-default-fg-color--light);
+  transition: all 0.2s;
+}
+
+.section-navigator__list a:hover {
+  background: rgba(129, 140, 248, 0.1);
+  color: var(--md-primary-fg-color);
+}
+
+/* Responsive - Inline for Tablet/Mobile */
+@media screen and (max-width: 1219px) {
+  .section-navigator-sidebar {
+    display: none;
+  }
+
+  .section-navigator-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(129, 140, 248, 0.05);
+    border-radius: 8px;
+  }
+
+  .section-navigator-inline a {
+    padding: 0.5rem 1rem;
+    background: rgba(129, 140, 248, 0.1);
+    border-radius: 20px;
+    font-size: 0.85rem;
+  }
+}
+```
+
+### 10.4 Implementation Checklist
+
+- [ ] Disable `toc.integrate` in mkdocs.yml
+- [ ] Create `overrides/partials/toc.html`
+- [ ] Add Section Navigator CSS to `extra.css`
+- [ ] Add inline navigator component (for mobile fallback)
+- [ ] Test on Desktop (≥1220px)
+- [ ] Test on Tablet (960-1219px)
+- [ ] Test on Mobile (<960px)
+- [ ] Verify all navigation links work
+
+### 10.5 Quality Metrics
+
+| Metric | Target |
+|--------|--------|
+| Desktop visibility | 100% (always visible in sidebar) |
+| Mobile accessibility | 100% (inline fallback) |
+| Link accuracy | 100% (all links work) |
+| Responsive transitions | Smooth (no layout shifts) |
+
+---
+
+## 11) Metro Cyberpunk Theme (v1.8 - Planned)
+
+### 11.1 Overview
+
+**Purpose:** ปรับ theme ทั้งหน้าเว็บให้มีความ Metro Cyberpunk อย่างเต็มรูปแบบ
+
+**Design Direction:**
+- Option 2: Metro Cyberpunk (Balanced - ชัดเจนแต่อ่านง่าย)
+- Terminal-style index จาก Option 3: `[1] [2] [3]` และ `> NAVIGATE_`
+- Demo file: `demo-metro-cyberpunk-full.html`
+
+### 11.2 Color Palette (Cyberpunk)
+
+| Color | Hex | CSS Variable | Usage |
+|-------|-----|--------------|-------|
+| **Neon Cyan** | #00ffff | `--neon-cyan` | Primary accent, links |
+| **Neon Magenta** | #ff00ff | `--neon-magenta` | Active states, highlights |
+| **Neon Green** | #00ff00 | `--neon-green` | Success, terminal style |
+| **Deep Black** | #0a0a0f | `--cyber-bg-deep` | Main background |
+| **Midnight** | #0f0f1a | `--cyber-bg-mid` | Cards, sidebars |
+| **Dark Surface** | #151520 | `--cyber-bg-surface` | Elevated surfaces |
+| **Cyber Purple** | #8b5cf6 | `--cyber-accent` | Secondary accent |
+
+### 11.3 Typography
+
+| Element | Font | Usage |
+|---------|------|-------|
+| **HUD Display** | Share Tech Mono | Section titles, navigation |
+| **Code** | Fira Code | Code blocks, monospace |
+| **Body** | Space Grotesk | General text |
+
+### 11.4 UI Components
+
+#### 11.4.1 Navigation with Terminal Index
+
+```html
+<div class="nav-section-title">NAVIGATE_</div>
+<ul class="nav-menu">
+  <li><a href="#"><span class="nav-index">[1]</span> Getting Started</a></li>
+  <li><a href="#"><span class="nav-index">[2]</span> Video Generation</a></li>
+  ...
+</ul>
+```
+
+#### 11.4.2 Neon Glow Effects
+
+```css
+.nav-item:hover {
+  color: #00ffff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.nav-item.active {
+  color: #ff00ff;
+  text-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
+}
+```
+
+#### 11.4.3 Scanline Effect (Optional)
+
+```css
+.cyber-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  opacity: 0.3;
+}
+```
+
+### 11.5 Responsive Behavior
+
+| Breakpoint | Screen Size | Behavior |
+|------------|-------------|----------|
+| Desktop | ≥1220px | Full effects, glow, scanlines |
+| Tablet | 960-1219px | Reduced glow, no scanlines |
+| Mobile | <960px | Minimal effects for performance |
+
+### 11.6 Performance Considerations
+
+| Effect | Performance Impact | Fallback |
+|--------|-------------------|----------|
+| Neon glow | Low | Solid color |
+| Scanlines | Medium | Disable on mobile |
+| Text shadow | Low | Keep always |
+| Animation pulse | Low | Reduce frequency on mobile |
+
+### 11.7 Implementation Checklist
+
+- [ ] Add CSS custom properties for Cyberpunk colors
+- [ ] Implement terminal-style navigation index
+- [ ] Add neon glow effects for interactive elements
+- [ ] Implement scanline overlay (optional)
+- [ ] Update typography to HUD fonts
+- [ ] Test accessibility (contrast ratios)
+- [ ] Test performance on mobile devices
+- [ ] Create light mode variant (optional)
+
+### 11.8 Quality Metrics
+
+| Metric | Target |
+|--------|--------|
+| Cyberpunk feel | 4/5 stars |
+| Readability | 4/5 stars |
+| Performance | Lighthouse ≥85 |
+| Accessibility | WCAG AA (contrast ≥4.5:1) |
 
 ---
 

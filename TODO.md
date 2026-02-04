@@ -1,7 +1,7 @@
 # 📋 TODO - Claude Code Media Generator
 
-> **Last Updated:** 2026-02-04
-> **Version:** 3.2
+> **Last Updated:** 2026-02-05
+> **Version:** 3.3
 
 ---
 
@@ -156,6 +156,62 @@
 ---
 
 ## 🚧 In Progress
+
+### 🔄 GitHub Pages: Section Navigator Feature (2026-02-04) ✅ IMPLEMENTED
+
+> **Design:** [design/pages.design.md Section 10](design/pages.design.md#10-section-navigator-feature-v16---implemented)
+> **Changelog:** [changelog/pages.changelog.md](changelog/pages.changelog.md)
+
+**Status:** ✅ Section Navigator implemented in Right Sidebar
+
+#### Implementation Tasks
+- [x] Design Section Navigator (pages.design.md Section 10)
+- [x] Disable `toc.integrate` in mkdocs.yml
+- [x] Create `overrides/partials/toc.html`
+- [x] Add Section Navigator CSS to `extra.css`
+- [x] Fix toc.html redundant wrapper bug (v1.1 - 2026-02-05)
+- [ ] Add inline navigator component (for mobile fallback)
+- [ ] Test on Desktop (≥1220px)
+- [ ] Test on Tablet (960-1219px)
+- [ ] Test on Mobile (<960px)
+- [ ] Verify all navigation links work
+
+---
+
+### 🔄 GitHub Pages: Metro Cyberpunk Theme (2026-02-05) - NEW
+
+> **Design:** [design/pages.design.md Section 11](design/pages.design.md#11-metro-cyberpunk-theme-v18---planned)
+> **Changelog:** [changelog/pages.changelog.md](changelog/pages.changelog.md)
+> **Demo:** `demo-metro-cyberpunk-full.html`
+
+**Goal:** ปรับ theme ทั้งหน้าเว็บให้มีความ Metro Cyberpunk อย่างเต็มรูปแบบ
+
+**Design Direction:**
+- Option 2: Metro Cyberpunk (Balanced - ชัดเจนแต่อ่านง่าย)
+- Terminal-style index จาก Option 3: `[1] [2] [3]` และ `> NAVIGATE_`
+
+**Target Metrics:**
+| Metric | Target |
+|--------|--------|
+| Cyberpunk feel | 4/5 stars |
+| Readability | 4/5 stars |
+| Performance | Lighthouse ≥85 |
+| Accessibility | WCAG AA (contrast ≥4.5:1) |
+
+#### Implementation Tasks
+- [x] Research and select Cyberpunk style (Option 2: Metro Cyberpunk)
+- [x] Create demo files for preview (`demo-cyberpunk-styles.html`, `demo-metro-cyberpunk-full.html`)
+- [x] Design Metro Cyberpunk theme (pages.design.md Section 11)
+- [ ] Add CSS custom properties for Cyberpunk colors
+- [ ] Implement terminal-style navigation index `[1] [2] [3]`
+- [ ] Add neon glow effects for interactive elements
+- [ ] Implement scanline overlay (optional)
+- [ ] Update typography to HUD fonts (Share Tech Mono, Space Grotesk)
+- [ ] Test accessibility (contrast ratios)
+- [ ] Test performance on mobile devices
+- [ ] Create light mode variant (optional)
+
+---
 
 ### ✅ Completed: GitHub Wiki Documentation (2026-01-23)
 - [x] **GitHub Wiki** - Complete documentation site
