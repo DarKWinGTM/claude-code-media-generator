@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.9.4 - Full Metro Cyberpunk Font System
+   v1.9.5 - TOC Scroll-Spy Animation Fix
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -3902,50 +3902,56 @@ a, button, input, .md-nav__link, .md-tabs__link {
 }
 
 /* ===== Cyberpunk - TOC Scroll-Spy Animation ===== */
+/* v1.9.5 Fix: Added !important to override .md-nav--primary rules (line 266) */
 
 /* Base transition for all TOC links (both sidebars) */
 [data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link,
-[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__link {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  padding-left: 0.75rem;
-  border-left: 2px solid transparent;
+[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__link,
+[data-md-color-scheme="slate"] .md-nav--primary .toc-for-left-sidebar .md-nav__link {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  padding-left: 0.75rem !important;
+  border-left: 2px solid transparent !important;
 }
 
 /* Active TOC item with neon glow (both sidebars) */
 [data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link--active,
-[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__link--active {
+[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__link--active,
+[data-md-color-scheme="slate"] .md-nav--primary .toc-for-left-sidebar .md-nav__link--active {
   color: var(--neon-cyan, #00ffff) !important;
-  font-weight: 600;
-  border-left: 2px solid var(--neon-cyan, #00ffff);
-  text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
-  background: linear-gradient(90deg, rgba(0, 255, 255, 0.1) 0%, transparent 100%);
+  font-weight: 600 !important;
+  border-left: 2px solid var(--neon-cyan, #00ffff) !important;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.5) !important;
+  background: linear-gradient(90deg, rgba(0, 255, 255, 0.1) 0%, transparent 100%) !important;
 }
 
 /* Passed TOC items (scrolled past) */
 [data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link--passed,
-[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__link--passed {
-  color: var(--text-muted, #64748b);
-  border-left-color: rgba(0, 255, 255, 0.2);
+[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__link--passed,
+[data-md-color-scheme="slate"] .md-nav--primary .toc-for-left-sidebar .md-nav__link--passed {
+  color: var(--text-muted, #64748b) !important;
+  border-left-color: rgba(0, 255, 255, 0.2) !important;
 }
 
 /* Hover effect for TOC links (both sidebars) */
 [data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link:hover,
-[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__link:hover {
-  color: var(--neon-cyan, #00ffff);
-  border-left-color: rgba(0, 255, 255, 0.5);
-  background: linear-gradient(90deg, rgba(0, 255, 255, 0.05) 0%, transparent 100%);
+[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__link:hover,
+[data-md-color-scheme="slate"] .md-nav--primary .toc-for-left-sidebar .md-nav__link:hover {
+  color: var(--neon-cyan, #00ffff) !important;
+  border-left-color: rgba(0, 255, 255, 0.5) !important;
+  background: linear-gradient(90deg, rgba(0, 255, 255, 0.05) 0%, transparent 100%) !important;
 }
 
 /* Smooth scroll indicator animation (both sidebars) */
 [data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link--active::before,
-[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__link--active::before {
-  content: "›";
-  position: absolute;
-  left: -0.5rem;
-  color: var(--neon-cyan, #00ffff);
-  font-weight: bold;
-  animation: pulse-glow 1.5s ease-in-out infinite;
+[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__link--active::before,
+[data-md-color-scheme="slate"] .md-nav--primary .toc-for-left-sidebar .md-nav__link--active::before {
+  content: "›" !important;
+  position: absolute !important;
+  left: -0.5rem !important;
+  color: var(--neon-cyan, #00ffff) !important;
+  font-weight: bold !important;
+  animation: pulse-glow 1.5s ease-in-out infinite !important;
 }
 
 /* Pulse glow animation */
@@ -3962,12 +3968,13 @@ a, button, input, .md-nav__link, .md-tabs__link {
 
 /* TOC Title styling (both sidebars) */
 [data-md-color-scheme="slate"] .md-nav--secondary .md-nav__title,
-[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__title {
-  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace);
-  color: var(--neon-magenta, #ff00ff);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.7rem;
+[data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__title,
+[data-md-color-scheme="slate"] .md-nav--primary .toc-for-left-sidebar .md-nav__title {
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace) !important;
+  color: var(--neon-magenta, #ff00ff) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  font-size: 0.7rem !important;
 }
 
 /* ===== End Metro Cyberpunk Theme ===== */
