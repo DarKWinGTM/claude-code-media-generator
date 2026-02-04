@@ -1,12 +1,63 @@
 # Changelog - GitHub Pages Design
 
 > **Parent Document:** [pages.design.md](../design/pages.design.md)
-> **Current Version:** 2.2
+> **Current Version:** 2.3
 > **Session:** (current session)
 
 ---
 
 ## Version History
+
+### Version 2.3 (2026-02-05)
+
+**extra.css v1.9.4: Full Metro Cyberpunk Font System**
+
+**Session:** (current session)
+
+#### Changes
+
+- **Complete Font Overhaul to Match Demo**
+  - **Body Text**: Changed from Plus Jakarta Sans → DM Sans
+  - **Headings (H1-H6)**: Changed from Plus Jakarta Sans → Space Grotesk
+  - **Header Logo**: Share Tech Mono + `// ` prefix + neon cyan glow
+  - **Navigation Tabs**: Fira Code mono font
+  - **Sidebar Headers**: Space Grotesk + uppercase + letter-spacing
+  - **Section Navigator Title**: Share Tech Mono + `> ` prefix + neon cyan
+  - **TOC Title**: Share Tech Mono HUD style + border
+  - **Table Headers**: Share Tech Mono + uppercase + neon cyan
+  - **Code Blocks**: Fira Code + `> TERMINAL` header
+  - **Inline Code**: Neon cyan styling with border
+  - **Buttons**: Fira Code mono + uppercase
+  - **Search**: Fira Code mono font
+  - **Admonition Titles**: Space Grotesk
+  - **H2 Color**: Neon cyan with glow
+
+- **Font Analysis Comparison**:
+
+| Element | Before (v1.9.3) | After (v1.9.4) | Demo Reference |
+|---------|-----------------|----------------|----------------|
+| Body | Plus Jakarta Sans | DM Sans | ✅ Match |
+| Headings | Plus Jakarta Sans | Space Grotesk | ✅ Match |
+| Logo | Default | Share Tech Mono | ✅ Match |
+| Nav Tabs | Default | Fira Code | ✅ Match |
+| Section Title | Default | Share Tech Mono | ✅ Match |
+| TOC Title | Partial | Share Tech Mono | ✅ Match |
+| Table Headers | Default | Share Tech Mono | ✅ Match |
+| Code | JetBrains Mono | Fira Code | ✅ Match |
+
+#### Files Modified
+
+| File | Changes |
+|------|---------|
+| `pages/docs/stylesheets/extra.css` | v1.9.4: Full Metro Cyberpunk Font System (+177 lines, 4150 total) |
+| `design/pages.design.md` | Updated typography section |
+| `changelog/pages.changelog.md` | This entry |
+
+#### Summary
+
+Complete typography overhaul to match demo-metro-cyberpunk-full.html. All fonts now use correct Cyberpunk font families: Space Grotesk for headings, DM Sans for body, Share Tech Mono for HUD elements, Fira Code for code.
+
+---
 
 ### Version 2.2 (2026-02-05)
 

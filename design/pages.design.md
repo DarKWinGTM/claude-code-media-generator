@@ -3,7 +3,7 @@
 ## 0) Document Control
 
 > **Parent Scope:** Claude Code Media Generator Project
-> **Current Version:** 2.0
+> **Current Version:** 2.1
 > **Session:** (current session) (2026-02-05)
 
 ---
@@ -76,7 +76,27 @@ All 25 issues from MCP analysis have been resolved in Phases 1-4.
 | **Hero Background** | #0d0d14 | Hero section bg |
 | **Card Border** | rgba(129, 140, 248, 0.2) | Card borders |
 
-### 3.2 Typography (Updated v1.1)
+### 3.2 Typography (Updated v2.1 - Metro Cyberpunk)
+
+**Dark Mode (Cyberpunk Theme)**:
+
+| Element | Font | Size | Weight | Notes |
+|---------|------|------|--------|-------|
+| **H1** | Space Grotesk | 3rem | 800 | + Blinking `_` cursor |
+| **H2** | Space Grotesk | 2rem | 700 | `## ` prefix, Neon Cyan |
+| **H3** | Space Grotesk | 1.5rem | 600 | `### ` prefix |
+| **H4-H6** | Space Grotesk | 1.25-1rem | 600 | Standard |
+| **Body** | DM Sans | 1rem | 400 | Line-height 1.625 |
+| **Code** | Fira Code | 0.875rem | 400 | `> TERMINAL` header |
+| **Logo** | Share Tech Mono | 1rem | 400 | `// ` prefix, Neon Cyan |
+| **Nav Tabs** | Fira Code | 0.8rem | 500 | Mono style |
+| **Sidebar Headers** | Space Grotesk | 0.72rem | 700 | Uppercase |
+| **Section Title** | Share Tech Mono | 0.65rem | 700 | `> ` prefix, HUD style |
+| **TOC Title** | Share Tech Mono | 0.6rem | 400 | Uppercase, border |
+| **Table Headers** | Share Tech Mono | 0.75rem | 400 | Uppercase, Neon Cyan |
+| **Buttons** | Fira Code | 0.85rem | 500 | Uppercase |
+
+**Light Mode** (Fallback - Uses Plus Jakarta Sans):
 
 | Element | Font | Size | Weight | Line Height |
 |---------|------|------|--------|-------------|

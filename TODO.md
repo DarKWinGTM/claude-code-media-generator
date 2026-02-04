@@ -1,7 +1,7 @@
 # 📋 TODO - Claude Code Media Generator
 
 > **Last Updated:** 2026-02-05
-> **Version:** 3.5
+> **Version:** 3.6
 
 ---
 
@@ -191,7 +191,7 @@
 > **Design:** [design/pages.design.md Section 11](design/pages.design.md#11-metro-cyberpunk-theme-v18---planned)
 > **Changelog:** [changelog/pages.changelog.md](changelog/pages.changelog.md)
 > **Demo:** `demo-metro-cyberpunk-full.html`
-> **CSS Version:** extra.css v1.9.0
+> **CSS Version:** extra.css v1.9.4
 
 **Goal:** ปรับ theme ทั้งหน้าเว็บให้มีความ Metro Cyberpunk อย่างเต็มรูปแบบ ✅
 
@@ -199,22 +199,25 @@
 - Option 2: Metro Cyberpunk (Balanced - ชัดเจนแต่อ่านง่าย)
 - Terminal-style index จาก Option 3: `[1] [2] [3]` และ `> NAVIGATE_`
 
-**Implemented Features (extra.css v1.9.0):**
-- Neon color palette (Cyan, Magenta, Green, Blue, Purple, Pink)
-- HUD fonts (Share Tech Mono, Space Grotesk, DM Sans, Fira Code)
-- Terminal-style Section Navigator with `> ` prefix
-- Neon glow hover effects
-- Grid background pattern with radial glow
-- Terminal header for code blocks (`$ TERMINAL_`)
-- Glass-style cards with neon borders
-- Custom neon scrollbar
-- Subtle scanlines overlay
+**Implemented Features (extra.css v1.9.4):**
+- ✅ Neon color palette (Cyan, Magenta, Green, Blue, Purple, Pink)
+- ✅ HUD fonts (Share Tech Mono, Space Grotesk, DM Sans, Fira Code)
+- ✅ Terminal-style Section Navigator with `> ` prefix
+- ✅ Neon glow hover effects
+- ✅ Grid background pattern with radial glow
+- ✅ Terminal header for code blocks (`> TERMINAL`)
+- ✅ Glass-style cards with neon borders
+- ✅ Custom neon scrollbar
+- ✅ Subtle scanlines overlay
+- ✅ **v1.9.2**: Full Cyberpunk features (H1 cursor, H2/H3 prefixes, transforms)
+- ✅ **v1.9.3**: TOC scroll-spy animation for left sidebar
+- ✅ **v1.9.4**: Full font system matching demo (all fonts corrected)
 
 **Target Metrics:**
 | Metric | Target |
 |--------|--------|
-| Cyberpunk feel | 4/5 stars |
-| Readability | 4/5 stars |
+| Cyberpunk feel | 5/5 stars ✅ |
+| Readability | 4/5 stars ✅ |
 | Performance | Lighthouse ≥85 |
 | Accessibility | WCAG AA (contrast ≥4.5:1) |
 
@@ -226,7 +229,10 @@
 - [x] Implement terminal-style navigation with `> ` prefix (v1.9.0)
 - [x] Add neon glow effects for interactive elements (v1.9.0)
 - [x] Implement scanline overlay (optional) (v1.9.0)
-- [x] Update typography to HUD fonts (Share Tech Mono, Space Grotesk) (v1.9.0)
+- [x] Update typography to HUD fonts (Share Tech Mono, Space Grotesk) (v1.9.4)
+- [x] Add full Cyberpunk features from demo (v1.9.2)
+- [x] Fix TOC scroll-spy animation (v1.9.3)
+- [x] Complete font system overhaul to match demo (v1.9.4)
 - [ ] Test accessibility (contrast ratios)
 - [ ] Test performance on mobile devices
 - [ ] Create light mode variant (optional)
