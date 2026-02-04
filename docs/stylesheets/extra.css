@@ -3930,7 +3930,6 @@ a, button, input, .md-nav__link, .md-tabs__link {
   position: absolute;
   width: 20px;
   height: 20px;
-  border: 1px solid var(--neon-cyan, #00ffff);
   opacity: 0.4;
   pointer-events: none;
 }
