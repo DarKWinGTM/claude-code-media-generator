@@ -1,11 +1,12 @@
 <!--
   Section Navigator + Table of Contents Template
-  Version: 1.4
+  Version: 1.5
   Design: pages.design.md Section 10
   Fix v1.1: Removed redundant md-sidebar__scrollwrap wrapper
   Fix v1.2: CSS hides Section Navigator in primary sidebar
   Fix v1.3: TOC moved to left sidebar via CSS, Sections stays in right sidebar
   Fix v1.4: Added CLI Reference sub-items (video_gen.py, image_gen.py, check_api.py)
+  Fix v1.5: Removed CLI Reference sub-items per user request - simple link only
 -->
 
 {% if page.toc %}
@@ -31,28 +32,11 @@
         <span>Image Generation</span>
       </a>
     </li>
-    <li class="section-navigator__item--has-children">
-      <span class="section-navigator__parent">
+    <li>
+      <a href="{{ config.site_url }}cli/video_gen/">
         <span class="section-navigator__icon">💻</span>
         <span>CLI Reference</span>
-      </span>
-      <ul class="section-navigator__sublist">
-        <li>
-          <a href="{{ config.site_url }}cli/video_gen/">
-            <span>video_gen.py</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ config.site_url }}cli/image_gen/">
-            <span>image_gen.py</span>
-          </a>
-        </li>
-        <li>
-          <a href="{{ config.site_url }}cli/check_api/">
-            <span>check_api.py</span>
-          </a>
-        </li>
-      </ul>
+      </a>
     </li>
     <li>
       <a href="{{ config.site_url }}guides/skill-installation/">
