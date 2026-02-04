@@ -1,12 +1,78 @@
 # Changelog - GitHub Pages Design
 
 > **Parent Document:** [pages.design.md](../design/pages.design.md)
-> **Current Version:** 2.3
+> **Current Version:** 2.4
 > **Session:** (current session)
 
 ---
 
 ## Version History
+
+### Version 2.4 (2026-02-05)
+
+**extra.css v1.9.5: TOC Scroll-Spy Animation Fix**
+
+**Session:** (current session)
+
+#### Problem Analysis
+
+- User reported TOC scroll-spy animation not working
+- Classes `md-nav__link--active` and `md-nav__link--passed` were being applied by JavaScript
+- CSS visual effects (border-left, text-shadow, background gradient) not visible
+
+#### Root Cause
+
+- CSS rule at line 266 was overriding TOC styles:
+  ```css
+  .md-nav--primary .md-nav__item .md-nav__item .md-nav__link {
+    border-left: none !important;
+  }
+  ```
+- TOC is nested inside `.md-nav--primary` structure (left sidebar)
+- Our TOC CSS lacked `!important` declarations and didn't target the nested path
+
+#### Fix Applied
+
+1. **Added new selector path** targeting `.md-nav--primary .toc-for-left-sidebar`
+2. **Added `!important`** to all TOC scroll-spy properties:
+   - `transition`, `position`, `padding-left`, `border-left`
+   - `color`, `font-weight`, `text-shadow`, `background`
+   - `::before` pseudo-element properties
+
+#### CSS Selectors Updated
+
+```css
+/* Base transition - added .md-nav--primary path + !important */
+[data-md-color-scheme="slate"] .md-nav--primary .toc-for-left-sidebar .md-nav__link
+
+/* Active state - added .md-nav--primary path + !important */
+[data-md-color-scheme="slate"] .md-nav--primary .toc-for-left-sidebar .md-nav__link--active
+
+/* Passed state - added .md-nav--primary path + !important */
+[data-md-color-scheme="slate"] .md-nav--primary .toc-for-left-sidebar .md-nav__link--passed
+
+/* Hover - added .md-nav--primary path + !important */
+[data-md-color-scheme="slate"] .md-nav--primary .toc-for-left-sidebar .md-nav__link:hover
+
+/* ::before animation - added .md-nav--primary path + !important */
+[data-md-color-scheme="slate"] .md-nav--primary .toc-for-left-sidebar .md-nav__link--active::before
+
+/* Title - added .md-nav--primary path + !important */
+[data-md-color-scheme="slate"] .md-nav--primary .toc-for-left-sidebar .md-nav__title
+```
+
+#### Files Modified
+
+| File | Changes |
+|------|---------|
+| `pages/docs/stylesheets/extra.css` | v1.9.5: TOC Scroll-Spy Fix - Added !important and .md-nav--primary selectors |
+| `changelog/pages.changelog.md` | This entry |
+
+#### Summary
+
+Fixed TOC scroll-spy animation by adding proper CSS specificity with `!important` declarations and targeting the `.md-nav--primary .toc-for-left-sidebar` path to override conflicting rules.
+
+---
 
 ### Version 2.3 (2026-02-05)
 
