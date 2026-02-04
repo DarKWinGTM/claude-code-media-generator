@@ -3225,17 +3225,42 @@ a, button, input, .md-nav__link, .md-tabs__link {
   border-bottom: 1px solid rgba(129, 140, 248, 0.2);
 }
 
-/* ===== CRITICAL FIX: Hide Section Navigator in Primary (Left) Sidebar ===== */
-/* MkDocs Material renders toc.html in BOTH sidebars for mobile TOC dropdown */
-/* We only want Section Navigator to show in Secondary (Right) Sidebar */
+/* ===== SIDEBAR LAYOUT FIX v1.3 ===== */
+/* Goal: TOC in LEFT sidebar, Sections in RIGHT sidebar */
+
+/* Hide Section Navigator in Primary (Left) Sidebar */
 .md-sidebar--primary .section-navigator,
 .md-sidebar--primary .section-navigator-sidebar {
   display: none !important;
 }
 
-/* Ensure it shows only in Secondary (Right) Sidebar - Desktop */
+/* Show Section Navigator in Secondary (Right) Sidebar */
 .md-sidebar--secondary .section-navigator-sidebar {
   display: block;
+}
+
+/* Hide TOC in Secondary (Right) Sidebar - only show Sections there */
+.md-sidebar--secondary .toc-for-left-sidebar {
+  display: none !important;
+}
+
+/* Show TOC in Primary (Left) Sidebar */
+.md-sidebar--primary .toc-for-left-sidebar {
+  display: block !important;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(129, 140, 248, 0.15);
+}
+
+/* Style TOC in left sidebar */
+.md-sidebar--primary .toc-for-left-sidebar .md-nav__title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted, #94a3b8);
+  padding: 0 0.6rem;
+  margin-bottom: 0.5rem;
 }
 
 .section-navigator__title {
