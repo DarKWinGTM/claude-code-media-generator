@@ -4566,9 +4566,27 @@ a, button, input, .md-nav__link, .md-tabs__link {
   background: rgba(99, 102, 241, 0.08) !important;
 }
 
-/* ===== FIX 10: TOC Nested Navigation Visibility Override (v1.9.10) ===== */
+/* ===== FIX 10: TOC Nested Navigation Visibility Override (v1.9.11) ===== */
 /* Override Material theme's visibility: collapse for TOC in left sidebar */
 /* This fixes the issue where nested TOC items are hidden by default */
+
+/* BRUTE FORCE: Override the EXACT Material theme selector globally */
+/* This must match or exceed Material's selector: .md-nav__toggle~.md-nav */
+.md-nav__toggle ~ .md-nav {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* More specific overrides for left sidebar TOC */
+.md-sidebar--primary .md-nav__toggle ~ .md-nav,
+.md-sidebar--primary .toc-for-left-sidebar .md-nav__toggle ~ .md-nav {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  grid-template-rows: none !important;
+  height: auto !important;
+  transition: none !important;
+}
 
 /* CRITICAL: Override the exact Material theme selector */
 /* Original: .md-nav__toggle~.md-nav { visibility: collapse; opacity: 0; } */
