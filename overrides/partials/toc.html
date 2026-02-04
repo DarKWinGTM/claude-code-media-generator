@@ -1,8 +1,10 @@
 <!--
   Section Navigator + Table of Contents Template
-  Version: 1.1
+  Version: 1.2
   Design: pages.design.md Section 10
-  Fix: Removed redundant md-sidebar__scrollwrap wrapper (MkDocs provides this)
+  Fix v1.1: Removed redundant md-sidebar__scrollwrap wrapper (MkDocs provides this)
+  Fix v1.2: CSS hides Section Navigator in primary sidebar (only shows in secondary/right)
+            Fixed TOC title translation issue
 -->
 
 {% if page.toc %}
@@ -47,7 +49,7 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   <label class="md-nav__title" for="__toc">
     <span class="md-nav__icon md-icon"></span>
-    {{ lang.t("toc.title") }}
+    Table of contents
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
     {% for toc_item in page.toc %}
