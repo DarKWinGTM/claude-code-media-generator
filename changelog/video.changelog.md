@@ -1,8 +1,336 @@
 # 📜 Changelog - Video Generation Design Document
 
 > **Parent Document:** [video.design.md](../design/video.design.md)
-> **Current Version:** 2.25
-> **Previous:** 2.24.1
+> **Current Version:** 2.30
+> **Previous:** 2.29
+
+---
+
+## Version 2.30: Audio Documentation Fix
+
+**Date:** 2026-02-03
+**Session:** (current session)
+**Status:** ✅ Implemented
+
+### Overview
+
+Fixed incorrect `generateAudio` parameter documentation. Audio is a model-level feature, not an API parameter.
+
+### Key Changes
+
+1. **Removed `generateAudio` parameter from examples**
+   - Line 180, 212, 227: Removed from curl examples
+   - Added note: "Audio is automatic for Veo 3.x models"
+
+2. **Updated Model Features table**
+   - Changed "generateAudio" to "native audio" for Veo 3.0
+
+3. **Updated API Parameters Reference**
+   - Removed `generateAudio` from parameters table
+   - Added note: "Audio controlled via prompt, not API parameter"
+
+4. **Audio Behavior Clarification**
+   - Veo 3.1/3.0: Audio always generated (cannot disable)
+   - Veo 2.0: Silent only (no audio capability)
+   - Control audio content through prompt engineering
+
+### Files Modified
+
+- `design/video.design.md` - Updated to v2.27.2
+
+---
+
+## Version 2.29: Smart Skill System v2.1 (English + Enhanced Discovery)
+
+**Date:** 2026-02-03
+**Session:** (current session)
+**Status:** ✅ Implemented
+
+### Overview
+
+Enhanced Smart Skill v2.1 with complete English conversion and new discovery questions for quality settings and attachment flows.
+
+### Key Changes
+
+1. **Complete English Conversion**
+   - Converted all Thai text to English
+   - All examples, questions, and documentation now in English only
+   - Maintains international accessibility
+
+2. **New Discovery Questions (v2.1)**
+   - Question 5: Quality Settings (Quick Draft/Standard/High Quality/Custom)
+   - Question 5.1: Custom Duration (conditional, 5-8 seconds)
+   - Question 5.2: Custom Resolution (conditional, 720p/1080p)
+
+3. **New Attachment Flows (v2.1)**
+   - Image Attachment Flow: For Image-to-Video and Reference Image modes
+   - Video Source Flow: For Video Extension mode
+   - Includes file search, selection, and verification steps
+
+4. **Enhanced CLI Reference**
+   - Complete arguments table organized by category
+   - 8 video generation modes reference
+   - Presets quick reference with cost estimates
+
+### Files Modified
+
+- `.claude/skills/generate-video/SKILL.md` - Rewritten in English (527 lines)
+- `design/skill.design.md` - Updated to v2.1
+
+---
+
+## Version 2.28: Smart Skill System v2.0
+
+**Date:** 2026-02-03
+**Session:** (current session)
+**Status:** ✅ Implemented
+
+### Overview
+
+Complete redesign of `/generate-video` skill as Smart Skill with intelligent prompt assistance.
+
+### Key Features
+
+1. **6-Phase Standard Workflow**
+   - Phase 0: Trigger Detection
+   - Phase 1: Requirement Discovery (via AskUserQuestion)
+   - Phase 2: Prompt Engineering (templates + enhancement)
+   - Phase 3: Pre-flight Checks (API, config, resources)
+   - Phase 4: Preview & Confirm (cost estimate)
+   - Phase 5: Execute & Report
+
+2. **Requirement Discovery System**
+   - Question 1: Purpose/Use Case (Social/YouTube/Product/Creative)
+   - Question 2: Content Type (People/Product/Nature/Abstract)
+   - Question 3: Style/Mood (Cinematic/Minimalist/Vibrant/Dark)
+   - Question 4: Generation Mode (Text/Image/Extension/Reference)
+
+3. **Prompt Engineering Templates**
+   - Template: [Subject] + [Action] + [Setting] + [Style] + [Camera] + [Lighting]
+   - Enhancement rules for each element
+   - Negative prompt suggestions by content type
+
+4. **Complete CLI Arguments Reference**
+   - All arguments from video_gen.py v2.27
+   - Organized by category (Generation, Input, Output, Auth, Debug)
+   - 8 video modes reference table
+
+5. **Example Interactions**
+   - Vague Request → Full Discovery flow
+   - Detailed Request → Skip Discovery flow
+   - Video Extension flow
+
+### Files Modified
+
+- `.claude/skills/generate-video/SKILL.md` - Completely rewritten (426 lines)
+- `design/skill.design.md` - Updated to v2.0 (implementation completed)
+
+---
+
+## Version 2.27.1: Interactive Skill with Pre-flight Checks
+
+**Date:** 2026-02-03
+**Session:** (current session)
+**Status:** ✅ Implemented
+
+### Overview
+
+Enhanced `/generate-video` skill with interactive pre-flight checks using AskUserQuestion tool.
+
+### Key Features
+
+1. **Interactive API Key Setup** - AskUserQuestion prompts if GOOGLE_API_KEY not set
+   - Option to provide key directly
+   - Guidance to create key at aistudio.google.com
+   - Option to use --api-key flag
+
+2. **API Endpoint Selection** - First-time setup asks Gemini vs Vertex AI
+
+3. **Config.json Creation** - Optional settings persistence
+
+4. **Video Extension Checks** - Verifies source video location for extend mode
+
+### Files Modified
+
+- `.claude/skills/generate-video/SKILL.md` - Added interactive pre-flight checks (194 lines)
+
+### Interactive Flow Example
+
+```
+/generate-video "A cat playing"
+  ↓
+Check API Key → Not found
+  ↓
+AskUserQuestion: "What is your Google API Key?"
+  ↓
+User provides key
+  ↓
+Export GOOGLE_API_KEY
+  ↓
+Execute: python video_gen.py "A cat playing"
+```
+
+---
+
+## Version 2.27: Phase 3 Claude Code Skills
+
+**Date:** 2026-02-02
+**Session:** (current session)
+**Status:** ✅ Implemented
+
+### Overview
+
+Phase 3 adds Claude Code Skills for `/generate-video` and `/generate-image` commands.
+
+### Key Features
+
+1. **`/generate-video` skill** - Generate videos via slash command
+   - YAML frontmatter with allowed-tools pre-approval
+   - Full documentation of 8 generation modes
+   - Preset reference table
+   - Cost estimation info
+
+2. **`/generate-image` skill** - Generate images via slash command
+   - YAML frontmatter with allowed-tools pre-approval
+   - Aspect ratio and image size reference
+   - Cost estimation info
+
+### Files Created
+
+- `.claude/skills/generate-video/SKILL.md` (86 lines)
+- `.claude/skills/generate-image/SKILL.md` (82 lines)
+
+### Usage
+
+```bash
+# In Claude Code CLI
+/generate-video "A cat playing with a ball" --preset quality
+/generate-image "A futuristic city" --aspect-ratio 16:9
+```
+
+---
+
+## Version 2.26: Phase 2.8.4 User Experience - Show Defaults Flag
+
+**Date:** 2026-02-02
+**Session:** (current session)
+**Status:** ✅ Implemented
+
+### Overview
+
+Phase 2.8.4 adds `--show-defaults` flag for improved user experience - lets users preview effective settings before generating.
+
+### Key Features
+
+1. **`--show-defaults` flag** - Show current defaults and exit without generating
+   - Displays video settings (model, duration, resolution, aspect_ratio)
+   - Shows project & auth settings
+   - Shows storage configuration
+   - Shows extend mode metadata inheritance (if applicable)
+   - Displays priority chain for reference
+
+2. **`show_defaults()` function** - Pretty-printed display of all current settings
+
+### Example Output
+
+```bash
+python video_gen.py --show-defaults
+
+# Output:
+# 📹 Video Settings:
+#    Model:        veo-3.1-generate-preview
+#    Duration:     5 seconds
+#    Resolution:   720p
+#    Aspect Ratio: 16:9
+#
+# 🔐 Project & Auth:
+#    Project:      (auto-detect)
+#    Location:     us-central1
+#    API Key:      (from env/config)
+#
+# 📋 Priority Chain:
+#    1. CLI args         (highest)
+#    2. Source metadata  (extend mode)
+#    3. config.json
+#    4. Environment vars
+#    5. Code defaults    (lowest)
+```
+
+### Files Modified
+
+- `video_gen.py` - Added `--show-defaults` argument and `show_defaults()` function
+- `pages/docs/cli/video_gen.md` - Added to Debug options table
+
+### Use Cases
+
+- Preview settings before expensive generation
+- Debug config resolution issues
+- Verify metadata inheritance for extend mode
+- Check effective model/resolution after config merging
+
+---
+
+## Version 2.25.1: Phase 2.8.3 Smart Defaults Implementation
+
+**Date:** 2026-02-01
+**Session:** (current session)
+**Status:** ✅ Implemented
+
+### Overview
+
+Phase 2.8.3 Smart Defaults Implementation ใน video_gen.py - ทำให้ metadata inheritance ใช้งานได้จริง
+
+### Key Features
+
+1. **`load_source_metadata(video_path)`** - โหลด metadata จาก source video สำหรับ inheritance
+   - Extract timestamp จากชื่อไฟล์ video (video_YYYYMMDD_HHMMSS_*.mp4)
+   - หา matching `metadata_YYYYMMDD_HHMMSS.json` ใน directory เดียวกัน
+   - Return `command_args` section สำหรับ inheritance
+
+2. **Updated `build_metadata()`** - เพิ่ม fields ใหม่:
+   - `project_id` - GCP project ID
+   - `storage_uri` - GCS bucket URI
+   - `location` - GCP region
+
+3. **Updated `apply_config_defaults()`** - Priority chain เต็มรูปแบบ:
+   - CLI > Source Metadata > config.json > Code Defaults
+   - แสดง inheritance messages ให้ user รู้ว่าค่าไหนมาจากไหน
+
+### Inheritable Fields
+
+| Field | Inheritance Behavior |
+|-------|---------------------|
+| model | Inherits if CLI at default |
+| resolution | Inherits if CLI at default |
+| aspect_ratio | Inherits if CLI at default |
+| storage_uri | Inherits if not set via CLI |
+| location | Inherits if CLI at default |
+| project_id | Used in resolve_project() |
+
+### User Experience
+
+```bash
+# Example: Extending video inherits settings from source
+python video_gen.py "Continue the scene" --extend-video video_20260201_123456_0.mp4
+
+# Output:
+# ℹ Found source metadata for inheritance
+# ℹ Inherited project from source metadata: my-project-1
+# ℹ Inherited model from metadata: veo-2.0
+# ℹ Inherited resolution from metadata: 1080p
+```
+
+> **Note:** Video extension is supported by `veo-2.0`, `veo-2.0-exp`, and `veo-3.1-generate-preview`.
+
+### Files Changed
+
+- `video_gen.py`: Added load_source_metadata(), updated build_metadata(), apply_config_defaults()
+- `design/config.design.md`: Updated to v1.5
+- `changelog/changelog.md`: Documented v4.3
+
+### Summary
+
+Implemented Smart Defaults System for video extension - metadata inheritance now works with full priority chain.
 
 ---
 
@@ -532,6 +860,18 @@ Initial extraction of video generation design
 
 | Version | Date | Changes | Session ID |
 |---------|------|---------|------------|
+| 2.29 | 2026-02-03 | **[Smart Skill v2.1 (English)](#version-229-smart-skill-system-v21-english--enhanced-discovery)** | (current) |
+| | | Summary: English conversion + Quality Settings + Attachment Flows | |
+| 2.28 | 2026-02-03 | **[Smart Skill System v2.0](#version-228-smart-skill-system-v20)** | (current) |
+| | | Summary: 6-Phase workflow, Requirement Discovery, Prompt Engineering | |
+| 2.27.1 | 2026-02-03 | **[Interactive Skill Pre-flight](#version-2271-interactive-skill-with-pre-flight-checks)** | (current) |
+| | | Summary: AskUserQuestion for API key setup | |
+| 2.27 | 2026-02-02 | **[Phase 3 Claude Code Skills](#version-227-phase-3-claude-code-skills)** | (current) |
+| | | Summary: /generate-video and /generate-image skills | |
+| 2.26 | 2026-02-02 | **[Show Defaults Flag](#version-226-phase-284-user-experience---show-defaults-flag)** | (current) |
+| | | Summary: --show-defaults for previewing effective settings | |
+| 2.25.1 | 2026-02-01 | **[Smart Defaults](#version-2251-phase-283-smart-defaults-implementation)** | (current) |
+| | | Summary: Metadata inheritance for video extension | |
 | 2.25 | 2026-01-23 | **[External URLs & FPS Requirements](#version-225-external-urls--fps-requirements-documentation)** | Testing |
 | | | Summary: Documented API limitations, proposed --extend-video-from-url feature | |
 | 2.24.1 | 2026-01-23 | **[No Mixed Types Fix](#version-2241-api-limitation-fix---no-mixed-types)** | 982d8499... |

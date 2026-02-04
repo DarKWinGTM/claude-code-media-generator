@@ -1,7 +1,7 @@
 # 🖼️ Image Generation Design Document
 
-## Version: 1.5
-## Date: 2026-01-22
+## Version: 1.9
+## Date: 2026-02-04
 ## Parent Document: [design.md](./design.md)
 
 ---
@@ -341,37 +341,35 @@ def calculate_image_cost(model: str, count: int = 1) -> dict:
 
 ## 11. Planned Features
 
-### 11.1 Template System (Planned)
+### 11.1 Multi-Tool Workflows (via Skill Orchestration)
 
-> **Status:** 🔲 Planned
-> **Added:** 2026-01-22
+> **Status:** ✅ Available (via Smart Skill)
+> **Updated:** 2026-02-04
 
-Support for pre-defined image templates for common use cases:
+**Design Decision:** Template features like `closing-frame` are NOT implemented as CLI flags.
+Instead, Smart Skill orchestrates multi-tool workflows:
 
-| Template | Description | Use Case |
-|----------|-------------|----------|
-| `closing-frame` | Video closing frame with avatars | Video credits, end cards |
-| `thumbnail` | YouTube/Social media thumbnails | Video thumbnails |
+**Example: Video Closing Credits Workflow**
 
-**Planned CLI Usage:**
-```bash
-# Generate closing frame for video
-python image_gen.py "Video credits with 2 hosts" \
-  --template closing-frame \
-  --avatars avatar1.jpg avatar2.jpg \
-  --names "Host 1" "Host 2" \
-  -o closing.png
-
-# Then use with video_gen.py
-python video_gen.py "Transition to credits" \
-  --extend-video main.mp4 \
-  --last-frame closing.png
+```
+User Request: "Create closing credits for my video"
+  ↓
+Skill Phase 1: Generate closing frame image
+  → python image_gen.py "Video credits frame with host avatars" \
+      --image avatar1.jpg avatar2.jpg \
+      -o closing.png
+  ↓
+Skill Phase 2: Extend video with closing frame
+  → python video_gen.py "Fade transition to credits" \
+      --extend-video main.mp4 \
+      --last-frame closing.png
 ```
 
-**Implementation Notes:**
-- Templates use AI-powered generation (Gemini/Imagen) with structured prompts
-- Avatars/names passed as additional parameters to guide generation
-- Replaces standalone `create_last_frame.py` (deleted - was redundant)
+**Benefits:**
+- No code changes needed in image_gen.py or video_gen.py
+- Flexible workflows managed by Smart Skill
+- Same capabilities, simpler implementation
+- Reference: [generate-video SKILL.md](../.claude/skills/generate-video/SKILL.md)
 
 ---
 

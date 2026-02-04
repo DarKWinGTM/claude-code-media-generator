@@ -1,7 +1,7 @@
 # 🎬 Video Generation Design Document
 
-## Version: 2.25
-## Date: 2026-01-24
+## Version: 2.27.2
+## Date: 2026-02-03
 ## Parent Document: [design.md](./design.md)
 
 ---
@@ -177,9 +177,11 @@ curl -X POST \
   -H "Content-Type: application/json" \
   -d '{
     "instances": [{"prompt": "A cat walking in a garden"}],
-    "parameters": {"aspectRatio": "16:9", "durationSeconds": 8, "generateAudio": true}
+    "parameters": {"aspectRatio": "16:9", "durationSeconds": 8}
   }'
 ```
+
+> **Note:** Audio is automatic for Veo 3.x models - no `generateAudio` parameter needed.
 
 ### 3.3 ⚠️ Vertex AI Authentication Options
 
@@ -209,7 +211,7 @@ curl -X POST \
   -H "Content-Type: application/json" \
   -d '{
     "instances": [{"prompt": "A cat walking in a garden"}],
-    "parameters": {"aspectRatio": "16:9", "durationSeconds": 8, "generateAudio": true}
+    "parameters": {"aspectRatio": "16:9", "durationSeconds": 8}
   }'
 ```
 
@@ -224,7 +226,7 @@ curl -X POST \
   -H "Content-Type: application/json" \
   -d '{
     "instances": [{"prompt": "A cat walking in a garden"}],
-    "parameters": {"aspectRatio": "16:9", "durationSeconds": 8, "generateAudio": true}
+    "parameters": {"aspectRatio": "16:9", "durationSeconds": 8}
   }'
 
 # ⚠️ NOTE: This same key will NOT work for List Models, generateContent, etc.
@@ -520,7 +522,7 @@ Service Account:
 | `veo-2.0-generate-exp` | 2.0 | 🧪 Experimental | enhancePrompt, referenceImages |
 | `veo-2.0-generate-preview` | 2.0 | 🔬 Preview | mask (inpainting/outpainting) |
 | **Veo 3.0** ||||
-| `veo-3.0-generate-001` | 3.0 | ✅ Stable | Production-ready, generateAudio |
+| `veo-3.0-generate-001` | 3.0 | ✅ Stable | Production-ready, native audio |
 | `veo-3.0-fast-generate-001` | 3.0 | ✅ Stable | Faster generation |
 | `veo-3.0-generate-preview` | 3.0 | 🔬 Preview | Preview features |
 | `veo-3.0-fast-generate-preview` | 3.0 | 🔬 Preview | Faster preview |
@@ -2247,13 +2249,13 @@ python video_gen.py "Smooth transition" --image start.jpg --last-frame end.jpg -
 | `sampleCount` | int | 1-4 | Number of video files to generate (RESPONSE_COUNT) |
 | `durationSeconds` | int | 4-8 | Video duration in seconds |
 | `aspectRatio` | string | `16:9`, `9:16`, `1:1` | Video aspect ratio |
-| `generateAudio` | bool | true/false | Enable audio generation (Veo 3.x only) |
 | `storageUri` | string | `gs://...` | GCS output path (optional) |
 | `negativePrompt` | string | text | What to avoid in generation |
 | `resizeMode` | string | `pad`, `fit` | How to resize input images |
 | `editMode` | string | `insert`, `remove` | For mask-based editing |
 
 > **Note:** `sampleCount` จะสร้าง video หลายไฟล์จาก prompt เดียวกัน (1-4 videos)
+> **Note:** Audio is automatic for Veo 3.x models - controlled via prompt, not API parameter.
 
 ---
 
@@ -2375,13 +2377,16 @@ Requires: GCP project with billing enabled.
 
 > **v2.16 Unified Format:** ทั้ง Success และ Error ใช้ schema เดียวกัน แยกแยะด้วย `status` field
 
-### 14.1 Unified Metadata Schema (v2.16)
+### 14.1 Unified Metadata Schema (v2.25)
 
 **Key Principle:** ไฟล์ metadata ใช้ชื่อ `metadata_*.json` เสมอ ไม่ว่าจะ success หรือ error
 
+> **v2.25 Update:** เพิ่ม `project_id`, `storage_uri`, `location` ใน `command_args` เพื่อรองรับ Smart Defaults System
+> **Reference:** [design.md Section 18](./design.md#18-smart-defaults-system-metadata-driven)
+
 ```json
 {
-  "version": "2.16",
+  "version": "2.25",
   "type": "video",
   "status": "SUCCESS",
   "timestamp": "2026-01-18T10:30:00.000Z",
@@ -2392,7 +2397,10 @@ Requires: GCP project with billing enabled.
     "aspect_ratio": "16:9",
     "resolution": "720p",
     "auth_method": "api-key",
-    "mode": "text_to_video"
+    "mode": "text_to_video",
+    "project_id": "gen-lang-client-0344941103",
+    "storage_uri": "gs://gen-lang-client-0344941103-media-output/videos/",
+    "location": "us-central1"
   },
   "generation": {
     "mode": "text_to_video",
@@ -2409,6 +2417,7 @@ Requires: GCP project with billing enabled.
     "reference_assets": [],
     "reference_style": null,
     "video": null,
+    "extend_video": null,
     "mask": null
   },
   "output": {
@@ -2433,6 +2442,14 @@ Requires: GCP project with billing enabled.
   "google_api_response": null
 }
 ```
+
+**New Fields in command_args (v2.25):**
+
+| Field | Type | Description | Used By Smart Defaults |
+|-------|------|-------------|:----------------------:|
+| `project_id` | string | GCP project ID used for this generation | ✅ |
+| `storage_uri` | string | GCS storage URI (if used) | ✅ |
+| `location` | string | GCP region (e.g., us-central1) | ✅ |
 
 ### 14.2 Error Metadata Schema (v2.16)
 

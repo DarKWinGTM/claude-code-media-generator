@@ -1,12 +1,54 @@
 # Changelog - GitHub Pages Design
 
 > **Parent Document:** [pages.design.md](../design/pages.design.md)
-> **Current Version:** 1.7
-> **Session:** 5584c223-ebff-4c03-b92c-697360841c5e
+> **Current Version:** 1.8
+> **Session:** (current session)
 
 ---
 
 ## Version History
+
+### Version 1.8 (2026-02-04)
+
+**Content Updates v1.5: Claude Code Skill Documentation**
+
+**Session:** (current session)
+
+#### Changes
+
+- **Updated Component Versions**: Updated all outdated versions in `index.md`
+  - video_gen.py: v2.26 → v2.27
+  - image_gen.py: v1.3 → v1.4
+  - Documentation: v3.8 → v3.10
+  - Claude Code Skill: "Phase 3 Planned" → v3.2.1 Available
+- **Created `guides/skill-installation.md`**: Full Claude Code Skill installation guide
+  - Linux/macOS installation with symlink option
+  - Windows PowerShell installation
+  - Windows CMD installation
+  - Skill commands reference
+  - Config sub-commands documentation
+  - Troubleshooting section
+- **Updated `installation.md`**: Fixed file structure (config.py, video_utils.py)
+- **Updated `authentication.md`**: Added `/generative config setup` wizard tip
+- **Updated `mkdocs.yml`**: Added Skill Installation to Guides navigation
+- **Updated Design**: Added Section 9 (Content Updates v1.5) to pages.design.md
+
+#### Files Modified
+
+| File | Changes |
+|------|---------|
+| `pages/docs/index.md` | Version table updated |
+| `pages/docs/getting-started/installation.md` | File structure + skill link |
+| `pages/docs/getting-started/authentication.md` | Config wizard tip + skill link |
+| `pages/docs/guides/skill-installation.md` | NEW - Full skill guide |
+| `pages/mkdocs.yml` | Added navigation entry |
+| `design/pages.design.md` | Section 9 added |
+
+#### Summary
+
+Added comprehensive Claude Code Skill documentation with installation guides for Windows/Linux.
+
+---
 
 ### Version 1.7 (2026-01-30)
 
@@ -320,6 +362,19 @@ position: fixed                     position: fixed
 
 | Version | Date | Changes | Session ID |
 |---------|------|---------|------------|
+| 1.8 | 2026-02-04 | **[Content Updates v1.5: Skill Documentation](#version-18-2026-02-04)** | (current) |
+| | | - Updated component versions (video_gen, image_gen, skill) | |
+| | | - Created guides/skill-installation.md | |
+| | | - Updated installation.md, authentication.md, mkdocs.yml | |
+| | | Summary: Claude Code Skill documentation for Windows/Linux | |
+| 1.7 | 2026-01-30 | **[Design v1.4: Git Workflow Documentation](#version-17-2026-01-30)** | 5584c223... |
+| | | - Added Section 8: Git Workflow & Branch Strategy | |
+| | | - Branch architecture, worktree setup | |
+| | | - Prohibited actions and correct workflow | |
+| | | Summary: Complete git workflow documentation | |
+| 1.6 | 2026-01-30 | **[CSS v1.8.3 Button ::after Reset](#version-16-2026-01-30)** | 5584c223... |
+| | | - Explicit Button ::after Reset | |
+| | | Summary: Button underline animation removed | |
 | 1.5 | 2026-01-29 | **[CSS v1.8.2 Prominent Sidebar Headers](#version-15-2026-01-29)** | 5584c223... |
 | | | - Prominent section headers (uppercase, bold, accent border) | |
 | | | - Fix button underline animation | |

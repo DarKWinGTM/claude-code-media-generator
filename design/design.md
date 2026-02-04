@@ -2,8 +2,8 @@
 
 ## 📋 Document Overview
 
-**Version:** 3.6
-**Last Updated:** 2026-01-25
+**Version:** 3.8
+**Last Updated:** 2026-02-03
 **Status:** Active Development
 **Author:** DarKWinGTM
 
@@ -35,6 +35,8 @@
 | Video Generation (8 Modes) | [video.design.md](./video.design.md) |
 | **Cloud Storage (GCS)** | [Section: Cloud Storage](#️-google-cloud-storage-gcs-integration) |
 | **Cost Overview** | [Section: Cost Overview](#-cost-overview) |
+| **Config System** | [config.design.md](./config.design.md) |
+| **Smart Defaults (Metadata)** | [Section 18: Smart Defaults](#18-smart-defaults-system-metadata-driven) |
 | API Endpoints | [Section: API Details (Summary)](#-api-details-summary) |
 | Error Handling | [Section: Error Handling](#error-handling) |
 
@@ -617,6 +619,51 @@ python image_gen.py "Analyze movement" --image animation.gif
 - Multiple Image Processing (loop in `generate_image`)
 - MIME Type Detection (GIF -> JPEG logic)
 - Response handling
+
+---
+
+## ✅ Phase 3: Claude Code Skills (Completed)
+
+> **Status:** ✅ Implemented (2026-02-03)
+> **Location:** `.claude/skills/`
+
+### Overview
+
+Claude Code Skills ช่วยให้ผู้ใช้สามารถ generate video/image ผ่าน slash commands ได้โดยตรง
+
+### Skills Implemented
+
+| Skill | Command | Features |
+|-------|---------|----------|
+| **generate-video** | `/generate-video "prompt"` | Interactive pre-flight checks, API key setup, 8 modes |
+| **generate-image** | `/generate-image "prompt"` | Aspect ratio, image size, CCS auth |
+
+### File Structure
+
+```
+.claude/skills/
+├── generate-video/
+│   └── SKILL.md        # 194 lines - Full video generation
+└── generate-image/
+    └── SKILL.md        # 82 lines - Image generation
+```
+
+### Key Features
+
+1. **YAML Frontmatter** - Pre-approved tool permissions
+2. **Interactive Setup** - AskUserQuestion for API key configuration
+3. **Pre-flight Checks** - Verify API key, endpoint, config before execution
+4. **Preset Support** - quick, quality, extend, budget presets
+
+### Usage Example
+
+```bash
+# Generate video
+/generate-video "A cat playing with a ball" --preset quality
+
+# Generate image
+/generate-image "A futuristic city" --aspect-ratio 16:9
+```
 
 ---
 
@@ -1450,6 +1497,277 @@ git push origin main
 
 ---
 
+## 18) Smart Defaults System (Metadata-Driven)
+
+> **Version:** 2.0 | **Status:** ✅ Implemented (Phase 2.8.3)
+> **Goal:** ลดความซับซ้อนเมื่อ extend video โดยใช้ metadata จาก source video เป็น defaults อัตโนมัติ
+> **Updated:** 2026-02-01
+
+### 18.1 Concept Overview
+
+```
+New Video:      CLI → config.json[--project] → Code Defaults
+Extend Video:   CLI → Source Metadata → config.json[--project] → Code Defaults
+```
+
+**Problem:** เมื่อ extend video ต้องพิมพ์ args ซ้ำทุกครั้ง (model, storage-uri, project, etc.)
+
+**Solution:** อ่าน metadata จาก source video แล้วใช้เป็น defaults + รองรับ --project flag
+
+### 18.2 Defaults Priority Chain (Extended)
+
+| Priority | Source | When Used | Description |
+|----------|--------|-----------|-------------|
+| 1 (Highest) | CLI Arguments | Always | User explicitly sets via command line |
+| 2 | Source Metadata | `--extend-video` mode | Inherits from source video's `command_args` |
+| 3 | config.json `[--project]` | When `--project` specified | Selected project from multi-project config |
+| 4 | config.json `[first project]` | Single project config | Auto-select if only one project exists |
+| 5 (Lowest) | Code Defaults | Always | Hardcoded fallbacks in script |
+
+### 18.3 --project Integration
+
+**Design Decision:** `--project` เป็น optional flag ที่ทำงานร่วมกับ metadata system
+
+```
+--project Behavior:
+
+1. If --project specified:
+   → Use that project's config from config.json
+
+2. If NOT specified + --extend-video:
+   → Try to inherit project_id from source metadata
+   → If metadata has project_id → use it
+   → If no project_id in metadata → use config.json (first/only project)
+
+3. If NOT specified + multi-project config:
+   → Error: "Multiple projects in config. Use --project to specify."
+   → Or: Auto-select first project with warning
+
+4. If NOT specified + single project config:
+   → Auto-select the only project (no warning needed)
+```
+
+### 18.4 Inheritable vs Non-Inheritable Args
+
+| Inherit from Metadata ✅ | ไม่ Inherit ❌ | Notes |
+|-------------------------|----------------|-------|
+| `model` | `prompt` (ต้องใหม่เสมอ) | Model consistency for extend |
+| `storage_uri` | `--extend-video` path | User specifies source |
+| `project_id` | mode-specific inputs | Project context |
+| `resolution` | `--image` / `--last-frame` | Keep resolution consistent |
+| `aspect_ratio` | `--reference-*` paths | Keep aspect ratio |
+| `api_key` (masked) | Sensitive data | Security: re-fetch from config |
+| `location` | | Region consistency |
+
+### 18.5 Metadata Schema Enhancement
+
+**Current metadata (v2.24.1) - Missing fields:**
+```json
+{
+  "command_args": {
+    "prompt": "...",
+    "model": "veo-3.1-generate-preview",
+    "duration": 6,
+    "aspect_ratio": "16:9",
+    "resolution": "720p",
+    "auth_method": "api-key",
+    "mode": "text_to_video"
+  }
+}
+```
+
+**Enhanced metadata (v2.25) - Add these fields:**
+```json
+{
+  "command_args": {
+    "prompt": "...",
+    "model": "veo-3.1-generate-preview",
+    "duration": 6,
+    "aspect_ratio": "16:9",
+    "resolution": "720p",
+    "auth_method": "api-key",
+    "mode": "text_to_video",
+    "project_id": "gen-lang-client-0344941103",
+    "storage_uri": "gs://gen-lang-client-0344941103-media-output/videos/",
+    "location": "us-central1"
+  }
+}
+```
+
+### 18.6 Metadata Lookup Strategy
+
+**Current metadata naming:**
+```
+video_20260124_220945_0.mp4
+metadata_20260124_220945.json
+```
+
+**Lookup algorithm:**
+```python
+def load_source_metadata(video_path: Path) -> Optional[dict]:
+    """Extract and load metadata from source video."""
+    # Extract timestamp from video filename
+    # video_20260124_220945_0.mp4 → 20260124_220945
+    match = re.search(r'(\d{8}_\d{6})', video_path.name)
+    if not match:
+        return None
+
+    timestamp = match.group(1)
+    metadata_path = video_path.parent / f"metadata_{timestamp}.json"
+
+    if not metadata_path.exists():
+        return None
+
+    with open(metadata_path) as f:
+        data = json.load(f)
+
+    return data.get("command_args", {})
+```
+
+### 18.7 Smart Defaults Function
+
+```python
+def apply_smart_defaults(args: Namespace, config: ConfigLoader) -> Namespace:
+    """Apply smart defaults from metadata and config."""
+
+    sources = {}  # Track where each value came from
+
+    # Step 1: Load source metadata (if extend mode)
+    source_meta = None
+    if args.extend_video:
+        source_meta = load_source_metadata(Path(args.extend_video))
+
+    # Step 2: Define inheritable fields
+    inheritable = ['model', 'storage_uri', 'project_id', 'resolution',
+                   'aspect_ratio', 'location']
+
+    # Step 3: Apply priority chain for each field
+    for field in inheritable:
+        cli_value = getattr(args, field, None)
+
+        if cli_value:
+            sources[field] = 'CLI'
+            continue
+
+        # Try source metadata
+        if source_meta and field in source_meta:
+            setattr(args, field, source_meta[field])
+            sources[field] = 'source metadata'
+            continue
+
+        # Try config.json
+        config_value = get_config_value(config, field, args.project)
+        if config_value:
+            setattr(args, field, config_value)
+            sources[field] = 'config.json'
+            continue
+
+        sources[field] = 'code default'
+
+    # Step 4: Print source summary
+    print_defaults_summary(sources, args)
+
+    return args
+```
+
+### 18.8 User Experience Examples
+
+**Example 1: First video (no extend)**
+```bash
+# With config.json (single project)
+python video_gen.py "A cat walking"
+# → All defaults from config.json automatically
+
+# With config.json (multi-project)
+python video_gen.py "A cat walking" --project my-project-1
+# → Uses my-project-1 settings from config.json
+```
+
+**Example 2: Extend video (Smart Defaults)**
+```bash
+# Before (ต้องพิมพ์ซ้ำ):
+python video_gen.py --extend-video video.mp4 -p "Continue" \
+  --storage-uri gs://bucket/out/ --model veo-2.0 \
+  --project my-project-1
+
+# After (Smart Defaults v2.0):
+python video_gen.py --extend-video video.mp4 -p "Continue"
+# → storage_uri, model, project ดึงจาก metadata อัตโนมัติ
+```
+
+**Console output:**
+```
+📋 Smart Defaults Applied
+  → model: veo-2.0 (from source metadata)
+  → storage_uri: gs://bucket/out/ (from source metadata)
+  → project_id: my-project-1 (from source metadata)
+  → resolution: 720p (from source metadata)
+  → location: us-central1 (from config.json)
+```
+
+> **Note:** Video extension is supported by `veo-2.0`, `veo-2.0-exp`, and `veo-3.1-generate-preview`.
+
+### 18.9 Edge Cases
+
+| Scenario | Behavior |
+|----------|----------|
+| Metadata not found | Warning → fallback to config.json |
+| External URL extend | No local metadata → use config only |
+| Corrupted metadata | Warning → fallback to config.json |
+| CLI override | CLI args always win |
+| Multi-project + no --project + no metadata | Error with hint to use --project |
+| project_id in metadata not in config | Use metadata value (API key from CLI/env) |
+
+### 18.10 Implementation Phases
+
+| Phase | Tasks | Priority | Status |
+|-------|-------|----------|--------|
+| **Phase 1** | Metadata schema enhancement (add project_id, storage_uri, location) | High | 🔲 TODO |
+| **Phase 2** | `load_source_metadata()` function in video_gen.py | High | 🔲 TODO |
+| **Phase 3** | `apply_smart_defaults()` function in video_gen.py | High | 🔲 TODO |
+| **Phase 4** | Update config.py - remove active_project logic | Medium | 🔲 TODO |
+| **Phase 5** | `--show-defaults` flag (preview without running) | Low | 🔲 Future |
+| **Phase 6** | Apply same system to image_gen.py | Low | 🔲 Future |
+
+### 18.11 Config System Integration
+
+**Remove from config.py:**
+- `active_project` field in schema
+- `active_project` logic in `load()` method
+
+**Keep in config.py:**
+- `--project` flag support via `set_active_project()`
+- Multi-project config structure
+- Environment variable fallback
+
+**Integration Flow:**
+```
+User runs command
+    ↓
+Parse CLI args (including --project)
+    ↓
+If --extend-video:
+    → Load source metadata
+    → Extract inheritable values
+    ↓
+Apply smart defaults (metadata → config → code)
+    ↓
+Execute generation
+    ↓
+Save metadata (including project_id, storage_uri)
+```
+
+### 18.12 Cross-Reference
+
+| Related | Document | Section |
+|---------|----------|---------|
+| Config System | [config.design.md](./config.design.md) | Schema, API Reference |
+| Video Generation | [video.design.md](./video.design.md) | Metadata Schema |
+| Image Generation | [image.design.md](./image.design.md) | Future integration |
+| GCS Naming | [Section: Cloud Storage](#️-google-cloud-storage-gcs-integration) | Bucket naming pattern |
+
+---
+
 **Document Status:** ✅ Active
-**Last Reviewed:** 2026-01-30
-**Next Review:** After video_gen.py CLIProxyAPI Token Integration Testing
+**Last Reviewed:** 2026-02-01
+**Next Review:** After Phase 2.8.4 (--show-defaults, image_gen.py)

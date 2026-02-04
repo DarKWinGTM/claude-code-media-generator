@@ -3,8 +3,8 @@
 ## 0) Document Control
 
 > **Parent Scope:** Claude Code Media Generator Project
-> **Current Version:** 1.4
-> **Session:** 5584c223-ebff-4c03-b92c-697360841c5e (2026-01-30)
+> **Current Version:** 1.5
+> **Session:** (current session) (2026-02-04)
 
 ---
 
@@ -366,6 +366,65 @@ git commit -m "chore: Remove pages/ files from main branch tracking"
 # Step 3: Push
 git push origin main
 ```
+
+---
+
+## 9) Content Updates (v1.5)
+
+### 9.1 Required Updates - February 2026
+
+Based on Skill v3.2.1 release, the following pages need content updates:
+
+#### Priority 1: Critical Updates
+
+| File | Update Required | Details |
+|------|-----------------|---------|
+| `index.md` | Version table | Update all component versions |
+| `installation.md` | Skill installation | Add Claude Code Skill section |
+| `authentication.md` | Config wizard | Add `/generative config` reference |
+
+#### Priority 2: New Navigation
+
+| Change | Location | Details |
+|--------|----------|---------|
+| Add skill guide | `mkdocs.yml` nav | `guides/skill-installation.md` |
+
+### 9.2 Version Updates Required
+
+| Component | Current (Pages) | Latest | Update To |
+|-----------|-----------------|--------|-----------|
+| video_gen.py | v2.26 | v2.27 | **v2.27** |
+| image_gen.py | v1.3 | v1.4 | **v1.4** |
+| Documentation | v3.8 | v3.10 | **v3.10** |
+| Claude Code Skill | "Phase 3 Planned" | v3.2.1 | **v3.2.1 Available** |
+
+### 9.3 New Pages Required
+
+| New Page | Content |
+|----------|---------|
+| `guides/skill-installation.md` | Full Claude Code Skill installation guide (Windows/Linux) |
+
+### 9.4 File Structure Updates
+
+**Current (Outdated):**
+```
+├── config_loader.py    # OLD - no longer exists
+```
+
+**Updated:**
+```
+├── config.py           # Configuration module
+├── video_utils.py      # Video utilities
+```
+
+### 9.5 Implementation Checklist
+
+- [ ] Update `index.md` status table
+- [ ] Update `installation.md` file structure
+- [ ] Add Skill installation to `installation.md`
+- [ ] Create `guides/skill-installation.md`
+- [ ] Add navigation entry to `mkdocs.yml`
+- [ ] Update `authentication.md` with config wizard reference
 
 ---
 

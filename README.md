@@ -128,6 +128,7 @@
 ✅ Python 3.8+
 ✅ Google Cloud account with Vertex AI enabled
 ✅ API Key (Gemini or Vertex AI)
+✅ Claude Code CLI (optional - for /generative skill)
 ```
 
 ### Installation
@@ -149,6 +150,159 @@ export GOOGLE_API_KEY="your-api-key"
 
 # Option 2: Command line
 python video_gen.py "Your prompt" --api-key YOUR_API_KEY
+```
+
+---
+
+## 🛠️ Claude Code Skill Installation
+
+Install the `/generative` skill to use AI-assisted video and image generation in Claude Code.
+
+### 📦 What Gets Installed
+
+| Component | Location | Purpose |
+|-----------|----------|---------|
+| `SKILL.md` | `~/.claude/skills/generative/` | Skill definition |
+| `video_gen.py` | Working directory | Video generation CLI |
+| `image_gen.py` | Working directory | Image generation CLI |
+| `config.py` | Working directory | Configuration module |
+| `video_utils.py` | Working directory | Video utilities |
+
+### 🐧 Linux / macOS Installation
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/DarKWinGTM/claude-code-media-generator.git
+cd claude-code-media-generator
+
+# 2. Install Python dependencies
+pip install requests google-auth
+
+# 3. Create skill directory and install skill
+mkdir -p ~/.claude/skills/generative
+cp .claude/skills/generative/SKILL.md ~/.claude/skills/generative/
+
+# 4. Copy Python scripts to your working directory
+# Option A: Copy to current project
+cp video_gen.py image_gen.py config.py video_utils.py /path/to/your/project/
+
+# Option B: Create symlinks (recommended for updates)
+ln -s "$(pwd)/video_gen.py" /path/to/your/project/
+ln -s "$(pwd)/image_gen.py" /path/to/your/project/
+ln -s "$(pwd)/config.py" /path/to/your/project/
+ln -s "$(pwd)/video_utils.py" /path/to/your/project/
+
+# 5. Restart Claude Code to detect new skill
+```
+
+### 🪟 Windows Installation (PowerShell)
+
+```powershell
+# 1. Clone the repository
+git clone https://github.com/DarKWinGTM/claude-code-media-generator.git
+cd claude-code-media-generator
+
+# 2. Install Python dependencies
+pip install requests google-auth
+
+# 3. Create skill directory and install skill
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\skills\generative"
+Copy-Item ".\.claude\skills\generative\SKILL.md" -Destination "$env:USERPROFILE\.claude\skills\generative\"
+
+# 4. Copy Python scripts to your working directory
+Copy-Item "video_gen.py", "image_gen.py", "config.py", "video_utils.py" -Destination "C:\path\to\your\project\"
+
+# 5. Restart Claude Code to detect new skill
+```
+
+### 🪟 Windows Installation (Command Prompt)
+
+```cmd
+:: 1. Clone the repository
+git clone https://github.com/DarKWinGTM/claude-code-media-generator.git
+cd claude-code-media-generator
+
+:: 2. Install Python dependencies
+pip install requests google-auth
+
+:: 3. Create skill directory and install skill
+mkdir "%USERPROFILE%\.claude\skills\generative"
+copy ".\.claude\skills\generative\SKILL.md" "%USERPROFILE%\.claude\skills\generative\"
+
+:: 4. Copy Python scripts to your working directory
+copy video_gen.py "C:\path\to\your\project\"
+copy image_gen.py "C:\path\to\your\project\"
+copy config.py "C:\path\to\your\project\"
+copy video_utils.py "C:\path\to\your\project\"
+
+:: 5. Restart Claude Code to detect new skill
+```
+
+### ✅ Verify Installation
+
+After restarting Claude Code:
+
+```bash
+# Test the skill is recognized
+/generative info
+
+# Test image generation
+/generative image "A beautiful sunset"
+
+# Test video generation
+/generative video "Ocean waves"
+
+# Show help
+/generative help
+```
+
+### 🔧 Configuration
+
+After installation, configure your API:
+
+```bash
+# Start setup wizard
+/generative config setup
+
+# Or configure manually
+/generative config gemini    # For Gemini API
+/generative config vertex    # For Vertex AI
+```
+
+### 📁 Directory Structure After Installation
+
+```
+~/.claude/
+└── skills/
+    └── generative/
+        └── SKILL.md           # Skill definition (1,500+ lines)
+
+/your/project/
+├── video_gen.py               # Video generation CLI
+├── image_gen.py               # Image generation CLI
+├── config.py                  # Configuration module
+├── video_utils.py             # Video utilities
+└── config.json                # Your API configuration (created by skill)
+```
+
+### 🔄 Updating the Skill
+
+```bash
+# Pull latest changes
+cd claude-code-media-generator
+git pull
+
+# Update skill file
+# Linux/macOS:
+cp .claude/skills/generative/SKILL.md ~/.claude/skills/generative/
+
+# Windows (PowerShell):
+Copy-Item ".\.claude\skills\generative\SKILL.md" -Destination "$env:USERPROFILE\.claude\skills\generative\" -Force
+
+# Update Python scripts (if using copies, not symlinks)
+# Copy the updated files to your project directory
+
+# Restart Claude Code
 ```
 
 ---
@@ -253,6 +407,24 @@ python video_gen.py "Your prompt" \
 
 ---
 
+## 🎯 Smart Defaults (v2.25.1)
+
+When extending a video, settings are automatically inherited from the source video's metadata:
+
+```bash
+# Original video was created with veo-2.0, 1080p, custom project
+python video_gen.py "Continue the scene" --extend-video video_20260201_123456_0.mp4
+
+# Output:
+# ℹ Found source metadata for inheritance
+# ℹ Inherited model from metadata: veo-2.0
+# ℹ Inherited resolution from metadata: 1080p
+```
+
+**Priority Chain:** CLI Arguments > Source Metadata > config.json > Code Defaults
+
+---
+
 ## 💰 Pricing
 
 | Model | Price/Second | 5-sec Video |
@@ -322,11 +494,11 @@ claude-code-media-generator/
 
 | Component | Version | Status |
 |:----------|:--------|:-------|
-| video_gen.py | v2.26 | ✅ Production Ready |
-| image_gen.py | v1.3 | ✅ Stable |
+| video_gen.py | v2.27 | ✅ Production Ready |
+| image_gen.py | v1.4 | ✅ Stable |
 | check_api.py | v2.1 | ✅ Stable |
-| Documentation | v3.8 | ✅ Updated |
-| Claude Code Skill | - | 🚧 Planned |
+| Documentation | v3.10 | ✅ Updated |
+| Claude Code Skill | v3.2.1 | ✅ Available |
 | MCP Server | - | 🚧 Planned |
 
 ---

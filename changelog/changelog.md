@@ -1,11 +1,167 @@
 # 📜 Changelog - Master Design Document
 
 > **Parent Document:** [design.md](../design.md)
-> **Current Version:** 3.9
+> **Current Version:** 4.3
 
 ---
 
 ## Version History
+
+### Version 4.3 (2026-02-01)
+
+**Phase 2.8.3: Smart Defaults Implementation - Complete:**
+
+**Code Changes:**
+- **video_gen.py:**
+  - Added `load_source_metadata(video_path)` function
+    - Extracts timestamp from video filename (video_YYYYMMDD_HHMMSS_*.mp4)
+    - Finds matching metadata_YYYYMMDD_HHMMSS.json in same directory
+    - Returns command_args section for inheritance
+  - Updated `build_metadata()` to include new fields:
+    - `project_id` - for project inheritance
+    - `storage_uri` - for GCS bucket inheritance
+    - `location` - for region inheritance
+  - Updated `apply_config_defaults()` for Phase 2.8.3:
+    - Loads source metadata when `--extend-video` is used
+    - Applies full priority chain: CLI > Metadata > Config > Code Defaults
+    - Shows inheritance messages for each value inherited from metadata
+    - Inherits: model, storage_uri, project_id, resolution, aspect_ratio, location
+
+**Inheritable Fields:**
+| Field | Inheritance Behavior |
+|-------|---------------------|
+| model | Inherits if CLI at default |
+| resolution | Inherits if CLI at default |
+| aspect_ratio | Inherits if CLI at default |
+| storage_uri | Inherits if not set via CLI |
+| location | Inherits if CLI at default (and different from default) |
+| project_id | Used in resolve_project() priority chain |
+
+**User Experience:**
+When extending a video:
+```bash
+# Original video was created with veo-3.1, 1080p, custom project
+python video_gen.py "Continue the scene" --extend-video video_20260201_123456_0.mp4
+
+# Output:
+# ℹ Found source metadata for inheritance
+# ℹ Inherited project from source metadata: my-project-1
+# ℹ Inherited model from metadata: veo-3.1-generate-preview
+# ℹ Inherited resolution from metadata: 1080p
+```
+
+**Files Modified:**
+- `video_gen.py` - Added load_source_metadata(), updated build_metadata(), apply_config_defaults()
+- `changelog/changelog.md` - This file (v4.3)
+
+### Version 4.2 (2026-02-01)
+
+**Phase 2.8.2: Config System Update - Implementation Complete:**
+
+**Code Changes:**
+- **config.py v1.1:**
+  - Removed `active_project` auto-loading from `load()` method
+  - Added `resolve_project(cli_project, metadata_project)` method
+    - Returns `(project_id, source)` tuple
+    - Sources: "cli", "metadata", "auto", "error", "none"
+  - Added `is_multi_project()` helper method
+  - Updated docstrings with Smart Defaults references
+
+- **video_gen.py:**
+  - Updated `apply_config_defaults()` for Phase 2.8.2
+  - Now uses `config.resolve_project()` for multi-project handling
+  - Error messages for: invalid project, multi-project without --project
+  - Auto-select message when single project in config
+
+- **image_gen.py:**
+  - Updated `apply_config_defaults()` for Phase 2.8.2
+  - Same multi-project logic as video_gen.py
+  - Consistent error/info messages
+
+**Behavior Changes:**
+- Multi-project config without `--project` flag → Error with hint
+- Single project config → Auto-select (no warning needed)
+- Invalid `--project` value → Error with available projects list
+- Prepared for Phase 2.8.3 metadata inheritance
+
+**Files Modified:**
+- `config.py` - v1.1 (removed active_project, added resolve_project)
+- `video_gen.py` - Updated apply_config_defaults()
+- `image_gen.py` - Updated apply_config_defaults()
+- `design/config.design.md` - v1.4 (implementation status update)
+- `changelog/changelog.md` - This file
+
+### Version 4.1 (2026-01-31)
+
+**Smart Defaults System v2.0 - Complete Design:**
+
+**Design Updates:**
+- Updated **Section 18: Smart Defaults System** to v2.0 in design.md
+  - Extended Priority Chain: CLI > Metadata > config.json[--project] > Env > Code Defaults
+  - Added `--project` integration with metadata inheritance
+  - Defined inheritable fields with notes (model, storage_uri, project_id, resolution, aspect_ratio, location)
+  - Added metadata schema enhancement (v2.25)
+  - Added implementation functions with pseudocode
+  - Added user experience examples
+  - Added edge case handling
+  - Added implementation phases with status tracking
+
+**Config System Updates (v1.3):**
+- Updated `design/config.design.md` to v1.3
+  - Added Value Priority Chain with Metadata
+  - Updated schema to v2.1 (removed active_project)
+  - Added CLI --project flag behavior design
+  - Added Smart Defaults integration section
+  - Added implementation TODO list
+
+**Metadata Schema Updates (v2.25):**
+- Updated `design/video.design.md` Section 14.1
+  - Added `project_id` field to `command_args`
+  - Added `storage_uri` field to `command_args`
+  - Added `location` field to `command_args`
+  - Reference to Smart Defaults System
+
+**TODO Updates:**
+- Added Phase 2.8: Smart Defaults System with clear sub-phases
+  - Phase 2.8.1: Metadata Schema Enhancement ✅ DESIGNED
+  - Phase 2.8.2: Config System Update
+  - Phase 2.8.3: Smart Defaults Implementation
+  - Phase 2.8.4: User Experience
+
+**Files Modified:**
+- `design/design.md` - Section 18 v2.0
+- `design/config.design.md` - v1.3
+- `design/video.design.md` - Section 14.1 v2.25
+- `TODO.md` - Phase 2.8 tasks
+- `changelog/changelog.md` - This file
+
+### Version 4.0 (2026-01-30)
+
+**Smart Defaults System (Section 18) + Config System Updates:**
+
+**New Features:**
+- Added **Section 18: Smart Defaults System (Metadata-Driven)** to design.md
+  - Concept: Extend video commands inherit settings from source video metadata
+  - Priority Chain: CLI > Source Metadata > config.json > Code Defaults
+  - Inheritable args: model, storage_uri, project, resolution, aspect_ratio
+  - Metadata lookup via timestamp extraction from video filename
+  - Edge case handling (metadata not found, external URLs, corrupted files)
+
+**Config System Updates (v1.2):**
+- Renamed `config_loader.py` → `config.py` (cleaner imports)
+- Removed `active_project` from config schema (use `--project` flag instead)
+- Created `design/config.design.md` v1.2
+- Created `changelog/config.changelog.md`
+- Updated `config.example.json`
+- Updated imports in `video_gen.py` and `image_gen.py`
+
+**Files Modified:**
+- `design/design.md` - Added Section 18, Quick Navigation update
+- `design/config.design.md` - New design document
+- `changelog/config.changelog.md` - New changelog
+- `config.py` - Renamed from config_loader.py
+- `config.example.json` - Removed active_project
+- `TODO.md` - Added Config v1.1/v1.2 tasks
 
 ### Version 3.9 (2026-01-27)
 
