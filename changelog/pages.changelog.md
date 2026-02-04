@@ -1,12 +1,45 @@
 # Changelog - GitHub Pages Design
 
 > **Parent Document:** [pages.design.md](../design/pages.design.md)
-> **Current Version:** 2.4
+> **Current Version:** 2.5
 > **Session:** (current session)
 
 ---
 
 ## Version History
+
+### Version 2.5 (2026-02-05)
+
+**extra.css v1.9.6: Section Navigator CLI Sub-items**
+
+**Session:** (current session)
+
+#### Problem Analysis
+
+- User reported Section Navigator (right sidebar) showing only single "CLI Reference" item
+- Expected: CLI Reference with sub-items (video_gen.py, image_gen.py, check_api.py)
+- toc.html had CLI Reference as single link without children
+
+#### Fix Applied
+
+1. **Updated toc.html to v1.4**:
+   - Added nested structure for CLI Reference with 3 sub-items
+   - New classes: `section-navigator__item--has-children`, `section-navigator__parent`, `section-navigator__sublist`
+
+2. **Added CSS styles for sub-items** (lines 3451-3551):
+   - `.section-navigator__item--has-children` - Container for parent with children
+   - `.section-navigator__parent` - Non-link parent label with icon
+   - `.section-navigator__sublist` - Nested list container with left padding
+   - `.section-navigator__sublist a` - Monospace font for CLI filenames
+   - Hover/active states with neon cyan glow for Cyberpunk theme
+   - Light mode adjustments
+
+#### Files Changed
+
+- `overrides/partials/toc.html` - v1.3 → v1.4
+- `docs/stylesheets/extra.css` - v1.9.5 → v1.9.6
+
+---
 
 ### Version 2.4 (2026-02-05)
 
