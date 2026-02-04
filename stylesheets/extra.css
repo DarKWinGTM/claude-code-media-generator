@@ -3225,6 +3225,19 @@ a, button, input, .md-nav__link, .md-tabs__link {
   border-bottom: 1px solid rgba(129, 140, 248, 0.2);
 }
 
+/* ===== CRITICAL FIX: Hide Section Navigator in Primary (Left) Sidebar ===== */
+/* MkDocs Material renders toc.html in BOTH sidebars for mobile TOC dropdown */
+/* We only want Section Navigator to show in Secondary (Right) Sidebar */
+.md-sidebar--primary .section-navigator,
+.md-sidebar--primary .section-navigator-sidebar {
+  display: none !important;
+}
+
+/* Ensure it shows only in Secondary (Right) Sidebar - Desktop */
+.md-sidebar--secondary .section-navigator-sidebar {
+  display: block;
+}
+
 .section-navigator__title {
   display: block;
   font-size: 0.7rem;
