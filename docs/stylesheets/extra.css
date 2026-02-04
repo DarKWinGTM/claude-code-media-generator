@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.9.5 - TOC Scroll-Spy Animation Fix
+   v1.9.6 - Section Navigator CLI Sub-items
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -3446,6 +3446,108 @@ a, button, input, .md-nav__link, .md-tabs__link {
   background: rgba(99, 102, 241, 0.15);
   color: var(--color-primary, #818cf8);
   border-left: 2px solid var(--color-primary, #818cf8);
+}
+
+/* ===== Section Navigator - Sub-items (CLI Reference children) ===== */
+/* v1.4: Added support for nested items */
+.section-navigator__item--has-children {
+  margin: 0;
+  padding: 0;
+}
+
+.section-navigator__parent {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.6rem;
+  color: var(--text-secondary, #e2e8f0);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.section-navigator__sublist {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 1.5rem;
+}
+
+.section-navigator__sublist li {
+  margin: 0;
+  padding: 0;
+}
+
+.section-navigator__sublist a {
+  display: flex;
+  align-items: center;
+  padding: 0.35rem 0.6rem;
+  border-radius: 0.25rem;
+  color: var(--text-secondary, #a0aec0);
+  text-decoration: none;
+  font-size: 0.7rem;
+  font-weight: 400;
+  font-family: var(--md-code-font-family, 'JetBrains Mono', monospace);
+  transition: all 0.2s ease;
+  border-left: 2px solid transparent;
+}
+
+.section-navigator__sublist a:hover {
+  background: var(--glass-bg, rgba(255, 255, 255, 0.04));
+  color: var(--color-primary, #818cf8);
+  border-left-color: var(--color-primary, #818cf8);
+  transform: translateX(2px);
+}
+
+.section-navigator__sublist a[aria-current="page"],
+.section-navigator__sublist a.active {
+  background: rgba(99, 102, 241, 0.12);
+  color: var(--color-primary, #818cf8);
+  border-left-color: var(--color-primary, #818cf8);
+  font-weight: 500;
+}
+
+/* Light mode adjustments for sub-items */
+[data-md-color-scheme="default"] .section-navigator__parent {
+  color: #374151;
+}
+
+[data-md-color-scheme="default"] .section-navigator__sublist a {
+  color: #6b7280;
+}
+
+[data-md-color-scheme="default"] .section-navigator__sublist a:hover {
+  background: rgba(99, 102, 241, 0.06);
+  color: #6366f1;
+}
+
+[data-md-color-scheme="default"] .section-navigator__sublist a.active {
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+}
+
+/* Cyberpunk theme for sub-items */
+[data-md-color-scheme="slate"] .section-navigator__parent {
+  color: var(--neon-cyan, #00ffff);
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+}
+
+[data-md-color-scheme="slate"] .section-navigator__sublist a {
+  color: rgba(0, 255, 255, 0.6);
+}
+
+[data-md-color-scheme="slate"] .section-navigator__sublist a:hover {
+  color: var(--neon-cyan, #00ffff);
+  border-left-color: var(--neon-cyan, #00ffff);
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
+}
+
+[data-md-color-scheme="slate"] .section-navigator__sublist a[aria-current="page"],
+[data-md-color-scheme="slate"] .section-navigator__sublist a.active {
+  color: var(--neon-cyan, #00ffff);
+  border-left-color: var(--neon-cyan, #00ffff);
+  background: rgba(0, 255, 255, 0.08);
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
 }
 
 /* Light mode adjustments */
