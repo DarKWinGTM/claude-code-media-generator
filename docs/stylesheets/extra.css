@@ -4786,4 +4786,114 @@ a, button, input, .md-nav__link, .md-tabs__link {
   border-left-color: #6366f1 !important;
 }
 
-/* ===== End Metro Cyberpunk Design Overhaul v1.9.12 =====  */
+/* ===== FIX 12: Section Navigator (Right Sidebar) - Match TOC Pattern (v1.9.13) ===== */
+/* Make Section Navigator use the same visual pattern as TOC in left sidebar */
+
+/* Base container - match TOC padding */
+.md-sidebar--secondary .section-navigator-sidebar {
+  padding: 0 0.5rem !important;
+}
+
+/* Title - match TOC title styling */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__title {
+  padding: 0.5rem 0.75rem !important;
+  margin-bottom: 0.5rem !important;
+  font-size: 0.65rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  color: var(--neon-cyan, #00ffff) !important;
+  opacity: 0.8 !important;
+}
+
+/* All links - base styling (match TOC) */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  padding: 0.35rem 0.75rem !important;
+  margin: 0.1rem 0 !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  text-decoration: none !important;
+  border-radius: 4px !important;
+  transition: all 0.15s ease !important;
+  border-left: 2px solid transparent !important;
+  transform: none !important;
+}
+
+/* Hover state - match TOC hover */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a:hover {
+  background: rgba(0, 255, 255, 0.08) !important;
+  color: var(--neon-cyan, #00ffff) !important;
+  border-left-color: rgba(0, 255, 255, 0.3) !important;
+  transform: none !important;
+}
+
+/* Active/current page state - match TOC active */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a[aria-current="page"],
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a.active {
+  background: rgba(0, 255, 255, 0.1) !important;
+  color: var(--neon-cyan, #00ffff) !important;
+  border-left-color: var(--neon-cyan, #00ffff) !important;
+  font-weight: 600 !important;
+}
+
+/* Icon styling */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__icon {
+  font-size: 0.9rem !important;
+  opacity: 0.8 !important;
+  flex-shrink: 0 !important;
+}
+
+/* List items spacing */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ===== Light Mode - Section Navigator Match TOC ===== */
+[data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__title {
+  padding: 0.5rem 0.75rem !important;
+  margin-bottom: 0.5rem !important;
+  font-size: 0.65rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+  color: #6366f1 !important;
+  opacity: 0.9 !important;
+}
+
+[data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  padding: 0.35rem 0.75rem !important;
+  margin: 0.1rem 0 !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  color: rgba(55, 65, 81, 0.8) !important;
+  text-decoration: none !important;
+  border-radius: 4px !important;
+  transition: all 0.15s ease !important;
+  border-left: 2px solid transparent !important;
+  transform: none !important;
+}
+
+[data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a:hover {
+  background: rgba(99, 102, 241, 0.08) !important;
+  color: #6366f1 !important;
+  border-left-color: rgba(99, 102, 241, 0.3) !important;
+  transform: none !important;
+}
+
+[data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a[aria-current="page"],
+[data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a.active {
+  background: rgba(99, 102, 241, 0.1) !important;
+  color: #6366f1 !important;
+  border-left-color: #6366f1 !important;
+  font-weight: 600 !important;
+}
+
+/* ===== End Metro Cyberpunk Design Overhaul v1.9.13 =====  */
