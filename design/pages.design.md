@@ -3,7 +3,7 @@
 ## 0) Document Control
 
 > **Parent Scope:** Claude Code Media Generator Project
-> **Current Version:** 2.1
+> **Current Version:** 2.7
 > **Session:** (current session) (2026-02-05)
 
 ---

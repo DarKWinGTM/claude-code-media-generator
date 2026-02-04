@@ -1,7 +1,7 @@
 # 📋 TODO - Claude Code Media Generator
 
 > **Last Updated:** 2026-02-05
-> **Version:** 3.6
+> **Version:** 3.7
 
 ---
 
@@ -178,6 +178,9 @@
 - [x] Fix Section Navigator appearing in both sidebars (v1.2 - 2026-02-05)
 - [x] Move TOC to left sidebar, Sections to right sidebar (v1.3 - 2026-02-05)
 - [x] Set Dark mode as default theme (v1.3 - 2026-02-05)
+- [x] CLI Reference sub-items (v1.4 - 2026-02-05) - Added then removed per user request
+- [x] Removed CLI Reference sub-items (v1.5 - 2026-02-05) - Simple link only
+- [x] extra.css v1.9.9: Enhanced sub-items styling (for future use)
 - [ ] Add inline navigator component (for mobile fallback)
 - [ ] Test on Desktop (≥1220px)
 - [ ] Test on Tablet (960-1219px)

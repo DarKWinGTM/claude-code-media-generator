@@ -1,12 +1,56 @@
 # Changelog - GitHub Pages Design
 
 > **Parent Document:** [pages.design.md](../design/pages.design.md)
-> **Current Version:** 2.5
+> **Current Version:** 2.7
 > **Session:** (current session)
 
 ---
 
 ## Version History
+
+### Version 2.7 (2026-02-05)
+
+**toc.html v1.5: Removed CLI Reference Sub-items**
+
+**Session:** (current session)
+
+#### User Request
+
+- User requested removal of CLI Reference sub-items (video_gen.py, image_gen.py, check_api.py)
+- CLI Reference should be simple link like other sections
+
+#### Change Applied
+
+- Removed nested `section-navigator__sublist` from CLI Reference
+- Changed CLI Reference to simple link pointing to `/cli/video_gen/`
+- Simplified Section Navigator structure
+
+#### Files Changed
+
+- `overrides/partials/toc.html` - v1.4 → v1.5
+
+---
+
+### Version 2.6 (2026-02-05)
+
+**extra.css v1.9.9: CLI Reference Sub-items Enhanced**
+
+**Session:** (current session)
+
+#### Improvements
+
+1. **Visual Indicator**: Added "▾" after parent items with children
+2. **Sublist Container**: Added border-left and background for visual hierarchy
+3. **Enhanced Styling**: Sub-items with monospace font and cyan color
+4. **Hover Effects**: Slide-right animation and glow effect
+5. **Active State**: Highlight for current page
+6. **Light Mode**: Full light mode support
+
+#### Files Changed
+
+- `docs/stylesheets/extra.css` - v1.9.8 → v1.9.9
+
+---
 
 ### Version 2.5 (2026-02-05)
 
