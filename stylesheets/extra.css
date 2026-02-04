@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.9.7 - Compact Left Navigator Spacing
+   v1.9.8 - Metro Cyberpunk Design Overhaul
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -4270,3 +4270,216 @@ a, button, input, .md-nav__link, .md-tabs__link {
 }
 
 /* ===== End Metro Cyberpunk Font System v1.9.4 ===== */
+
+/* ===========================================
+   Metro Cyberpunk Design Overhaul v1.9.8
+   Comprehensive fixes for design consistency
+   =========================================== */
+
+/* ===== FIX 1: Right Sidebar (Secondary) Cyberpunk Border ===== */
+[data-md-color-scheme="slate"] .md-sidebar--secondary {
+  background: var(--cyber-bg-glass, rgba(18, 18, 26, 0.85)) !important;
+  border-left: 1px solid var(--cyber-border, rgba(0, 255, 255, 0.2)) !important;
+  border-right: none !important;
+}
+
+/* ===== FIX 2: Section Navigator Consistency in Right Sidebar ===== */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator-sidebar {
+  background: transparent !important;
+  padding: 0.5rem 0.8rem !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__title {
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace) !important;
+  font-size: 0.65rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.15em !important;
+  color: var(--neon-cyan, #00ffff) !important;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.4) !important;
+  padding: 0.4rem 0 !important;
+  margin-bottom: 0.5rem !important;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.15) !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__title::before {
+  content: '> ' !important;
+  color: var(--neon-magenta, #ff00ff) !important;
+}
+
+/* ===== FIX 3: Section Navigator Items - Compact & Consistent ===== */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a {
+  font-family: var(--font-cyber-body, 'DM Sans', sans-serif) !important;
+  font-size: 0.78rem !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+  padding: 0.4rem 0.5rem !important;
+  margin: 0 !important;
+  border-radius: 0.25rem !important;
+  border-left: 2px solid transparent !important;
+  transition: all 0.2s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a:hover {
+  color: var(--neon-cyan, #00ffff) !important;
+  background: rgba(0, 255, 255, 0.08) !important;
+  border-left-color: var(--neon-cyan, #00ffff) !important;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3) !important;
+  transform: translateX(2px) !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a[aria-current="page"],
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a.active {
+  color: var(--neon-cyan, #00ffff) !important;
+  background: rgba(0, 255, 255, 0.12) !important;
+  border-left-color: var(--neon-cyan, #00ffff) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.5) !important;
+}
+
+/* ===== FIX 4: Section Navigator Icon Styling ===== */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__icon {
+  font-size: 0.9rem !important;
+  opacity: 0.9 !important;
+  flex-shrink: 0 !important;
+}
+
+/* ===== FIX 5: CLI Reference Sub-items in Right Sidebar ===== */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__parent {
+  font-family: var(--font-cyber-body, 'DM Sans', sans-serif) !important;
+  font-size: 0.78rem !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+  padding: 0.4rem 0.5rem !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  font-weight: 500 !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__sublist {
+  padding-left: 1.2rem !important;
+  margin: 0 !important;
+  border-left: 1px solid rgba(0, 255, 255, 0.1) !important;
+  margin-left: 0.8rem !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__sublist a {
+  font-family: var(--font-cyber-mono, 'Fira Code', monospace) !important;
+  font-size: 0.7rem !important;
+  color: rgba(0, 255, 255, 0.6) !important;
+  padding: 0.25rem 0.4rem !important;
+  border-left: none !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__sublist a:hover {
+  color: var(--neon-cyan, #00ffff) !important;
+  background: rgba(0, 255, 255, 0.06) !important;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3) !important;
+}
+
+/* ===== FIX 6: Left Sidebar TOC Enhanced Styling ===== */
+[data-md-color-scheme="slate"] .md-sidebar--primary .toc-for-left-sidebar {
+  border-top: 1px solid rgba(0, 255, 255, 0.15) !important;
+  margin-top: 0.75rem !important;
+  padding-top: 0.75rem !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--primary .toc-for-left-sidebar .md-nav__title {
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace) !important;
+  font-size: 0.6rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.15em !important;
+  color: var(--neon-cyan, #00ffff) !important;
+  opacity: 0.7 !important;
+  padding: 0 0.5rem 0.4rem !important;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.1) !important;
+  margin-bottom: 0.4rem !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--primary .toc-for-left-sidebar .md-nav__link {
+  font-size: 0.72rem !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+  padding: 0.25rem 0.5rem !important;
+  border-left: 2px solid transparent !important;
+  transition: all 0.2s ease !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--primary .toc-for-left-sidebar .md-nav__link:hover {
+  color: var(--neon-cyan, #00ffff) !important;
+  border-left-color: var(--neon-cyan, #00ffff) !important;
+  background: rgba(0, 255, 255, 0.05) !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--primary .toc-for-left-sidebar .md-nav__link--active {
+  color: var(--neon-cyan, #00ffff) !important;
+  border-left-color: var(--neon-cyan, #00ffff) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3) !important;
+}
+
+/* ===== FIX 7: Left Sidebar Navigation Compact Spacing ===== */
+[data-md-color-scheme="slate"] .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link,
+[data-md-color-scheme="slate"] .md-nav--primary > .md-nav__list > .md-nav__item > label {
+  margin-top: 0.3rem !important;
+  margin-bottom: 0.15rem !important;
+}
+
+[data-md-color-scheme="slate"] .md-nav--primary .md-nav__item .md-nav__item .md-nav__link {
+  padding-top: 0.18rem !important;
+  padding-bottom: 0.18rem !important;
+  font-size: 0.72rem !important;
+}
+
+/* ===== FIX 8: Sidebar Scrollbar Cyberpunk Style ===== */
+[data-md-color-scheme="slate"] .md-sidebar__scrollwrap::-webkit-scrollbar {
+  width: 4px !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar__scrollwrap::-webkit-scrollbar-track {
+  background: rgba(0, 255, 255, 0.02) !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar__scrollwrap::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 255, 0.2) !important;
+  border-radius: 2px !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar__scrollwrap::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 255, 0.4) !important;
+}
+
+/* ===== FIX 9: Light Mode Sidebar Consistency ===== */
+[data-md-color-scheme="default"] .md-sidebar--secondary {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border-left: 1px solid rgba(99, 102, 241, 0.15) !important;
+  border-right: none !important;
+}
+
+[data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__title {
+  color: #6366f1 !important;
+  font-weight: 700 !important;
+  font-size: 0.65rem !important;
+  letter-spacing: 0.1em !important;
+}
+
+[data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a {
+  color: #374151 !important;
+  font-size: 0.78rem !important;
+}
+
+[data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a:hover {
+  color: #6366f1 !important;
+  background: rgba(99, 102, 241, 0.08) !important;
+}
+
+/* ===== End Metro Cyberpunk Design Overhaul v1.9.8 =====  */
