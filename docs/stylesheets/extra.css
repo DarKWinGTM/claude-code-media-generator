@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.9.0 - Metro Cyberpunk Theme
+   v1.9.1 - TOC Scroll-Spy Animation
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -3757,6 +3757,63 @@ a, button, input, .md-nav__link, .md-tabs__link {
   );
   z-index: 9999;
   opacity: 0.3;
+}
+
+/* ===== Cyberpunk - TOC Scroll-Spy Animation ===== */
+
+/* Base transition for all TOC links */
+[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  padding-left: 0.75rem;
+  border-left: 2px solid transparent;
+}
+
+/* Active TOC item with neon glow */
+[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link--active {
+  color: var(--neon-cyan, #00ffff) !important;
+  font-weight: 600;
+  border-left: 2px solid var(--neon-cyan, #00ffff);
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+  background: linear-gradient(90deg, rgba(0, 255, 255, 0.1) 0%, transparent 100%);
+}
+
+/* Hover effect for TOC links */
+[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link:hover {
+  color: var(--neon-cyan, #00ffff);
+  border-left-color: rgba(0, 255, 255, 0.5);
+  background: linear-gradient(90deg, rgba(0, 255, 255, 0.05) 0%, transparent 100%);
+}
+
+/* Smooth scroll indicator animation */
+[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link--active::before {
+  content: "›";
+  position: absolute;
+  left: -0.5rem;
+  color: var(--neon-cyan, #00ffff);
+  font-weight: bold;
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+/* Pulse glow animation */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 5px var(--neon-cyan, #00ffff);
+  }
+  50% {
+    opacity: 0.7;
+    text-shadow: 0 0 15px var(--neon-cyan, #00ffff), 0 0 25px var(--neon-cyan, #00ffff);
+  }
+}
+
+/* TOC Title styling */
+[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__title {
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace);
+  color: var(--neon-magenta, #ff00ff);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
 }
 
 /* ===== End Metro Cyberpunk Theme ===== */
