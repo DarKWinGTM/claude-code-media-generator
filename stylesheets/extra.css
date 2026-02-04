@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.9.8 - Metro Cyberpunk Design Overhaul
+   v1.9.9 - CLI Reference Sub-items Enhanced
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -4355,36 +4355,120 @@ a, button, input, .md-nav__link, .md-tabs__link {
   flex-shrink: 0 !important;
 }
 
-/* ===== FIX 5: CLI Reference Sub-items in Right Sidebar ===== */
+/* ===== FIX 5: CLI Reference Sub-items in Right Sidebar (v1.9.9) ===== */
+/* Enhanced visual hierarchy for nested navigation */
+
+/* Parent item container - CLI Reference */
+.section-navigator__item--has-children {
+  margin-bottom: 0.25rem !important;
+}
+
+/* Parent label with expand indicator */
+.section-navigator__parent {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  padding: 0.45rem 0.6rem !important;
+  margin: 0 !important;
+  cursor: default !important;
+  position: relative !important;
+}
+
+/* Add visual indicator (▾) after parent label */
+.section-navigator__parent::after {
+  content: "▾" !important;
+  font-size: 0.6rem !important;
+  margin-left: auto !important;
+  opacity: 0.5 !important;
+}
+
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__parent {
   font-family: var(--font-cyber-body, 'DM Sans', sans-serif) !important;
   font-size: 0.78rem !important;
-  color: rgba(255, 255, 255, 0.75) !important;
-  padding: 0.4rem 0.5rem !important;
+  color: var(--neon-cyan, #00ffff) !important;
   text-transform: none !important;
   letter-spacing: normal !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
+  text-shadow: 0 0 4px rgba(0, 255, 255, 0.3) !important;
+}
+
+/* Sublist container with clear visual separation */
+.section-navigator__sublist {
+  display: block !important;
+  list-style: none !important;
+  margin: 0.2rem 0 0.4rem 0 !important;
+  padding: 0.3rem 0 0.3rem 0.8rem !important;
+  border-left: 2px solid rgba(0, 255, 255, 0.25) !important;
+  margin-left: 1.1rem !important;
+  background: rgba(0, 255, 255, 0.02) !important;
+  border-radius: 0 4px 4px 0 !important;
 }
 
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__sublist {
-  padding-left: 1.2rem !important;
+  border-left-color: rgba(0, 255, 255, 0.3) !important;
+  background: rgba(0, 255, 255, 0.03) !important;
+}
+
+/* Sublist items */
+.section-navigator__sublist li {
   margin: 0 !important;
-  border-left: 1px solid rgba(0, 255, 255, 0.1) !important;
-  margin-left: 0.8rem !important;
+  padding: 0 !important;
+}
+
+/* Sublist links - styled like code/filenames */
+.section-navigator__sublist a {
+  display: flex !important;
+  align-items: center !important;
+  padding: 0.3rem 0.5rem !important;
+  border-radius: 3px !important;
+  margin: 0.1rem 0 !important;
+  transition: all 0.15s ease !important;
 }
 
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__sublist a {
-  font-family: var(--font-cyber-mono, 'Fira Code', monospace) !important;
-  font-size: 0.7rem !important;
-  color: rgba(0, 255, 255, 0.6) !important;
-  padding: 0.25rem 0.4rem !important;
-  border-left: none !important;
+  font-family: var(--font-cyber-mono, 'Fira Code', 'JetBrains Mono', monospace) !important;
+  font-size: 0.72rem !important;
+  color: rgba(0, 255, 255, 0.7) !important;
+  background: transparent !important;
 }
 
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__sublist a:hover {
   color: var(--neon-cyan, #00ffff) !important;
-  background: rgba(0, 255, 255, 0.06) !important;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3) !important;
+  background: rgba(0, 255, 255, 0.08) !important;
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.4) !important;
+  transform: translateX(2px) !important;
+}
+
+/* Active state for current page */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__sublist a[aria-current="page"],
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__sublist a.active {
+  color: var(--neon-cyan, #00ffff) !important;
+  background: rgba(0, 255, 255, 0.12) !important;
+  font-weight: 500 !important;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.5) !important;
+  border-left: 2px solid var(--neon-cyan, #00ffff) !important;
+  margin-left: -2px !important;
+  padding-left: calc(0.5rem + 2px) !important;
+}
+
+/* Light mode support */
+[data-md-color-scheme="default"] .section-navigator__parent {
+  color: #4f46e5 !important;
+  font-weight: 600 !important;
+}
+
+[data-md-color-scheme="default"] .section-navigator__sublist {
+  border-left-color: rgba(99, 102, 241, 0.3) !important;
+  background: rgba(99, 102, 241, 0.03) !important;
+}
+
+[data-md-color-scheme="default"] .section-navigator__sublist a {
+  color: #6366f1 !important;
+}
+
+[data-md-color-scheme="default"] .section-navigator__sublist a:hover {
+  background: rgba(99, 102, 241, 0.08) !important;
+  color: #4f46e5 !important;
 }
 
 /* ===== FIX 6: Left Sidebar TOC Enhanced Styling ===== */
