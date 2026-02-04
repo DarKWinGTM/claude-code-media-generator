@@ -1,7 +1,7 @@
 # 📋 TODO - Claude Code Media Generator
 
 > **Last Updated:** 2026-02-05
-> **Version:** 3.3
+> **Version:** 3.5
 
 ---
 
@@ -157,12 +157,17 @@
 
 ## 🚧 In Progress
 
-### 🔄 GitHub Pages: Section Navigator Feature (2026-02-04) ✅ IMPLEMENTED
+### 🔄 GitHub Pages: Section Navigator Feature (2026-02-05) ✅ IMPLEMENTED
 
-> **Design:** [design/pages.design.md Section 10](design/pages.design.md#10-section-navigator-feature-v16---implemented)
+> **Design:** [design/pages.design.md Section 10](design/pages.design.md#10-section-navigator-feature-v163---implemented)
 > **Changelog:** [changelog/pages.changelog.md](changelog/pages.changelog.md)
 
-**Status:** ✅ Section Navigator implemented in Right Sidebar
+**Status:** ✅ Section Navigator + Sidebar Layout Complete
+
+**Current Layout:**
+- **LEFT Sidebar**: Table of Contents (page headings)
+- **RIGHT Sidebar**: Section Navigator (major sections)
+- **Theme**: Dark Mode default (always)
 
 #### Implementation Tasks
 - [x] Design Section Navigator (pages.design.md Section 10)
@@ -170,6 +175,9 @@
 - [x] Create `overrides/partials/toc.html`
 - [x] Add Section Navigator CSS to `extra.css`
 - [x] Fix toc.html redundant wrapper bug (v1.1 - 2026-02-05)
+- [x] Fix Section Navigator appearing in both sidebars (v1.2 - 2026-02-05)
+- [x] Move TOC to left sidebar, Sections to right sidebar (v1.3 - 2026-02-05)
+- [x] Set Dark mode as default theme (v1.3 - 2026-02-05)
 - [ ] Add inline navigator component (for mobile fallback)
 - [ ] Test on Desktop (≥1220px)
 - [ ] Test on Tablet (960-1219px)
@@ -178,17 +186,29 @@
 
 ---
 
-### 🔄 GitHub Pages: Metro Cyberpunk Theme (2026-02-05) - NEW
+### ✅ GitHub Pages: Metro Cyberpunk Theme (2026-02-05) - IMPLEMENTED
 
 > **Design:** [design/pages.design.md Section 11](design/pages.design.md#11-metro-cyberpunk-theme-v18---planned)
 > **Changelog:** [changelog/pages.changelog.md](changelog/pages.changelog.md)
 > **Demo:** `demo-metro-cyberpunk-full.html`
+> **CSS Version:** extra.css v1.9.0
 
-**Goal:** ปรับ theme ทั้งหน้าเว็บให้มีความ Metro Cyberpunk อย่างเต็มรูปแบบ
+**Goal:** ปรับ theme ทั้งหน้าเว็บให้มีความ Metro Cyberpunk อย่างเต็มรูปแบบ ✅
 
 **Design Direction:**
 - Option 2: Metro Cyberpunk (Balanced - ชัดเจนแต่อ่านง่าย)
 - Terminal-style index จาก Option 3: `[1] [2] [3]` และ `> NAVIGATE_`
+
+**Implemented Features (extra.css v1.9.0):**
+- Neon color palette (Cyan, Magenta, Green, Blue, Purple, Pink)
+- HUD fonts (Share Tech Mono, Space Grotesk, DM Sans, Fira Code)
+- Terminal-style Section Navigator with `> ` prefix
+- Neon glow hover effects
+- Grid background pattern with radial glow
+- Terminal header for code blocks (`$ TERMINAL_`)
+- Glass-style cards with neon borders
+- Custom neon scrollbar
+- Subtle scanlines overlay
 
 **Target Metrics:**
 | Metric | Target |
@@ -202,11 +222,11 @@
 - [x] Research and select Cyberpunk style (Option 2: Metro Cyberpunk)
 - [x] Create demo files for preview (`demo-cyberpunk-styles.html`, `demo-metro-cyberpunk-full.html`)
 - [x] Design Metro Cyberpunk theme (pages.design.md Section 11)
-- [ ] Add CSS custom properties for Cyberpunk colors
-- [ ] Implement terminal-style navigation index `[1] [2] [3]`
-- [ ] Add neon glow effects for interactive elements
-- [ ] Implement scanline overlay (optional)
-- [ ] Update typography to HUD fonts (Share Tech Mono, Space Grotesk)
+- [x] Add CSS custom properties for Cyberpunk colors (v1.9.0)
+- [x] Implement terminal-style navigation with `> ` prefix (v1.9.0)
+- [x] Add neon glow effects for interactive elements (v1.9.0)
+- [x] Implement scanline overlay (optional) (v1.9.0)
+- [x] Update typography to HUD fonts (Share Tech Mono, Space Grotesk) (v1.9.0)
 - [ ] Test accessibility (contrast ratios)
 - [ ] Test performance on mobile devices
 - [ ] Create light mode variant (optional)

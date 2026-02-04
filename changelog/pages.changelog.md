@@ -1,12 +1,108 @@
 # Changelog - GitHub Pages Design
 
 > **Parent Document:** [pages.design.md](../design/pages.design.md)
-> **Current Version:** 2.0
+> **Current Version:** 2.2
 > **Session:** (current session)
 
 ---
 
 ## Version History
+
+### Version 2.2 (2026-02-05)
+
+**Design v2.0: Metro Cyberpunk Theme Implementation**
+
+**Session:** (current session)
+
+#### Changes
+
+- **extra.css v1.9.0: Metro Cyberpunk Theme**
+  - **Fonts Import**: Added Share Tech Mono, Space Grotesk, DM Sans, Fira Code
+  - **CSS Variables**: Added 20+ Cyberpunk color and effect variables
+  - **Typography**: HUD-style headings with neon colors (Cyan H1, Magenta H2, Green H3)
+  - **Section Navigator**: Terminal-style with `> ` prefix and neon glow hover
+  - **Header & Nav**: Glass background with cyberpunk borders
+  - **Code Blocks**: Terminal header `$ TERMINAL_` styling
+  - **Cards & Tables**: Neon border glow effects
+  - **Buttons**: Transparent with cyan neon border
+  - **Scrollbar**: Custom neon-styled scrollbar
+  - **Scanlines**: Subtle overlay effect (optional)
+  - **Grid Background**: Subtle grid pattern with radial glow
+
+- **CSS Variables Added**:
+  - `--font-cyber-heading`, `--font-cyber-body`, `--font-cyber-mono`, `--font-cyber-hud`
+  - `--cyber-bg-deep`, `--cyber-bg-dark`, `--cyber-bg-surface`, `--cyber-bg-elevated`
+  - `--neon-cyan`, `--neon-magenta`, `--neon-green`, `--neon-blue`, `--neon-purple`
+  - `--cyber-glow-cyan`, `--cyber-glow-magenta`, `--cyber-glow-green`
+  - `--cyber-border`, `--cyber-border-hover`, `--cyber-border-active`
+
+- **Design v2.0**: Updated Section 11.7 checklist - 5 items completed
+
+#### Files Modified
+
+| File | Changes |
+|------|---------|
+| `pages/docs/stylesheets/extra.css` | v1.9.0: Metro Cyberpunk Theme (3762 lines, +333 lines) |
+| `design/pages.design.md` | v2.0: Updated implementation checklist |
+| `changelog/pages.changelog.md` | This entry |
+
+#### Summary
+
+Implemented Metro Cyberpunk Theme with neon colors, HUD fonts, terminal-style navigation, and glow effects for Dark mode.
+
+---
+
+### Version 2.1 (2026-02-05)
+
+**Design v1.9: Sidebar Layout Fix + Dark Theme Default**
+
+**Session:** (current session)
+
+#### Changes
+
+- **Section 10 v1.6.3: Complete Sidebar Layout Implementation**
+  - **TOC → LEFT Sidebar**: Table of Contents now displays in Primary (Left) sidebar
+  - **Sections → RIGHT Sidebar**: Section Navigator shows only in Secondary (Right) sidebar
+  - **Dark Theme Default**: Removed `media` queries, Dark mode is always the default
+  - **Fixed Duplication Bug**: Section Navigator was appearing in both sidebars
+
+- **toc.html v1.3 Updates**:
+  - Added `toc-for-left-sidebar` class to TOC nav element
+  - Updated version comments
+
+- **extra.css Sidebar Rules**:
+  - `.md-sidebar--secondary .toc-for-left-sidebar { display: none !important; }`
+  - `.md-sidebar--primary .toc-for-left-sidebar { display: block !important; }`
+  - Styling for TOC in left sidebar (title, spacing, border)
+
+- **mkdocs.yml Theme Changes**:
+  - Removed `media: "(prefers-color-scheme: ...)"` from palette
+  - Dark mode (`slate` scheme) is now first and always default
+  - Light mode available as toggle option
+
+#### Files Modified
+
+| File | Changes |
+|------|---------|
+| `design/pages.design.md` | v1.9: Updated Section 10 with v1.6.3 implementation details |
+| `pages/overrides/partials/toc.html` | v1.3: Added toc-for-left-sidebar class |
+| `pages/docs/stylesheets/extra.css` | Added sidebar layout CSS rules |
+| `pages/mkdocs.yml` | Dark theme default (no media queries) |
+| `changelog/pages.changelog.md` | This entry |
+| `TODO.md` | Marked sidebar layout tasks as completed |
+
+#### Git Commits
+
+| Commit | Description |
+|--------|-------------|
+| `5a6e54b` | fix(ui): Section Navigator now shows only in right sidebar |
+| `2c533c9` | feat(ui): TOC in left sidebar, Sections in right sidebar + Dark default |
+
+#### Summary
+
+Fixed sidebar layout: TOC in left sidebar, Section Navigator in right sidebar only, Dark mode as default theme.
+
+---
 
 ### Version 2.0 (2026-02-05)
 
@@ -441,6 +537,11 @@ position: fixed                     position: fixed
 
 | Version | Date | Changes | Session ID |
 |---------|------|---------|------------|
+| 2.1 | 2026-02-05 | **[Sidebar Layout Fix + Dark Theme Default](#version-21-2026-02-05)** | (current) |
+| | | - TOC → left sidebar, Sections → right sidebar | |
+| | | - Dark mode as default (no media queries) | |
+| | | - Fixed duplication bug | |
+| | | Summary: Complete sidebar layout implementation | |
 | 1.8 | 2026-02-04 | **[Content Updates v1.5: Skill Documentation](#version-18-2026-02-04)** | (current) |
 | | | - Updated component versions (video_gen, image_gen, skill) | |
 | | | - Created guides/skill-installation.md | |

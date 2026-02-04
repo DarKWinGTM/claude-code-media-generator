@@ -3,7 +3,7 @@
 ## 0) Document Control
 
 > **Parent Scope:** Claude Code Media Generator Project
-> **Current Version:** 1.8
+> **Current Version:** 2.0
 > **Session:** (current session) (2026-02-05)
 
 ---
@@ -428,16 +428,21 @@ Based on Skill v3.2.1 release, the following pages need content updates:
 
 ---
 
-## 10) Section Navigator Feature (v1.6 - Implemented)
+## 10) Section Navigator Feature (v1.6.3 - Implemented)
 
 ### 10.1 Overview
 
-**Purpose:** เพิ่ม Section Navigator ใน Right Sidebar เพื่อให้ผู้ใช้สามารถ navigate ไปยังหัวข้อหลักได้รวดเร็ว
+**Purpose:** เพิ่ม Section Navigator ใน Right Sidebar และ Table of Contents ใน Left Sidebar เพื่อให้ผู้ใช้สามารถ navigate ได้รวดเร็ว
 
 **Problem Statement:**
 - ปัจจุบัน ผู้ใช้ต้องไล่ดู Left Sidebar ทีละหัวข้อ
 - ไม่มี quick access ไปยัง major sections
 - Mobile experience ขาด section navigation
+
+**Current Layout (v1.3):**
+- **LEFT Sidebar**: Table of Contents (หน้าปัจจุบัน)
+- **RIGHT Sidebar**: Section Navigator (major sections)
+- **Theme Default**: Dark Mode เสมอ (ไม่ follow system preference)
 
 ### 10.2 Design Specification
 
@@ -451,6 +456,13 @@ Based on Skill v3.2.1 release, the following pages need content updates:
 | CLI Reference | 💻 | `/cli/video_gen/` |
 | Guides | 📖 | `/guides/skill-installation/` |
 
+#### Sidebar Layout (v1.3)
+
+| Sidebar | Content | CSS Class |
+|---------|---------|-----------|
+| **LEFT (Primary)** | Table of Contents | `.toc-for-left-sidebar` |
+| **RIGHT (Secondary)** | Section Navigator | `.section-navigator-sidebar` |
+
 #### Responsive Behavior
 
 | Breakpoint | Screen Size | Navigator Location |
@@ -461,105 +473,122 @@ Based on Skill v3.2.1 release, the following pages need content updates:
 
 ### 10.3 Technical Implementation
 
-#### 10.3.1 mkdocs.yml Changes
+#### 10.3.1 mkdocs.yml Changes (v1.3)
 
 ```yaml
-features:
-  # Remove or comment out:
-  # - toc.integrate  # Disable to show Right Sidebar
+theme:
+  palette:
+    # Dark mode (ALWAYS default - modern feel)
+    - scheme: slate
+      primary: deep purple
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    # Light mode (optional toggle)
+    - scheme: default
+      primary: deep purple
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+  features:
+    # Note: toc.integrate is DISABLED to enable Right Sidebar
+    # - toc.integrate
 ```
 
-#### 10.3.2 Template Override: `overrides/partials/toc.html`
+#### 10.3.2 Template Override: `overrides/partials/toc.html` (v1.3)
 
 ```html
-<!-- Section Navigator -->
-<nav class="section-navigator" aria-label="Section Navigation">
+<!--
+  Section Navigator + Table of Contents Template
+  Version: 1.3
+  Fix v1.1: Removed redundant md-sidebar__scrollwrap wrapper
+  Fix v1.2: CSS hides Section Navigator in primary sidebar
+  Fix v1.3: TOC moved to left sidebar via CSS, Sections stays in right sidebar
+-->
+
+{% if page.toc %}
+<!-- Section Navigator - Shows in RIGHT sidebar only -->
+<nav class="section-navigator section-navigator-sidebar" aria-label="Section Navigation">
   <span class="section-navigator__title">Sections</span>
   <ul class="section-navigator__list">
-    <li><a href="{{ base_url }}/getting-started/installation/">🚀 Getting Started</a></li>
-    <li><a href="{{ base_url }}/video/overview/">🎬 Video Generation</a></li>
-    <li><a href="{{ base_url }}/image/">🖼️ Image Generation</a></li>
-    <li><a href="{{ base_url }}/cli/video_gen/">💻 CLI Reference</a></li>
-    <li><a href="{{ base_url }}/guides/skill-installation/">📖 Guides</a></li>
+    <li>
+      <a href="{{ config.site_url }}getting-started/installation/">
+        <span class="section-navigator__icon">🚀</span>
+        <span>Getting Started</span>
+      </a>
+    </li>
+    <!-- ... other sections ... -->
   </ul>
 </nav>
 
-<!-- Original TOC -->
-{% include "partials/toc-original.html" %}
+<!-- Table of Contents - Will be moved to LEFT sidebar via CSS -->
+<nav class="md-nav md-nav--secondary toc-for-left-sidebar" aria-label="Table of contents">
+  <label class="md-nav__title" for="__toc">
+    <span class="md-nav__icon md-icon"></span>
+    Table of contents
+  </label>
+  <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+    {% for toc_item in page.toc %}
+      {% include "partials/toc-item.html" %}
+    {% endfor %}
+  </ul>
+</nav>
+{% endif %}
 ```
 
-#### 10.3.3 CSS: `extra.css` additions
+#### 10.3.3 CSS: `extra.css` Sidebar Layout (v1.3)
 
 ```css
-/* Section Navigator - Desktop */
-.section-navigator {
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(129, 140, 248, 0.2);
+/* ===== SIDEBAR LAYOUT FIX v1.3 ===== */
+/* Goal: TOC in LEFT sidebar, Sections in RIGHT sidebar */
+
+/* Hide Section Navigator in Primary (Left) Sidebar */
+.md-sidebar--primary .section-navigator,
+.md-sidebar--primary .section-navigator-sidebar {
+  display: none !important;
 }
 
-.section-navigator__title {
+/* Show Section Navigator in Secondary (Right) Sidebar */
+.md-sidebar--secondary .section-navigator-sidebar {
+  display: block;
+}
+
+/* Hide TOC in Secondary (Right) Sidebar - only show Sections there */
+.md-sidebar--secondary .toc-for-left-sidebar {
+  display: none !important;
+}
+
+/* Show TOC in Primary (Left) Sidebar */
+.md-sidebar--primary .toc-for-left-sidebar {
+  display: block !important;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(129, 140, 248, 0.15);
+}
+
+/* Style TOC in left sidebar */
+.md-sidebar--primary .toc-for-left-sidebar .md-nav__title {
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--md-default-fg-color--light);
-}
-
-.section-navigator__list {
-  list-style: none;
-  padding: 0;
-  margin: 0.5rem 0 0 0;
-}
-
-.section-navigator__list li {
-  margin: 0.25rem 0;
-}
-
-.section-navigator__list a {
-  display: block;
-  padding: 0.4rem 0.6rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  color: var(--md-default-fg-color--light);
-  transition: all 0.2s;
-}
-
-.section-navigator__list a:hover {
-  background: rgba(129, 140, 248, 0.1);
-  color: var(--md-primary-fg-color);
-}
-
-/* Responsive - Inline for Tablet/Mobile */
-@media screen and (max-width: 1219px) {
-  .section-navigator-sidebar {
-    display: none;
-  }
-
-  .section-navigator-inline {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    background: rgba(129, 140, 248, 0.05);
-    border-radius: 8px;
-  }
-
-  .section-navigator-inline a {
-    padding: 0.5rem 1rem;
-    background: rgba(129, 140, 248, 0.1);
-    border-radius: 20px;
-    font-size: 0.85rem;
-  }
+  color: var(--text-muted, #94a3b8);
+  padding: 0 0.6rem;
+  margin-bottom: 0.5rem;
 }
 ```
 
 ### 10.4 Implementation Checklist
 
-- [ ] Disable `toc.integrate` in mkdocs.yml
-- [ ] Create `overrides/partials/toc.html`
-- [ ] Add Section Navigator CSS to `extra.css`
+- [x] Disable `toc.integrate` in mkdocs.yml
+- [x] Create `overrides/partials/toc.html`
+- [x] Add Section Navigator CSS to `extra.css`
+- [x] Fix toc.html redundant wrapper bug (v1.1 - 2026-02-05)
+- [x] Fix Section Navigator showing in both sidebars (v1.2 - 2026-02-05)
+- [x] Move TOC to left sidebar, keep Sections in right (v1.3 - 2026-02-05)
+- [x] Set Dark mode as default theme (v1.3 - 2026-02-05)
 - [ ] Add inline navigator component (for mobile fallback)
 - [ ] Test on Desktop (≥1220px)
 - [ ] Test on Tablet (960-1219px)
@@ -568,12 +597,23 @@ features:
 
 ### 10.5 Quality Metrics
 
-| Metric | Target |
-|--------|--------|
-| Desktop visibility | 100% (always visible in sidebar) |
-| Mobile accessibility | 100% (inline fallback) |
-| Link accuracy | 100% (all links work) |
-| Responsive transitions | Smooth (no layout shifts) |
+| Metric | Target | Current |
+|--------|--------|---------|
+| Desktop visibility | 100% (always visible in sidebar) | ✅ Achieved |
+| TOC location | Left sidebar | ✅ Achieved |
+| Sections location | Right sidebar only | ✅ Achieved |
+| Dark theme default | Always dark first | ✅ Achieved |
+| Link accuracy | 100% (all links work) | TBD |
+| Responsive transitions | Smooth (no layout shifts) | TBD |
+
+### 10.6 Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.3 | 2026-02-05 | TOC → left sidebar, Sections → right sidebar, Dark default |
+| 1.2 | 2026-02-05 | CSS hides Section Navigator in primary sidebar |
+| 1.1 | 2026-02-05 | Fixed redundant wrapper bug |
+| 1.0 | 2026-02-04 | Initial design |
 
 ---
 
@@ -677,11 +717,11 @@ features:
 
 ### 11.7 Implementation Checklist
 
-- [ ] Add CSS custom properties for Cyberpunk colors
-- [ ] Implement terminal-style navigation index
-- [ ] Add neon glow effects for interactive elements
-- [ ] Implement scanline overlay (optional)
-- [ ] Update typography to HUD fonts
+- [x] Add CSS custom properties for Cyberpunk colors (v1.9.0)
+- [x] Implement terminal-style navigation index (v1.9.0)
+- [x] Add neon glow effects for interactive elements (v1.9.0)
+- [x] Implement scanline overlay (optional) (v1.9.0)
+- [x] Update typography to HUD fonts (v1.9.0)
 - [ ] Test accessibility (contrast ratios)
 - [ ] Test performance on mobile devices
 - [ ] Create light mode variant (optional)
