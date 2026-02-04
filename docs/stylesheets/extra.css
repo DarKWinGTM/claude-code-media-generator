@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.9.1 - TOC Scroll-Spy Animation
+   v1.9.2 - Full Metro Cyberpunk Features
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -3757,6 +3757,148 @@ a, button, input, .md-nav__link, .md-tabs__link {
   );
   z-index: 9999;
   opacity: 0.3;
+}
+
+/* ===== Cyberpunk - Background Grid Pattern ===== */
+[data-md-color-scheme="slate"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(var(--cyber-grid-color, rgba(0, 255, 255, 0.03)) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cyber-grid-color, rgba(0, 255, 255, 0.03)) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* ===== Cyberpunk - Radial Glow Background ===== */
+[data-md-color-scheme="slate"] body::after {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(255, 0, 255, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(139, 92, 246, 0.02) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ===== Cyberpunk - Header Gradient Border Line ===== */
+[data-md-color-scheme="slate"] .md-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    var(--neon-cyan, #00ffff) 20%,
+    var(--neon-magenta, #ff00ff) 50%,
+    var(--neon-cyan, #00ffff) 80%,
+    transparent
+  );
+  opacity: 0.6;
+}
+
+/* ===== Cyberpunk - Logo Prefix Style ===== */
+[data-md-color-scheme="slate"] .md-header__topic:first-child .md-ellipsis::before {
+  content: '// ';
+  color: var(--neon-magenta, #ff00ff);
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace);
+  text-shadow: 0 0 8px rgba(255, 0, 255, 0.5);
+}
+
+/* ===== Cyberpunk - Content Corner Decorations ===== */
+[data-md-color-scheme="slate"] .md-content__inner {
+  position: relative;
+}
+
+[data-md-color-scheme="slate"] .md-content__inner::before,
+[data-md-color-scheme="slate"] .md-content__inner::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--neon-cyan, #00ffff);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+[data-md-color-scheme="slate"] .md-content__inner::before {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+[data-md-color-scheme="slate"] .md-content__inner::after {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+/* ===== Cyberpunk - H1 Blinking Cursor ===== */
+[data-md-color-scheme="slate"] .md-typeset h1::after {
+  content: '_';
+  color: var(--neon-cyan, #00ffff);
+  animation: blink-cursor 1s step-end infinite;
+  margin-left: 0.1em;
+}
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ===== Cyberpunk - H2 Markdown Prefix ===== */
+[data-md-color-scheme="slate"] .md-typeset h2::before {
+  content: '## ';
+  color: var(--neon-magenta, #ff00ff);
+  font-family: var(--font-cyber-mono, 'Fira Code', monospace);
+  font-weight: normal;
+  text-shadow: 0 0 8px rgba(255, 0, 255, 0.4);
+}
+
+/* ===== Cyberpunk - H3 Markdown Prefix ===== */
+[data-md-color-scheme="slate"] .md-typeset h3::before {
+  content: '### ';
+  color: var(--neon-purple, #8b5cf6);
+  font-family: var(--font-cyber-mono, 'Fira Code', monospace);
+  font-size: 0.9em;
+  font-weight: normal;
+  text-shadow: 0 0 6px rgba(139, 92, 246, 0.4);
+}
+
+/* ===== Cyberpunk - Nav Menu Hover Transform ===== */
+[data-md-color-scheme="slate"] .md-nav__link:hover {
+  transform: translateX(4px);
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+[data-md-color-scheme="slate"] .md-nav__item--active > .md-nav__link {
+  color: var(--neon-magenta, #ff00ff);
+  text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+/* ===== Cyberpunk - Card Hover Transform ===== */
+[data-md-color-scheme="slate"] .grid-card:hover,
+[data-md-color-scheme="slate"] .md-typeset .admonition:hover {
+  transform: translateY(-2px);
+}
+
+/* ===== Cyberpunk - Button Hover Transform ===== */
+[data-md-color-scheme="slate"] .md-button:hover {
+  transform: translateY(-1px);
 }
 
 /* ===== Cyberpunk - TOC Scroll-Spy Animation ===== */
