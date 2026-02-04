@@ -1,0 +1,63 @@
+<!--
+  Section Navigator + Table of Contents Template
+  Version: 1.0
+  Design: pages.design.md Section 10
+-->
+
+{% if page.toc %}
+<div class="md-sidebar__scrollwrap">
+  <div class="md-sidebar__inner">
+
+    <!-- Section Navigator (Desktop only - hidden on mobile via CSS) -->
+    <nav class="section-navigator section-navigator-sidebar" aria-label="Section Navigation">
+      <span class="section-navigator__title">Sections</span>
+      <ul class="section-navigator__list">
+        <li>
+          <a href="{{ config.site_url }}getting-started/installation/">
+            <span class="section-navigator__icon">🚀</span>
+            <span>Getting Started</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ config.site_url }}video/overview/">
+            <span class="section-navigator__icon">🎬</span>
+            <span>Video Generation</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ config.site_url }}image/">
+            <span class="section-navigator__icon">🖼️</span>
+            <span>Image Generation</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ config.site_url }}cli/video_gen/">
+            <span class="section-navigator__icon">💻</span>
+            <span>CLI Reference</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ config.site_url }}guides/skill-installation/">
+            <span class="section-navigator__icon">📖</span>
+            <span>Guides</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Original Table of Contents -->
+    <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+      <label class="md-nav__title" for="__toc">
+        <span class="md-nav__icon md-icon"></span>
+        {{ lang.t("toc.title") }}
+      </label>
+      <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+        {% for toc_item in page.toc %}
+          {% include "partials/toc-item.html" %}
+        {% endfor %}
+      </ul>
+    </nav>
+
+  </div>
+</div>
+{% endif %}

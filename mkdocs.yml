@@ -49,7 +49,7 @@ theme:
     - content.code.copy
     - content.code.select
     - toc.follow
-    - toc.integrate
+    # - toc.integrate  # Disabled to enable Right Sidebar with Section Navigator
     - announce.dismiss
   icon:
     repo: fontawesome/brands/github
