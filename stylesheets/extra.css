@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.9.15 - Section Navigator EXACT TOC Clone
+   v1.9.16 - Section Navigator EXACT TOC Clone
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -4786,10 +4786,10 @@ a, button, input, .md-nav__link, .md-tabs__link {
   border-left-color: #6366f1 !important;
 }
 
-/* ===== FIX 12: Section Navigator (Right Sidebar) - EXACT TOC Clone (v1.9.15) ===== */
-/* Make Section Navigator IDENTICAL to TOC in left sidebar - same structure, same styling */
+/* ===== FIX 12: Section Navigator = EXACT TOC Clone (v1.9.16) ===== */
+/* Copy EXACT same CSS values from TOC (.toc-for-left-sidebar) to Section Navigator */
 
-/* CRITICAL: Remove ALL ::before prefixes */
+/* CRITICAL: Remove ALL ::before/::after prefixes */
 .md-sidebar--secondary .section-navigator__title::before,
 .md-sidebar--secondary .section-navigator__title::after {
   content: none !important;
@@ -4801,109 +4801,112 @@ a, button, input, .md-nav__link, .md-tabs__link {
   display: none !important;
 }
 
-/* Base container - match TOC exactly */
-.md-sidebar--secondary .section-navigator-sidebar {
-  padding: 0 !important;
-  margin: 0 !important;
+/* ===== DARK MODE (Slate) ===== */
+
+/* Base container - EXACT match .toc-for-left-sidebar (line 4673-4675) */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator-sidebar {
+  padding: 0 0.5rem !important;
+  border-top: 1px solid rgba(0, 255, 255, 0.15) !important;
+  margin-top: 0.75rem !important;
+  padding-top: 0.75rem !important;
   background: transparent !important;
-  border: none !important;
 }
 
-/* ===== DARK MODE (Slate) - Section Navigator = TOC Clone ===== */
-
-/* Title - EXACT match TOC .md-nav__title */
+/* Title - EXACT match .toc-for-left-sidebar .md-nav__title (line 4481-4491) */
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__title {
-  display: block !important;
-  padding: 0.6rem 0.6rem 0.5rem !important;
-  margin: 0 !important;
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace) !important;
   font-size: 0.6rem !important;
-  font-weight: 700 !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.1em !important;
-  color: var(--neon-cyan, #00ffff) !important;
-  opacity: 0.9 !important;
-  font-family: inherit !important;
-  border-bottom: 1px solid rgba(0, 255, 255, 0.2) !important;
+  letter-spacing: 0.15em !important;
+  color: var(--neon-magenta, #ff00ff) !important;
+  padding: 0.4rem 0.75rem !important;
+  margin-bottom: 0.4rem !important;
+  border-bottom: 1px solid rgba(255, 0, 255, 0.2) !important;
+  display: block !important;
   background: transparent !important;
+  opacity: 1 !important;
 }
 
-/* List container - match TOC .md-nav__list */
+/* List container */
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list {
   margin: 0 !important;
-  padding: 0.4rem 0 !important;
+  padding: 0 !important;
   list-style: none !important;
 }
 
-/* List items - match TOC .md-nav__item */
+/* List items - EXACT match .md-nav__item (line 4755-4757) */
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list li {
   margin: 0 !important;
   padding: 0 !important;
-  display: block !important;
 }
 
-/* Links - EXACT match TOC .md-nav__link */
+/* Links - EXACT match .toc-for-left-sidebar .md-nav__link (line 4690-4699) */
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a {
   display: block !important;
-  padding: 0.4rem 0.6rem !important;
-  margin: 0 !important;
-  font-size: 0.7rem !important;
-  font-weight: 400 !important;
-  line-height: 1.4 !important;
+  padding: 0.35rem 0.75rem !important;
+  margin: 0.1rem 0 !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
   color: rgba(255, 255, 255, 0.7) !important;
   text-decoration: none !important;
   border-left: 2px solid transparent !important;
   border-radius: 0 !important;
-  transition: all 0.15s ease !important;
+  transition: all 0.2s ease !important;
   background: transparent !important;
   box-shadow: none !important;
   transform: none !important;
   font-family: inherit !important;
-  /* Remove flex layout - just text like TOC */
-  align-items: unset !important;
-  gap: 0 !important;
+  line-height: 1.4 !important;
 }
 
-/* Hover - EXACT match TOC hover */
+/* Hover - EXACT match line 4727-4731 */
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a:hover {
+  background: rgba(0, 255, 255, 0.08) !important;
   color: var(--neon-cyan, #00ffff) !important;
-  background: rgba(0, 255, 255, 0.05) !important;
-  border-left: 2px solid rgba(0, 255, 255, 0.4) !important;
+  border-left-color: rgba(0, 255, 255, 0.3) !important;
   box-shadow: none !important;
   transform: none !important;
 }
 
-/* Active/Current - EXACT match TOC active */
+/* Active - EXACT match line 4734-4738 */
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a[aria-current="page"],
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a.active {
+  background: rgba(0, 255, 255, 0.1) !important;
   color: var(--neon-cyan, #00ffff) !important;
-  background: rgba(0, 255, 255, 0.08) !important;
-  border-left: 2px solid var(--neon-cyan, #00ffff) !important;
+  border-left-color: var(--neon-cyan, #00ffff) !important;
   font-weight: 600 !important;
-  box-shadow: none !important;
 }
 
-/* ===== LIGHT MODE (Default) - Section Navigator = TOC Clone ===== */
+/* ===== LIGHT MODE (Default) ===== */
 
-/* Title */
-[data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__title {
-  display: block !important;
-  padding: 0.6rem 0.6rem 0.5rem !important;
-  margin: 0 !important;
-  font-size: 0.6rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.1em !important;
-  color: #6366f1 !important;
-  opacity: 0.9 !important;
-  font-family: inherit !important;
-  border-bottom: 1px solid rgba(99, 102, 241, 0.2) !important;
+/* Base container */
+[data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator-sidebar {
+  padding: 0 0.5rem !important;
+  border-top: 1px solid rgba(99, 102, 241, 0.15) !important;
+  margin-top: 0.75rem !important;
+  padding-top: 0.75rem !important;
   background: transparent !important;
+}
+
+/* Title - EXACT match line 4761-4762 */
+[data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__title {
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace) !important;
+  font-size: 0.6rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.15em !important;
+  color: #6366f1 !important;
+  padding: 0.4rem 0.75rem !important;
+  margin-bottom: 0.4rem !important;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.2) !important;
+  display: block !important;
+  background: transparent !important;
+  opacity: 1 !important;
 }
 
 /* List container */
 [data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list {
   margin: 0 !important;
-  padding: 0.4rem 0 !important;
+  padding: 0 !important;
   list-style: none !important;
 }
 
@@ -4911,47 +4914,43 @@ a, button, input, .md-nav__link, .md-tabs__link {
 [data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list li {
   margin: 0 !important;
   padding: 0 !important;
-  display: block !important;
 }
 
-/* Links */
+/* Links - EXACT match line 4765-4766 */
 [data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a {
   display: block !important;
-  padding: 0.4rem 0.6rem !important;
-  margin: 0 !important;
-  font-size: 0.7rem !important;
-  font-weight: 400 !important;
-  line-height: 1.4 !important;
+  padding: 0.35rem 0.75rem !important;
+  margin: 0.1rem 0 !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
   color: rgba(55, 65, 81, 0.8) !important;
   text-decoration: none !important;
   border-left: 2px solid transparent !important;
   border-radius: 0 !important;
-  transition: all 0.15s ease !important;
+  transition: all 0.2s ease !important;
   background: transparent !important;
   box-shadow: none !important;
   transform: none !important;
   font-family: inherit !important;
-  align-items: unset !important;
-  gap: 0 !important;
+  line-height: 1.4 !important;
 }
 
-/* Hover */
+/* Hover - EXACT match line 4777-4780 */
 [data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a:hover {
+  background: rgba(99, 102, 241, 0.08) !important;
   color: #6366f1 !important;
-  background: rgba(99, 102, 241, 0.05) !important;
-  border-left: 2px solid rgba(99, 102, 241, 0.4) !important;
+  border-left-color: rgba(99, 102, 241, 0.3) !important;
   box-shadow: none !important;
   transform: none !important;
 }
 
-/* Active/Current */
+/* Active - EXACT match line 4783-4786 */
 [data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a[aria-current="page"],
 [data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a.active {
+  background: rgba(99, 102, 241, 0.1) !important;
   color: #6366f1 !important;
-  background: rgba(99, 102, 241, 0.08) !important;
-  border-left: 2px solid #6366f1 !important;
+  border-left-color: #6366f1 !important;
   font-weight: 600 !important;
-  box-shadow: none !important;
 }
 
-/* ===== End Metro Cyberpunk Design Overhaul v1.9.15 =====  */
+/* ===== End Section Navigator = EXACT TOC Clone v1.9.16 ===== */
