@@ -1,6 +1,6 @@
 # Pages - TODO
 
-> **Last Updated:** 2026-02-05
+> **Last Updated:** 2026-02-06
 
 ---
 
@@ -48,7 +48,23 @@
 
 ## 📋 Tasks To Do
 
-*No pending tasks*
+### Skill Orchestrator Agent ⭐ (Pending Design Review)
+
+**Design:** [agent.design.md](agent.design.md)
+**Status:** ⏸️ Pending Review - ต้องตัดสินใจ Open Questions ก่อน
+
+**Open Questions ต้องตอบ:**
+- [ ] Q1: Scope - `/generative` only หรือ all skills?
+- [ ] Q2: Intelligence - Thin หรือ Full orchestrator?
+- [ ] Q3: Integration - Standalone agent หรือ extend skill.md?
+- [ ] Q4: Activation - Auto-detect หรือ explicit command?
+
+**Implementation Tasks (หลัง Review):**
+- [ ] Phase 1: Intent parsing (video/image/config)
+- [ ] Phase 2: Parameter extraction
+- [ ] Phase 3: Basic error handling
+- [ ] Phase 4: Context awareness
+- [ ] Phase 5: Smart prompt optimization
 
 ---
 
@@ -65,3 +81,4 @@
 | 2026-02-05 | Designed Skill-First Approach - saved to design.md |
 | 2026-02-05 | **Implemented Skill-First Approach** - All content changes complete |
 | 2026-02-05 | **v1.4.0 - Removed Sidebar background** - Transparent sidebars |
+| 2026-02-06 | **Created agent.design.md** - Skill Orchestrator Agent design (Pending Review) |
