@@ -21,3 +21,8 @@
 !.github/
 !.github/**
 
+# Pages documentation files
+!TODO.md
+!changelog.md
+!design.md
+
