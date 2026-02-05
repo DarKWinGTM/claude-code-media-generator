@@ -29,8 +29,8 @@ theme:
     text: Plus Jakarta Sans
     code: JetBrains Mono
   features:
-    - navigation.tabs
-    - navigation.tabs.sticky
+    # - navigation.tabs          # Disabled: Want all sections in left sidebar
+    # - navigation.tabs.sticky   # Disabled: No tabs
     - navigation.sections
     - navigation.expand
     - navigation.path
