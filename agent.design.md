@@ -1,359 +1,255 @@
-# Skill Orchestrator Agent Design
+# Skill Navigator Agent Design
 
-> **Current Version:** 0.1.0
+> **Current Version:** 0.2.0
 > **Last Updated:** 2026-02-06
-> **Status:** Draft - Pending Review
+> **Status:** Draft - Simplified Design
 
 ---
 
 ## 0. Document Control
 
 > **Parent Scope:** Claude Code Media Generator
-> **Design Type:** Architecture Proposal
-> **Review Required:** Yes - before implementation
+> **Design Type:** Agent Architecture
+> **Approach:** Simple Auto-detect
 
 ---
 
 ## 1. Overview
 
-### 1.1 Problem Statement
+### 1.1 Concept
 
-ปัจจุบัน `/generative` skill ต้องการให้ user รู้ syntax และเรียกใช้เอง ทำให้:
-- User ต้องเรียนรู้ command syntax
-- ไม่มี context awareness จาก conversation
-- Error handling เป็นภาระของ user
-- ไม่มี intelligent parameter optimization
+**Skill Navigator** - Agent ที่ทำหน้าที่เรียบง่าย:
+- **ฟัง** conversation context
+- **ตรวจจับ** เมื่อ user ต้องการสร้าง media
+- **เรียก** skill อัตโนมัติ
 
-### 1.2 Proposed Solution
+### 1.2 Philosophy
 
-สร้าง **Skill Orchestrator Agent** ที่ทำหน้าที่:
-- Parse natural language intent
-- Extract และ validate parameters
-- Invoke skill commands อัตโนมัติ
-- Handle errors และ recovery
+```
+Simple > Complex
+Auto-detect > Explicit commands
+Assistant > Controller
+```
 
 ### 1.3 Goals
 
 | Goal | Description |
 |------|-------------|
-| **UX Improvement** | User ใช้ภาษาธรรมชาติได้ |
-| **Error Recovery** | จัดการ errors อัตโนมัติ |
-| **Context Awareness** | รู้ context จาก conversation |
-| **Skill Enhancement** | เสริมประสิทธิภาพ skill ที่มีอยู่ |
+| **ลด friction** | User ไม่ต้องจำ command syntax |
+| **Auto-detect** | เข้าใจ intent จากการสนทนา |
+| **Seamless** | เหมือนคุยกับ assistant ที่เข้าใจ |
 
 ---
 
-## 2. Current State Analysis
+## 2. Design Principle
 
-### 2.1 Current Flow (Without Agent)
+### 2.1 ❌ ไม่ทำ (Rejected Approach)
 
 ```
-User Prompt
+User → Orchestrator (complex) → Skill
+         ↓
+    Parse → Validate → Plan → Execute → Handle
+```
+
+**ปัญหา:** สร้าง layer ซับซ้อนที่ไม่จำเป็น
+
+### 2.2 ✅ ทำ (Simplified Approach)
+
+```
+User (สนทนาปกติ)
   ↓
-Claude Code (Main)
+Skill Navigator (ฟังและตรวจจับ)
   ↓
-Manual: /generative video "prompt"
-  ↓
-Skill Script (video_gen.py)
+เรียก Skill อัตโนมัติ
   ↓
 Result
 ```
 
-### 2.2 Pain Points
-
-| Issue | Impact | Priority |
-|-------|--------|----------|
-| Manual Invocation | User ต้องรู้ syntax | High |
-| Context Loss | Skill ไม่รู้ conversation context | Medium |
-| No Intelligence | ไม่มี reasoning | Medium |
-| Error Handling | User ต้อง debug เอง | High |
+**ข้อดี:** ง่าย, ตรงไปตรงมา, ไม่มี overhead
 
 ---
 
-## 3. Proposed Architecture
+## 3. Agent Definition
 
-### 3.1 Target Flow (With Orchestrator)
-
-```
-User Intent (Natural Language)
-  ↓
-Skill Orchestrator Agent
-  ↓
-Intent Analysis → Parameter Extraction → Validation
-  ↓
-Skill Invocation (Automated)
-  ↓
-Result Processing → Error Recovery → User Response
-```
-
-### 3.2 Architecture Options
-
-#### Option A: Thin Orchestrator (Recommended for v1)
-
-**Description:** Lightweight agent ที่ parse intent และ invoke skill
-
-```
-User: "สร้างวิดีโอแมวกำลังเล่นบนดาวอังคาร 16:9"
-  ↓
-Orchestrator (Thin)
-  → Parse: video generation
-  → Extract: prompt, aspect="16:9"
-  → Invoke: /generative video "cat playing on Mars" --aspect 16:9
-  ↓
-Result
-```
-
-| Pros | Cons |
-|------|------|
-| Simple, low overhead | Limited error recovery |
-| Fast execution | No complex reasoning |
-| Easy to maintain | Basic intelligence |
-
-#### Option B: Full Orchestrator (Future)
-
-**Description:** Full intelligence agent พร้อม reasoning และ optimization
-
-```
-User: "อยากได้วิดีโอโปรโมทร้านกาแฟ สไตล์ cinematic"
-  ↓
-Orchestrator (Full)
-  → Understand business context
-  → Generate optimized prompt
-  → Select best model
-  → Execute with retry
-  → Validate output
-  ↓
-Curated Result
-```
-
-| Pros | Cons |
-|------|------|
-| Best UX | Higher latency |
-| Smart error recovery | More complex |
-| Context aware | Higher token cost |
-
-#### Option C: Hybrid (Adaptive)
-
-```
-Simple Request → Thin Orchestrator → Fast
-Complex Request → Full Orchestrator → Quality
-```
-
-### 3.3 Recommendation
-
-**Phase 1:** Option A (Thin Orchestrator)
-- Quick to implement
-- Immediate UX improvement
-- Can evolve to Option B/C later
-
----
-
-## 4. Detailed Design
-
-### 4.1 Agent Definition
+### 3.1 Core Identity
 
 ```yaml
-name: "media-orchestrator"
-type: "skill-orchestrator"
-description: |
-  Orchestrates media generation skills based on natural language.
-  Automatically invokes /generative commands.
+name: "skill-navigator"
+type: "auto-detect-assistant"
+purpose: |
+  ฟัง conversation และเรียก /generative skill
+  อัตโนมัติเมื่อตรวจจับว่า user ต้องการสร้าง media
 
-capabilities:
-  - intent_parsing
-  - parameter_extraction
-  - skill_invocation
-  - error_recovery
-
-supported_skills:
-  - /generative video
-  - /generative image
-  - /generative config
+behavior:
+  - listen: true        # ฟัง context
+  - auto_detect: true   # ตรวจจับ intent
+  - invoke_skill: true  # เรียก skill เอง
 ```
 
-### 4.2 Intent Mapping
+### 3.2 Capabilities
 
-| User Intent Pattern | Action | Parameters |
-|---------------------|--------|------------|
-| "สร้างวิดีโอ...", "generate video..." | video | prompt, aspect, duration |
-| "ทำรูป...", "create image..." | image | prompt, aspect, count |
-| "ตั้งค่า API", "setup config" | config | - |
-| "เช็ค status", "check API" | check | - |
+| Capability | Description |
+|------------|-------------|
+| **Context Listening** | อ่าน conversation ที่ผ่านมา |
+| **Intent Detection** | ตรวจจับว่า user ต้องการสร้าง video/image |
+| **Skill Invocation** | เรียก /generative command |
+| **Result Relay** | ส่ง result กลับ user |
 
-### 4.3 Workflow Phases
+### 3.3 ไม่ทำ (Out of Scope)
 
-**Phase 1: Intent Analysis**
-- Parse natural language
-- Classify: video | image | config | unknown
-- Calculate confidence score
-
-**Phase 2: Parameter Extraction**
-- Extract explicit parameters
-- Infer implicit parameters (defaults)
-- Validate completeness
-
-**Phase 3: Pre-flight Check**
-- Verify API availability
-- Check rate limits
-- Validate parameters
-
-**Phase 4: Execution**
-- Invoke skill command
-- Monitor progress
-- Handle errors/retries
-
-**Phase 5: Result Processing**
-- Validate output
-- Format response
-- Provide recommendations
-
-### 4.4 Error Recovery Strategy
-
-| Error Type | Recovery Action |
-|------------|-----------------|
-| API Key Invalid | Prompt: `/generative config setup` |
-| Rate Limited | Wait + retry with backoff |
-| Invalid Parameters | Suggest corrections |
-| Generation Failed | Retry with adjusted prompt |
-| Network Error | Exponential backoff retry |
+- ❌ Complex orchestration
+- ❌ Multi-step planning
+- ❌ Parameter optimization
+- ❌ Error recovery strategies
 
 ---
 
-## 5. Multi-Perspective Analysis
+## 4. Intent Detection
 
-### 5.1 Developer Perspective
+### 4.1 Trigger Patterns
 
-| Aspect | Assessment |
-|--------|------------|
-| Complexity | Medium - agent definition + integration |
-| Maintainability | Good - clear separation of concerns |
-| Testability | Need unit tests for intent parsing |
-| Integration | Use Task tool with subagent_type |
+| Pattern | Intent | Action |
+|---------|--------|--------|
+| "สร้างวิดีโอ...", "ทำวิดีโอ...", "generate video..." | Video | `/generative video` |
+| "สร้างรูป...", "ทำรูป...", "generate image..." | Image | `/generative image` |
+| "อยากได้วิดีโอ...", "ต้องการรูป..." | Media | Detect type from context |
 
-### 5.2 Security Perspective
+### 4.2 Detection Flow
 
-| Aspect | Assessment |
-|--------|------------|
-| API Key Safety | Agent must not expose keys in logs |
-| Prompt Injection | Sanitize user input before passing |
-| Resource Limits | Rate limiting to prevent abuse |
-| Validation | Validate parameters before execute |
+```
+1. ฟัง: User พูดอะไร?
+   ↓
+2. ตรวจจับ: มี keyword/intent สร้าง media ไหม?
+   ↓
+3. ถ้าใช่ → สกัด prompt และ parameters
+   ↓
+4. เรียก skill
+```
 
-### 5.3 Architect Perspective
+### 4.3 Examples
 
-| Aspect | Assessment |
-|--------|------------|
-| Scalability | Good - agent pattern scales well |
-| Extensibility | Excellent - easy to add new skills |
-| Separation | Orchestrator separate from skill logic |
-| Future-proofing | Ready for MCP migration |
+**Example 1: Direct Request**
+```
+User: "สร้างวิดีโอแมวเดินบนดวงจันทร์"
+Agent: ตรวจจับ → video, prompt="แมวเดินบนดวงจันทร์"
+Action: /generative video "cat walking on the moon"
+```
+
+**Example 2: Conversational**
+```
+User: "ผมอยากได้รูปสำหรับโปรโมทร้านกาแฟ สไตล์ minimal"
+Agent: ตรวจจับ → image, prompt="coffee shop promotion, minimal style"
+Action: /generative image "coffee shop promotion minimal style"
+```
+
+**Example 3: No Intent**
+```
+User: "วิดีโอที่ส่งไปเมื่อกี้เป็นยังไงบ้าง?"
+Agent: ไม่ตรวจจับ intent สร้าง → ไม่ทำอะไร
+Action: (none - ตอบคำถามปกติ)
+```
 
 ---
 
-## 6. Integration Design
+## 5. Integration
 
-### 6.1 Current Skill Structure
+### 5.1 File Structure
 
 ```
 .claude/skills/generate-video/
-├── skill.md
+├── skill.md              # Existing skill definition
+├── navigator.md          # NEW: Navigator agent definition
 ├── video_gen.py
 ├── image_gen.py
 └── check_api.py
 ```
 
-### 6.2 Proposed Addition
-
-```
-.claude/skills/generate-video/
-├── skill.md          # Updated with orchestrator info
-├── orchestrator.md   # NEW: Agent definition
-├── video_gen.py
-├── image_gen.py
-└── check_api.py
-```
-
-### 6.3 Skill.md Updates
+### 5.2 navigator.md Content
 
 ```markdown
-## Orchestrator Mode (Optional)
+# Skill Navigator
 
-Natural language → Orchestrator → Skill invocation
+## Trigger
+เมื่อ user แสดง intent ต้องการสร้าง video หรือ image
 
-Example:
-  User: "วิดีโอแมวเดินบนดวงจันทร์ 4 วินาที"
-  Orchestrator: /generative video "cat walking on moon" --duration 4
+## Behavior
+1. ตรวจจับ intent จาก conversation
+2. สกัด prompt และ parameters
+3. เรียก /generative command
+4. ส่ง result กลับ user
+
+## Keywords
+- สร้างวิดีโอ, ทำวิดีโอ, generate video
+- สร้างรูป, ทำรูป, generate image
+- อยากได้, ต้องการ + video/image context
 ```
+
+---
+
+## 6. Scope & Limitations
+
+### 6.1 In Scope (v1)
+
+- ✅ Auto-detect video/image generation intent
+- ✅ Extract prompt from natural language
+- ✅ Invoke /generative skill
+- ✅ Basic parameter extraction (aspect, duration)
+
+### 6.2 Out of Scope (v1)
+
+- ❌ Complex prompt optimization
+- ❌ Multi-step generation workflow
+- ❌ Error recovery/retry logic
+- ❌ Config/setup assistance
+
+### 6.3 Future (v2+)
+
+- Context-aware prompt enhancement
+- Learn from user preferences
+- Suggest improvements
 
 ---
 
 ## 7. Implementation Plan
 
-### 7.1 Phases
+### 7.1 Simple 2-Phase Approach
 
-| Phase | Feature | Effort | Priority |
-|-------|---------|--------|----------|
-| 1 | Intent parsing (video/image/config) | Low | High |
-| 2 | Parameter extraction | Low | High |
-| 3 | Basic error handling | Medium | Medium |
-| 4 | Context awareness | Medium | Low |
-| 5 | Smart prompt optimization | High | Low |
+| Phase | Task | Effort |
+|-------|------|--------|
+| **1** | สร้าง navigator.md พร้อม intent patterns | Low |
+| **2** | ทดสอบ auto-detection กับ real conversations | Low |
 
-### 7.2 Dependencies
+### 7.2 Files to Create
 
-- Claude Code Task tool with subagent_type support
-- Existing `/generative` skill scripts
-- API configuration (check_api.py)
+1. `navigator.md` - Agent definition
+2. Update `skill.md` - Reference to navigator
 
-### 7.3 Testing Strategy
+### 7.3 Testing
 
-| Test Type | Coverage |
+| Test Case | Expected |
 |-----------|----------|
-| Unit | Intent parsing accuracy |
-| Integration | Skill invocation flow |
-| E2E | Natural language → Result |
-| Error | Recovery scenarios |
+| "สร้างวิดีโอแมว" | Detect → invoke video |
+| "ทำรูปร้านกาแฟ" | Detect → invoke image |
+| "วิดีโอเมื่อกี้เป็นยังไง" | No detection |
 
 ---
 
-## 8. Open Questions
+## 8. Decision Summary
 
-ต้องตัดสินใจก่อน implement:
-
-### Q1: Scope
-- Orchestrator สำหรับ `/generative` เท่านั้น?
-- หรือ generic สำหรับทุก skill?
-
-### Q2: Intelligence Level
-- Thin (parse + invoke)?
-- Full (reasoning + optimization)?
-
-### Q3: Integration Point
-- Standalone agent?
-- Extend skill.md?
-
-### Q4: Activation
-- Auto-detect intent?
-- Explicit command (e.g., `/orchestrate`)?
+| Question | Decision | Rationale |
+|----------|----------|-----------|
+| Complexity | Simple (not orchestrator) | ลด overhead, ตรงประเด็น |
+| Approach | Auto-detect | User ไม่ต้องจำ command |
+| Scope | `/generative` only | Focus, prove concept |
+| Integration | navigator.md แยกไฟล์ | Clear separation |
 
 ---
 
-## 9. Decision Log
+## 9. Next Steps
 
-| Date | Decision | Rationale |
-|------|----------|-----------|
-| 2026-02-06 | Created design document | Initial analysis complete |
-| - | Pending: Architecture choice | Awaiting review |
-| - | Pending: Scope decision | Awaiting review |
-
----
-
-## 10. Next Steps
-
-1. **Review** - ตรวจสอบ design document นี้
-2. **Decide** - ตอบ Open Questions (Section 8)
-3. **Prototype** - สร้าง proof-of-concept
-4. **Implement** - ตาม Implementation Plan (Section 7)
+1. **สร้าง navigator.md** - Agent definition file
+2. **อัปเดต skill.md** - Reference navigator
+3. **ทดสอบ** - Try with real conversations
 
 ---
 

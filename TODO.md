@@ -48,23 +48,20 @@
 
 ## 📋 Tasks To Do
 
-### Skill Orchestrator Agent ⭐ (Pending Design Review)
+### Skill Navigator Agent ⭐ (Ready to Implement)
 
-**Design:** [agent.design.md](agent.design.md)
-**Status:** ⏸️ Pending Review - ต้องตัดสินใจ Open Questions ก่อน
+**Design:** [agent.design.md](agent.design.md) v0.2.0
+**Changelog:** [agent.changelog.md](agent.changelog.md)
+**Status:** ✅ Design Complete - พร้อม implement
 
-**Open Questions ต้องตอบ:**
-- [ ] Q1: Scope - `/generative` only หรือ all skills?
-- [ ] Q2: Intelligence - Thin หรือ Full orchestrator?
-- [ ] Q3: Integration - Standalone agent หรือ extend skill.md?
-- [ ] Q4: Activation - Auto-detect หรือ explicit command?
+**Concept:** Simple auto-detect agent
+- ฟัง conversation context
+- ตรวจจับ intent สร้าง video/image
+- เรียก /generative skill อัตโนมัติ
 
-**Implementation Tasks (หลัง Review):**
-- [ ] Phase 1: Intent parsing (video/image/config)
-- [ ] Phase 2: Parameter extraction
-- [ ] Phase 3: Basic error handling
-- [ ] Phase 4: Context awareness
-- [ ] Phase 5: Smart prompt optimization
+**Implementation Tasks:**
+- [ ] Phase 1: สร้าง navigator.md - Agent definition file
+- [ ] Phase 2: ทดสอบ auto-detection กับ real conversations
 
 ---
 
@@ -81,4 +78,5 @@
 | 2026-02-05 | Designed Skill-First Approach - saved to design.md |
 | 2026-02-05 | **Implemented Skill-First Approach** - All content changes complete |
 | 2026-02-05 | **v1.4.0 - Removed Sidebar background** - Transparent sidebars |
-| 2026-02-06 | **Created agent.design.md** - Skill Orchestrator Agent design (Pending Review) |
+| 2026-02-06 | **Created agent.design.md v0.1.0** - Skill Orchestrator (rejected - too complex) |
+| 2026-02-06 | **Simplified to Skill Navigator v0.2.0** - Simple auto-detect agent design |

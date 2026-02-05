@@ -1,7 +1,7 @@
 # Agent Design Changelog
 
 > **Parent Document:** [agent.design.md](agent.design.md)
-> **Current Version:** 0.1.0
+> **Current Version:** 0.2.0
 > **Last Updated:** 2026-02-06
 
 ---
@@ -10,41 +10,85 @@
 
 | Version | Date | Changes | Summary |
 |---------|------|---------|---------|
-| 0.1.0 | 2026-02-06 | **Initial Design Draft** | สร้าง design document สำหรับ Skill Orchestrator Agent |
+| 0.2.0 | 2026-02-06 | **Simplified to Skill Navigator** | ลบ Orchestrator concept, ใช้ auto-detect แทน |
+| 0.1.0 | 2026-02-06 | **Initial Design Draft** | สร้าง design document (Orchestrator approach - rejected) |
 
 ---
 
-## Version 0.1.0: Initial Design Draft
+## Version 0.2.0: Simplified to Skill Navigator
 
 **Date:** 2026-02-06
-**Status:** Draft - Pending Review
+**Status:** Draft - Simplified Design
 
-### Changes
+### Major Changes
 
-**Created:**
-- `agent.design.md` - Complete design document
+**❌ Removed (Orchestrator Concept):**
+- Complex orchestration layer
+- Multi-step workflow (Parse → Validate → Plan → Execute → Handle)
+- 4 Open Questions about complexity levels
+- Heavy architecture proposal
 
-**Content Sections:**
-1. Overview - Problem statement และ goals
-2. Current State Analysis - Pain points
-3. Proposed Architecture - 3 options (Thin/Full/Hybrid)
-4. Detailed Design - Agent definition, intent mapping, workflow
-5. Multi-Perspective Analysis - Developer/Security/Architect views
-6. Integration Design - Skill structure updates
-7. Implementation Plan - Phases และ dependencies
-8. Open Questions - 4 questions ต้องตัดสินใจ
-9. Decision Log - Track decisions
-10. Next Steps - Review → Decide → Prototype → Implement
+**✅ Added (Skill Navigator Concept):**
+- Simple 3-step flow: ฟัง → ตรวจจับ → เรียก skill
+- Auto-detect approach
+- navigator.md file proposal
+- Simple 2-phase implementation plan
 
-### Recommendation
-- **Phase 1:** Option A (Thin Orchestrator)
-- **Rationale:** Quick to implement, low risk, can evolve later
+### New Design Philosophy
 
-### Open Questions
-1. Scope: `/generative` only or all skills?
-2. Intelligence: Thin or Full?
-3. Integration: Standalone or extend skill.md?
-4. Activation: Auto-detect or explicit command?
+```
+Simple > Complex
+Auto-detect > Explicit commands
+Assistant > Controller
+```
+
+### Simplified Architecture
+
+```
+User (สนทนาปกติ)
+  ↓
+Skill Navigator (ฟังและตรวจจับ)
+  ↓
+เรียก Skill อัตโนมัติ
+  ↓
+Result
+```
+
+### Decision Summary
+
+| Question | Decision |
+|----------|----------|
+| Complexity | Simple (not orchestrator) |
+| Approach | Auto-detect |
+| Scope | `/generative` only |
+| Integration | navigator.md แยกไฟล์ |
+
+### Rationale
+
+User feedback ระบุว่า Orchestrator approach ซับซ้อนเกินไป:
+- ไม่ต้องการ complex layer
+- ต้องการแค่ agent ที่ฟังและเรียก skill อัตโนมัติ
+- Focus on "assistance" not "orchestration"
+
+---
+
+## Version 0.1.0: Initial Design Draft (Rejected)
+
+**Date:** 2026-02-06
+**Status:** ❌ Rejected - Too Complex
+
+### Content (Historical)
+
+- Proposed "Skill Orchestrator Agent"
+- 3 architecture options: Thin/Full/Hybrid
+- 4 Open Questions requiring decisions
+- Complex 5-phase implementation plan
+
+### Why Rejected
+
+- Over-engineered for the use case
+- User wanted simple auto-detect, not orchestration
+- Unnecessary complexity and overhead
 
 ---
 
