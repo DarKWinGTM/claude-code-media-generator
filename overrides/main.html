@@ -60,6 +60,69 @@
     document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.add('loaded');
 
+      // ============================================================
+      // Section Navigator v3.0 - JavaScript Injection
+      // Injects Section Navigator into RIGHT sidebar ONLY
+      // This prevents duplicate "Sections" in left sidebar
+      // ============================================================
+      function injectSectionNavigator() {
+        const secondarySidebar = document.querySelector('.md-sidebar--secondary .md-sidebar__inner');
+        if (!secondarySidebar) return;
+
+        // Check if already injected
+        if (secondarySidebar.querySelector('.section-navigator')) return;
+
+        // Get base URL from config
+        const baseUrl = '{{ config.site_url }}';
+
+        // Create Section Navigator HTML
+        const sectionNav = document.createElement('nav');
+        sectionNav.className = 'section-navigator md-nav md-nav--secondary';
+        sectionNav.setAttribute('aria-label', 'Sections');
+        sectionNav.innerHTML = `
+          <label class="md-nav__title">
+            <span class="md-nav__icon md-icon"></span>
+            Sections
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            <li class="md-nav__item">
+              <a href="${baseUrl}getting-started/installation/" class="md-nav__link">
+                <span class="section-icon">🚀</span> Getting Started
+              </a>
+            </li>
+            <li class="md-nav__item">
+              <a href="${baseUrl}video/overview/" class="md-nav__link">
+                <span class="section-icon">🎬</span> Video Generation
+              </a>
+            </li>
+            <li class="md-nav__item">
+              <a href="${baseUrl}image/" class="md-nav__link">
+                <span class="section-icon">🖼️</span> Image Generation
+              </a>
+            </li>
+            <li class="md-nav__item">
+              <a href="${baseUrl}cli/video_gen/" class="md-nav__link">
+                <span class="section-icon">💻</span> CLI Reference
+              </a>
+            </li>
+            <li class="md-nav__item">
+              <a href="${baseUrl}guides/skill-installation/" class="md-nav__link">
+                <span class="section-icon">📚</span> Guides
+              </a>
+            </li>
+          </ul>
+        `;
+
+        // Insert at the TOP of the sidebar (before TOC)
+        secondarySidebar.insertBefore(sectionNav, secondarySidebar.firstChild);
+      }
+
+      // Run immediately
+      injectSectionNavigator();
+
+      // Also run after navigation (for instant loading feature)
+      document.addEventListener('DOMContentSwitch', injectSectionNavigator);
+
       // CSS v1.8.1: Sidebar + Footer Layout Consistency
       // Sidebar: fixed, z-index 100, top matches header height
       // Footer: centered with margins to avoid overlap
