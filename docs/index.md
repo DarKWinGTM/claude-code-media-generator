@@ -112,50 +112,39 @@ Create stunning videos and images using Google Veo & Imagen APIs
 
 ## :material-rocket-launch-outline: Quick Start
 
-=== ":material-package-variant: Install"
+=== ":material-star: Skill (Recommended)"
+
+    The easiest way - use the `/generative` skill in Claude Code:
 
     ```bash
-    # Clone the repository
-    git clone https://github.com/DarKWinGTM/claude-code-media-generator.git
-    cd claude-code-media-generator
+    # Generate an image
+    /generative image "A beautiful sunset over mountains"
 
-    # Install dependencies
-    pip install requests google-auth
+    # Generate a video
+    /generative video "Ocean waves crashing on the beach"
+
+    # With options
+    /generative video "Cinematic sunset" --preset quality
     ```
 
-=== ":material-key-variant: Setup API"
+    [:material-arrow-right: Learn more about Skills](skills/overview.md){ .md-button .md-button--primary }
+
+=== ":material-console: Script"
+
+    For automation and advanced users:
 
     ```bash
     # Option 1: Environment variable
     export GOOGLE_API_KEY="your-api-key"
 
-    # Option 2: Command line
-    python video_gen.py "prompt" --api-key "your-key"
-    ```
-
-=== ":material-video-box: Generate Video"
-
-    ```bash
-    # Simple text-to-video
+    # Generate video
     python video_gen.py "A cat playing in a sunlit garden"
 
     # With quality preset
     python video_gen.py "Cinematic sunset over mountains" --preset quality
-
-    # With GCS storage
-    python video_gen.py "Your prompt" \
-        --storage-uri "gs://PROJECT_ID-media-output/videos/"
     ```
 
-=== ":material-image-plus: Generate Image"
-
-    ```bash
-    # Simple text-to-image
-    python image_gen.py "A futuristic city at sunset"
-
-    # With aspect ratio
-    python image_gen.py "Portrait of a robot" --aspect-ratio 9:16
-    ```
+    [:material-arrow-right: Advanced Usage](advanced/index.md){ .md-button }
 
 ---
 
@@ -216,13 +205,21 @@ Create stunning videos and images using Google Veo & Imagen APIs
 
 <div class="grid cards" markdown>
 
+-   :material-magic-staff:{ .lg .middle } **Using Skills**
+
+    ---
+
+    The easiest way to generate media - `/generative` skill for Claude Code.
+
+    [:material-arrow-right: Start with Skills](skills/overview.md)
+
 -   :material-download:{ .lg .middle } **Getting Started**
 
     ---
 
     Installation, authentication setup, and creating your first video in minutes.
 
-    [:material-arrow-right: Start here](getting-started/installation.md)
+    [:material-arrow-right: Get Started](getting-started/installation.md)
 
 -   :material-video-vintage:{ .lg .middle } **Video Generation**
 
@@ -240,13 +237,21 @@ Create stunning videos and images using Google Veo & Imagen APIs
 
     [:material-arrow-right: Image docs](image/index.md)
 
--   :material-console:{ .lg .middle } **CLI Reference**
+-   :material-console:{ .lg .middle } **Advanced Usage**
 
     ---
 
-    Complete command-line documentation for all tools.
+    Direct scripts, automation, CI/CD integration for power users.
 
-    [:material-arrow-right: CLI docs](cli/video_gen.md)
+    [:material-arrow-right: Advanced docs](advanced/index.md)
+
+-   :material-book-open-variant:{ .lg .middle } **Guides**
+
+    ---
+
+    GCS storage, presets, troubleshooting, and more.
+
+    [:material-arrow-right: View guides](guides/gcs-storage.md)
 
 </div>
 

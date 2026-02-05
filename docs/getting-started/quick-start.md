@@ -12,67 +12,100 @@ Generate your first video and image in minutes.
 
 ---
 
-## :movie_camera: Video Generation
+## Choose Your Method
 
-### Your First Video
+=== ":material-star: Using Skill (Recommended)"
 
-```bash
-# Set API key
-export GOOGLE_API_KEY="AIzaSy..."
+    The easiest way to generate media - just type and go!
 
-# Generate a simple video
-python video_gen.py "A cat walking in a garden"
-```
+    ### Generate an Image
 
-Output:
-```
-🎬 Video Generation via Veo API
-Mode: text_to_video
-Model: veo-3.1-generate-preview
-...
-✅ Video saved: generated_videos/video_20260123_123456_0.mp4
-```
+    ```bash
+    /generative image "A beautiful sunset over mountains"
+    ```
 
-### With Options
+    **Output:**
+    ```
+    🖼️ Generating image...
+    ✅ Image saved: generated_images/image_20260123_123456.png
+    ```
 
-```bash
-# Higher quality, longer duration
-python video_gen.py "A cat walking in a garden" \
-  --model veo-3.1-generate-preview \
-  --duration 8 \
-  --aspect-ratio 16:9
+    ### Generate a Video
 
-# Use preset
-python video_gen.py "A cat walking" --preset quality
-```
+    ```bash
+    /generative video "Ocean waves crashing on the beach"
+    ```
 
----
+    **Output:**
+    ```
+    🎬 Generating video...
+    ✅ Video saved: generated_videos/video_20260123_123456.mp4
+    ```
 
-## :material-image: Image Generation
+    ### With Options
 
-### Your First Image
+    ```bash
+    # Higher quality video
+    /generative video "A cat walking in a garden" --preset quality
 
-```bash
-# Generate an image
-python image_gen.py "A futuristic city at sunset"
-```
+    # Different aspect ratio
+    /generative image "Portrait of a robot" --aspect-ratio 9:16
+    ```
 
-Output:
-```
-🖼️ Image Generation via Gemini
-Model: gemini-3-pro-image-preview
-...
-✅ Image saved: generated_images/image_20260123_123456.png
-```
+    [:material-arrow-right: More Skill Examples](../skills/examples.md){ .md-button }
 
-### With Options
+=== ":material-console: Using Script (Advanced)"
 
-```bash
-# Different aspect ratio and resolution
-python image_gen.py "A futuristic city" \
-  --aspect-ratio 16:9 \
-  --image-size 2K
-```
+    For automation or when not using Claude Code.
+
+    ### Generate an Image
+
+    ```bash
+    # Set API key
+    export GOOGLE_API_KEY="AIzaSy..."
+
+    # Generate image
+    python image_gen.py "A futuristic city at sunset"
+    ```
+
+    **Output:**
+    ```
+    🖼️ Image Generation via Gemini
+    Model: gemini-3-pro-image-preview
+    ...
+    ✅ Image saved: generated_images/image_20260123_123456.png
+    ```
+
+    ### Generate a Video
+
+    ```bash
+    # Generate video
+    python video_gen.py "A cat walking in a garden"
+    ```
+
+    **Output:**
+    ```
+    🎬 Video Generation via Veo API
+    Mode: text_to_video
+    Model: veo-3.1-generate-preview
+    ...
+    ✅ Video saved: generated_videos/video_20260123_123456.mp4
+    ```
+
+    ### With Options
+
+    ```bash
+    # Higher quality, longer duration
+    python video_gen.py "A cat walking in a garden" \
+      --model veo-3.1-generate-preview \
+      --duration 8 \
+      --aspect-ratio 16:9
+
+    # Use preset
+    python video_gen.py "A cat walking" --preset quality
+    ```
+
+    [:material-arrow-right: Advanced Usage](../advanced/index.md){ .md-button }
 
 ---
 
@@ -80,13 +113,17 @@ python image_gen.py "A futuristic city" \
 
 Before generating, check the cost:
 
-```bash
-# Video cost estimate
-python video_gen.py "prompt" --estimate-cost
+=== ":material-star: Skill"
 
-# Image cost estimate
-python image_gen.py "prompt" --estimate-cost
-```
+    ```bash
+    /generative video "prompt" --estimate-cost
+    ```
+
+=== ":material-console: Script"
+
+    ```bash
+    python video_gen.py "prompt" --estimate-cost
+    ```
 
 ---
 
@@ -101,19 +138,17 @@ Presets provide optimized settings for different use cases:
 | `extend` | Video extension | veo-2.0 | 8s |
 | `budget` | Cost saving | veo-2.0 | 5s |
 
-```bash
-python video_gen.py "A cat walking" --preset quality
-```
+=== ":material-star: Skill"
 
----
+    ```bash
+    /generative video "A cat walking" --preset quality
+    ```
 
-## :mag: Check Your API
+=== ":material-console: Script"
 
-Verify your API key works:
-
-```bash
-python check_api.py --key "$GOOGLE_API_KEY"
-```
+    ```bash
+    python video_gen.py "A cat walking" --preset quality
+    ```
 
 ---
 
@@ -125,7 +160,7 @@ python check_api.py --key "$GOOGLE_API_KEY"
 
 ### "Model not found"
 - Check model name spelling
-- Use `python check_api.py` to list available models
+- Use `/generative info` or `python check_api.py` to list available models
 
 ### "Rate limit exceeded"
 - Wait a few seconds and retry
@@ -135,6 +170,7 @@ python check_api.py --key "$GOOGLE_API_KEY"
 
 ## Next Steps
 
+- [Using Skills](../skills/overview.md) - Master the `/generative` skill
 - [Generation Modes](../video/modes.md) - Explore all 8 video modes
 - [Video Models](../video/models.md) - Compare Veo 2.0 vs 3.1
 - [Presets](../guides/presets.md) - Learn about presets

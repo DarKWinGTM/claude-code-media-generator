@@ -174,4 +174,4 @@ python video_gen.py "prompt" --project work
 
 - [Quick Start](quick-start.md) - Generate your first video
 - [GCS Storage](../guides/gcs-storage.md) - Set up cloud storage
-- [Skill Installation](../guides/skill-installation.md) - Install Claude Code Skill
+- [Using Skills](../skills/overview.md) - Use the `/generative` skill

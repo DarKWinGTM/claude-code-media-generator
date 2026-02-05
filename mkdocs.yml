@@ -109,6 +109,11 @@ nav:
     - Installation: getting-started/installation.md
     - Authentication: getting-started/authentication.md
     - Quick Start: getting-started/quick-start.md
+  - Using Skills:
+    - Overview: skills/overview.md
+    - Commands: skills/commands.md
+    - Examples: skills/examples.md
+    - Configuration: skills/configuration.md
   - Video Generation:
     - Overview: video/overview.md
     - Generation Modes: video/modes.md
@@ -117,12 +122,13 @@ nav:
     - Video Extension: video/extension.md
   - Image Generation:
     - Overview: image/index.md
-  - CLI Reference:
-    - video_gen.py: cli/video_gen.md
-    - image_gen.py: cli/image_gen.md
-    - check_api.py: cli/check_api.md
+  - Advanced Usage:
+    - Overview: advanced/index.md
+    - video_gen.py: advanced/video_gen.md
+    - image_gen.py: advanced/image_gen.md
+    - check_api.py: advanced/check_api.md
+    - Automation: advanced/automation.md
   - Guides:
-    - Skill Installation: guides/skill-installation.md
     - GCS Storage: guides/gcs-storage.md
     - Presets: guides/presets.md
     - Troubleshooting: guides/troubleshooting.md

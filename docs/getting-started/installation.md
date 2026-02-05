@@ -5,33 +5,86 @@
 - **Python** 3.8+
 - **pip** package manager
 - **Google Account** with billing enabled (for video generation)
+- **Claude Code** (recommended for skill usage)
 
 ---
 
-## Install Dependencies
+## Choose Your Installation Method
 
-```bash
-# Core dependencies
-pip install requests google-auth google-auth-oauthlib
+=== ":material-star: Skill (Recommended)"
 
-# For GCS uploads (optional)
-pip install google-cloud-storage
-```
+    The easiest way to use this project - install the `/generative` skill for Claude Code.
 
----
+    ### Step 1: Clone Repository
 
-## Download Scripts
+    ```bash
+    git clone https://github.com/DarKWinGTM/claude-code-media-generator.git
+    cd claude-code-media-generator
+    ```
 
-```bash
-# Clone the repository
-git clone https://github.com/DarKWinGTM/claude-code-media-generator.git
-cd claude-code-media-generator
+    ### Step 2: Install Dependencies
 
-# Or download individual scripts
-curl -O https://raw.githubusercontent.com/DarKWinGTM/claude-code-media-generator/main/video_gen.py
-curl -O https://raw.githubusercontent.com/DarKWinGTM/claude-code-media-generator/main/image_gen.py
-curl -O https://raw.githubusercontent.com/DarKWinGTM/claude-code-media-generator/main/check_api.py
-```
+    ```bash
+    pip install requests google-auth google-auth-oauthlib
+    ```
+
+    ### Step 3: Install Skill
+
+    ```bash
+    # Create skill directory
+    mkdir -p ~/.claude/skills/generative
+
+    # Copy skill file
+    cp .claude/skills/generative/SKILL.md ~/.claude/skills/generative/
+
+    # Copy scripts to your working directory
+    cp video_gen.py image_gen.py config.py video_utils.py /path/to/your/project/
+    ```
+
+    ### Step 4: Restart Claude Code
+
+    Restart Claude Code to detect the new skill.
+
+    ### Step 5: Verify
+
+    ```bash
+    /generative info
+    ```
+
+    [:material-arrow-right: Skill Configuration](../skills/configuration.md){ .md-button }
+
+=== ":material-console: Script (Advanced)"
+
+    For automation, CI/CD, or use without Claude Code.
+
+    ### Step 1: Clone Repository
+
+    ```bash
+    git clone https://github.com/DarKWinGTM/claude-code-media-generator.git
+    cd claude-code-media-generator
+    ```
+
+    ### Step 2: Install Dependencies
+
+    ```bash
+    # Core dependencies
+    pip install requests google-auth google-auth-oauthlib
+
+    # For GCS uploads (optional)
+    pip install google-cloud-storage
+    ```
+
+    ### Step 3: Verify
+
+    ```bash
+    # Check Python version
+    python3 --version
+
+    # Test video_gen.py help
+    python video_gen.py --help
+    ```
+
+    [:material-arrow-right: Advanced Usage](../advanced/index.md){ .md-button }
 
 ---
 
@@ -45,25 +98,12 @@ claude-code-media-generator/
 ├── config.py           # Configuration module
 ├── video_utils.py      # Video utilities
 ├── config.json         # Your configuration
-├── config.example.json # Example config
-├── design/             # Design documents
-├── changelog/          # Version history
-└── generated_videos/   # Output directory
-```
-
----
-
-## Verify Installation
-
-```bash
-# Check Python version
-python3 --version
-
-# Test video_gen.py help
-python video_gen.py --help
-
-# Test API connectivity (requires API key)
-python check_api.py --key "YOUR_API_KEY"
+├── .claude/
+│   └── skills/
+│       └── generative/
+│           └── SKILL.md  # Skill definition (1,500+ lines)
+├── generated_videos/   # Output directory
+└── generated_images/   # Output directory
 ```
 
 ---
@@ -72,4 +112,4 @@ python check_api.py --key "YOUR_API_KEY"
 
 - [Authentication](authentication.md) - Set up your API key
 - [Quick Start](quick-start.md) - Generate your first video
-- [Skill Installation](../guides/skill-installation.md) - Install Claude Code Skill
+- [Using Skills](../skills/overview.md) - Learn about the `/generative` skill
