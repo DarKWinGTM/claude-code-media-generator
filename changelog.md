@@ -1,6 +1,6 @@
 # Pages Changelog
 
-> **Current Version:** 1.3.0
+> **Current Version:** 1.4.0
 > **Last Updated:** 2026-02-05
 
 ---
@@ -9,10 +9,40 @@
 
 | Version | Date | Changes | Summary |
 |---------|------|---------|---------|
+| 1.4.0 | 2026-02-05 | **Sidebar Transparent** | ลบ sidebar background ทั้งหมด |
 | 1.3.0 | 2026-02-05 | **Skill-First Implementation** | เพิ่ม skills/, advanced/ sections, ปรับ docs ทั้งหมด |
 | 1.2.0 | 2026-02-05 | **Left Sidebar Fix + Skill-First Design** | ปิด navigation.tabs, เพิ่ม spacing, ออกแบบ Skill-First |
 | 1.1.0 | 2026-02-05 | **Sidebar Enhancement Options (Reverted)** | Options A, B, C - Reverted เพราะเว็บพัง |
 | 1.0.0 | 2026-02-05 | **Clean Slate Release** | ลบ Section Navigator ทั้งหมด, สร้าง documentation files |
+
+---
+
+## Version 1.4.0: Sidebar Transparent
+
+**Date:** 2026-02-05
+
+### Changes
+
+**Removed - Sidebar Background:**
+- ลบ `.md-sidebar` glass panel background (Dark mode)
+- ลบ Light mode sidebar background (rgba และ solid colors)
+- ทำให้ sidebar transparent ทั้ง dark และ light mode
+
+**CSS Changes:**
+- Line 235-239: Removed glass panel background
+- Line 2198-2201: Light mode sidebar → transparent
+- Line 2360-2363: Professional light mode → transparent
+- Line 3087-3092: Light mode no glass → transparent
+
+**Files Modified:**
+- `docs/stylesheets/extra.css`: 4 sidebar background rules changed to transparent
+- `design.md`: Updated to v1.4.0 with sidebar styling info
+- `TODO.md`: Added v1.4.0 completed tasks
+
+### Philosophy
+- Cleaner, less cluttered look
+- Sidebar blends with main content area
+- Focus on content, not UI elements
 
 ---
 

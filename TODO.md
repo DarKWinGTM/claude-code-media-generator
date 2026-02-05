@@ -33,29 +33,22 @@
 - ✅ วิเคราะห์และออกแบบ Skill-First Approach
 - ✅ บันทึกลง design.md Section 2.2, 2.3, 6.2
 
+### Skill-First Implementation v1.3.0 (2026-02-05)
+- ✅ สร้าง skills/ folder (4 ไฟล์ใหม่)
+- ✅ สร้าง advanced/ folder (2 ใหม่ + 3 ย้ายจาก cli/)
+- ✅ ปรับ index.md, installation.md, quick-start.md เป็น Skill-First
+- ✅ อัปเดต mkdocs.yml navigation
+- ✅ ลบ guides/skill-installation.md
+
+### Sidebar Transparent v1.4.0 (2026-02-05)
+- ✅ ลบ Sidebar background ออกทั้งหมด (Dark และ Light mode)
+- ✅ อัปเดต extra.css - 4 จุดที่มี .md-sidebar background
+
 ---
 
 ## 📋 Tasks To Do
 
-### Skill-First Content Creation ⭐ (Completed)
-- [x] สร้าง skills/overview.md - Skill overview
-- [x] สร้าง skills/commands.md - All /generative commands
-- [x] สร้าง skills/examples.md - Usage examples
-- [x] สร้าง skills/configuration.md - Configuration options
-- [x] สร้าง advanced/index.md - Advanced usage overview
-- [x] สร้าง advanced/automation.md - Automation guide
-
-### Content Updates (Skill-First) - Completed
-- [x] ปรับ index.md - เพิ่ม Skill tab เป็นตัวเลือกแรกใน Quick Start
-- [x] ปรับ installation.md - เน้น Skill installation ก่อน
-- [x] ปรับ quick-start.md - แยก 2 tabs: Skill (หลัก) vs Script (ทางเลือก)
-- [x] ย้าย cli/*.md ไป advanced/
-- [x] ลบ guides/skill-installation.md (ย้ายเนื้อหาไป skills/)
-
-### mkdocs.yml Updates - Completed
-- [x] เพิ่ม "Using Skills" section ใน nav
-- [x] เปลี่ยน "CLI Reference" เป็น "Advanced Usage"
-- [x] ปรับ Guides section
+*No pending tasks*
 
 ---
 
@@ -71,3 +64,4 @@
 | 2026-02-05 | Added spacing between main sections (16px) |
 | 2026-02-05 | Designed Skill-First Approach - saved to design.md |
 | 2026-02-05 | **Implemented Skill-First Approach** - All content changes complete |
+| 2026-02-05 | **v1.4.0 - Removed Sidebar background** - Transparent sidebars |

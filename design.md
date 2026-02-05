@@ -1,6 +1,6 @@
 # Pages Design - Claude Code Media Generator Documentation
 
-> **Current Version:** 1.1
+> **Current Version:** 1.4.0
 > **Last Updated:** 2026-02-05
 
 ---
@@ -15,57 +15,37 @@ MkDocs Material documentation site สำหรับ Claude Code Media Generato
 
 ## 2. Navigation Structure
 
-### 2.1 Current Structure (6 หัวข้อหลัก)
+### 2.1 Current Structure (v1.3.0 - Skill-First Implemented) ✅
 
 | # | Section | URL Path | Sub-pages |
 |---|---------|----------|-----------|
 | 1 | Home | `/` | - |
 | 2 | Getting Started | `/getting-started/` | Installation, Authentication, Quick Start |
-| 3 | Video Generation | `/video/` | Overview, Modes, Models, Reference Images, Extension |
-| 4 | Image Generation | `/image/` | Overview |
-| 5 | CLI Reference | `/cli/` | video_gen.py, image_gen.py, check_api.py |
-| 6 | Guides | `/guides/` | Skill Installation, GCS Storage, Presets, Troubleshooting |
+| 3 | **Using Skills** ⭐ | `/skills/` | Overview, Commands, Examples, Configuration |
+| 4 | Video Generation | `/video/` | Overview, Modes, Models, Reference Images, Extension |
+| 5 | Image Generation | `/image/` | Overview |
+| 6 | **Advanced Usage** ⭐ | `/advanced/` | Overview, video_gen.py, image_gen.py, check_api.py, Automation |
+| 7 | Guides | `/guides/` | GCS Storage, Presets, Troubleshooting |
 
-### 2.2 Proposed Structure: Skill-First Approach ⭐
+### 2.2 Skill-First Philosophy
 
 **หลักการ:**
 - Skill = วิธีใช้งานหลัก (ง่าย, Claude Code native)
 - Script = วิธีใช้ทางเลือก (สำหรับ automation, advanced users)
 
-| # | Section | Sub-pages | Notes |
-|---|---------|-----------|-------|
-| 1 | Home | - | ปรับให้เน้น Skill |
-| 2 | Getting Started | Installation, Authentication, Quick Start | Installation เน้น Skill |
-| 3 | **Using Skills** ⭐ | Overview, Commands, Examples, Configuration | หัวข้อใหม่! |
-| 4 | Video Generation | Overview, Modes, Models, Reference Images, Extension | คงเดิม |
-| 5 | Image Generation | Overview | คงเดิม |
-| 6 | **Advanced Usage** ⭐ | CLI Reference, Direct Scripts, Automation | รวม CLI มาที่นี่ |
-| 7 | Guides | GCS Storage, Presets, Troubleshooting | ย้าย Skill Installation ออก |
-
-### 2.3 Content Changes Required
-
-| หน้า | เปลี่ยนแปลง |
-|------|------------|
-| **index.md** | เพิ่ม Skill tab เป็นตัวเลือกแรกใน Quick Start |
-| **installation.md** | เน้น Skill installation ก่อน, Script เป็นตัวเลือก |
-| **quick-start.md** | แยก 2 tabs: Skill (หลัก) vs Script (ทางเลือก) |
-| **ใหม่: skills/overview.md** | สร้างใหม่ - Skill overview |
-| **ใหม่: skills/commands.md** | สร้างใหม่ - All /generative commands |
-| **ใหม่: skills/examples.md** | สร้างใหม่ - Usage examples |
-| **ใหม่: advanced/index.md** | สร้างใหม่ - Advanced usage overview |
-| **ย้าย: cli/*.md** | ย้ายไป advanced/ |
-
-### 2.4 Current Sidebar Behavior
+### 2.3 Sidebar Behavior
 
 **Left Sidebar (Primary):**
 - แสดงหัวข้อหลักทั้งหมด (ปิด navigation.tabs แล้ว)
 - Expandable/collapsible sections
 - Active section expanded อัตโนมัติ
 - เพิ่ม padding-bottom: 16px ระหว่างหัวข้อหลัก
+- **Background: Transparent** (v1.4.0) ✅
 
 **Right Sidebar (Secondary):**
 - Table of Contents ของหน้าปัจจุบัน
 - Auto-generated จาก headings
+- **Background: Transparent** (v1.4.0) ✅
 
 ---
 
@@ -107,7 +87,19 @@ features:
 
 ---
 
-## 5. Design Decisions
+## 5. CSS Styling
+
+### 5.1 Sidebar Styling (v1.4.0)
+
+| Component | Style | Notes |
+|-----------|-------|-------|
+| `.md-sidebar` | `background: transparent` | ลบ glass panel ออก |
+| Light Mode Sidebar | `background: transparent` | ทั้ง dark และ light mode |
+| Sidebar Scrollwrap | `background: transparent` | Inner scroll area |
+
+---
+
+## 6. Design Decisions
 
 | Decision | Choice | Reason |
 |----------|--------|--------|
@@ -115,22 +107,37 @@ features:
 | navigation.tabs | ปิด | ให้ Left Sidebar แสดงหัวข้อหลักทั้งหมด |
 | Section Spacing | 16px | เพิ่มระยะห่างระหว่างหัวข้อหลัก |
 | **Skill-First** | ใช้ | Skill เป็นวิธีหลัก, Script เป็นทางเลือก |
+| **Sidebar Background** | Transparent | Cleaner look (v1.4.0) |
 
 ---
 
-## 6. File Structure
-
-### 6.1 Current Structure
+## 7. File Structure
 
 ```
 pages/
 ├── docs/
 │   ├── index.md
 │   ├── getting-started/
+│   │   ├── installation.md   # Skill-first tabs
+│   │   ├── authentication.md
+│   │   └── quick-start.md    # Skill-first tabs
+│   ├── skills/               # ⭐ NEW (v1.3.0)
+│   │   ├── overview.md
+│   │   ├── commands.md
+│   │   ├── examples.md
+│   │   └── configuration.md
 │   ├── video/
 │   ├── image/
-│   ├── cli/              # จะย้ายไป advanced/
+│   ├── advanced/             # ⭐ NEW (v1.3.0)
+│   │   ├── index.md
+│   │   ├── video_gen.md
+│   │   ├── image_gen.md
+│   │   ├── check_api.md
+│   │   └── automation.md
 │   └── guides/
+│       ├── gcs-storage.md
+│       ├── presets.md
+│       └── troubleshooting.md
 ├── overrides/
 ├── docs/stylesheets/
 │   └── extra.css
@@ -138,35 +145,6 @@ pages/
 ├── design.md
 ├── TODO.md
 └── changelog.md
-```
-
-### 6.2 Proposed Structure (Skill-First)
-
-```
-pages/
-├── docs/
-│   ├── index.md          # ปรับให้เน้น Skill
-│   ├── getting-started/
-│   │   ├── installation.md   # เน้น Skill installation
-│   │   ├── authentication.md
-│   │   └── quick-start.md    # Skill-first tabs
-│   ├── skills/           # ใหม่! ⭐
-│   │   ├── overview.md
-│   │   ├── commands.md
-│   │   ├── examples.md
-│   │   └── configuration.md
-│   ├── video/
-│   ├── image/
-│   ├── advanced/         # ใหม่! ⭐
-│   │   ├── index.md
-│   │   ├── video_gen.md  # ย้ายจาก cli/
-│   │   ├── image_gen.md  # ย้ายจาก cli/
-│   │   ├── check_api.md  # ย้ายจาก cli/
-│   │   └── automation.md
-│   └── guides/
-│       ├── gcs-storage.md
-│       ├── presets.md
-│       └── troubleshooting.md
 ```
 
 ---
