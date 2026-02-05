@@ -1,36 +1,18 @@
 {% extends "base.html" %}
 
 {% block extrahead %}
-  <!-- Preconnect for faster font loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <!-- Meta for better SEO -->
   <meta name="author" content="DarKWinGTM">
   <meta name="robots" content="index, follow">
-
-  <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ config.site_name }}">
   <meta property="og:description" content="{{ config.site_description }}">
   <meta property="og:url" content="{{ config.site_url }}">
   <meta property="og:image" content="{{ config.site_url }}assets/og-image.png">
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ config.site_name }}">
   <meta name="twitter:description" content="{{ config.site_description }}">
-{% endblock %}
-
-{% block announce %}
-  <!-- Announcement banner (optional - uncomment to use) -->
-  <!--
-  <div class="announcement-banner">
-    <span class="twemoji">🎉</span>
-    <strong>New!</strong> Veo 3.1 support with 8 generation modes
-    <a href="video/modes/">Learn more →</a>
-  </div>
-  -->
 {% endblock %}
 
 {% block content %}
@@ -39,164 +21,4 @@
 
 {% block footer %}
   {{ super() }}
-
-  <!-- Custom footer scripts -->
-  <script>
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href !== '#') {
-          e.preventDefault();
-          const target = document.querySelector(href);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }
-      });
-    });
-
-    // Add loaded class for animations
-    document.addEventListener('DOMContentLoaded', () => {
-      document.body.classList.add('loaded');
-
-      // ============================================================
-      // Section Navigator v3.0 - JavaScript Injection
-      // Injects Section Navigator into RIGHT sidebar ONLY
-      // This prevents duplicate "Sections" in left sidebar
-      // ============================================================
-      function injectSectionNavigator() {
-        const secondarySidebar = document.querySelector('.md-sidebar--secondary .md-sidebar__inner');
-        if (!secondarySidebar) return;
-
-        // Check if already injected
-        if (secondarySidebar.querySelector('.section-navigator')) return;
-
-        // Get base URL from config
-        const baseUrl = '{{ config.site_url }}';
-
-        // Create Section Navigator HTML
-        const sectionNav = document.createElement('nav');
-        sectionNav.className = 'section-navigator md-nav md-nav--secondary';
-        sectionNav.setAttribute('aria-label', 'Sections');
-        sectionNav.innerHTML = `
-          <label class="md-nav__title">
-            <span class="md-nav__icon md-icon"></span>
-            Sections
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            <li class="md-nav__item">
-              <a href="${baseUrl}getting-started/installation/" class="md-nav__link">
-                <span class="section-icon">🚀</span> Getting Started
-              </a>
-            </li>
-            <li class="md-nav__item">
-              <a href="${baseUrl}video/overview/" class="md-nav__link">
-                <span class="section-icon">🎬</span> Video Generation
-              </a>
-            </li>
-            <li class="md-nav__item">
-              <a href="${baseUrl}image/" class="md-nav__link">
-                <span class="section-icon">🖼️</span> Image Generation
-              </a>
-            </li>
-            <li class="md-nav__item">
-              <a href="${baseUrl}cli/video_gen/" class="md-nav__link">
-                <span class="section-icon">💻</span> CLI Reference
-              </a>
-            </li>
-            <li class="md-nav__item">
-              <a href="${baseUrl}guides/skill-installation/" class="md-nav__link">
-                <span class="section-icon">📚</span> Guides
-              </a>
-            </li>
-          </ul>
-        `;
-
-        // Insert at the TOP of the sidebar (before TOC)
-        secondarySidebar.insertBefore(sectionNav, secondarySidebar.firstChild);
-      }
-
-      // Run immediately
-      injectSectionNavigator();
-
-      // Also run after navigation (for instant loading feature)
-      document.addEventListener('DOMContentSwitch', injectSectionNavigator);
-
-      // CSS v1.8.1: Sidebar + Footer Layout Consistency
-      // Sidebar: fixed, z-index 100, top matches header height
-      // Footer: centered with margins to avoid overlap
-      function fixSidebarPosition() {
-        // Get actual header height from MkDocs CSS variable or computed style
-        const header = document.querySelector('.md-header');
-        const headerHeight = header ? header.offsetHeight + 'px' : '48px';
-
-        const sidebars = document.querySelectorAll('.md-sidebar');
-
-        // Force fixed positioning on all sidebars with high z-index
-        sidebars.forEach(sidebar => {
-          sidebar.style.position = 'fixed';
-          sidebar.style.top = headerHeight;  // Match header height exactly
-          sidebar.style.height = `calc(100vh - ${headerHeight})`;
-          sidebar.style.maxHeight = `calc(100vh - ${headerHeight})`;
-          sidebar.style.zIndex = '100';  // Above footer
-          sidebar.style.paddingTop = '0';  // Remove extra padding
-        });
-
-        // Primary sidebar (left)
-        const primarySidebar = document.querySelector('.md-sidebar--primary');
-        if (primarySidebar) {
-          primarySidebar.style.left = '0';
-        }
-
-        // Secondary sidebar (right - TOC)
-        const secondarySidebar = document.querySelector('.md-sidebar--secondary');
-        if (secondarySidebar) {
-          secondarySidebar.style.right = '0';
-        }
-
-        // Footer: centered with margins
-        const footer = document.querySelector('.md-footer');
-        if (footer) {
-          footer.style.marginLeft = '12.5rem';
-          footer.style.marginRight = '12.5rem';
-          footer.style.zIndex = '50';  // Below sidebar
-        }
-      }
-
-      // Run immediately
-      fixSidebarPosition();
-
-      // Also run after a short delay (in case MkDocs sets it later)
-      setTimeout(fixSidebarPosition, 100);
-      setTimeout(fixSidebarPosition, 500);
-
-      // Watch for DOM changes that might reset the style
-      const navObserver = new MutationObserver(fixSidebarPosition);
-      const primaryNav = document.querySelector('.md-nav--primary');
-      if (primaryNav) {
-        navObserver.observe(primaryNav, { attributes: true, attributeFilter: ['style'] });
-      }
-
-      // Intersection Observer for fade-in animations
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, observerOptions);
-
-      // Observe cards and sections
-      document.querySelectorAll('.grid.cards > li, .hero-section, .md-content > *').forEach(el => {
-        observer.observe(el);
-      });
-    });
-  </script>
 {% endblock %}
