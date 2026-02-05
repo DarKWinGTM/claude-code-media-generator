@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.9.16 - Section Navigator EXACT TOC Clone
+   v1.9.17 - Remove duplicate Section Navigator CSS
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -3631,44 +3631,11 @@ a, button, input, .md-nav__link, .md-tabs__link {
   backdrop-filter: blur(10px);
 }
 
-[data-md-color-scheme="slate"] .section-navigator__title {
-  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace);
-  color: var(--neon-cyan, #00ffff);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-[data-md-color-scheme="slate"] .section-navigator__title::before {
-  content: "> ";
-  color: var(--neon-green, #00ff00);
-}
+/* v1.9.17: REMOVED - These generic selectors override FIX 12 specific selectors */
+/* Title and ::before now handled by FIX 12 with .md-sidebar--secondary prefix */
 
 /* Terminal-style nav links with index numbers */
-[data-md-color-scheme="slate"] .section-navigator__list a {
-  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace);
-  color: var(--text-secondary, #e2e8f0);
-  background: transparent;
-  border: 1px solid transparent;
-  transition: all 0.2s ease;
-  position: relative;
-}
-
-/* Neon hover effect */
-[data-md-color-scheme="slate"] .section-navigator__list a:hover {
-  color: var(--neon-cyan, #00ffff);
-  background: rgba(0, 255, 255, 0.1);
-  border-color: var(--cyber-border-hover, rgba(0, 255, 255, 0.4));
-  box-shadow: var(--cyber-glow-cyan);
-}
-
-/* Active state */
-[data-md-color-scheme="slate"] .section-navigator__list a[aria-current="page"],
-[data-md-color-scheme="slate"] .section-navigator__list a.active {
-  color: var(--neon-cyan, #00ffff);
-  background: rgba(0, 255, 255, 0.15);
-  border-left: 3px solid var(--neon-cyan, #00ffff);
-  box-shadow: var(--cyber-glow-cyan);
-}
+/* v1.9.17: REMOVED - Now handled by FIX 12 */
 
 /* ===== Cyberpunk - Header ===== */
 [data-md-color-scheme="slate"] .md-header {
@@ -4152,26 +4119,7 @@ a, button, input, .md-nav__link, .md-tabs__link {
 }
 
 /* ===== Section Navigator - HUD Terminal Style ===== */
-[data-md-color-scheme="slate"] .section-navigator__title {
-  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace) !important;
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--neon-cyan, #00ffff);
-  text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
-}
-
-/* Add "> " prefix like demo */
-[data-md-color-scheme="slate"] .section-navigator__title::before {
-  content: '> ';
-  color: var(--neon-magenta, #ff00ff);
-}
-
-/* Section Navigator Links */
-[data-md-color-scheme="slate"] .section-navigator__list a {
-  font-family: var(--font-cyber-body, 'DM Sans', sans-serif) !important;
-  font-size: 0.85rem;
-}
+/* v1.9.17: REMOVED - Now handled by FIX 12 with .md-sidebar--secondary prefix */
 
 /* ===== TOC Title - HUD Style ===== */
 [data-md-color-scheme="slate"] .toc-for-left-sidebar .md-nav__title,
@@ -4283,77 +4231,7 @@ a, button, input, .md-nav__link, .md-tabs__link {
   border-right: none !important;
 }
 
-/* ===== FIX 2: Section Navigator Consistency in Right Sidebar ===== */
-[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator-sidebar {
-  background: transparent !important;
-  padding: 0.5rem 0.8rem !important;
-}
-
-[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__title {
-  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace) !important;
-  font-size: 0.65rem !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.15em !important;
-  color: var(--neon-cyan, #00ffff) !important;
-  text-shadow: 0 0 8px rgba(0, 255, 255, 0.4) !important;
-  padding: 0.4rem 0 !important;
-  margin-bottom: 0.5rem !important;
-  border-bottom: 1px solid rgba(0, 255, 255, 0.15) !important;
-}
-
-[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__title::before {
-  content: '> ' !important;
-  color: var(--neon-magenta, #ff00ff) !important;
-}
-
-/* ===== FIX 3: Section Navigator Items - Compact & Consistent ===== */
-[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list li {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a {
-  font-family: var(--font-cyber-body, 'DM Sans', sans-serif) !important;
-  font-size: 0.78rem !important;
-  color: rgba(255, 255, 255, 0.75) !important;
-  padding: 0.4rem 0.5rem !important;
-  margin: 0 !important;
-  border-radius: 0.25rem !important;
-  border-left: 2px solid transparent !important;
-  transition: all 0.2s ease !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.5rem !important;
-}
-
-[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a:hover {
-  color: var(--neon-cyan, #00ffff) !important;
-  background: rgba(0, 255, 255, 0.08) !important;
-  border-left-color: var(--neon-cyan, #00ffff) !important;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3) !important;
-  transform: translateX(2px) !important;
-}
-
-[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a[aria-current="page"],
-[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a.active {
-  color: var(--neon-cyan, #00ffff) !important;
-  background: rgba(0, 255, 255, 0.12) !important;
-  border-left-color: var(--neon-cyan, #00ffff) !important;
-  font-weight: 600 !important;
-  text-shadow: 0 0 8px rgba(0, 255, 255, 0.5) !important;
-}
-
-/* ===== FIX 4: Section Navigator Icon Styling ===== */
-[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__icon {
-  font-size: 0.9rem !important;
-  opacity: 0.9 !important;
-  flex-shrink: 0 !important;
-}
+/* ===== FIX 2-4: REMOVED - Now handled by FIX 12 (v1.9.16) ===== */
 
 /* ===== FIX 5: CLI Reference Sub-items in Right Sidebar (v1.9.9) ===== */
 /* Enhanced visual hierarchy for nested navigation */
