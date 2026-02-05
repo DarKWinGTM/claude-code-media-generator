@@ -3267,3 +3267,12 @@ a, button, input, .md-nav__link, .md-tabs__link {
     text-align: center !important;
   }
 }
+
+/* ===========================================
+   Left Sidebar - Main Section Spacing
+   =========================================== */
+
+/* Add spacing between main sections */
+li.md-nav__item.md-nav__item--section.md-nav__item--nested {
+  padding-bottom: 16px !important;
+}
