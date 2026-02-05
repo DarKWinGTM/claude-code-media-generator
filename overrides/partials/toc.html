@@ -1,47 +1,45 @@
 <!--
   Section Navigator + Table of Contents Template
-  Version: 1.5
+  Version: 2.0
   Design: pages.design.md Section 10
-  Fix v1.1: Removed redundant md-sidebar__scrollwrap wrapper
-  Fix v1.2: CSS hides Section Navigator in primary sidebar
-  Fix v1.3: TOC moved to left sidebar via CSS, Sections stays in right sidebar
-  Fix v1.4: Added CLI Reference sub-items (video_gen.py, image_gen.py, check_api.py)
-  Fix v1.5: Removed CLI Reference sub-items per user request - simple link only
+
+  v2.0: Section Navigator now uses SAME HTML structure as TOC
+        - Uses md-nav classes for automatic styling match
+        - No more custom section-navigator classes
+        - Both sidebars now 100% identical in structure
 -->
 
 {% if page.toc %}
 <!-- Section Navigator - Shows in RIGHT sidebar only -->
-<nav class="section-navigator section-navigator-sidebar" aria-label="Section Navigation">
-  <span class="section-navigator__title">Sections</span>
-  <ul class="section-navigator__list">
-    <li>
-      <a href="{{ config.site_url }}getting-started/installation/">
-        <span class="section-navigator__icon">🚀</span>
-        <span>Getting Started</span>
+<!-- Using SAME structure as TOC for identical styling -->
+<nav class="md-nav md-nav--secondary section-nav-right" aria-label="Section Navigation">
+  <label class="md-nav__title">
+    Sections
+  </label>
+  <ul class="md-nav__list" data-md-scrollfix>
+    <li class="md-nav__item">
+      <a class="md-nav__link" href="{{ config.site_url }}getting-started/installation/">
+        Getting Started
       </a>
     </li>
-    <li>
-      <a href="{{ config.site_url }}video/overview/">
-        <span class="section-navigator__icon">🎬</span>
-        <span>Video Generation</span>
+    <li class="md-nav__item">
+      <a class="md-nav__link" href="{{ config.site_url }}video/overview/">
+        Video Generation
       </a>
     </li>
-    <li>
-      <a href="{{ config.site_url }}image/">
-        <span class="section-navigator__icon">🖼️</span>
-        <span>Image Generation</span>
+    <li class="md-nav__item">
+      <a class="md-nav__link" href="{{ config.site_url }}image/">
+        Image Generation
       </a>
     </li>
-    <li>
-      <a href="{{ config.site_url }}cli/video_gen/">
-        <span class="section-navigator__icon">💻</span>
-        <span>CLI Reference</span>
+    <li class="md-nav__item">
+      <a class="md-nav__link" href="{{ config.site_url }}cli/video_gen/">
+        CLI Reference
       </a>
     </li>
-    <li>
-      <a href="{{ config.site_url }}guides/skill-installation/">
-        <span class="section-navigator__icon">📖</span>
-        <span>Guides</span>
+    <li class="md-nav__item">
+      <a class="md-nav__link" href="{{ config.site_url }}guides/skill-installation/">
+        Guides
       </a>
     </li>
   </ul>
