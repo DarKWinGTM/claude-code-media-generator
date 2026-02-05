@@ -3320,12 +3320,66 @@ a, button, input, .md-nav__link, .md-tabs__link {
   margin-bottom: 0.5rem;
 }
 
-/* ===== Section Nav Right - Same styling as TOC ===== */
-/* v1.9.18: Now uses md-nav classes, inherits TOC styling automatically */
+/* ===== Section Nav Right - Match Left Sidebar SECTIONS styling ===== */
+/* v1.9.19: Make Section Navigator match site navigation (left sidebar) styling */
+
+/* Base container - NO border */
 .md-sidebar--secondary .section-nav-right {
   margin-top: 0 !important;
-  padding: 0.5rem !important;
-  border-top: 1px solid rgba(0, 255, 255, 0.15) !important;
+  padding: 0.5rem 0 !important;
+  border-top: none !important;
+  background: transparent !important;
+}
+
+/* Title styling - match left sidebar section headers */
+/* HIGH SPECIFICITY: Use .md-sidebar--secondary prefix to override .md-nav--secondary rules */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-nav-right .md-nav__title {
+  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace) !important;
+  font-size: 0.6rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.15em !important;
+  color: var(--neon-cyan, #00ffff) !important;
+  margin-bottom: 0.5rem !important;
+  padding: 0.5rem 0.75rem !important;
+}
+
+/* Link styling - match left sidebar sub-items (muted color) */
+/* HIGH SPECIFICITY: Override .md-nav--secondary .md-nav__link rules */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-nav-right .md-nav__link {
+  font-weight: 400 !important;
+  font-size: 0.7rem !important;
+  text-transform: none !important;
+  color: rgba(255, 255, 255, 0.65) !important;
+  padding: 0.35rem 0.75rem !important;
+  display: block !important;
+  transition: all 0.2s ease !important;
+  border-left: 2px solid transparent !important;
+}
+
+/* Hover state - match left sidebar */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-nav-right .md-nav__link:hover {
+  color: var(--neon-cyan, #00ffff) !important;
+  border-left-color: rgba(0, 255, 255, 0.3) !important;
+  background: rgba(0, 255, 255, 0.05) !important;
+}
+
+/* Active state */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-nav-right .md-nav__link--active {
+  color: var(--neon-cyan, #00ffff) !important;
+  border-left-color: var(--neon-cyan, #00ffff) !important;
+  font-weight: 600 !important;
+}
+
+/* List styling */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-nav-right .md-nav__list {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-nav-right .md-nav__item {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .section-navigator__title {
