@@ -3269,102 +3269,98 @@ a, button, input, .md-nav__link, .md-tabs__link {
 }
 
 /* ===========================================
-   Section Navigator (v1.9 - Design: pages.design.md Section 10)
-   Responsive navigation for major documentation sections
+   Section Navigator (v3.0 - Clean Redesign)
+   Design: pages.design.md Section 10
+
+   v3.0: JavaScript-injected Section Navigator
+         - Only appears in RIGHT sidebar (via JS injection)
+         - Uses Material's native classes for consistent styling
+         - NO duplicate "Sections" in left sidebar
    =========================================== */
 
-/* ===== Section Navigator - Base Styles ===== */
+/* ===== Section Navigator - Base Styles (v3.0) ===== */
 .section-navigator {
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid rgba(129, 140, 248, 0.2);
 }
 
-/* ===== SIDEBAR LAYOUT FIX v1.3 ===== */
-/* Goal: TOC in LEFT sidebar, Sections in RIGHT sidebar */
-
-/* Hide Section Navigator in Primary (Left) Sidebar */
-.md-sidebar--primary .section-navigator,
-.md-sidebar--primary .section-navigator-sidebar,
-.md-sidebar--primary .section-nav-right {
-  display: none !important;
-}
-
-/* Show Section Navigator in Secondary (Right) Sidebar */
-.md-sidebar--secondary .section-navigator-sidebar,
-.md-sidebar--secondary .section-nav-right {
-  display: block !important;
-}
-
-/* Hide TOC in Secondary (Right) Sidebar - only show Sections there */
-.md-sidebar--secondary .toc-for-left-sidebar {
-  display: none !important;
-}
-
-/* Show TOC in Primary (Left) Sidebar */
-.md-sidebar--primary .toc-for-left-sidebar {
-  display: block !important;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(129, 140, 248, 0.15);
-}
-
-/* Style TOC in left sidebar */
-.md-sidebar--primary .toc-for-left-sidebar .md-nav__title {
+/* Section Navigator Title */
+.section-navigator .md-nav__title {
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--text-muted, #94a3b8);
-  padding: 0 0.6rem;
+  color: var(--md-default-fg-color--light);
   margin-bottom: 0.5rem;
+  padding: 0 0.6rem;
 }
 
-/* ===== Section Nav Right - Match Left Sidebar SECTIONS styling ===== */
-/* v1.9.19: Make Section Navigator match site navigation (left sidebar) styling */
-
-/* Base container - NO border */
-.md-sidebar--secondary .section-nav-right {
-  margin-top: 0 !important;
-  padding: 0.5rem 0 !important;
-  border-top: none !important;
-  background: transparent !important;
+/* Section icons styling */
+.section-navigator .section-icon {
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-size: 1em;
 }
 
-/* Title styling - match left sidebar section headers */
-/* HIGH SPECIFICITY: Use .md-sidebar--secondary prefix to override .md-nav--secondary rules */
-[data-md-color-scheme="slate"] .md-sidebar--secondary .section-nav-right .md-nav__title {
-  font-family: var(--font-cyber-hud, 'Share Tech Mono', monospace) !important;
-  font-size: 0.6rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.15em !important;
-  color: var(--neon-cyan, #00ffff) !important;
-  margin-bottom: 0.5rem !important;
-  padding: 0.5rem 0.75rem !important;
+/* Section Navigator Links - match TOC styling */
+.section-navigator .md-nav__link {
+  font-size: 0.7rem;
+  padding: 0.4rem 0.6rem;
+  display: block;
+  transition: all 0.2s ease;
+  border-left: 2px solid transparent;
 }
 
-/* Link styling - match left sidebar sub-items (muted color) */
-/* HIGH SPECIFICITY: Override .md-nav--secondary .md-nav__link rules */
-[data-md-color-scheme="slate"] .md-sidebar--secondary .section-nav-right .md-nav__link {
-  font-weight: 400 !important;
-  font-size: 0.7rem !important;
-  text-transform: none !important;
-  color: rgba(255, 255, 255, 0.65) !important;
-  padding: 0.35rem 0.75rem !important;
-  display: block !important;
-  transition: all 0.2s ease !important;
-  border-left: 2px solid transparent !important;
+/* Hover state */
+.section-navigator .md-nav__link:hover {
+  color: var(--md-accent-fg-color);
+  border-left-color: var(--md-accent-fg-color);
+  background: rgba(var(--md-accent-fg-color--rgb), 0.05);
 }
 
-/* Hover state - match left sidebar */
-[data-md-color-scheme="slate"] .md-sidebar--secondary .section-nav-right .md-nav__link:hover {
-  color: var(--neon-cyan, #00ffff) !important;
-  border-left-color: rgba(0, 255, 255, 0.3) !important;
-  background: rgba(0, 255, 255, 0.05) !important;
+/* ===== Slate Theme (Dark Mode) ===== */
+[data-md-color-scheme="slate"] .section-navigator .md-nav__title {
+  color: var(--neon-cyan, #00ffff);
 }
 
-/* Active state */
+[data-md-color-scheme="slate"] .section-navigator .md-nav__link {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+[data-md-color-scheme="slate"] .section-navigator .md-nav__link:hover {
+  color: var(--neon-cyan, #00ffff);
+  border-left-color: rgba(0, 255, 255, 0.3);
+  background: rgba(0, 255, 255, 0.05);
+}
+
+/* ===== Default Theme (Light Mode) ===== */
+[data-md-color-scheme="default"] .section-navigator .md-nav__title {
+  color: var(--md-primary-fg-color);
+}
+
+[data-md-color-scheme="default"] .section-navigator .md-nav__link {
+  color: var(--md-default-fg-color--light);
+}
+
+[data-md-color-scheme="default"] .section-navigator .md-nav__link:hover {
+  color: var(--md-primary-fg-color);
+  border-left-color: var(--md-primary-fg-color);
+  background: rgba(var(--md-primary-fg-color--rgb), 0.05);
+}
+
+/* ===== LEGACY CLEANUP (v3.0) ===== */
+/* Hide any legacy section-nav-right or section-navigator-sidebar classes */
+.section-nav-right,
+.section-navigator-sidebar,
+.toc-for-left-sidebar {
+  display: none !important;
+}
+
+/* ===== DEPRECATED STYLES BELOW (kept for reference) ===== */
+/* These styles are from v1.x and may be removed in future versions */
+
+/* Active state - kept for compatibility */
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-nav-right .md-nav__link--active {
   color: var(--neon-cyan, #00ffff) !important;
   border-left-color: var(--neon-cyan, #00ffff) !important;
