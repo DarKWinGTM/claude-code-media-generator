@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.9.9 - CLI Reference Sub-items Enhanced
+   v1.9.15 - Section Navigator EXACT TOC Clone
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -4786,140 +4786,172 @@ a, button, input, .md-nav__link, .md-tabs__link {
   border-left-color: #6366f1 !important;
 }
 
-/* ===== FIX 12: Section Navigator (Right Sidebar) - Match TOC Pattern (v1.9.14) ===== */
-/* Make Section Navigator use the same visual pattern as TOC in left sidebar */
+/* ===== FIX 12: Section Navigator (Right Sidebar) - EXACT TOC Clone (v1.9.15) ===== */
+/* Make Section Navigator IDENTICAL to TOC in left sidebar - same structure, same styling */
 
-/* CRITICAL: Remove the ">" prefix from title - must match TOC which has no prefix */
-[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__title::before,
-[data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__title::before,
-.md-sidebar--secondary .section-navigator__title::before {
+/* CRITICAL: Remove ALL ::before prefixes */
+.md-sidebar--secondary .section-navigator__title::before,
+.md-sidebar--secondary .section-navigator__title::after {
   content: none !important;
   display: none !important;
 }
 
-/* Base container - match TOC padding */
-.md-sidebar--secondary .section-navigator-sidebar {
-  padding: 0 0.5rem !important;
+/* CRITICAL: HIDE EMOJI ICONS - TOC doesn't have icons */
+.md-sidebar--secondary .section-navigator__icon {
+  display: none !important;
 }
 
-/* Title - match TOC title styling EXACTLY */
+/* Base container - match TOC exactly */
+.md-sidebar--secondary .section-navigator-sidebar {
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+/* ===== DARK MODE (Slate) - Section Navigator = TOC Clone ===== */
+
+/* Title - EXACT match TOC .md-nav__title */
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__title {
-  padding: 0.5rem 0.75rem !important;
-  margin-bottom: 0.5rem !important;
-  font-size: 0.65rem !important;
+  display: block !important;
+  padding: 0.6rem 0.6rem 0.5rem !important;
+  margin: 0 !important;
+  font-size: 0.6rem !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.1em !important;
   color: var(--neon-cyan, #00ffff) !important;
-  opacity: 0.8 !important;
+  opacity: 0.9 !important;
   font-family: inherit !important;
-  border-bottom: none !important;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.2) !important;
+  background: transparent !important;
 }
 
-/* All links - base styling (match TOC) */
+/* List container - match TOC .md-nav__list */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list {
+  margin: 0 !important;
+  padding: 0.4rem 0 !important;
+  list-style: none !important;
+}
+
+/* List items - match TOC .md-nav__item */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list li {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+}
+
+/* Links - EXACT match TOC .md-nav__link */
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a {
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.5rem !important;
-  padding: 0.35rem 0.75rem !important;
-  margin: 0.1rem 0 !important;
-  font-size: 0.75rem !important;
-  font-weight: 500 !important;
+  display: block !important;
+  padding: 0.4rem 0.6rem !important;
+  margin: 0 !important;
+  font-size: 0.7rem !important;
+  font-weight: 400 !important;
+  line-height: 1.4 !important;
   color: rgba(255, 255, 255, 0.7) !important;
   text-decoration: none !important;
-  border-radius: 4px !important;
-  transition: all 0.15s ease !important;
   border-left: 2px solid transparent !important;
-  transform: none !important;
-  border: none !important;
-  box-shadow: none !important;
+  border-radius: 0 !important;
+  transition: all 0.15s ease !important;
   background: transparent !important;
-  font-family: inherit !important;
-}
-
-/* Hover state - match TOC hover */
-[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a:hover {
-  background: rgba(0, 255, 255, 0.08) !important;
-  color: var(--neon-cyan, #00ffff) !important;
-  border-left: 2px solid rgba(0, 255, 255, 0.3) !important;
-  transform: none !important;
   box-shadow: none !important;
-  border-top: none !important;
-  border-right: none !important;
-  border-bottom: none !important;
+  transform: none !important;
+  font-family: inherit !important;
+  /* Remove flex layout - just text like TOC */
+  align-items: unset !important;
+  gap: 0 !important;
 }
 
-/* Active/current page state - match TOC active */
+/* Hover - EXACT match TOC hover */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a:hover {
+  color: var(--neon-cyan, #00ffff) !important;
+  background: rgba(0, 255, 255, 0.05) !important;
+  border-left: 2px solid rgba(0, 255, 255, 0.4) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Active/Current - EXACT match TOC active */
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a[aria-current="page"],
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a.active {
-  background: rgba(0, 255, 255, 0.1) !important;
   color: var(--neon-cyan, #00ffff) !important;
+  background: rgba(0, 255, 255, 0.08) !important;
   border-left: 2px solid var(--neon-cyan, #00ffff) !important;
   font-weight: 600 !important;
   box-shadow: none !important;
 }
 
-/* Icon styling */
-[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__icon {
-  font-size: 0.9rem !important;
-  opacity: 0.8 !important;
-  flex-shrink: 0 !important;
-}
+/* ===== LIGHT MODE (Default) - Section Navigator = TOC Clone ===== */
 
-/* List items spacing */
-[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list li {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* ===== Light Mode - Section Navigator Match TOC ===== */
+/* Title */
 [data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__title {
-  padding: 0.5rem 0.75rem !important;
-  margin-bottom: 0.5rem !important;
-  font-size: 0.65rem !important;
+  display: block !important;
+  padding: 0.6rem 0.6rem 0.5rem !important;
+  margin: 0 !important;
+  font-size: 0.6rem !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.1em !important;
   color: #6366f1 !important;
   opacity: 0.9 !important;
   font-family: inherit !important;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.2) !important;
+  background: transparent !important;
 }
 
+/* List container */
+[data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list {
+  margin: 0 !important;
+  padding: 0.4rem 0 !important;
+  list-style: none !important;
+}
+
+/* List items */
+[data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list li {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+}
+
+/* Links */
 [data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a {
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.5rem !important;
-  padding: 0.35rem 0.75rem !important;
-  margin: 0.1rem 0 !important;
-  font-size: 0.75rem !important;
-  font-weight: 500 !important;
+  display: block !important;
+  padding: 0.4rem 0.6rem !important;
+  margin: 0 !important;
+  font-size: 0.7rem !important;
+  font-weight: 400 !important;
+  line-height: 1.4 !important;
   color: rgba(55, 65, 81, 0.8) !important;
   text-decoration: none !important;
-  border-radius: 4px !important;
-  transition: all 0.15s ease !important;
   border-left: 2px solid transparent !important;
-  transform: none !important;
-  border: none !important;
-  box-shadow: none !important;
+  border-radius: 0 !important;
+  transition: all 0.15s ease !important;
   background: transparent !important;
-  font-family: inherit !important;
-}
-
-[data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a:hover {
-  background: rgba(99, 102, 241, 0.08) !important;
-  color: #6366f1 !important;
-  border-left: 2px solid rgba(99, 102, 241, 0.3) !important;
-  transform: none !important;
   box-shadow: none !important;
+  transform: none !important;
+  font-family: inherit !important;
+  align-items: unset !important;
+  gap: 0 !important;
 }
 
+/* Hover */
+[data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a:hover {
+  color: #6366f1 !important;
+  background: rgba(99, 102, 241, 0.05) !important;
+  border-left: 2px solid rgba(99, 102, 241, 0.4) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Active/Current */
 [data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a[aria-current="page"],
 [data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a.active {
-  background: rgba(99, 102, 241, 0.1) !important;
   color: #6366f1 !important;
+  background: rgba(99, 102, 241, 0.08) !important;
   border-left: 2px solid #6366f1 !important;
   font-weight: 600 !important;
   box-shadow: none !important;
 }
 
-/* ===== End Metro Cyberpunk Design Overhaul v1.9.14 =====  */
+/* ===== End Metro Cyberpunk Design Overhaul v1.9.15 =====  */
