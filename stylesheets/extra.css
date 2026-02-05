@@ -4786,15 +4786,23 @@ a, button, input, .md-nav__link, .md-tabs__link {
   border-left-color: #6366f1 !important;
 }
 
-/* ===== FIX 12: Section Navigator (Right Sidebar) - Match TOC Pattern (v1.9.13) ===== */
+/* ===== FIX 12: Section Navigator (Right Sidebar) - Match TOC Pattern (v1.9.14) ===== */
 /* Make Section Navigator use the same visual pattern as TOC in left sidebar */
+
+/* CRITICAL: Remove the ">" prefix from title - must match TOC which has no prefix */
+[data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__title::before,
+[data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__title::before,
+.md-sidebar--secondary .section-navigator__title::before {
+  content: none !important;
+  display: none !important;
+}
 
 /* Base container - match TOC padding */
 .md-sidebar--secondary .section-navigator-sidebar {
   padding: 0 0.5rem !important;
 }
 
-/* Title - match TOC title styling */
+/* Title - match TOC title styling EXACTLY */
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__title {
   padding: 0.5rem 0.75rem !important;
   margin-bottom: 0.5rem !important;
@@ -4804,6 +4812,8 @@ a, button, input, .md-nav__link, .md-tabs__link {
   letter-spacing: 0.1em !important;
   color: var(--neon-cyan, #00ffff) !important;
   opacity: 0.8 !important;
+  font-family: inherit !important;
+  border-bottom: none !important;
 }
 
 /* All links - base styling (match TOC) */
@@ -4821,14 +4831,22 @@ a, button, input, .md-nav__link, .md-tabs__link {
   transition: all 0.15s ease !important;
   border-left: 2px solid transparent !important;
   transform: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  font-family: inherit !important;
 }
 
 /* Hover state - match TOC hover */
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a:hover {
   background: rgba(0, 255, 255, 0.08) !important;
   color: var(--neon-cyan, #00ffff) !important;
-  border-left-color: rgba(0, 255, 255, 0.3) !important;
+  border-left: 2px solid rgba(0, 255, 255, 0.3) !important;
   transform: none !important;
+  box-shadow: none !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
 }
 
 /* Active/current page state - match TOC active */
@@ -4836,8 +4854,9 @@ a, button, input, .md-nav__link, .md-tabs__link {
 [data-md-color-scheme="slate"] .md-sidebar--secondary .section-navigator__list a.active {
   background: rgba(0, 255, 255, 0.1) !important;
   color: var(--neon-cyan, #00ffff) !important;
-  border-left-color: var(--neon-cyan, #00ffff) !important;
+  border-left: 2px solid var(--neon-cyan, #00ffff) !important;
   font-weight: 600 !important;
+  box-shadow: none !important;
 }
 
 /* Icon styling */
@@ -4863,6 +4882,7 @@ a, button, input, .md-nav__link, .md-tabs__link {
   letter-spacing: 0.1em !important;
   color: #6366f1 !important;
   opacity: 0.9 !important;
+  font-family: inherit !important;
 }
 
 [data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a {
@@ -4879,21 +4899,27 @@ a, button, input, .md-nav__link, .md-tabs__link {
   transition: all 0.15s ease !important;
   border-left: 2px solid transparent !important;
   transform: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  font-family: inherit !important;
 }
 
 [data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a:hover {
   background: rgba(99, 102, 241, 0.08) !important;
   color: #6366f1 !important;
-  border-left-color: rgba(99, 102, 241, 0.3) !important;
+  border-left: 2px solid rgba(99, 102, 241, 0.3) !important;
   transform: none !important;
+  box-shadow: none !important;
 }
 
 [data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a[aria-current="page"],
 [data-md-color-scheme="default"] .md-sidebar--secondary .section-navigator__list a.active {
   background: rgba(99, 102, 241, 0.1) !important;
   color: #6366f1 !important;
-  border-left-color: #6366f1 !important;
+  border-left: 2px solid #6366f1 !important;
   font-weight: 600 !important;
+  box-shadow: none !important;
 }
 
-/* ===== End Metro Cyberpunk Design Overhaul v1.9.13 =====  */
+/* ===== End Metro Cyberpunk Design Overhaul v1.9.14 =====  */
