@@ -1,7 +1,7 @@
 /* ===========================================
    Claude Code Media Generator - 2026 Design
    Glassmorphism + Gradient + Bento Grid
-   v1.9.17 - Remove duplicate Section Navigator CSS
+   v1.9.18 - Section Nav uses TOC HTML structure
    =========================================== */
 
 /* ===== Google Fonts Import ===== */
@@ -3285,13 +3285,15 @@ a, button, input, .md-nav__link, .md-tabs__link {
 
 /* Hide Section Navigator in Primary (Left) Sidebar */
 .md-sidebar--primary .section-navigator,
-.md-sidebar--primary .section-navigator-sidebar {
+.md-sidebar--primary .section-navigator-sidebar,
+.md-sidebar--primary .section-nav-right {
   display: none !important;
 }
 
 /* Show Section Navigator in Secondary (Right) Sidebar */
-.md-sidebar--secondary .section-navigator-sidebar {
-  display: block;
+.md-sidebar--secondary .section-navigator-sidebar,
+.md-sidebar--secondary .section-nav-right {
+  display: block !important;
 }
 
 /* Hide TOC in Secondary (Right) Sidebar - only show Sections there */
@@ -3316,6 +3318,14 @@ a, button, input, .md-nav__link, .md-tabs__link {
   color: var(--text-muted, #94a3b8);
   padding: 0 0.6rem;
   margin-bottom: 0.5rem;
+}
+
+/* ===== Section Nav Right - Same styling as TOC ===== */
+/* v1.9.18: Now uses md-nav classes, inherits TOC styling automatically */
+.md-sidebar--secondary .section-nav-right {
+  margin-top: 0 !important;
+  padding: 0.5rem !important;
+  border-top: 1px solid rgba(0, 255, 255, 0.15) !important;
 }
 
 .section-navigator__title {
