@@ -33,7 +33,7 @@
 </span><span id=__span-3-8>Agent: [Detects video intent → invokes /generative video &quot;ocean waves&quot;]
 </span></code></pre></div> <hr> <h2 id=when-agent-does-not-act>When Agent Does NOT Act<a class=headerlink href=#when-agent-does-not-act title="Link to this section">&para;</a></h2> <p>The agent will <strong>not</strong> auto-invoke when:</p> <ul> <li>Asking about previous generated content ("วิดีโอที่สร้างเมื่อกี้เป็นไง")</li> <li>Troubleshooting or checking status</li> <li>Request is ambiguous (will ask for clarification)</li> <li>User explicitly says they don't want to generate</li> </ul> <hr> <h2 id=directory-structure>Directory Structure<a class=headerlink href=#directory-structure title="Link to this section">&para;</a></h2> <p>After full installation (Skill + Agent):</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-4-1>~/.claude/
 </span><span id=__span-4-2>├── agents/
-</span><span id=__span-4-3>│   └── generative-media-navigator.md   ← Agent (optional)
+</span><span id=__span-4-3>│   └── generative-media-navigator.md   ← Agent (enhancement)
 </span><span id=__span-4-4>└── skills/
 </span><span id=__span-4-5>    └── generative/
 </span><span id=__span-4-6>        └── SKILL.md                      ← Skill (required)
