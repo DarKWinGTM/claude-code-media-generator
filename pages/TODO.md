@@ -1,6 +1,6 @@
 # Pages - TODO
 
-> **Last Updated:** 2026-02-05
+> **Last Updated:** 2026-02-06
 
 ---
 
@@ -18,23 +18,50 @@
 - ✅ ยืนยันว่า 6 หัวข้อหลักแสดงใน left sidebar อยู่แล้ว
 
 ### Sidebar Enhancement v1.1.0 (2026-02-05)
-- ✅ Option A: Main section styling (font, color, icon, uppercase)
-- ✅ Option B: Gradient separators between main sections
-- ✅ Option C: Header Tabs (show 6 sections in header)
-- ✅ Deploy all 3 options for user evaluation
+- ✅ Option A: Main section styling (reverted)
+- ✅ Option B: Gradient separators (reverted)
+- ✅ Option C: Header Tabs (reverted)
+- ✅ **Reverted** - ทำให้เว็บพัง กลับไปใช้ clean version
+
+### Left Sidebar Fix v1.2.0 (2026-02-05)
+- ✅ ปิด navigation.tabs ใน mkdocs.yml
+- ✅ Left Sidebar แสดง 6 หัวข้อหลักทั้งหมดแล้ว
+- ✅ เพิ่ม padding-bottom: 16px ระหว่างหัวข้อหลัก
+- ✅ Deploy สำเร็จ
+
+### Skill-First Design (2026-02-05)
+- ✅ วิเคราะห์และออกแบบ Skill-First Approach
+- ✅ บันทึกลง design.md Section 2.2, 2.3, 6.2
+
+### Skill-First Implementation v1.3.0 (2026-02-05)
+- ✅ สร้าง skills/ folder (4 ไฟล์ใหม่)
+- ✅ สร้าง advanced/ folder (2 ใหม่ + 3 ย้ายจาก cli/)
+- ✅ ปรับ index.md, installation.md, quick-start.md เป็น Skill-First
+- ✅ อัปเดต mkdocs.yml navigation
+- ✅ ลบ guides/skill-installation.md
+
+### Sidebar Transparent v1.4.0 (2026-02-05)
+- ✅ ลบ Sidebar background ออกทั้งหมด (Dark และ Light mode)
+- ✅ อัปเดต extra.css - 4 จุดที่มี .md-sidebar background
 
 ---
 
 ## 📋 Tasks To Do
 
-### User Decision Required
-- [ ] ดู live site แล้วเลือกว่าจะเก็บตัวเลือกไหนบ้าง (A, B, C)
-- [ ] อาจเลือกเก็บทั้งหมด หรือบางตัว หรือไม่เก็บเลย
+### Generative Media Navigator Agent ⭐ (Ready to Implement)
 
-### CSS Cleanup (After Decision)
-- [ ] ลบ CSS ของ options ที่ไม่ต้องการ
-- [ ] Review extra.css หา unused rules
-- [ ] Organize CSS by section
+**Design:** [agent.design.md](agent.design.md) v0.3.0
+**Changelog:** [agent.changelog.md](agent.changelog.md)
+**Status:** ✅ Design Complete - พร้อม implement
+
+**Agent Info:**
+- **Name:** `generative-media-navigator`
+- **Location:** `~/.claude/agents/generative-media-navigator.md`
+- **Purpose:** Auto-detect video/image creation intent → invoke `/generative` skill
+
+**Implementation Tasks:**
+- [ ] Phase 1: สร้าง `generative-media-navigator.md` ที่ `~/.claude/agents/`
+- [ ] Phase 2: ทดสอบ auto-detection กับ real conversations
 
 ---
 
@@ -45,3 +72,12 @@
 | 2026-02-05 | Created TODO.md, design.md, changelog.md |
 | 2026-02-05 | Removed all Section Navigator code (1838 lines total) |
 | 2026-02-05 | Identified header.html missing tabs issue |
+| 2026-02-05 | Reverted Options A, B, C (website broke) |
+| 2026-02-05 | Fixed Left Sidebar - disabled navigation.tabs |
+| 2026-02-05 | Added spacing between main sections (16px) |
+| 2026-02-05 | Designed Skill-First Approach - saved to design.md |
+| 2026-02-05 | **Implemented Skill-First Approach** - All content changes complete |
+| 2026-02-05 | **v1.4.0 - Removed Sidebar background** - Transparent sidebars |
+| 2026-02-06 | **Created agent.design.md v0.1.0** - Skill Orchestrator (rejected - too complex) |
+| 2026-02-06 | **Simplified to Skill Navigator v0.2.0** - Simple auto-detect agent design |
+| 2026-02-06 | **Corrected to v0.3.0** - Renamed to `generative-media-navigator`, fixed location to `~/.claude/agents/` |

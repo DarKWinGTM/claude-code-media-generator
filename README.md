@@ -11,6 +11,8 @@
 
 *Generate stunning videos and images using Google Veo & Imagen APIs*
 
+<img src="https://img.shields.io/badge/🚧_Under_Development-Documentation_Phase-yellow?style=for-the-badge" alt="Development Status">
+
 <br>
 
 <!-- Badges Row 1 -->
@@ -610,7 +612,55 @@ claude-code-media-generator/
 | check_api.py | v2.1 | ✅ Stable |
 | Documentation | v3.10 | ✅ Updated |
 | Claude Code Skill | v3.2.1 | ✅ Available |
+| Agent | v1.0 | ✅ Available |
 | MCP Server | - | 🚧 Planned |
+
+---
+
+## 🗺️ Roadmap
+
+```
+✅ Phase 1: Core Features (Completed)
+   ├── video_gen.py with 8 generation modes
+   ├── image_gen.py with Imagen/Gemini support
+   ├── Smart validation and auto-correction
+   └── GCS storage integration
+
+✅ Phase 2: Enhanced Workflows (Completed)
+   ├── Video extension from URLs
+   ├── Auto FPS conversion (24fps)
+   ├── Reference image system (asset/style)
+   └── Smart defaults from metadata
+
+✅ Phase 3: Claude Code Integration (Completed)
+   ├── /generative skill (unified)
+   ├── Help system with 5 topics
+   ├── Config wizard
+   └── Agent for auto-detection
+
+📋 Phase 4: Planned Features
+   ├── Remix Mode (--remix video.mp4)
+   ├── Outpainting (--outpaint left,right)
+   ├── Camera Control (--camera pan-left)
+   └── Audio Control (style/mood)
+
+🔬 Phase 5: Future Research
+   ├── Character consistency across videos
+   ├── Multi-video batch processing
+   └── MCP Server implementation
+```
+
+---
+
+## 📈 Star History
+
+<a href="https://star-history.com/#DarKWinGTM/claude-code-media-generator&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=DarKWinGTM/claude-code-media-generator&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=DarKWinGTM/claude-code-media-generator&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=DarKWinGTM/claude-code-media-generator&type=Date" />
+ </picture>
+</a>
 
 ---
 
