@@ -122,7 +122,7 @@ After full installation (Skill + Agent):
 ```
 ~/.claude/
 ├── agents/
-│   └── generative-media-navigator.md   ← Agent (optional)
+│   └── generative-media-navigator.md   ← Agent (enhancement)
 └── skills/
     └── generative/
         └── SKILL.md                      ← Skill (required)
