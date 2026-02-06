@@ -109,7 +109,7 @@ python video_gen.py "A cinematic sunset" \
 
 ## Next Steps
 
-- [Agent (Optional)](agent.md) - Auto-detect media creation intent
+- [Agent](agent.md) - Auto-detect media creation intent (recommended)
 - [Commands Reference](commands.md) - All `/generative` commands
 - [Examples](examples.md) - Usage examples
 - [Configuration](configuration.md) - Setup and configuration options

@@ -111,7 +111,7 @@ nav:
     - Quick Start: getting-started/quick-start.md
   - Using Skills:
     - Overview: skills/overview.md
-    - Agent (Optional): skills/agent.md
+    - Agent: skills/agent.md
     - Commands: skills/commands.md
     - Examples: skills/examples.md
     - Configuration: skills/configuration.md

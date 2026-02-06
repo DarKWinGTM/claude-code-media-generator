@@ -4,12 +4,15 @@ The **Generative Media Navigator** is a Claude Code agent that automatically det
 
 ---
 
-## Agent vs Skill
+## Skill + Agent Architecture
 
-| Component | Purpose | Type | Required |
-|-----------|---------|------|----------|
-| `/generative` Skill | Execute generation commands | Skill | ✅ Yes |
-| Generative Media Navigator | Auto-detect intent, invoke skill | Agent | ❌ Optional |
+| Component | Purpose | Type | Install |
+|-----------|---------|------|---------|
+| `/generative` Skill | Execute generation commands | Skill | ✅ Required |
+| Generative Media Navigator | Auto-detect intent, invoke skill | Agent | ✅ Recommended |
+
+!!! success "Recommended Setup"
+    Install both the Skill and Agent for the complete experience. The agent provides natural language understanding on top of the skill's execution capabilities.
 
 !!! info "Dependency"
     The agent requires the `/generative` skill to be installed first. See [Skill Installation](../getting-started/installation.md).
