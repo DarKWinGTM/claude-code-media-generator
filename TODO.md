@@ -48,19 +48,19 @@
 
 ## 📋 Tasks To Do
 
-### Skill Navigator Agent ⭐ (Ready to Implement)
+### Generative Media Navigator Agent ⭐ (Ready to Implement)
 
-**Design:** [agent.design.md](agent.design.md) v0.2.0
+**Design:** [agent.design.md](agent.design.md) v0.3.0
 **Changelog:** [agent.changelog.md](agent.changelog.md)
 **Status:** ✅ Design Complete - พร้อม implement
 
-**Concept:** Simple auto-detect agent
-- ฟัง conversation context
-- ตรวจจับ intent สร้าง video/image
-- เรียก /generative skill อัตโนมัติ
+**Agent Info:**
+- **Name:** `generative-media-navigator`
+- **Location:** `~/.claude/agents/generative-media-navigator.md`
+- **Purpose:** Auto-detect video/image creation intent → invoke `/generative` skill
 
 **Implementation Tasks:**
-- [ ] Phase 1: สร้าง navigator.md - Agent definition file
+- [ ] Phase 1: สร้าง `generative-media-navigator.md` ที่ `~/.claude/agents/`
 - [ ] Phase 2: ทดสอบ auto-detection กับ real conversations
 
 ---
@@ -80,3 +80,4 @@
 | 2026-02-05 | **v1.4.0 - Removed Sidebar background** - Transparent sidebars |
 | 2026-02-06 | **Created agent.design.md v0.1.0** - Skill Orchestrator (rejected - too complex) |
 | 2026-02-06 | **Simplified to Skill Navigator v0.2.0** - Simple auto-detect agent design |
+| 2026-02-06 | **Corrected to v0.3.0** - Renamed to `generative-media-navigator`, fixed location to `~/.claude/agents/` |

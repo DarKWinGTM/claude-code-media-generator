@@ -113,3 +113,4 @@ claude-code-media-generator/
 - [Authentication](authentication.md) - Set up your API key
 - [Quick Start](quick-start.md) - Generate your first video
 - [Using Skills](../skills/overview.md) - Learn about the `/generative` skill
+- [Agent (Optional)](../skills/agent.md) - Auto-detect media creation intent

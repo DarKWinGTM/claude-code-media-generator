@@ -1,8 +1,8 @@
-# Skill Navigator Agent Design
+# Generative Media Navigator Agent Design
 
-> **Current Version:** 0.2.0
+> **Current Version:** 0.3.0
 > **Last Updated:** 2026-02-06
-> **Status:** Draft - Simplified Design
+> **Status:** Ready to Implement
 
 ---
 
@@ -18,10 +18,10 @@
 
 ### 1.1 Concept
 
-**Skill Navigator** - Agent ที่ทำหน้าที่เรียบง่าย:
+**Generative Media Navigator** - Agent ที่ทำหน้าที่เรียบง่าย:
 - **ฟัง** conversation context
 - **ตรวจจับ** เมื่อ user ต้องการสร้าง media
-- **เรียก** skill อัตโนมัติ
+- **เรียก** /generative skill อัตโนมัติ
 
 ### 1.2 Philosophy
 
@@ -58,9 +58,9 @@ User → Orchestrator (complex) → Skill
 ```
 User (สนทนาปกติ)
   ↓
-Skill Navigator (ฟังและตรวจจับ)
+Generative Media Navigator (ฟังและตรวจจับ)
   ↓
-เรียก Skill อัตโนมัติ
+เรียก /generative Skill อัตโนมัติ
   ↓
 Result
 ```
@@ -71,22 +71,33 @@ Result
 
 ## 3. Agent Definition
 
-### 3.1 Core Identity
+### 3.1 Claude Code Agent Structure
+
+**Location:** `~/.claude/agents/generative-media-navigator.md`
+
+**Format:** YAML frontmatter + Markdown system prompt
 
 ```yaml
-name: "skill-navigator"
-type: "auto-detect-assistant"
-purpose: |
-  ฟัง conversation และเรียก /generative skill
-  อัตโนมัติเมื่อตรวจจับว่า user ต้องการสร้าง media
-
-behavior:
-  - listen: true        # ฟัง context
-  - auto_detect: true   # ตรวจจับ intent
-  - invoke_skill: true  # เรียก skill เอง
+---
+name: generative-media-navigator
+description: Auto-detect when user wants to create video or image, then invoke /generative skill automatically. Use proactively when user mentions creating media content.
+tools: Bash, Read, Glob, AskUserQuestion
+model: inherit
+color: purple
+---
 ```
 
-### 3.2 Capabilities
+### 3.2 YAML Frontmatter Fields
+
+| Field | Value | Description |
+|-------|-------|-------------|
+| `name` | `generative-media-navigator` | Unique identifier |
+| `description` | Auto-detect... | When to invoke agent |
+| `tools` | `Bash, Read, Glob, AskUserQuestion` | Available tools |
+| `model` | `inherit` | Use parent model |
+| `color` | `purple` | UI color |
+
+### 3.3 Capabilities
 
 | Capability | Description |
 |------------|-------------|
@@ -95,7 +106,7 @@ behavior:
 | **Skill Invocation** | เรียก /generative command |
 | **Result Relay** | ส่ง result กลับ user |
 
-### 3.3 ไม่ทำ (Out of Scope)
+### 3.4 Out of Scope
 
 - ❌ Complex orchestration
 - ❌ Multi-step planning
@@ -113,6 +124,7 @@ behavior:
 | "สร้างวิดีโอ...", "ทำวิดีโอ...", "generate video..." | Video | `/generative video` |
 | "สร้างรูป...", "ทำรูป...", "generate image..." | Image | `/generative image` |
 | "อยากได้วิดีโอ...", "ต้องการรูป..." | Media | Detect type from context |
+| "create video", "make image", "I want a video" | Media | Detect type from keywords |
 
 ### 4.2 Detection Flow
 
@@ -123,26 +135,33 @@ behavior:
    ↓
 3. ถ้าใช่ → สกัด prompt และ parameters
    ↓
-4. เรียก skill
+4. เรียก /generative skill
 ```
 
 ### 4.3 Examples
 
-**Example 1: Direct Request**
+**Example 1: Direct Request (Thai)**
 ```
 User: "สร้างวิดีโอแมวเดินบนดวงจันทร์"
 Agent: ตรวจจับ → video, prompt="แมวเดินบนดวงจันทร์"
 Action: /generative video "cat walking on the moon"
 ```
 
-**Example 2: Conversational**
+**Example 2: Direct Request (English)**
+```
+User: "Create a video of sunset over the ocean"
+Agent: Detect → video, prompt="sunset over the ocean"
+Action: /generative video "sunset over the ocean"
+```
+
+**Example 3: Conversational**
 ```
 User: "ผมอยากได้รูปสำหรับโปรโมทร้านกาแฟ สไตล์ minimal"
 Agent: ตรวจจับ → image, prompt="coffee shop promotion, minimal style"
 Action: /generative image "coffee shop promotion minimal style"
 ```
 
-**Example 3: No Intent**
+**Example 4: No Intent**
 ```
 User: "วิดีโอที่ส่งไปเมื่อกี้เป็นยังไงบ้าง?"
 Agent: ไม่ตรวจจับ intent สร้าง → ไม่ทำอะไร
@@ -153,35 +172,35 @@ Action: (none - ตอบคำถามปกติ)
 
 ## 5. Integration
 
-### 5.1 File Structure
+### 5.1 File Location
 
+**Correct Location (Claude Code Agents):**
 ```
-.claude/skills/generate-video/
-├── skill.md              # Existing skill definition
-├── navigator.md          # NEW: Navigator agent definition
+~/.claude/agents/
+├── generative-media-navigator.md    ← NEW: This agent
+├── nodejs-expert.md
+├── html-css-js-frontend-expert.md
+└── ...
+```
+
+**Related Skill:**
+```
+.claude/skills/generative/
+├── SKILL.md              # Existing skill definition
 ├── video_gen.py
 ├── image_gen.py
 └── check_api.py
 ```
 
-### 5.2 navigator.md Content
+### 5.2 Agent ↔ Skill Relationship
 
-```markdown
-# Skill Navigator
-
-## Trigger
-เมื่อ user แสดง intent ต้องการสร้าง video หรือ image
-
-## Behavior
-1. ตรวจจับ intent จาก conversation
-2. สกัด prompt และ parameters
-3. เรียก /generative command
-4. ส่ง result กลับ user
-
-## Keywords
-- สร้างวิดีโอ, ทำวิดีโอ, generate video
-- สร้างรูป, ทำรูป, generate image
-- อยากได้, ต้องการ + video/image context
+```
+generative-media-navigator (Agent)
+  ↓ detects intent
+  ↓ invokes
+/generative (Skill)
+  ↓ executes
+video_gen.py / image_gen.py
 ```
 
 ---
@@ -193,7 +212,7 @@ Action: (none - ตอบคำถามปกติ)
 - ✅ Auto-detect video/image generation intent
 - ✅ Extract prompt from natural language
 - ✅ Invoke /generative skill
-- ✅ Basic parameter extraction (aspect, duration)
+- ✅ Support Thai and English keywords
 
 ### 6.2 Out of Scope (v1)
 
@@ -207,6 +226,7 @@ Action: (none - ตอบคำถามปกติ)
 - Context-aware prompt enhancement
 - Learn from user preferences
 - Suggest improvements
+- Parameter recommendations
 
 ---
 
@@ -216,20 +236,20 @@ Action: (none - ตอบคำถามปกติ)
 
 | Phase | Task | Effort |
 |-------|------|--------|
-| **1** | สร้าง navigator.md พร้อม intent patterns | Low |
+| **1** | สร้าง `generative-media-navigator.md` | Low |
 | **2** | ทดสอบ auto-detection กับ real conversations | Low |
 
-### 7.2 Files to Create
+### 7.2 File to Create
 
-1. `navigator.md` - Agent definition
-2. Update `skill.md` - Reference to navigator
+1. `~/.claude/agents/generative-media-navigator.md` - Agent definition
 
 ### 7.3 Testing
 
 | Test Case | Expected |
 |-----------|----------|
-| "สร้างวิดีโอแมว" | Detect → invoke video |
-| "ทำรูปร้านกาแฟ" | Detect → invoke image |
+| "สร้างวิดีโอแมว" | Detect → invoke `/generative video` |
+| "ทำรูปร้านกาแฟ" | Detect → invoke `/generative image` |
+| "Create a video of sunset" | Detect → invoke `/generative video` |
 | "วิดีโอเมื่อกี้เป็นยังไง" | No detection |
 
 ---
@@ -238,18 +258,20 @@ Action: (none - ตอบคำถามปกติ)
 
 | Question | Decision | Rationale |
 |----------|----------|-----------|
+| Agent Name | `generative-media-navigator` | สอดคล้องกับ `/generative` skill |
+| Location | `~/.claude/agents/` | ตาม Claude Code agent convention |
 | Complexity | Simple (not orchestrator) | ลด overhead, ตรงประเด็น |
 | Approach | Auto-detect | User ไม่ต้องจำ command |
 | Scope | `/generative` only | Focus, prove concept |
-| Integration | navigator.md แยกไฟล์ | Clear separation |
+| Tools | `Bash, Read, Glob, AskUserQuestion` | เพียงพอสำหรับ invoke skill |
 
 ---
 
 ## 9. Next Steps
 
-1. **สร้าง navigator.md** - Agent definition file
-2. **อัปเดต skill.md** - Reference navigator
-3. **ทดสอบ** - Try with real conversations
+1. **สร้าง agent file** - `~/.claude/agents/generative-media-navigator.md`
+2. **ทดสอบ** - Try with real conversations
+3. **ปรับปรุง** - Based on testing feedback
 
 ---
 

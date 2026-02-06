@@ -1,7 +1,7 @@
 # Agent Design Changelog
 
 > **Parent Document:** [agent.design.md](agent.design.md)
-> **Current Version:** 0.2.0
+> **Current Version:** 0.3.0
 > **Last Updated:** 2026-02-06
 
 ---
@@ -10,8 +10,48 @@
 
 | Version | Date | Changes | Summary |
 |---------|------|---------|---------|
+| 0.3.0 | 2026-02-06 | **Correct Claude Code Agent Structure** | แก้ไขโครงสร้างตาม Claude Code agents convention |
 | 0.2.0 | 2026-02-06 | **Simplified to Skill Navigator** | ลบ Orchestrator concept, ใช้ auto-detect แทน |
 | 0.1.0 | 2026-02-06 | **Initial Design Draft** | สร้าง design document (Orchestrator approach - rejected) |
+
+---
+
+## Version 0.3.0: Correct Claude Code Agent Structure
+
+**Date:** 2026-02-06
+**Status:** Ready to Implement
+
+### Major Changes
+
+**🔧 Renamed:**
+- Agent name: `skill-navigator` → `generative-media-navigator`
+- สอดคล้องกับ `/generative` skill ที่ทำงานร่วมกัน
+
+**📁 Correct Location:**
+- Wrong: `.claude/skills/generative/navigator.md`
+- Correct: `~/.claude/agents/generative-media-navigator.md`
+
+**📋 Added YAML Frontmatter:**
+```yaml
+---
+name: generative-media-navigator
+description: Auto-detect when user wants to create video or image...
+tools: Bash, Read, Glob, AskUserQuestion
+model: inherit
+color: purple
+---
+```
+
+**✅ Research Verified:**
+- ศึกษา existing agents ใน `/home/node/.claude/agents/`
+- ค้นหา Claude Code documentation
+- ยืนยันโครงสร้างถูกต้องตาม convention
+
+### Rationale
+
+User feedback ระบุว่าโครงสร้างเดิมคลาดเคลื่อน:
+- "ฉันคิดว่าโครงสร้างและการวางความเข้าใจมีความคลาดเคลื่อนแน่นอน"
+- ต้อง research ให้ครบก่อนดำเนินการ
 
 ---
 
