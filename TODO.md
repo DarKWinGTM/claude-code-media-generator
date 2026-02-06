@@ -1,7 +1,7 @@
 # 📋 TODO - Claude Code Media Generator
 
-> **Last Updated:** 2026-02-05
-> **Version:** 3.7
+> **Last Updated:** 2026-02-06
+> **Version:** 3.8
 
 ---
 
@@ -633,6 +633,57 @@ Example:
 - [ ] **Video Extension Workflow**
   - [ ] Automated chain extension
   - [ ] Smart prompt continuation
+
+---
+
+### Phase 6: Remix Mode & Video Enhancement (Planned v2.32+)
+
+> **Design:** [design/video.design.md Section 5.19](design/video.design.md#519-remix-mode-planned-feature-)
+> **Changelog:** [changelog/video.changelog.md](changelog/video.changelog.md)
+> **Status:** 📋 DESIGNED (2026-02-06)
+
+**Goal:** เพิ่ม Remix Mode สำหรับปรับแต่ง video เดิมด้วย prompt ใหม่
+
+#### 6.1 Remix Mode (`--remix`) 🔴 High Priority
+
+- [ ] **`--remix VIDEO`** - Source video to remix
+  - [ ] Extract first frame automatically
+  - [ ] Use Image-to-Video mode for generation
+  - [ ] Support any source video duration (not limited to 8 seconds)
+
+- [ ] **`--remix-last-frame`** - Also extract last frame
+  - [ ] Use First & Last Frames mode for better control
+  - [ ] AI interpolates between frames + new prompt
+
+- [ ] **`--remix-start M:SS`** - Start time for extraction
+  - [ ] Support `M:SS` format (e.g., `0:05`)
+  - [ ] Support seconds format (e.g., `5`)
+
+- [ ] **`--remix-end M:SS`** - End time for extraction
+  - [ ] Default: end of video
+  - [ ] Useful for long videos (select specific section)
+
+**Example Usage:**
+```bash
+# Simple remix (first frame only)
+python video_gen.py "Make the cat run faster" --remix cat_walking.mp4
+
+# With last frame (better control)
+python video_gen.py "Transform to anime style" --remix video.mp4 --remix-last-frame
+
+# Long video - select section
+python video_gen.py "Add dramatic lighting" --remix long_video.mp4 --remix-start 0:10 --remix-end 0:18
+```
+
+#### 6.2 Future Video Enhancement Features
+
+| Priority | Feature | Description | Status |
+|----------|---------|-------------|--------|
+| 🟡 Medium | **Outpainting** | `--outpaint left,right` (expand video) | 📋 Planned |
+| 🟡 Medium | **Camera Control** | `--camera pan-left` (cinematic effects) | 📋 Planned |
+| 🟢 Low | **Audio Control** | Audio style/mood parameters | 📋 Planned |
+| 🔵 Future | **Character Consistency** | Same character across videos | 🔬 Research |
+| ⚫ N/A | **Lip Sync** | Match audio to lip movement | ❌ Not in API |
 
 ---
 

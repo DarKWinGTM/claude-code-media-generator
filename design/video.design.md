@@ -1,6 +1,6 @@
 # 🎬 Video Generation Design Document
 
-## Version: 2.28
+## Version: 2.29
 ## Date: 2026-02-06
 ## Parent Document: [design.md](./design.md)
 
@@ -1763,6 +1763,192 @@ def prepare_video_for_extension(
 | Local file (base64) | ❌ | Not supported by Gemini API |
 | Local file → Auto-upload GCS | ✅ | With --storage-uri |
 | URL → Download → Convert → Upload | ✅ | Proposed v2.25 feature |
+
+---
+
+### 5.19 Remix Mode (Planned Feature) 🆕
+
+> **Status:** 📋 DESIGNED (Not yet implemented)
+> **Version:** Planned for v2.32+
+> **Date:** 2026-02-06
+
+#### 5.19.1 Overview
+
+**Problem Statement:**
+- ผู้ใช้มี video เดิมต้องการ "ปรับแต่ง" ด้วย prompt ใหม่
+- Google UI มี "Remix" feature แต่ API ไม่มี mode โดยตรง
+- ต้อง extract frames แล้วใช้ Image-to-Video mode
+
+**Solution: `--remix` CLI Argument**
+
+Remix Mode = **Extract First/Last Frames** + **New Prompt** + **Image-to-Video or First & Last Frames mode**
+
+#### 5.19.2 CLI Syntax
+
+```bash
+# Basic remix (extract first frame only)
+python video_gen.py "New description" \
+  --remix source_video.mp4
+
+# Remix with first + last frame (better control)
+python video_gen.py "Transform the scene" \
+  --remix source_video.mp4 \
+  --remix-last-frame
+
+# Remix with time range specification (for long videos)
+python video_gen.py "Modify this section" \
+  --remix source_video.mp4 \
+  --remix-start 0:05 \
+  --remix-end 0:13
+
+# Remix with custom output duration
+python video_gen.py "Make it different" \
+  --remix source_video.mp4 \
+  --duration 8
+```
+
+#### 5.19.3 Key Design Requirements
+
+**1. Source Video ความยาวไม่จำกัด:**
+
+| Source Duration | Behavior | Notes |
+|-----------------|----------|-------|
+| < 8 seconds | Use as-is | Extract first/last frames directly |
+| 8 seconds exactly | Use as-is | Standard case |
+| > 8 seconds | Trim/specify range | Use `--remix-start` / `--remix-end` |
+| Any duration | Auto-adapt | Output duration controlled by `--duration` |
+
+**2. First Frame + Last Frame Support:**
+
+```
+Remix Mode Variants
+
+Mode 1: First Frame Only (Default)
+  --remix video.mp4
+    → Extract first frame
+    → Use Image-to-Video mode
+    → Result: AI generates motion from first frame + new prompt
+
+Mode 2: First + Last Frame (Better Control)
+  --remix video.mp4 --remix-last-frame
+    → Extract first frame at start time
+    → Extract last frame at end time
+    → Use First & Last Frames mode
+    → Result: AI interpolates between frames + follows new prompt
+```
+
+**3. Time Range Specification (for long videos):**
+
+| Argument | Format | Default | Description |
+|----------|--------|---------|-------------|
+| `--remix-start` | `M:SS` or seconds | `0:00` | Start time for extraction |
+| `--remix-end` | `M:SS` or seconds | End of video | End time for extraction |
+| `--remix-last-frame` | flag | false | Also extract last frame |
+
+#### 5.19.4 Workflow Diagram
+
+```
+User Command: --remix source.mp4 --remix-last-frame --remix-start 0:05 --remix-end 0:13
+
+Step 1: Analyze Source Video
+  ├─ Get duration: 30 seconds
+  ├─ Get FPS: 24fps
+  └─ Validate time range: 0:05 to 0:13 (8 seconds selected)
+
+Step 2: Extract Frames (using ffmpeg)
+  ├─ First frame at 0:05 → temp_first_frame.jpg
+  └─ Last frame at 0:13 → temp_last_frame.jpg
+
+Step 3: Determine Generation Mode
+  ├─ Has last frame? → Yes → Use "first_last_frames" mode
+  └─ No last frame? → Use "image_to_video" mode
+
+Step 4: Generate New Video
+  ├─ Input: temp_first_frame.jpg + temp_last_frame.jpg
+  ├─ Prompt: "Transform the scene" (user's new prompt)
+  └─ Output: remix_20260206_123456.mp4
+```
+
+#### 5.19.5 Implementation Pseudocode
+
+```python
+def remix_video(args):
+    source = args.remix
+    start_time = parse_time(args.remix_start) if args.remix_start else 0
+    end_time = parse_time(args.remix_end) if args.remix_end else get_video_duration(source)
+    use_last_frame = args.remix_last_frame
+
+    # Step 1: Extract first frame
+    first_frame = extract_frame(source, start_time)  # ffmpeg -ss {start} -i {source} -frames:v 1
+
+    # Step 2: Extract last frame (if requested)
+    last_frame = None
+    if use_last_frame:
+        last_frame = extract_frame(source, end_time)
+
+    # Step 3: Determine mode
+    if last_frame:
+        mode = "first_last_frames"
+        args.image = first_frame
+        args.last_frame = last_frame
+    else:
+        mode = "image_to_video"
+        args.image = first_frame
+
+    # Step 4: Call existing generation logic
+    return generate_video(args, mode=mode)
+```
+
+#### 5.19.6 Feature Gap Analysis
+
+**Current 8 Modes vs Remix Mode:**
+
+| Feature | Current Modes | Remix Mode Adds |
+|---------|---------------|-----------------|
+| Edit existing video | ❌ Need mask for insert/remove | ✅ "Soft edit" via prompt |
+| Keep subject identity | ✅ Reference Asset | ✅ First/Last frame anchor |
+| Style transfer | ✅ Reference Style | ✅ Combine with style ref |
+| Video transformation | ❌ Not available | ✅ New prompt on existing content |
+
+**Planned Features Roadmap:**
+
+| Priority | Feature | Description | Status |
+|----------|---------|-------------|--------|
+| 🔴 High | **Remix Mode** | `--remix video.mp4` with First+Last frames | 📋 DESIGNED |
+| 🟡 Medium | **Outpainting** | `--outpaint left,right` (expand video) | 📋 Planned |
+| 🟡 Medium | **Camera Control** | `--camera pan-left` (cinematic) | 📋 Planned |
+| 🟢 Low | **Audio Control** | Audio style/mood parameters | 📋 Planned |
+| 🔵 Future | **Character Consistency** | Same character across videos | 🔬 Research |
+| ⚫ N/A | **Lip Sync** | Match audio to lip movement | ❌ Not in API |
+
+#### 5.19.7 Example Use Cases
+
+**Use Case 1: Simple Remix**
+```bash
+# Original: Cat walking in garden
+# New: Cat running in garden (keep the cat, change action)
+python video_gen.py "The cat starts running fast" \
+  --remix cat_walking.mp4
+```
+
+**Use Case 2: Style Transform**
+```bash
+# Original: Real footage
+# New: Anime style (keep composition, change style)
+python video_gen.py "Convert to anime style, vibrant colors" \
+  --remix real_video.mp4 \
+  --remix-last-frame
+```
+
+**Use Case 3: Long Video Section Remix**
+```bash
+# Original: 60 second video
+# New: Remix only seconds 10-18
+python video_gen.py "Add dramatic lighting" \
+  --remix long_video.mp4 \
+  --remix-start 0:10 \
+  --remix-end 0:18
+```
 
 ---
 

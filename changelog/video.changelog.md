@@ -1,8 +1,65 @@
 # 📜 Changelog - Video Generation Design Document
 
 > **Parent Document:** [video.design.md](../design/video.design.md)
-> **Current Version:** 2.31
-> **Previous:** 2.30
+> **Current Version:** 2.32
+> **Previous:** 2.31
+
+---
+
+## Version 2.32: Remix Mode Design + Feature Gap Analysis
+
+**Date:** 2026-02-06
+**Session:** (current session)
+**Status:** 📋 DESIGNED
+
+### Overview
+
+Added comprehensive **Remix Mode** design (Section 5.19) and documented Feature Gap Analysis for future development planning.
+
+### Key Changes
+
+1. **Section 5.19: Remix Mode (Planned Feature)**
+   - New `--remix video.mp4` CLI argument design
+   - Supports First Frame extraction (Image-to-Video mode)
+   - Supports First + Last Frame extraction (`--remix-last-frame` flag)
+   - Source video ความยาวไม่จำกัด - trim via `--remix-start` / `--remix-end`
+   - Workflow diagram and implementation pseudocode
+   - 3 example use cases (Simple, Style Transform, Long Video)
+
+2. **Remix Mode Key Arguments**
+
+   | Argument | Purpose |
+   |----------|---------|
+   | `--remix VIDEO` | Source video to remix |
+   | `--remix-last-frame` | Also extract last frame (First & Last Frames mode) |
+   | `--remix-start M:SS` | Start time for frame extraction |
+   | `--remix-end M:SS` | End time for frame extraction |
+
+3. **Feature Gap Analysis (Roadmap)**
+
+   | Priority | Feature | Status |
+   |----------|---------|--------|
+   | 🔴 High | **Remix Mode** | 📋 DESIGNED |
+   | 🟡 Medium | Outpainting | 📋 Planned |
+   | 🟡 Medium | Camera Control | 📋 Planned |
+   | 🟢 Low | Audio Control | 📋 Planned |
+   | 🔵 Future | Character Consistency | 🔬 Research |
+   | ⚫ N/A | Lip Sync | ❌ Not in API |
+
+### Technical Details
+
+**Remix Mode Variants:**
+- **Mode 1 (Default):** `--remix video.mp4` → Extract first frame → Image-to-Video
+- **Mode 2 (Better Control):** `--remix video.mp4 --remix-last-frame` → Extract first + last → First & Last Frames mode
+
+**Time Range Support:**
+- Source video can be any duration (not limited to 8 seconds)
+- Use `--remix-start 0:05 --remix-end 0:13` to select specific section
+- Output duration controlled by `--duration` flag (5-8 seconds)
+
+### Files Modified
+
+- `design/video.design.md` - Updated to v2.29 (Added Section 5.19)
 
 ---
 
