@@ -13,6 +13,9 @@
 
 <img src="https://img.shields.io/badge/🚧_Under_Development-Documentation_Phase-yellow?style=for-the-badge" alt="Development Status">
 
+> **📝 Status:** Core features (video_gen.py, image_gen.py) are production-ready.
+> Currently focusing on **documentation improvements** and **planned features design**.
+
 <br>
 
 <!-- Badges Row 1 -->
