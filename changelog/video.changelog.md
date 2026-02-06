@@ -1,8 +1,64 @@
 # 📜 Changelog - Video Generation Design Document
 
 > **Parent Document:** [video.design.md](../design/video.design.md)
-> **Current Version:** 2.30
-> **Previous:** 2.29
+> **Current Version:** 2.31
+> **Previous:** 2.30
+
+---
+
+## Version 2.31: Veo 3.1 Mask Operations Support (Critical Fix)
+
+**Date:** 2026-02-06
+**Session:** (current session)
+**Status:** ✅ Implemented
+
+### Overview
+
+**Critical Fix:** Corrected outdated information that claimed only Veo 2.0 supports mask operations. Research confirmed **Veo 3.1 fully supports Add Object, Remove Object, and Outpainting** with enhanced features.
+
+### Key Changes
+
+1. **video_gen.py - MODEL_CAPABILITIES**
+   - Changed `insert_objects: False` → `True` for veo-3.1-generate-preview
+   - Changed `remove_objects: False` → `True` for veo-3.1-generate-preview
+   - Changed `insert_objects: False` → `True` for veo-3.1-fast-generate-preview
+   - Changed `remove_objects: False` → `True` for veo-3.1-fast-generate-preview
+
+2. **video_gen.py - MODE_DEFAULTS**
+   - Changed `insert_objects.model: veo-2.0-generate-preview` → `veo-3.1-generate-preview`
+   - Changed `remove_objects.model: veo-2.0-generate-preview` → `veo-3.1-generate-preview`
+
+3. **video_gen.py - MODE_FALLBACK_MODELS**
+   - Changed `insert_objects` fallback → `veo-3.1-generate-preview`
+   - Changed `remove_objects` fallback → `veo-3.1-generate-preview`
+
+4. **video.design.md - Model IDs Table**
+   - Added "mask (Add/Remove Object)" feature to Veo 3.1 preview models
+
+5. **video.design.md - Auto-correction Table**
+   - Updated insert_objects/remove_objects auto-correct target to veo-3.1-generate-preview
+
+6. **video.design.md - MODE_FALLBACK_MODELS Table**
+   - Updated fallback models and reasons for mask operations
+
+### Veo 3.1 Mask Capabilities (Confirmed)
+
+| Feature | Veo 2.0 | Veo 3.1 | Notes |
+|---------|---------|---------|-------|
+| **Add Object** | ✅ Yes | ✅ Yes | Veo 3.1 has improved scale/shadow handling |
+| **Remove Object** | ✅ Yes | ✅ Yes | Veo 3.1 better at scene preservation |
+| **Outpainting** | ✅ Yes | ✅ Yes | Veo 3.1 extends with consistency |
+
+### Why This Matters
+
+- **Standard Model Update**: Veo 3.1 is now the recommended standard for ALL video operations
+- **Mask Operations**: No longer need to fallback to Veo 2.0 for insert/remove object
+- **Consistency**: Use single model (veo-3.1-generate-preview) for all advanced features
+
+### Files Modified
+
+- `video_gen.py` - MODEL_CAPABILITIES, MODE_DEFAULTS, MODE_FALLBACK_MODELS
+- `design/video.design.md` - Updated to v2.28
 
 ---
 

@@ -1,7 +1,7 @@
 # 🎬 Video Generation Design Document
 
-## Version: 2.27.2
-## Date: 2026-02-03
+## Version: 2.28
+## Date: 2026-02-06
 ## Parent Document: [design.md](./design.md)
 
 ---
@@ -529,8 +529,8 @@ Service Account:
 | **Veo 3.1** ||||
 | `veo-3.1-generate-001` | 3.1 | ✅ Stable | Native audio, 720p/1080p/4k |
 | `veo-3.1-fast-generate-001` | 3.1 | ✅ Stable | Fastest + audio |
-| `veo-3.1-generate-preview` | 3.1 | 🔬 Preview | lastFrame, referenceImages |
-| `veo-3.1-fast-generate-preview` | 3.1 | 🔬 Preview | Fastest preview |
+| `veo-3.1-generate-preview` | 3.1 | 🔬 Preview | lastFrame, referenceImages, **mask (Add/Remove Object)** |
+| `veo-3.1-fast-generate-preview` | 3.1 | 🔬 Preview | Fastest preview, **mask (Add/Remove Object)** |
 
 > **Status Legend:**
 > - ✅ Stable = Production-ready
@@ -2019,8 +2019,8 @@ python video_gen.py "A cat walking" --preset budget
 | **video_extension** | `gs://` + Gemini API | ❌ Error with solution hint |
 | **reference_asset** | `--duration` | ⚠️ Auto-correct to **8** (fixed) |
 | **reference_style** | `--duration` | ⚠️ Auto-correct to **8** (fixed) |
-| **insert_objects** | `--model` | ⚠️ Auto-correct to **veo-2.0-generate-preview** |
-| **remove_objects** | `--model` | ⚠️ Auto-correct to **veo-2.0-generate-preview** |
+| **insert_objects** | `--model` | ⚠️ Auto-correct to **veo-3.1-generate-preview** |
+| **remove_objects** | `--model` | ⚠️ Auto-correct to **veo-3.1-generate-preview** |
 
 **Example - Auto-correction in action:**
 ```bash
@@ -2042,8 +2042,8 @@ python video_gen.py "Continue" --extend-video video.mp4 --duration 8
 | **first_last_frames** | `veo-3.1-generate-preview` | veo-3.0 ไม่รองรับ |
 | **reference_asset** | `veo-3.1-generate-preview` | เฉพาะ veo-2.0-exp, veo-3.1-preview |
 | **reference_style** | `veo-2.0-generate-exp` | เฉพาะ veo-2.0-exp |
-| **insert_objects** | `veo-2.0-generate-preview` | เฉพาะ veo-2.0-preview (mask support) |
-| **remove_objects** | `veo-2.0-generate-preview` | เฉพาะ veo-2.0-preview (mask support) |
+| **insert_objects** | `veo-3.1-generate-preview` | Veo 3.1 supports Add Object with mask |
+| **remove_objects** | `veo-3.1-generate-preview` | Veo 3.1 supports Remove Object with mask |
 
 **Example - Model auto-switch:**
 ```bash
