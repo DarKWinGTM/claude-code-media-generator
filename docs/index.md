@@ -16,6 +16,9 @@ AI-Powered Video & Image Generation
 Create stunning videos and images using Google Veo & Imagen APIs
 </p>
 
+!!! warning "🚧 Under Development"
+    **Core features are production-ready.** Currently focusing on documentation improvements and planned features design.
+
 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;" markdown>
 
 [Get Started :material-rocket-launch:](getting-started/installation.md){ .md-button .md-button--primary }
@@ -197,7 +200,52 @@ Create stunning videos and images using Google Veo & Imagen APIs
 | **check_api.py** | v2.1 | :material-check-circle:{ .status-ready } Stable |
 | **Documentation** | v3.10 | :material-check-circle:{ .status-ready } Updated |
 | **Claude Code Skill** | v3.2.1 | :material-check-circle:{ .status-ready } Available |
+| **Agent** | v1.0 | :material-check-circle:{ .status-ready } Available |
 | **MCP Server** | — | :material-progress-wrench:{ .status-planned } Planned |
+
+---
+
+## :material-map-marker-path: Development Roadmap
+
+<div class="grid cards" markdown>
+
+-   :material-check-circle:{ .lg .middle style="color: #22c55e" } **Phase 1: Core Features** ✅
+
+    ---
+
+    - 8 video generation modes
+    - Image generation (Imagen/Gemini)
+    - Smart validation & auto-correction
+    - GCS storage integration
+
+-   :material-check-circle:{ .lg .middle style="color: #22c55e" } **Phase 2: Enhanced Workflows** ✅
+
+    ---
+
+    - Video extension from URLs
+    - Auto FPS conversion (24fps)
+    - Reference image system
+    - Smart defaults from metadata
+
+-   :material-check-circle:{ .lg .middle style="color: #22c55e" } **Phase 3: Claude Code** ✅
+
+    ---
+
+    - `/generative` unified skill
+    - Help system (5 topics)
+    - Config wizard
+    - Agent for auto-detection
+
+-   :material-clipboard-list:{ .lg .middle style="color: #eab308" } **Phase 4: Planned Features**
+
+    ---
+
+    - **Remix Mode** (`--remix video.mp4`)
+    - Outpainting (`--outpaint left,right`)
+    - Camera Control (`--camera pan-left`)
+    - Audio Control (style/mood)
+
+</div>
 
 ---
 
@@ -254,6 +302,18 @@ Create stunning videos and images using Google Veo & Imagen APIs
     [:material-arrow-right: View guides](guides/gcs-storage.md)
 
 </div>
+
+---
+
+## :material-star-shooting: Star History
+
+<a href="https://star-history.com/#DarKWinGTM/claude-code-media-generator&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=DarKWinGTM/claude-code-media-generator&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=DarKWinGTM/claude-code-media-generator&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=DarKWinGTM/claude-code-media-generator&type=Date" />
+ </picture>
+</a>
 
 ---
 
