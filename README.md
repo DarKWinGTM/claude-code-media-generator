@@ -343,6 +343,81 @@ Copy-Item ".\.claude\skills\generative\SKILL.md" -Destination "$env:USERPROFILE\
 
 ---
 
+## 🤖 Agent Installation (Optional)
+
+The **Generative Media Navigator** agent provides auto-detection of media creation intent. When you mention creating videos or images in conversation, it automatically invokes the `/generative` skill.
+
+> **Note:** The agent requires the `/generative` skill to be installed first.
+
+### Agent vs Skill
+
+| Component | Purpose | Required |
+|-----------|---------|----------|
+| `/generative` Skill | Execute video/image generation commands | ✅ Yes |
+| Generative Media Navigator Agent | Auto-detect intent and invoke skill | ❌ Optional |
+
+### 🐧 Linux / macOS Agent Installation
+
+```bash
+# Prerequisites: Skill must be installed first (see above)
+
+# Create agents directory
+mkdir -p ~/.claude/agents
+
+# Copy agent file
+cp path/to/claude-code-media-generator/.claude/agents/generative-media-navigator.md \
+   ~/.claude/agents/
+
+# Restart Claude Code to detect new agent
+```
+
+### 🪟 Windows Agent Installation (PowerShell)
+
+```powershell
+# Prerequisites: Skill must be installed first (see above)
+
+# Create agents directory
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\agents"
+
+# Copy agent file
+Copy-Item "path\to\claude-code-media-generator\.claude\agents\generative-media-navigator.md" `
+   -Destination "$env:USERPROFILE\.claude\agents\"
+
+# Restart Claude Code to detect new agent
+```
+
+### ✅ Verify Agent Installation
+
+After restarting Claude Code, test with natural language:
+
+```
+You: "สร้างวิดีโอแมวเดินบนดวงจันทร์"
+Agent: [Auto-detects video intent → invokes /generative video]
+
+You: "Create an image of a sunset"
+Agent: [Auto-detects image intent → invokes /generative image]
+```
+
+### 📁 Directory Structure After Full Installation
+
+```
+~/.claude/
+├── agents/
+│   └── generative-media-navigator.md  # Agent (optional)
+└── skills/
+    └── generative/
+        └── SKILL.md                    # Skill (required)
+
+/your/project/
+├── video_gen.py
+├── image_gen.py
+├── config.py
+├── video_utils.py
+└── config.json
+```
+
+---
+
 ## 💡 Usage Examples
 
 ### Basic Video Generation
