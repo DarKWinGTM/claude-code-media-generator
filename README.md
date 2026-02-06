@@ -403,7 +403,7 @@ Agent: [Auto-detects image intent → invokes /generative image]
 ```
 ~/.claude/
 ├── agents/
-│   └── generative-media-navigator.md  # Agent (optional)
+│   └── generative-media-navigator.md  # Agent (enhancement)
 └── skills/
     └── generative/
         └── SKILL.md                    # Skill (required)
