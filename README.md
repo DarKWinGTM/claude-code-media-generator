@@ -187,7 +187,11 @@ pip install requests google-auth
 mkdir -p ~/.claude/skills/generative
 cp .claude/skills/generative/SKILL.md ~/.claude/skills/generative/
 
-# 4. Copy Python scripts to your working directory
+# 4. Install Agent (Recommended - enables auto-detection)
+mkdir -p ~/.claude/agents
+cp .claude/agents/generative-media-navigator.md ~/.claude/agents/
+
+# 5. Copy Python scripts to your working directory
 # Option A: Copy to current project
 cp video_gen.py image_gen.py config.py video_utils.py /path/to/your/project/
 
@@ -197,7 +201,7 @@ ln -s "$(pwd)/image_gen.py" /path/to/your/project/
 ln -s "$(pwd)/config.py" /path/to/your/project/
 ln -s "$(pwd)/video_utils.py" /path/to/your/project/
 
-# 5. Restart Claude Code to detect new skill
+# 6. Restart Claude Code to detect new skill and agent
 ```
 
 ### 🪟 Windows Installation (PowerShell)
@@ -214,10 +218,14 @@ pip install requests google-auth
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\skills\generative"
 Copy-Item ".\.claude\skills\generative\SKILL.md" -Destination "$env:USERPROFILE\.claude\skills\generative\"
 
-# 4. Copy Python scripts to your working directory
+# 4. Install Agent (Recommended - enables auto-detection)
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\agents"
+Copy-Item ".\.claude\agents\generative-media-navigator.md" -Destination "$env:USERPROFILE\.claude\agents\"
+
+# 5. Copy Python scripts to your working directory
 Copy-Item "video_gen.py", "image_gen.py", "config.py", "video_utils.py" -Destination "C:\path\to\your\project\"
 
-# 5. Restart Claude Code to detect new skill
+# 6. Restart Claude Code to detect new skill and agent
 ```
 
 ### 🪟 Windows Installation (Command Prompt)
@@ -234,13 +242,17 @@ pip install requests google-auth
 mkdir "%USERPROFILE%\.claude\skills\generative"
 copy ".\.claude\skills\generative\SKILL.md" "%USERPROFILE%\.claude\skills\generative\"
 
-:: 4. Copy Python scripts to your working directory
+:: 4. Install Agent (Recommended - enables auto-detection)
+mkdir "%USERPROFILE%\.claude\agents"
+copy ".\.claude\agents\generative-media-navigator.md" "%USERPROFILE%\.claude\agents\"
+
+:: 5. Copy Python scripts to your working directory
 copy video_gen.py "C:\path\to\your\project\"
 copy image_gen.py "C:\path\to\your\project\"
 copy config.py "C:\path\to\your\project\"
 copy video_utils.py "C:\path\to\your\project\"
 
-:: 5. Restart Claude Code to detect new skill
+:: 6. Restart Claude Code to detect new skill and agent
 ```
 
 ### ✅ Verify Installation
