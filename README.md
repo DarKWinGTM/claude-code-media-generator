@@ -343,18 +343,18 @@ Copy-Item ".\.claude\skills\generative\SKILL.md" -Destination "$env:USERPROFILE\
 
 ---
 
-## 🤖 Agent Installation (Optional)
+## 🤖 Agent Installation
 
 The **Generative Media Navigator** agent provides auto-detection of media creation intent. When you mention creating videos or images in conversation, it automatically invokes the `/generative` skill.
 
-> **Note:** The agent requires the `/generative` skill to be installed first.
+> **Recommended:** Install both the Skill and Agent for the complete experience.
 
-### Agent vs Skill
+### Skill + Agent Architecture
 
-| Component | Purpose | Required |
-|-----------|---------|----------|
-| `/generative` Skill | Execute video/image generation commands | ✅ Yes |
-| Generative Media Navigator Agent | Auto-detect intent and invoke skill | ❌ Optional |
+| Component | Purpose | Install |
+|-----------|---------|---------|
+| `/generative` Skill | Execute video/image generation commands | ✅ Required |
+| Generative Media Navigator Agent | Auto-detect intent and invoke skill | ✅ Recommended |
 
 ### 🐧 Linux / macOS Agent Installation
 
