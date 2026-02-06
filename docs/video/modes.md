@@ -207,11 +207,11 @@ The script automatically detects mode based on provided arguments:
 | text_to_video | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | image_to_video | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | first_and_last | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| video_extension | :x: | :x: | :white_check_mark: | :white_check_mark: |
+| video_extension | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | reference_asset | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | reference_style | :x: | :x: | :x: | :white_check_mark: |
-| insert_objects | :x: | :x: | :white_check_mark: | :white_check_mark: |
-| remove_objects | :x: | :x: | :white_check_mark: | :white_check_mark: |
+| insert_objects | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| remove_objects | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 ---
 
