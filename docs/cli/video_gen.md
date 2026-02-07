@@ -70,6 +70,15 @@ python video_gen.py PROMPT [OPTIONS]
 | `--mask-mode` | string | - | insert or remove |
 | `--resize-mode` | string | - | Resize mode for mask |
 
+### Remix Mode
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `--remix` | path | - | Source video to remix |
+| `--remix-last-frame` | flag | - | Also extract last frame |
+| `--remix-start` | M:SS | 0:00 | Start time for extraction |
+| `--remix-end` | M:SS | end | End time for extraction |
+
 ### Cost & Metadata
 
 | Option | Type | Default | Description |
@@ -163,6 +172,27 @@ python video_gen.py "Remove watermark" \
   --video scene.mp4 \
   --mask watermark.png \
   --mask-mode remove
+```
+
+### Remix Mode
+
+```bash
+# Simple remix (first frame only)
+python video_gen.py "Make the cat run faster" --remix cat_walking.mp4
+
+# With first and last frames (better control)
+python video_gen.py "Transform to anime style" \
+  --remix video.mp4 \
+  --remix-last-frame
+
+# Select specific time range
+python video_gen.py "Add dramatic lighting" \
+  --remix long_video.mp4 \
+  --remix-start 0:10 \
+  --remix-end 0:18
+
+# Dry run to test frame extraction
+python video_gen.py "Test" --remix video.mp4 --remix-last-frame --dry-run
 ```
 
 ---
@@ -264,5 +294,5 @@ python video_gen.py "Continue" \
 ## See Also
 
 - [Video Overview](../video/overview.md) - Video generation guide
-- [Generation Modes](../video/modes.md) - All 8 modes explained
+- [Generation Modes](../video/modes.md) - All 9 modes explained
 - [Presets](../guides/presets.md) - Preset configurations

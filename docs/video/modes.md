@@ -1,6 +1,6 @@
 # Video Generation Modes
 
-All 8 video generation modes explained with examples.
+All 9 video generation modes explained with examples.
 
 ---
 
@@ -183,6 +183,40 @@ python video_gen.py "Remove the watermark" \
 
 ---
 
+## Remix Mode
+
+Extract frames from an existing video and regenerate with a new prompt.
+
+**Usage:**
+```bash
+# Simple remix (first frame only → Image-to-Video)
+python video_gen.py "Make the cat run faster" --remix cat_walking.mp4
+
+# With last frame (→ First & Last Frames mode)
+python video_gen.py "Transform to anime style" --remix video.mp4 --remix-last-frame
+
+# Long video - select section (0:10 to 0:18)
+python video_gen.py "Add dramatic lighting" --remix long_video.mp4 --remix-start 0:10 --remix-end 0:18
+```
+
+**Parameters:**
+
+- `--remix VIDEO` - Source video to remix (required)
+- `--remix-last-frame` - Also extract last frame for better control
+- `--remix-start M:SS` - Start time for frame extraction
+- `--remix-end M:SS` - End time for frame extraction
+
+**How it works:**
+
+1. Extracts frame(s) from the source video
+2. Uses extracted frame(s) as input for generation
+3. First frame only → Image-to-Video mode
+4. First + Last frames → First & Last Frames mode
+
+**Best for:** Restyling videos, creating variations, extracting key frames
+
+---
+
 ## Mode Detection
 
 The script automatically detects mode based on provided arguments:
@@ -197,6 +231,8 @@ The script automatically detects mode based on provided arguments:
 | prompt + --reference-image:style | reference_style |
 | prompt + --video + --mask-mode insert | insert_objects |
 | prompt + --video + --mask-mode remove | remove_objects |
+| prompt + --remix | remix_mode (→ image_to_video) |
+| prompt + --remix + --remix-last-frame | remix_mode (→ first_and_last_frames) |
 
 ---
 
@@ -212,6 +248,7 @@ The script automatically detects mode based on provided arguments:
 | reference_style | :x: | :x: | :x: | :white_check_mark: |
 | insert_objects | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | remove_objects | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| remix_mode | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 ---
 

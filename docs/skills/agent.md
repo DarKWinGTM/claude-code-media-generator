@@ -22,7 +22,7 @@ The **Generative Media Navigator** is a Claude Code agent that automatically det
 ## How It Works
 
 ```
-User: "สร้างวิดีโอแมวเดินบนดวงจันทร์"
+User: "Create a video of a cat walking on the moon"
   ↓
 Agent detects: video intent, prompt = "cat walking on the moon"
   ↓
@@ -37,19 +37,19 @@ The agent recognizes these patterns:
 
 **Video Keywords:**
 
-| Thai | English |
-|------|---------|
-| สร้างวิดีโอ, ทำวิดีโอ | create video, make video |
-| อยากได้วิดีโอ | I want a video |
-| generate video | generate video |
+| Trigger Phrase | Intent |
+|----------------|--------|
+| create video, make video | Video generation |
+| I want a video, generate video | Video generation |
+| make a clip, create animation | Video generation |
 
 **Image Keywords:**
 
-| Thai | English |
-|------|---------|
-| สร้างรูป, ทำรูป, สร้างภาพ | create image, make image |
-| อยากได้รูป | I want an image |
-| generate image | generate image |
+| Trigger Phrase | Intent |
+|----------------|--------|
+| create image, make image | Image generation |
+| I want an image, generate image | Image generation |
+| create a picture, make a photo | Image generation |
 
 ---
 
@@ -92,7 +92,7 @@ Copy-Item ".\.claude\agents\generative-media-navigator.md" `
 After installation, test with natural language:
 
 ```
-You: "สร้างวิดีโอแมวเดินบนดวงจันทร์"
+You: "Create a video of a cat walking on the moon"
 Agent: [Detects video intent → invokes /generative video "cat walking on the moon"]
 
 You: "Create an image of a beautiful sunset"
@@ -108,7 +108,7 @@ Agent: [Detects video intent → invokes /generative video "ocean waves"]
 
 The agent will **not** auto-invoke when:
 
-- Asking about previous generated content ("วิดีโอที่สร้างเมื่อกี้เป็นไง")
+- Asking about previous generated content ("How did the video I made earlier turn out?")
 - Troubleshooting or checking status
 - Request is ambiguous (will ask for clarification)
 - User explicitly says they don't want to generate
