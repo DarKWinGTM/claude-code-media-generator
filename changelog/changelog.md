@@ -1,11 +1,35 @@
 # 📜 Changelog - Master Design Document
 
-> **Parent Document:** [design.md](../design.md)
-> **Current Version:** 4.3
+> **Parent Document:** [design.md](../design/design.md)
+> **Current Version:** 4.4
 
 ---
 
 ## Version History
+
+### Version 4.4 (2026-02-07)
+
+**Documentation Structure Update:**
+
+**Changes:**
+- Updated Related Documents table in design.md:
+  - Added `skill.design.md` - Smart Skill System
+  - Added `pages.design.md` - GitHub Pages Design
+  - Added `config.design.md` - Config System
+  - Added `agent.design.md` - Agent Design
+  - Fixed README.md path to `../README.md`
+- Updated Quick Navigation:
+  - Added Smart Skill System link
+  - Added GitHub Pages link
+  - Updated "8 Modes" → "9 Modes" (Remix Mode added)
+- Clarified document locations:
+  - `design/*.design.md` - All design documents
+  - `changelog/*.changelog.md` - All changelogs
+  - `pages/` - Git worktree for GitHub Pages (separate branch)
+
+**Note:** `pages/` directory is a git worktree linked to `pages` branch. Design/changelog files for Pages belong in `design/pages.design.md` and `changelog/pages.changelog.md`, NOT inside `pages/`.
+
+---
 
 ### Version 4.3 (2026-02-01)
 

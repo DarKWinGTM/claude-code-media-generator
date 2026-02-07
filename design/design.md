@@ -18,10 +18,14 @@
 | Document | Description | Content |
 |----------|-------------|---------|
 | **[image.design.md](./image.design.md)** | 🖼️ Image Generation Details | Endpoints, methods, limitations, pricing |
-| **[video.design.md](./video.design.md)** | 🎬 Video Generation Details | 8 modes, endpoints, methods, limitations |
+| **[video.design.md](./video.design.md)** | 🎬 Video Generation Details | 9 modes, endpoints, methods, limitations |
+| **[skill.design.md](./skill.design.md)** | 🎯 Smart Skill System | `/generative` skill design, workflows |
+| **[pages.design.md](./pages.design.md)** | 🌐 GitHub Pages Design | UI/UX, MkDocs Material, Metro Cyberpunk theme |
+| **[config.design.md](./config.design.md)** | ⚙️ Config System | Multi-project config, Smart Defaults |
 | **[mcp.design.md](./mcp.design.md)** | 🔧 MCP Tools Specification | Future MCP integration plan |
 | **[gcsdb.design.md](./gcsdb.design.md)** | 🗄️ GCS Module (Planning) | Future GCS module extraction |
-| **[README.md](./README.md)** | 📖 Quick Start | Installation and basic usage |
+| **[agent.design.md](./agent.design.md)** | 🤖 Agent Design | Generative Media Navigator agent |
+| **[README.md](../README.md)** | 📖 Quick Start | Installation and basic usage |
 
 ### Quick Navigation
 
@@ -32,7 +36,9 @@
 | Authentication (3 Methods) | [Section: Authentication](#authentication-methods) |
 | **OAuth 2.0 Client Types** | [Section: Understanding OAuth 2.0](#-understanding-oauth-20-client-types) |
 | Image Generation | [image.design.md](./image.design.md) |
-| Video Generation (8 Modes) | [video.design.md](./video.design.md) |
+| Video Generation (9 Modes) | [video.design.md](./video.design.md) |
+| **Smart Skill System** | [skill.design.md](./skill.design.md) |
+| **GitHub Pages** | [pages.design.md](./pages.design.md) |
 | **Cloud Storage (GCS)** | [Section: Cloud Storage](#️-google-cloud-storage-gcs-integration) |
 | **Cost Overview** | [Section: Cost Overview](#-cost-overview) |
 | **Config System** | [config.design.md](./config.design.md) |
