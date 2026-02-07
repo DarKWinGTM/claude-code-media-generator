@@ -1,7 +1,7 @@
 # 📋 TODO - Claude Code Media Generator
 
-> **Last Updated:** 2026-02-06
-> **Version:** 3.8
+> **Last Updated:** 2026-02-07
+> **Version:** 3.9
 
 ---
 
@@ -157,7 +157,52 @@
 
 ## 🚧 In Progress
 
-### 🔄 GitHub Pages: Section Navigator Feature (2026-02-05) ✅ IMPLEMENTED
+(No active tasks)
+
+---
+
+### ✅ Phase 6.2: Remix Mode Documentation (2026-02-07) - COMPLETED
+
+> **Related:** Phase 6.1 Remix Mode Implementation (✅ COMPLETED)
+> **Changelog:** [changelog/video.changelog.md](changelog/video.changelog.md) v2.33
+
+**Goal:** อัพเดท Skill, Docs/Pages และ README เพื่อ document Remix Mode ใหม่
+
+#### Documentation Tasks (Priority Order)
+
+| # | Task | File | Priority | Status |
+|---|------|------|----------|--------|
+| 1 | Add Remix to Question 4 + CLI Reference | SKILL.md | 🔴 High | ✅ Done |
+| 2 | Add Remix Mode section | docs/video/modes.md | 🔴 High | ✅ Done |
+| 3 | Add Remix arguments table | docs/cli/video_gen.md | 🔴 High | ✅ Done |
+| 4 | Update features section | README.md | 🟡 Medium | ✅ Done |
+
+#### Task Details
+
+**Task 1: SKILL.md** ✅
+- [x] Add "Remix existing video (Remix Mode)" to Question 4 options
+- [x] Add Video Remix Flow section (similar to Video Source Flow)
+- [x] Add Remix arguments to CLI Reference table
+- [x] Update "8 Video Modes" → "9 Video Modes"
+
+**Task 2: docs/video/modes.md** ✅
+- [x] Add new "Remix Mode" section with usage examples
+- [x] Document parameters and workflow
+- [x] Add "Best for" use cases
+- [x] Update Mode Detection table
+- [x] Update Model Compatibility table
+
+**Task 3: docs/cli/video_gen.md** ✅
+- [x] Add "Remix Mode" arguments table
+- [x] Add Remix examples section
+
+**Task 4: README.md** ✅
+- [x] Update "8 Video Modes" → "9 Video Modes"
+- [x] Update subtitle to mention Remix
+
+---
+
+### ✅ GitHub Pages: Section Navigator Feature (2026-02-05) - IMPLEMENTED
 
 > **Design:** [design/pages.design.md Section 10](design/pages.design.md#10-section-navigator-feature-v163---implemented)
 > **Changelog:** [changelog/pages.changelog.md](changelog/pages.changelog.md)
@@ -636,32 +681,36 @@ Example:
 
 ---
 
-### Phase 6: Remix Mode & Video Enhancement (Planned v2.32+)
+### ✅ Completed: Phase 6 - Remix Mode Implementation (2026-02-07)
 
 > **Design:** [design/video.design.md Section 5.19](design/video.design.md#519-remix-mode-planned-feature-)
 > **Changelog:** [changelog/video.changelog.md](changelog/video.changelog.md)
-> **Status:** 📋 DESIGNED (2026-02-06)
+> **Status:** ✅ IMPLEMENTED (video_gen.py v2.32, video_utils.py v1.1.0)
 
 **Goal:** เพิ่ม Remix Mode สำหรับปรับแต่ง video เดิมด้วย prompt ใหม่
 
-#### 6.1 Remix Mode (`--remix`) 🔴 High Priority
+#### 6.1 Remix Mode (`--remix`) ✅ IMPLEMENTED
 
-- [ ] **`--remix VIDEO`** - Source video to remix
-  - [ ] Extract first frame automatically
-  - [ ] Use Image-to-Video mode for generation
-  - [ ] Support any source video duration (not limited to 8 seconds)
+- [x] **`--remix VIDEO`** - Source video to remix
+  - [x] Extract first frame automatically
+  - [x] Use Image-to-Video mode for generation
+  - [x] Support any source video duration (not limited to 8 seconds)
 
-- [ ] **`--remix-last-frame`** - Also extract last frame
-  - [ ] Use First & Last Frames mode for better control
-  - [ ] AI interpolates between frames + new prompt
+- [x] **`--remix-last-frame`** - Also extract last frame
+  - [x] Use First & Last Frames mode for better control
+  - [x] AI interpolates between frames + new prompt
 
-- [ ] **`--remix-start M:SS`** - Start time for extraction
-  - [ ] Support `M:SS` format (e.g., `0:05`)
-  - [ ] Support seconds format (e.g., `5`)
+- [x] **`--remix-start M:SS`** - Start time for extraction
+  - [x] Support `M:SS` format (e.g., `0:05`)
+  - [x] Support seconds format (e.g., `5`)
 
-- [ ] **`--remix-end M:SS`** - End time for extraction
-  - [ ] Default: end of video
-  - [ ] Useful for long videos (select specific section)
+- [x] **`--remix-end M:SS`** - End time for extraction
+  - [x] Default: end of video
+  - [x] Useful for long videos (select specific section)
+
+**New Functions Implemented:**
+- `video_utils.py`: `get_video_duration()`, `extract_frame()`, `extract_first_and_last_frames()`
+- `video_gen.py`: `parse_time()`, `process_remix_mode()`
 
 **Example Usage:**
 ```bash

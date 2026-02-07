@@ -47,8 +47,8 @@
 </td>
 <td width="25%" align="center">
 <h3>🎬</h3>
-<b>8 Video Modes</b><br>
-<sub>Text, Image, Extension & more</sub>
+<b>9 Video Modes</b><br>
+<sub>Text, Image, Remix & more</sub>
 </td>
 <td width="25%" align="center">
 <h3>☁️</h3>

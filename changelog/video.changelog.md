@@ -1,15 +1,128 @@
 # 📜 Changelog - Video Generation Design Document
 
 > **Parent Document:** [video.design.md](../design/video.design.md)
-> **Current Version:** 2.32
-> **Previous:** 2.31
+> **Current Version:** 2.34
+> **Previous:** 2.33
+
+---
+
+## Version 2.34: Remix Mode Documentation Update
+
+**Date:** 2026-02-07
+**Session:** (current session)
+**Status:** ✅ COMPLETED
+
+### Overview
+
+Updated all documentation to include Remix Mode (Phase 6.2):
+- SKILL.md agent workflow
+- GitHub Pages docs
+- README.md
+
+### Changes
+
+1. **SKILL.md** (Generative Skill Agent)
+   - Added Option 5 "Remix existing video" to Question 4
+   - Added Video Remix Flow section with 4 steps
+   - Added Remix args to CLI Reference table
+   - Updated "8 Video Modes" → "9 Video Modes"
+
+2. **pages/docs/video/modes.md**
+   - Added new "Remix Mode" section with full documentation
+   - Updated Mode Detection table with remix patterns
+   - Updated Model Compatibility table
+
+3. **pages/docs/cli/video_gen.md**
+   - Added "Remix Mode" arguments table
+   - Added Remix Mode examples section
+   - Updated "See Also" reference
+
+4. **README.md**
+   - Updated badge: "8 Video Modes" → "9 Video Modes"
+   - Updated subtitle: "Extension & more" → "Remix & more"
+
+---
+
+## Version 2.33: Remix Mode Implementation (Phase 6)
+
+**Date:** 2026-02-07
+**Session:** (current session)
+**Status:** ✅ IMPLEMENTED
+
+### Overview
+
+Implemented complete **Remix Mode** functionality (Phase 6) in video_gen.py v2.32 and video_utils.py v1.1.0. This feature enables extracting frames from existing videos and regenerating with new prompts using Image-to-Video or First & Last Frames mode.
+
+### Key Features
+
+1. **New CLI Arguments (Remix Mode Group)**
+
+   | Argument | Purpose |
+   |----------|---------|
+   | `--remix VIDEO` | Source video to remix |
+   | `--remix-last-frame` | Also extract last frame (First & Last Frames mode) |
+   | `--remix-start M:SS` | Start time for frame extraction (default: 0) |
+   | `--remix-end M:SS` | End time for frame extraction (default: end of video) |
+
+2. **New Functions in video_utils.py (v1.1.0)**
+   - `get_video_duration(video_path)` - Get video duration using ffprobe
+   - `extract_frame(video_path, timestamp, output_path, verbose)` - Extract single frame at timestamp
+   - `extract_first_and_last_frames(video_path, start_time, end_time, output_dir, verbose)` - Extract both frames
+
+3. **New Functions in video_gen.py (v2.32)**
+   - `parse_time(time_str)` - Parse M:SS or seconds format to float
+   - `process_remix_mode(args)` - Complete remix workflow (validate, extract, set args)
+
+4. **Frame Extraction Workflow**
+   - Mode 1 (Default): `--remix video.mp4` → Extract first frame → Image-to-Video mode
+   - Mode 2 (Better Control): `--remix video.mp4 --remix-last-frame` → First & Last Frames mode
+
+### Bug Fixes During Implementation
+
+1. **Last Frame Extraction at End of Video**
+   - Problem: Extracting at (duration - 0.04s) produced empty files for very short videos
+   - Solution: Changed buffer to 0.1s, added midpoint fallback for very short videos
+
+2. **Empty Output File Detection**
+   - Problem: `extract_frame()` wasn't checking for empty output files
+   - Solution: Added separate checks for file existence and file size > 0
+
+### Example Usage
+
+```bash
+# Simple remix (first frame only → Image-to-Video mode)
+python video_gen.py "Make the cat run faster" --remix cat_walking.mp4
+
+# With last frame (better control → First & Last Frames mode)
+python video_gen.py "Transform to anime style" --remix video.mp4 --remix-last-frame
+
+# Long video - select section (0:10 to 0:18)
+python video_gen.py "Add dramatic lighting" --remix long_video.mp4 --remix-start 0:10 --remix-end 0:18
+```
+
+### Test Results (2026-02-07)
+
+| Test | Status | Details |
+|------|--------|---------|
+| Python syntax check | ✅ | `py_compile` passed |
+| `--help` display | ✅ | Remix Mode options shown correctly |
+| `video_utils.py duration` | ✅ | Returns correct video duration |
+| `video_utils.py extract-frame` | ✅ | Extracts frame at specified timestamp |
+| `--remix --dry-run` | ✅ | Extracts first frame, sets Image-to-Video mode |
+| `--remix --remix-last-frame` | ✅ | Extracts both frames, sets First & Last Frames mode |
+| `--remix-start` / `--remix-end` | ✅ | Time range validation works |
+
+### Files Modified
+
+- `video_gen.py` - Updated to v2.32 (Added Remix Mode)
+- `video_utils.py` - Updated to v1.1.0 (Added frame extraction functions)
 
 ---
 
 ## Version 2.32: Remix Mode Design + Feature Gap Analysis
 
 **Date:** 2026-02-06
-**Session:** (current session)
+**Session:** (previous session)
 **Status:** 📋 DESIGNED
 
 ### Overview
