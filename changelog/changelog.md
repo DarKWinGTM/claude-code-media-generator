@@ -1,11 +1,111 @@
 # 📜 Changelog - Master Design Document
 
 > **Parent Document:** [design.md](../design/design.md)
-> **Current Version:** 4.4
+> **Current Version:** 4.7
 
 ---
 
 ## Version History
+
+### Version 4.7 (2026-02-09)
+
+**Testing Phases Restructure:**
+
+**Major Changes to testing.design.md (v1.1 → v1.2):**
+- Restructured entire testing into 4 distinct phases
+- Phase dependencies enforce correct testing order
+- Cannot test skill/agent without installation
+
+**Testing Phases:**
+| Phase | Name | Tests | Prerequisites |
+|-------|------|-------|---------------|
+| 1 | Environment & Scripts | 30 | None - ทำได้เลย |
+| 2 | Installation | 6 | Phase 1 ✅ |
+| 3 | Skill & Agent | 17 | Phase 2 ✅ |
+| 4 | Integration | 4 | Phase 3 ✅ |
+
+**New Test Category:**
+- Added ENV (Environment) with 4 tests
+- Total tests: 57 (was 48)
+
+**Rationale:**
+- Direct script testing (video_gen.py, image_gen.py) can run without installation
+- Skill/Agent tests REQUIRE installation first
+- Clear phase dependencies prevent testing errors
+
+**Files Modified:**
+- `design/testing.design.md` - Updated to v1.2
+- `changelog/testing.changelog.md` - Added v1.2 entry
+- `changelog/changelog.md` - This file (v4.7)
+
+---
+
+### Version 4.6 (2026-02-09)
+
+**Testing Design Enhancement - Usage Pattern Recording:**
+
+**Updates to testing.design.md (v1.0 → v1.1):**
+- Added Section 11: Usage Pattern Recording
+- Recording Goals: Command examples, error patterns, best practices, edge cases, sample outputs
+- Usage Pattern Template for standardized documentation
+- 6 Pattern Categories: VGP, IGP, SUP, AIP, CFP, TRP
+- Recording Workflow diagram
+- Usage Pattern Log table for tracking
+- Sample Patterns priority list
+- Documentation Transfer Checklist
+
+**Purpose:**
+- บันทึกรูปแบบการใช้งานจริงระหว่างการทดสอบ
+- นำข้อมูลไปเสริมใน pages/docs ในอนาคต
+- เก็บ command examples ที่ใช้ได้จริง
+- บันทึก error patterns และวิธีแก้ไข
+
+**Files Modified:**
+- `design/testing.design.md` - Updated to v1.1
+- `changelog/testing.changelog.md` - Added v1.1 entry
+- `changelog/changelog.md` - This file (v4.6)
+
+---
+
+### Version 4.5 (2026-02-08)
+
+**Phase 7: Checkpoint Testing Design:**
+
+**New Documents:**
+- Created `design/testing.design.md` v1.0 - Comprehensive testing design document
+- Created `changelog/testing.changelog.md` - Testing changelog
+
+**Testing Framework:**
+- 48 test cases across 7 categories (INS, VID, IMG, SKL, AGT, CFG, INT)
+- Extensible design for adding new tests
+- Installation tests for Claude Code deployment
+- Prerequisites checklist
+- Sign-off criteria (MVP and Full Release)
+- Issue tracking template
+
+**Test Categories:**
+| Category | Tests | Description |
+|----------|-------|-------------|
+| INS | 10 | Installation & Deployment |
+| VID | 15 | Video Generation |
+| IMG | 7 | Image Generation |
+| SKL | 11 | /generative Skill |
+| AGT | 6 | Agent Auto-Detection |
+| CFG | 4 | Configuration System |
+| INT | 4 | Integration Tests |
+
+**TODO Updates:**
+- Updated TODO.md to v4.0
+- Added Phase 7: Checkpoint Testing section
+- Documented testing tasks and sign-off criteria
+
+**Files Created/Modified:**
+- `design/testing.design.md` - NEW
+- `changelog/testing.changelog.md` - NEW
+- `TODO.md` - Updated to v4.0
+- `changelog/changelog.md` - This file (v4.5)
+
+---
 
 ### Version 4.4 (2026-02-07)
 

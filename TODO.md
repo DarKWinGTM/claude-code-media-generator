@@ -1,7 +1,7 @@
 # 📋 TODO - Claude Code Media Generator
 
-> **Last Updated:** 2026-02-07
-> **Version:** 3.9
+> **Last Updated:** 2026-02-08
+> **Version:** 4.0
 
 ---
 
@@ -157,7 +157,66 @@
 
 ## 🚧 In Progress
 
-(No active tasks)
+### 🔄 Phase 7: Checkpoint Testing (2026-02-08) - IN PROGRESS
+
+> **Design:** [design/testing.design.md](design/testing.design.md) v1.0
+> **Changelog:** [changelog/testing.changelog.md](changelog/testing.changelog.md)
+
+**Goal:** ทดสอบการใช้งานจริงของทุก component ก่อนพัฒนา features เพิ่มเติม
+
+**Philosophy:** ทดสอบ core features ก่อนพัฒนา optional components (gcsdb_api.py)
+
+#### 7.1 Prerequisites (ต้องเตรียมก่อนทดสอบ)
+
+| Requirement | Status |
+|-------------|--------|
+| Python 3.9+ | ⏳ |
+| ffmpeg / ffprobe | ⏳ |
+| gcloud CLI | ⏳ |
+| Google Cloud Project | ⏳ |
+| API Key (Gemini/Vertex) | ⏳ |
+| GCS Bucket | ⏳ |
+| Test assets (image, video) | ⏳ |
+
+#### 7.2 Test Categories (48 Tests)
+
+| Category | Code | Tests | Priority | Status |
+|----------|------|-------|----------|--------|
+| Installation | INS | 10 | 🔴 Critical | ⏳ |
+| Video Generation | VID | 15 | 🔴 Critical | ⏳ |
+| Image Generation | IMG | 7 | 🔴 Critical | ⏳ |
+| Skill | SKL | 11 | 🟡 High | ⏳ |
+| Agent | AGT | 6 | 🟡 High | ⏳ |
+| Configuration | CFG | 4 | 🟢 Medium | ⏳ |
+| Integration | INT | 4 | 🟢 Medium | ⏳ |
+
+#### 7.3 Testing Tasks (Priority Order)
+
+| # | Task | Description | Status |
+|---|------|-------------|--------|
+| 1 | **Prepare Prerequisites** | Setup environment, API, test assets | ⏳ |
+| 2 | **INS Tests** | Installation & deployment to Claude Code | ⏳ |
+| 3 | **VID Tests** | video_gen.py all modes | ⏳ |
+| 4 | **IMG Tests** | image_gen.py all options | ⏳ |
+| 5 | **SKL Tests** | /generative skill | ⏳ |
+| 6 | **AGT Tests** | Agent auto-detection | ⏳ |
+| 7 | **CFG Tests** | Configuration system | ⏳ |
+| 8 | **INT Tests** | Integration workflows | ⏳ |
+| 9 | **Document Results** | Update testing.design.md with results | ⏳ |
+| 10 | **Fix Issues** | Fix any issues found | ⏳ |
+
+#### 7.4 Sign-Off Criteria
+
+**MVP (Minimum Viable):**
+- [ ] INS Tests 100% pass
+- [ ] VID Basic Tests (VID-001 to VID-005) 100% pass
+- [ ] IMG Basic Tests (IMG-001 to IMG-003) 100% pass
+- [ ] No Critical issues
+
+**Full Release:**
+- [ ] All 48 tests pass
+- [ ] No Critical/High issues open
+- [ ] Documentation updated
 
 ---
 

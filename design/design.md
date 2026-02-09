@@ -2,8 +2,8 @@
 
 ## 📋 Document Overview
 
-**Version:** 3.8
-**Last Updated:** 2026-02-03
+**Version:** 3.9
+**Last Updated:** 2026-02-08
 **Status:** Active Development
 **Author:** DarKWinGTM
 
@@ -25,6 +25,7 @@
 | **[mcp.design.md](./mcp.design.md)** | 🔧 MCP Tools Specification | Future MCP integration plan |
 | **[gcsdb.design.md](./gcsdb.design.md)** | 🗄️ GCS Module (Planning) | Future GCS module extraction |
 | **[agent.design.md](./agent.design.md)** | 🤖 Agent Design | Generative Media Navigator agent |
+| **[testing.design.md](./testing.design.md)** | 🧪 Checkpoint Testing | 48 test cases, installation, validation |
 | **[README.md](../README.md)** | 📖 Quick Start | Installation and basic usage |
 
 ### Quick Navigation
@@ -43,6 +44,7 @@
 | **Cost Overview** | [Section: Cost Overview](#-cost-overview) |
 | **Config System** | [config.design.md](./config.design.md) |
 | **Smart Defaults (Metadata)** | [Section 18: Smart Defaults](#18-smart-defaults-system-metadata-driven) |
+| **Checkpoint Testing** | [testing.design.md](./testing.design.md) |
 | API Endpoints | [Section: API Details (Summary)](#-api-details-summary) |
 | Error Handling | [Section: Error Handling](#error-handling) |
 
