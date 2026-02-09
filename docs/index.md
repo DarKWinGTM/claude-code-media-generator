@@ -16,9 +16,6 @@ AI-Powered Video & Image Generation
 Create stunning videos and images using Google Veo & Imagen APIs
 </p>
 
-!!! warning "🚧 Under Development"
-    **Core features are production-ready.** Currently focusing on documentation improvements and planned features design.
-
 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;" markdown>
 
 [Get Started :material-rocket-launch:](getting-started/installation.md){ .md-button .md-button--primary }
@@ -302,18 +299,6 @@ Create stunning videos and images using Google Veo & Imagen APIs
     [:material-arrow-right: View guides](guides/gcs-storage.md)
 
 </div>
-
----
-
-## :material-star-shooting: Star History
-
-<a href="https://star-history.com/#DarKWinGTM/claude-code-media-generator&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=DarKWinGTM/claude-code-media-generator&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=DarKWinGTM/claude-code-media-generator&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=DarKWinGTM/claude-code-media-generator&type=Date" />
- </picture>
-</a>
 
 ---
 
