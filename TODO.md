@@ -159,7 +159,7 @@
 
 ### 🔄 Phase 7: Checkpoint Testing (2026-02-08) - IN PROGRESS
 
-> **Design:** [design/testing.design.md](design/testing.design.md) v1.0
+> **Design:** [design/testing.design.md](design/testing.design.md) v1.2
 > **Changelog:** [changelog/testing.changelog.md](changelog/testing.changelog.md)
 
 **Goal:** ทดสอบการใช้งานจริงของทุก component ก่อนพัฒนา features เพิ่มเติม

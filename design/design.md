@@ -25,7 +25,7 @@
 | **[mcp.design.md](./mcp.design.md)** | 🔧 MCP Tools Specification | Future MCP integration plan |
 | **[gcsdb.design.md](./gcsdb.design.md)** | 🗄️ GCS Module (Planning) | Future GCS module extraction |
 | **[agent.design.md](./agent.design.md)** | 🤖 Agent Design | Generative Media Navigator agent |
-| **[testing.design.md](./testing.design.md)** | 🧪 Checkpoint Testing | 48 test cases, installation, validation |
+| **[testing.design.md](./testing.design.md)** | 🧪 Checkpoint Testing | 4 phases, 57 test cases, installation, validation |
 | **[README.md](../README.md)** | 📖 Quick Start | Installation and basic usage |
 
 ### Quick Navigation
