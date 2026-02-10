@@ -2,7 +2,7 @@
 
 ## 📋 Document Overview
 
-**Version:** 4.0
+**Version:** 4.1
 **Last Updated:** 2026-02-10
 **Status:** Active Development
 **Author:** DarKWinGTM
@@ -497,7 +497,7 @@ User Request: "Generate a hybrid creature" + [cat.jpg, dog.png]
 │                                                             │
 │  - Extract base64 data                                     │
 │  - Decode & save as PNG                                    │
-│  - Output: ./generated_images/image_YYYYMMDD_HHMMSS.png    │
+│  - Output: ./+generated_images/image_YYYYMMDD_HHMMSS.png   │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -542,7 +542,7 @@ User Request: "Generate a cat playing video"
 │                                                             │
 │  - Extract base64 data                                     │
 │  - Decode & save as MP4                                    │
-│  - Output: ./generated_videos/video_YYYYMMDD_HHMMSS.mp4    │
+│  - Output: ./+generated_videos/video_YYYYMMDD_HHMMSS.mp4   │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -601,7 +601,7 @@ User: "Generate an image of a sunset"
 - Support multiple models (gemini-3-pro-image-preview, gemini-2.5-flash-image)
 - Configurable aspect ratios (1:1, 3:4, 4:3, 9:16, 16:9)
 - Configurable image sizes (1K, 2K, 4K)
-- Auto-save to ./generated_images/
+- Auto-save to ./+generated_images/
 - Metadata tracking (JSON)
 - Colorful terminal output
 - **Multiple Image Inputs (New in v2.2):** Support for referencing multiple images
@@ -1039,7 +1039,7 @@ python video_gen.py "A cat walking in garden" \
   --model veo-3.1-generate-preview
 
 # Output:
-# ✅ Video saved: ./generated_videos/video_xxx.mp4
+# ✅ Video saved: ./+generated_videos/video_xxx.mp4
 # 📤 Uploading to GCS
 # ✅ Uploaded to GCS: gs://YOUR_BUCKET/videos/video_xxx.mp4
 

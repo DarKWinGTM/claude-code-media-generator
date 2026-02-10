@@ -268,7 +268,7 @@ Image Generation Flow
 ```json
 {
   "success": true,
-  "image_path": "/path/to/generated_images/image_20260114_120000_0.png",
+  "image_path": "/path/to/+generated_images/image_20260114_120000_0.png",
   "metadata": {
     "prompt": "...",
     "model": "gemini-3-pro-image-preview",
@@ -653,7 +653,7 @@ class Settings:
     REQUEST_TIMEOUT: int = 120
 
     # Output
-    OUTPUT_DIR: Path = Path(__file__).parent.parent / "generated_images"
+    OUTPUT_DIR: Path = Path(__file__).parent.parent / "+generated_images"
     METADATA_DIR: Path = Path(__file__).parent.parent / "metadata"
 
     # Models
@@ -699,7 +699,7 @@ export MCP_DEFAULT_MODEL="gemini-3-pro-image-preview"
         "--transport", "stdio"
       ],
       "env": {
-        "MCP_OUTPUT_DIR": "/home/node/workplace/AWCLOUD/CLAUDE/claude-code-image-generator/generated_images"
+        "MCP_OUTPUT_DIR": "/home/node/workplace/AWCLOUD/CLAUDE/claude-code-image-generator/+generated_images"
       }
     }
   }
@@ -941,7 +941,7 @@ claude-code-image-generator/
 │       ├── __init__.py
 │       ├── stdio.py
 │       └── sse.py
-├── generated_images/
+├── +generated_images/
 ├── metadata/
 ├── tests/
 │   ├── __init__.py

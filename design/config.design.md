@@ -105,8 +105,8 @@ Code Defaults (lowest)
 
   "output": {
     "auto_save_metadata": true,
-    "video_dir": "generated_videos",
-    "image_dir": "generated_images"
+    "video_dir": "+generated_videos",
+    "image_dir": "+generated_images"
   }
 }
 ```

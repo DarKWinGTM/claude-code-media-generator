@@ -2608,7 +2608,7 @@ Requires: GCP project with billing enabled.
   },
   "output": {
     "filename": "video_20260118_103000_0.mp4",
-    "path": "/path/to/generated_videos/video_20260118_103000_0.mp4",
+    "path": "/path/to/+generated_videos/video_20260118_103000_0.mp4",
     "file_size_bytes": 1234567,
     "mime_type": "video/mp4"
   },
@@ -2733,7 +2733,7 @@ Image Metadata              Video Metadata
 ### 14.6 Auto-Save Location
 
 ```
-generated_videos/
++generated_videos/
 ├── video_20260118_103000_0.mp4
 ├── metadata_20260118_103000.json    ← Auto-saved metadata
 ├── video_20260118_103500_0.mp4
@@ -2817,7 +2817,7 @@ CLI Output Example:
 ├─ ⏳ Processing... (67.68 seconds)
 │
 ├─ ✅ Video generated successfully!
-├─ Output: generated_videos/video_20260118_132218_0.mp4
+├─ Output: +generated_videos/video_20260118_132218_0.mp4
 ├─ Size: 5.0 MB
 └─ 💰 Actual Cost: $2.80
 ```

@@ -157,7 +157,7 @@
 
 ## 🚧 In Progress
 
-### 🔄 Phase 8: Global Installation Refactor (2026-02-10) - IN PROGRESS
+### ✅ Phase 8: Global Installation Refactor (2026-02-10) - COMPLETED
 
 > **Changelog:** [changelog/changelog.md](changelog/changelog.md) v4.8
 
@@ -171,38 +171,38 @@ After:  Scripts อยู่ที่ ~/.claude/skills/generative/ → Output �
 
 **Output Directory:** `+generated_images/` และ `+generated_videos/` (+ prefix แยกจาก user files)
 
-#### 8.1 Code Changes (Core - ต้องทำก่อน)
+#### 8.1 Code Changes (Core) ✅ COMPLETED
 
 | # | Task | File | Lines | Status |
 |---|------|------|-------|--------|
-| 1 | แก้ output path เป็น `Path.cwd() / "+generated_images"` | image_gen.py | 274-276, 496 | ⏳ |
-| 2 | แก้ output path เป็น `Path.cwd() / "+generated_videos"` | video_gen.py | 270, 2729 | ⏳ |
-| 3 | เพิ่ม skill dir ใน config search path | config.py | 17-20 | ⏳ |
-| 4 | แก้ output dir names ใน config template | config.example.json | 43-44 | ⏳ |
+| 1 | แก้ output path เป็น `Path.cwd() / "+generated_images"` | image_gen.py | 274-276, 496 | ✅ |
+| 2 | แก้ output path เป็น `Path.cwd() / "+generated_videos"` | video_gen.py | 270, 2729 | ✅ |
+| 3 | เพิ่ม skill dir ใน config search path | config.py | 17-20 | ✅ |
+| 4 | แก้ output dir names ใน config template | config.example.json | 43-44 | ✅ |
 
-#### 8.2 SKILL.md Changes (ต้องทำหลัง 8.1)
+#### 8.2 SKILL.md Changes ✅ COMPLETED
 
 | # | Task | File | Lines | Status |
 |---|------|------|-------|--------|
-| 5 | แก้ allowed-tools เป็น absolute path | SKILL.md | 6 | ⏳ |
-| 6 | แก้ ls commands เป็น `+generated_*` | SKILL.md | 145, 378, 412, 435 | ⏳ |
-| 7 | แก้ command examples ทั้งหมดใน SKILL.md | SKILL.md | ทั้งไฟล์ | ⏳ |
+| 5 | แก้ allowed-tools เป็น absolute path | SKILL.md | 6 | ✅ |
+| 6 | แก้ ls commands เป็น `+generated_*` | SKILL.md | 145, 378, 412, 435 | ✅ |
+| 7 | แก้ command examples ทั้งหมดใน SKILL.md (15 occurrences) | SKILL.md | ทั้งไฟล์ | ✅ |
 
-#### 8.3 Verification (ต้องทำหลัง 8.1 + 8.2)
-
-| # | Task | Status |
-|---|------|--------|
-| 8 | ทดสอบ `python ~/.claude/skills/generative/image_gen.py --help` | ⏳ |
-| 9 | ทดสอบ `python ~/.claude/skills/generative/video_gen.py --help` | ⏳ |
-| 10 | ทดสอบ config.json ค้นหาจาก skill dir | ⏳ |
-| 11 | ทดสอบ output สร้างที่ CWD ไม่ใช่ skill dir | ⏳ |
-
-#### 8.4 Documentation (ทำหลังสุด)
+#### 8.3 Verification ✅ COMPLETED
 
 | # | Task | Status |
 |---|------|--------|
-| 12 | อัพเดท README.md installation section | ⏳ |
-| 13 | อัพเดท design docs ที่อ้าง `generated_images/` → `+generated_images/` | ⏳ |
+| 8 | ตรวจสอบ image_gen.py: `Path.cwd() / "+generated_images"` | ✅ |
+| 9 | ตรวจสอบ video_gen.py: `Path.cwd() / "+generated_videos"` | ✅ |
+| 10 | ตรวจสอบ config.py: 3-tier search (CWD → Skill dir → Home) | ✅ |
+| 11 | ตรวจสอบ SKILL.md: 0 bare paths, 16 absolute paths | ✅ |
+
+#### 8.4 Documentation ✅ COMPLETED
+
+| # | Task | Status |
+|---|------|--------|
+| 12 | อัพเดท README.md installation section → global install | ✅ |
+| 13 | อัพเดท design docs ที่อ้าง `generated_images/` → `+generated_images/` | ✅ (already updated) |
 | 14 | อัพเดท pages/wiki docs (ถ้าจำเป็น) | ⏳ |
 
 ---

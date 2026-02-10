@@ -168,10 +168,10 @@ Install the `/generative` skill to use AI-assisted video and image generation in
 | Component | Location | Purpose |
 |-----------|----------|---------|
 | `SKILL.md` | `~/.claude/skills/generative/` | Skill definition |
-| `video_gen.py` | Working directory | Video generation CLI |
-| `image_gen.py` | Working directory | Image generation CLI |
-| `config.py` | Working directory | Configuration module |
-| `video_utils.py` | Working directory | Video utilities |
+| `video_gen.py` | `~/.claude/skills/generative/` | Video generation CLI |
+| `image_gen.py` | `~/.claude/skills/generative/` | Image generation CLI |
+| `config.py` | `~/.claude/skills/generative/` | Configuration module |
+| `video_utils.py` | `~/.claude/skills/generative/` | Video utilities |
 
 ### 🐧 Linux / macOS Installation
 
@@ -183,25 +183,16 @@ cd claude-code-media-generator
 # 2. Install Python dependencies
 pip install requests google-auth
 
-# 3. Create skill directory and install skill
+# 3. Create skill directory and install all components
 mkdir -p ~/.claude/skills/generative
 cp .claude/skills/generative/SKILL.md ~/.claude/skills/generative/
+cp video_gen.py image_gen.py config.py video_utils.py ~/.claude/skills/generative/
 
 # 4. Install Agent (Recommended - enables auto-detection)
 mkdir -p ~/.claude/agents
 cp .claude/agents/generative-media-navigator.md ~/.claude/agents/
 
-# 5. Copy Python scripts to your working directory
-# Option A: Copy to current project
-cp video_gen.py image_gen.py config.py video_utils.py /path/to/your/project/
-
-# Option B: Create symlinks (recommended for updates)
-ln -s "$(pwd)/video_gen.py" /path/to/your/project/
-ln -s "$(pwd)/image_gen.py" /path/to/your/project/
-ln -s "$(pwd)/config.py" /path/to/your/project/
-ln -s "$(pwd)/video_utils.py" /path/to/your/project/
-
-# 6. Restart Claude Code to detect new skill and agent
+# 5. Restart Claude Code to detect new skill and agent
 ```
 
 ### 🪟 Windows Installation (PowerShell)
@@ -214,18 +205,16 @@ cd claude-code-media-generator
 # 2. Install Python dependencies
 pip install requests google-auth
 
-# 3. Create skill directory and install skill
+# 3. Create skill directory and install all components
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\skills\generative"
 Copy-Item ".\.claude\skills\generative\SKILL.md" -Destination "$env:USERPROFILE\.claude\skills\generative\"
+Copy-Item "video_gen.py", "image_gen.py", "config.py", "video_utils.py" -Destination "$env:USERPROFILE\.claude\skills\generative\"
 
 # 4. Install Agent (Recommended - enables auto-detection)
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\agents"
 Copy-Item ".\.claude\agents\generative-media-navigator.md" -Destination "$env:USERPROFILE\.claude\agents\"
 
-# 5. Copy Python scripts to your working directory
-Copy-Item "video_gen.py", "image_gen.py", "config.py", "video_utils.py" -Destination "C:\path\to\your\project\"
-
-# 6. Restart Claude Code to detect new skill and agent
+# 5. Restart Claude Code to detect new skill and agent
 ```
 
 ### 🪟 Windows Installation (Command Prompt)
@@ -238,21 +227,19 @@ cd claude-code-media-generator
 :: 2. Install Python dependencies
 pip install requests google-auth
 
-:: 3. Create skill directory and install skill
+:: 3. Create skill directory and install all components
 mkdir "%USERPROFILE%\.claude\skills\generative"
 copy ".\.claude\skills\generative\SKILL.md" "%USERPROFILE%\.claude\skills\generative\"
+copy video_gen.py "%USERPROFILE%\.claude\skills\generative\"
+copy image_gen.py "%USERPROFILE%\.claude\skills\generative\"
+copy config.py "%USERPROFILE%\.claude\skills\generative\"
+copy video_utils.py "%USERPROFILE%\.claude\skills\generative\"
 
 :: 4. Install Agent (Recommended - enables auto-detection)
 mkdir "%USERPROFILE%\.claude\agents"
 copy ".\.claude\agents\generative-media-navigator.md" "%USERPROFILE%\.claude\agents\"
 
-:: 5. Copy Python scripts to your working directory
-copy video_gen.py "C:\path\to\your\project\"
-copy image_gen.py "C:\path\to\your\project\"
-copy config.py "C:\path\to\your\project\"
-copy video_utils.py "C:\path\to\your\project\"
-
-:: 6. Restart Claude Code to detect new skill and agent
+:: 5. Restart Claude Code to detect new skill and agent
 ```
 
 ### ✅ Verify Installation
@@ -328,14 +315,16 @@ After installation, configure your API:
 ~/.claude/
 └── skills/
     └── generative/
-        └── SKILL.md           # Skill definition (1,500+ lines)
+        ├── SKILL.md           # Skill definition (1,500+ lines)
+        ├── video_gen.py       # Video generation CLI
+        ├── image_gen.py       # Image generation CLI
+        ├── config.py          # Configuration module
+        └── video_utils.py     # Video utilities
 
-/your/project/
-├── video_gen.py               # Video generation CLI
-├── image_gen.py               # Image generation CLI
-├── config.py                  # Configuration module
-├── video_utils.py             # Video utilities
-└── config.json                # Your API configuration (created by skill)
+/your/project/                 # Your working directory
+├── config.json                # Your API configuration (optional)
+├── +generated_images/         # Generated images (auto-created)
+└── +generated_videos/         # Generated videos (auto-created)
 ```
 
 ### 🔄 Updating the Skill
@@ -345,15 +334,14 @@ After installation, configure your API:
 cd claude-code-media-generator
 git pull
 
-# Update skill file
+# Update all components
 # Linux/macOS:
 cp .claude/skills/generative/SKILL.md ~/.claude/skills/generative/
+cp video_gen.py image_gen.py config.py video_utils.py ~/.claude/skills/generative/
 
 # Windows (PowerShell):
 Copy-Item ".\.claude\skills\generative\SKILL.md" -Destination "$env:USERPROFILE\.claude\skills\generative\" -Force
-
-# Update Python scripts (if using copies, not symlinks)
-# Copy the updated files to your project directory
+Copy-Item "video_gen.py", "image_gen.py", "config.py", "video_utils.py" -Destination "$env:USERPROFILE\.claude\skills\generative\" -Force
 
 # Restart Claude Code
 ```
@@ -423,14 +411,16 @@ Agent: [Auto-detects image intent → invokes /generative image]
 │   └── generative-media-navigator.md  # Agent (enhancement)
 └── skills/
     └── generative/
-        └── SKILL.md                    # Skill (required)
+        ├── SKILL.md                    # Skill (required)
+        ├── video_gen.py               # Video generation CLI
+        ├── image_gen.py               # Image generation CLI
+        ├── config.py                  # Configuration module
+        └── video_utils.py             # Video utilities
 
-/your/project/
-├── video_gen.py
-├── image_gen.py
-├── config.py
-├── video_utils.py
-└── config.json
+/your/project/                         # Your working directory
+├── config.json                        # Optional config
+├── +generated_images/                 # Generated images (auto-created)
+└── +generated_videos/                 # Generated videos (auto-created)
 ```
 
 ---
@@ -570,6 +560,8 @@ python video_gen.py "Continue the scene" --extend-video video_20260201_123456_0.
 claude-code-media-generator/
 ├── 🎬 video_gen.py      # Video generation CLI
 ├── 🖼️ image_gen.py      # Image generation CLI
+├── ⚙️ config.py          # Configuration module
+├── 🔧 video_utils.py    # Video utilities
 ├── 🔍 check_api.py      # API verification tool
 ├── 📄 README.md         # This file
 ├── 📋 TODO.md           # Development roadmap
@@ -580,7 +572,11 @@ claude-code-media-generator/
 │   └── ...
 ├── 📁 changelog/        # Version history
 ├── 📁 pages/            # MkDocs documentation (pages branch)
-└── 📁 wiki/             # GitHub Wiki source
+└── 📁 .claude/
+    ├── skills/generative/
+    │   └── SKILL.md     # Skill definition
+    └── agents/
+        └── generative-media-navigator.md
 ```
 
 ---

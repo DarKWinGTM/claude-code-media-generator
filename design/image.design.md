@@ -313,7 +313,7 @@ def calculate_image_cost(model: str, count: int = 1) -> dict:
 ├─ 💰 Cost: $0.134/image
 │
 ├─ ✅ Image generated successfully!
-├─ Output: generated_images/image_20260121_140000_0.png
+├─ Output: +generated_images/image_20260121_140000_0.png
 └─ Size: 1.2 MB
 ```
 

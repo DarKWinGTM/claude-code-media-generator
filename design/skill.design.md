@@ -187,7 +187,7 @@ Options:
 Flow: Image Attachment
 
 Step 1: Search for images in project
-  → Use Glob: ls *.{jpg,png,jpeg,webp} generated_images/*.png
+  → Use Glob: ls *.{jpg,png,jpeg,webp} +generated_images/*.png
   → List found images
 
 Step 2: AskUserQuestion
@@ -211,7 +211,7 @@ Step 4: Add to command
 ```bash
 # Search common image locations
 ls -la *.{jpg,png,jpeg,webp} 2>/dev/null
-ls -la generated_images/*.{jpg,png} 2>/dev/null
+ls -la +generated_images/*.{jpg,png} 2>/dev/null
 ls -la images/*.{jpg,png,jpeg,webp} 2>/dev/null
 ```
 
@@ -223,7 +223,7 @@ ls -la images/*.{jpg,png,jpeg,webp} 2>/dev/null
 Flow: Video Source Selection
 
 Step 1: Search for videos in project
-  → Use Glob: ls generated_videos/*.mp4
+  → Use Glob: ls +generated_videos/*.mp4
   → List found videos with timestamps
 
 Step 2: AskUserQuestion
@@ -659,7 +659,7 @@ triggers:
 ```markdown
 **Step 4.1:** Show final command
 ```bash
-python video_gen.py "Your refined prompt here" \
+python ~/.claude/skills/generative/video_gen.py "Your refined prompt here" \
   --preset quality \
   --aspect-ratio 16:9 \
   --duration 8
@@ -683,7 +683,7 @@ Options:
 
 ```markdown
 **Step 5.1:** Execute command
-  - Run python video_gen.py with constructed args
+  - Run python ~/.claude/skills/generative/video_gen.py with constructed args
   - Show progress if verbose
 
 **Step 5.2:** Handle result
@@ -732,7 +732,7 @@ description: Smart video generation with prompt assistance
 argument-hint: [prompt] or describe what you want
 disable-model-invocation: true
 allowed-tools:
-  - Bash(python video_gen.py *)
+  - Bash(python ~/.claude/skills/generative/video_gen.py *)
   - Bash(echo *)
   - Bash(export *)
   - Bash(ls *)
@@ -1020,14 +1020,14 @@ User: "สร้าง closing credits สำหรับวิดีโอ main
 Skill: Detected multi-tool workflow (Closing Credits)
   ↓
 Phase 1: Generate closing frame
-  → python image_gen.py "Video credits with host avatars" \
+  → python ~/.claude/skills/generative/image_gen.py "Video credits with host avatars" \
       --image avatar1.jpg avatar2.jpg \
       -o closing.png
   ↓
 User: Confirms closing.png looks good
   ↓
 Phase 2: Extend video with closing frame
-  → python video_gen.py "Fade transition to credits" \
+  → python ~/.claude/skills/generative/video_gen.py "Fade transition to credits" \
       --extend-video main.mp4 \
       --last-frame closing.png
 ```
@@ -1106,7 +1106,7 @@ Discovery: Ask aspect ratio, style, quality
   ↓
 Prompt Engineering: Enhance prompt
   ↓
-Execute: python image_gen.py "enhanced prompt" [options]
+Execute: python ~/.claude/skills/generative/image_gen.py "enhanced prompt" [options]
   ↓
 Report: Show output path and cost
 ```
@@ -1123,7 +1123,7 @@ Discovery: Ask purpose, content type, style, mode, quality
   ↓
 Prompt Engineering: Enhance prompt (+ audio cues for Veo 3.x)
   ↓
-Execute: python video_gen.py "enhanced prompt" [options]
+Execute: python ~/.claude/skills/generative/video_gen.py "enhanced prompt" [options]
   ↓
 Report: Show output path and cost
 ```
@@ -1135,11 +1135,11 @@ Report: Show output path and cost
 Skill detects: Needs image first (closing frame)
   ↓
 Phase 1: Generate image
-  → python image_gen.py "credits frame" --image avatars.jpg -o closing.png
+  → python ~/.claude/skills/generative/image_gen.py "credits frame" --image avatars.jpg -o closing.png
   → User confirms
   ↓
 Phase 2: Generate video with image
-  → python video_gen.py "fade to credits" --last-frame closing.png
+  → python ~/.claude/skills/generative/video_gen.py "fade to credits" --last-frame closing.png
   ↓
 Report: Show final video
 ```

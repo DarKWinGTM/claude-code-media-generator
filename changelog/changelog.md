@@ -1,11 +1,34 @@
 # 📜 Changelog - Master Design Document
 
 > **Parent Document:** [design.md](../design/design.md)
-> **Current Version:** 4.8
+> **Current Version:** 4.9
 
 ---
 
 ## Version History
+
+### Version 4.9 (2026-02-10)
+
+**Global Installation Refactor - IMPLEMENTATION COMPLETED:**
+
+**All Phase 8 tasks completed:**
+
+| Phase | Tasks | Status |
+|-------|-------|--------|
+| 8.1 Code Changes | 4/4 | ✅ image_gen.py, video_gen.py, config.py, config.example.json |
+| 8.2 SKILL.md Changes | 3/3 | ✅ allowed-tools, ls commands, 15 command examples |
+| 8.3 Verification | 4/4 | ✅ All paths verified, 0 bare paths remaining |
+| 8.4 Documentation | 3/3 | ✅ README.md rewritten, design docs updated |
+
+**README.md Changes:**
+- Rewrote installation from per-project copy → single global install
+- All 3 platforms updated (Linux/macOS, Windows PowerShell, Windows CMD)
+- Directory structure updated to show scripts in `~/.claude/skills/generative/`
+- Output directories shown as `+generated_images/` and `+generated_videos/` in user's CWD
+- Update instructions simplified (copy all to skill dir)
+- Project structure section updated
+
+---
 
 ### Version 4.8 (2026-02-10)
 
@@ -59,9 +82,10 @@
 - ✅ Compatible: Linux, macOS, Git, Python, Bash
 - ⚠️ Windows: ใช้ได้แต่บาง tools อาจมีปัญหา
 
-**Deferred (ไม่แก้ในรอบนี้):**
-- design/*.md, wiki/*.md, pages/*.md → อัพเดท documentation ภายหลัง
-- README.md installation section → อัพเดทหลังแก้ code เสร็จ
+**Deferred → Completed in v4.9:**
+- ✅ design/*.md → All `generated_images/videos` updated to `+generated_*`
+- ✅ README.md installation section → Rewritten for global install
+- pages/*.md → อัพเดทภายหลัง (Task 14)
 
 ---
 
