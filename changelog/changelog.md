@@ -1,11 +1,69 @@
 # 📜 Changelog - Master Design Document
 
 > **Parent Document:** [design.md](../design/design.md)
-> **Current Version:** 4.7
+> **Current Version:** 4.8
 
 ---
 
 ## Version History
+
+### Version 4.8 (2026-02-10)
+
+**Global Installation Refactor - Single Install Architecture:**
+
+**Goal:** เปลี่ยนจาก per-project copy (ต้อง copy 5 ไฟล์ .py ไปทุก project) เป็น single global install (ทุกอย่างอยู่ที่ `~/.claude/skills/generative/`)
+
+**Architecture Change:**
+| Before (per-project) | After (global install) |
+|------|------|
+| Scripts copy ไปทุก project | Scripts อยู่ที่ `~/.claude/skills/generative/` ที่เดียว |
+| Output ที่ `Path(__file__).parent` | Output ที่ `Path.cwd()` (user's CWD) |
+| `generated_images/`, `generated_videos/` | `+generated_images/`, `+generated_videos/` |
+| Config search: CWD + Home | Config search: CWD + Skill dir + Home |
+| SKILL.md ใช้ relative path | SKILL.md ใช้ absolute path |
+
+**Target Installed Structure:**
+```
+~/.claude/
+├── agents/
+│   └── generative-media-navigator.md
+└── skills/
+    └── generative/
+        ├── SKILL.md
+        ├── image_gen.py
+        ├── video_gen.py
+        ├── config.py
+        ├── video_utils.py
+        ├── check_api.py
+        ├── config.example.json
+        └── config.json
+
+{user's CWD}/
+├── +generated_images/    ← Output สร้างอัตโนมัติ
+└── +generated_videos/    ← Output สร้างอัตโนมัติ
+```
+
+**Files to Modify:**
+
+| # | File | Change | Reason |
+|---|------|--------|--------|
+| 1 | SKILL.md:6 | `python image_gen.py` → `python ~/.claude/skills/generative/image_gen.py` | Script อยู่กับ skill |
+| 2 | image_gen.py:274-276 | `Path(__file__).parent / "generated_images"` → `Path.cwd() / "+generated_images"` | Output ที่ CWD |
+| 3 | video_gen.py:270 | `Path(__file__).parent / "generated_videos"` → `Path.cwd() / "+generated_videos"` | Output ที่ CWD |
+| 4 | config.py:17-20 | เพิ่ม `Path(__file__).parent / "config.json"` ลำดับที่ 2 | Config หาเจอที่ skill dir |
+| 5 | config.example.json:43-44 | `generated_*` → `+generated_*` | ให้ตรงกับ code |
+| 6 | SKILL.md:145,378,412,435 | `generated_images/` → `+generated_images/` ใน ls commands | ให้ตรงกับ output dir |
+
+**`+` Prefix Rationale:**
+- แยกความแตกต่างระหว่าง user's files กับ generated output
+- ✅ Compatible: Linux, macOS, Git, Python, Bash
+- ⚠️ Windows: ใช้ได้แต่บาง tools อาจมีปัญหา
+
+**Deferred (ไม่แก้ในรอบนี้):**
+- design/*.md, wiki/*.md, pages/*.md → อัพเดท documentation ภายหลัง
+- README.md installation section → อัพเดทหลังแก้ code เสร็จ
+
+---
 
 ### Version 4.7 (2026-02-09)
 

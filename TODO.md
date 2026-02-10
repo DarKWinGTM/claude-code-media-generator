@@ -1,7 +1,7 @@
 # 📋 TODO - Claude Code Media Generator
 
-> **Last Updated:** 2026-02-08
-> **Version:** 4.0
+> **Last Updated:** 2026-02-10
+> **Version:** 4.1
 
 ---
 
@@ -157,6 +157,56 @@
 
 ## 🚧 In Progress
 
+### 🔄 Phase 8: Global Installation Refactor (2026-02-10) - IN PROGRESS
+
+> **Changelog:** [changelog/changelog.md](changelog/changelog.md) v4.8
+
+**Goal:** เปลี่ยนจาก per-project copy เป็น single global install ที่ `~/.claude/skills/generative/`
+
+**Architecture:**
+```
+Before: Scripts copy ไปทุก project → Output ที่ script location
+After:  Scripts อยู่ที่ ~/.claude/skills/generative/ → Output ที่ user's CWD
+```
+
+**Output Directory:** `+generated_images/` และ `+generated_videos/` (+ prefix แยกจาก user files)
+
+#### 8.1 Code Changes (Core - ต้องทำก่อน)
+
+| # | Task | File | Lines | Status |
+|---|------|------|-------|--------|
+| 1 | แก้ output path เป็น `Path.cwd() / "+generated_images"` | image_gen.py | 274-276, 496 | ⏳ |
+| 2 | แก้ output path เป็น `Path.cwd() / "+generated_videos"` | video_gen.py | 270, 2729 | ⏳ |
+| 3 | เพิ่ม skill dir ใน config search path | config.py | 17-20 | ⏳ |
+| 4 | แก้ output dir names ใน config template | config.example.json | 43-44 | ⏳ |
+
+#### 8.2 SKILL.md Changes (ต้องทำหลัง 8.1)
+
+| # | Task | File | Lines | Status |
+|---|------|------|-------|--------|
+| 5 | แก้ allowed-tools เป็น absolute path | SKILL.md | 6 | ⏳ |
+| 6 | แก้ ls commands เป็น `+generated_*` | SKILL.md | 145, 378, 412, 435 | ⏳ |
+| 7 | แก้ command examples ทั้งหมดใน SKILL.md | SKILL.md | ทั้งไฟล์ | ⏳ |
+
+#### 8.3 Verification (ต้องทำหลัง 8.1 + 8.2)
+
+| # | Task | Status |
+|---|------|--------|
+| 8 | ทดสอบ `python ~/.claude/skills/generative/image_gen.py --help` | ⏳ |
+| 9 | ทดสอบ `python ~/.claude/skills/generative/video_gen.py --help` | ⏳ |
+| 10 | ทดสอบ config.json ค้นหาจาก skill dir | ⏳ |
+| 11 | ทดสอบ output สร้างที่ CWD ไม่ใช่ skill dir | ⏳ |
+
+#### 8.4 Documentation (ทำหลังสุด)
+
+| # | Task | Status |
+|---|------|--------|
+| 12 | อัพเดท README.md installation section | ⏳ |
+| 13 | อัพเดท design docs ที่อ้าง `generated_images/` → `+generated_images/` | ⏳ |
+| 14 | อัพเดท pages/wiki docs (ถ้าจำเป็น) | ⏳ |
+
+---
+
 ### 🔄 Phase 7: Checkpoint Testing (2026-02-08) - IN PROGRESS
 
 > **Design:** [design/testing.design.md](design/testing.design.md) v1.2
@@ -178,17 +228,18 @@
 | GCS Bucket | ⏳ |
 | Test assets (image, video) | ⏳ |
 
-#### 7.2 Test Categories (48 Tests)
+#### 7.2 Test Categories (57 Tests - 4 Phases)
 
-| Category | Code | Tests | Priority | Status |
-|----------|------|-------|----------|--------|
-| Installation | INS | 10 | 🔴 Critical | ⏳ |
-| Video Generation | VID | 15 | 🔴 Critical | ⏳ |
-| Image Generation | IMG | 7 | 🔴 Critical | ⏳ |
-| Skill | SKL | 11 | 🟡 High | ⏳ |
-| Agent | AGT | 6 | 🟡 High | ⏳ |
-| Configuration | CFG | 4 | 🟢 Medium | ⏳ |
-| Integration | INT | 4 | 🟢 Medium | ⏳ |
+| Phase | Category | Code | Tests | Prerequisites | Status |
+|-------|----------|------|-------|---------------|--------|
+| 1 | Environment | ENV | 4 | None | ⏳ |
+| 1 | Video Generation | VID | 15 | None | ⏳ |
+| 1 | Image Generation | IMG | 7 | None | ⏳ |
+| 1 | Configuration | CFG | 4 | None | ⏳ |
+| 2 | Installation | INS | 6 | Phase 1 ✅ | ⏳ |
+| 3 | Skill | SKL | 11 | Phase 2 ✅ | ⏳ |
+| 3 | Agent | AGT | 6 | Phase 2 ✅ | ⏳ |
+| 4 | Integration | INT | 4 | Phase 3 ✅ | ⏳ |
 
 #### 7.3 Testing Tasks (Priority Order)
 
@@ -214,7 +265,7 @@
 - [ ] No Critical issues
 
 **Full Release:**
-- [ ] All 48 tests pass
+- [ ] All 57 tests pass
 - [ ] No Critical/High issues open
 - [ ] Documentation updated
 
