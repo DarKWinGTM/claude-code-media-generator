@@ -1,12 +1,46 @@
 # Changelog - GitHub Pages Design
 
 > **Parent Document:** [pages.design.md](../design/pages.design.md)
-> **Current Version:** 2.7
+> **Current Version:** 2.8
 > **Session:** (current session)
 
 ---
 
 ## Version History
+
+### Version 2.8 (2026-02-15)
+
+**Seamless Background Layout — .md-container Gradient**
+
+**Session:** (current session)
+
+#### Problem
+
+Background gradient อยู่บน `.md-main` ทำให้เกิดแถบตัดระหว่าง main content กับ footer เพราะ footer มี opaque background แยกต่างหาก
+
+#### Solution
+
+- ย้าย background gradient จาก `.md-main` → `.md-container`
+- `.md-container` ครอบทั้ง `.md-main` และ `.md-footer` → seamless background
+- Override Material theme built-in `background-color: var(--md-footer-bg-color--dark)` ด้วย `transparent !important`
+
+#### Changes
+
+| Edit | File | Description |
+|------|------|-------------|
+| 1 | extra.css | Dark mode gradient: `.md-main` → `.md-container` |
+| 2 | extra.css | `.md-footer`: `transparent !important` + Material theme override |
+| 3 | extra.css | `.md-footer-meta`: `transparent !important` (override theme) |
+| 4 | extra.css | Light mode: `.md-container` gets background, `.md-main` transparent |
+| 5 | extra.css | Light mode footer: transparent |
+| 6 | extra.css | Old `.md-main` gradient rule kept as comment reference |
+
+#### Commits
+
+- `a4f93e7` — style: move background gradient from .md-main to .md-container
+- `c1fa076` — fix: override .md-footer-meta background-color from Material theme
+
+---
 
 ### Version 2.7 (2026-02-05)
 

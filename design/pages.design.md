@@ -3,8 +3,8 @@
 ## 0) Document Control
 
 > **Parent Scope:** Claude Code Media Generator Project
-> **Current Version:** 2.7
-> **Session:** (current session) (2026-02-05)
+> **Current Version:** 2.8
+> **Session:** (current session) (2026-02-15)
 
 ---
 
@@ -754,6 +754,64 @@ theme:
 | Readability | 4/5 stars |
 | Performance | Lighthouse ≥85 |
 | Accessibility | WCAG AA (contrast ≥4.5:1) |
+
+---
+
+## 12) Seamless Background Layout (v2.8 - 2026-02-15)
+
+### 12.1 Overview
+
+Background gradient ย้ายจาก `.md-main` ไปที่ `.md-container` เพื่อให้ background เป็นแผ่นเดียวกันตลอดทั้ง main content และ footer — ไม่มีแถบตัดระหว่าง sections
+
+### 12.2 Architecture Change
+
+```
+Before (v2.7):
+  .md-container → no background
+    .md-main → gradient background ← แถบตัดที่ขอบ
+    .md-footer → opaque background ← แถบตัดอีกชั้น
+
+After (v2.8):
+  .md-container → gradient background ← seamless ทั้งหน้า
+    .md-main → transparent
+    .md-footer → transparent
+      .md-footer-meta → transparent
+```
+
+### 12.3 CSS Changes
+
+| Selector | Before | After | Reason |
+|----------|--------|-------|--------|
+| `.md-container` (dark) | No background | Gradient background | Seamless coverage |
+| `.md-main` (dark) | Gradient background | Kept as comment reference | Moved to container |
+| `.md-footer` | `rgba(10,10,15,0.9)` | `transparent !important` | Seamless with container |
+| `.md-footer-meta` | `var(--md-footer-bg-color--dark)` | `transparent !important` | Override Material theme |
+| `.md-container` (light) | No background | `#F8FAFC !important` | Seamless light mode |
+| `.md-main` (light) | `#F8FAFC` | `transparent !important` | Moved to container |
+| `.md-footer` (light) | `#f1f5f9` | `transparent !important` | Seamless with container |
+| `.md-footer-meta` (light) | `var(--md-footer-bg-color--dark)` | `transparent !important` | Override Material theme |
+
+### 12.4 Material Theme Override
+
+Material theme built-in CSS (`main.*.min.css`) มี:
+```css
+.md-footer-meta {
+  background-color: var(--md-footer-bg-color--dark);
+}
+```
+ต้อง override ด้วย `background-color: transparent !important` ใน `extra.css`
+
+### 12.5 Implementation Checklist
+
+- [x] Dark mode: `.md-container` ← gradient background
+- [x] Dark mode: `.md-main` ← transparent (old rule as comment)
+- [x] Dark mode: `.md-footer` ← transparent !important
+- [x] Dark mode: `.md-footer-meta` ← transparent !important
+- [x] Light mode: `.md-container` ← `#F8FAFC !important`
+- [x] Light mode: `.md-main` ← transparent !important
+- [x] Light mode: `.md-footer` ← transparent !important
+- [x] Light mode: `.md-footer-meta` ← transparent !important
+- [x] Material theme built-in override verified
 
 ---
 

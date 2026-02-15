@@ -1,7 +1,7 @@
 # 📋 TODO - Claude Code Media Generator
 
-> **Last Updated:** 2026-02-10
-> **Version:** 4.1
+> **Last Updated:** 2026-02-15
+> **Version:** 4.2
 
 ---
 

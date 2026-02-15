@@ -1,11 +1,24 @@
 # 📜 Changelog - Master Design Document
 
 > **Parent Document:** [design.md](../design/design.md)
-> **Current Version:** 5.0
+> **Current Version:** 5.1
 
 ---
 
 ## Version History
+
+### Version 5.1 (2026-02-15)
+
+**Pages: Seamless Background Layout**
+
+- Moved background gradient from `.md-main` → `.md-container` for seamless main+footer coverage
+- Footer and footer-meta set to `transparent !important` (override Material theme built-in CSS)
+- Light mode: same pattern (`.md-container` background, `.md-main` transparent)
+- Old `.md-main` gradient rule kept as comment reference
+- Updated `pages.design.md` to v2.8 (Section 12: Seamless Background Layout)
+- Updated `pages.changelog.md` to v2.8
+
+---
 
 ### Version 5.0 (2026-02-15)
 
