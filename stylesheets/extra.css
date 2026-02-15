@@ -1306,6 +1306,8 @@ textarea:focus,
 
 /* ===== #20: Footer Improvements ===== */
 .md-footer-meta {
+  background-color: transparent !important;
+  /* background-color: var(--md-footer-bg-color--dark); — Material theme default, overridden */
   padding: 1.5rem 1rem;
 }
 
@@ -2284,6 +2286,7 @@ a, button, input, .md-nav__link, .md-tabs__link {
 }
 
 [data-md-color-scheme="default"] .md-footer-meta {
+  background-color: transparent !important;
   color: var(--text-light-secondary) !important;
 }
 
