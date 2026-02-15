@@ -774,18 +774,21 @@ Example:
 
 ---
 
-### Phase 5: Advanced Features
-- [ ] **gcsdb_api.py** - GCS database module
+### Phase 5: Advanced Features (Design Complete ✅ — Implementation Deferred)
+
+> **All 3 features have complete design documents. Implementation planned for later.**
+
+- [ ] **gcsdb_api.py** - GCS database module — [design/gcsdb.design.md](design/gcsdb.design.md) ✅
   - [ ] Upload/download operations
   - [ ] Object management
   - [ ] Tracking & cleanup
 
-- [ ] **Batch Processing**
+- [ ] **Batch Processing** — [design/batch.design.md](design/batch.design.md) ✅
   - [ ] Multiple prompts from file
   - [ ] Parallel generation
   - [ ] Batch cost estimation
 
-- [ ] **Video Extension Workflow**
+- [ ] **Video Extension Workflow** — [design/chain.design.md](design/chain.design.md) ✅
   - [ ] Automated chain extension
   - [ ] Smart prompt continuation
 

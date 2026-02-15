@@ -1,11 +1,31 @@
 # 📜 Changelog - Master Design Document
 
 > **Parent Document:** [design.md](../design/design.md)
-> **Current Version:** 4.9
+> **Current Version:** 5.0
 
 ---
 
 ## Version History
+
+### Version 5.0 (2026-02-15)
+
+**Phase 5: Advanced Features — Design Documents Complete:**
+
+All 3 Phase 5 features now have complete design specifications:
+
+| Feature | Design Document | Status |
+|---------|----------------|--------|
+| GCS Database Module | `design/gcsdb.design.md` v1.2 | ✅ Design complete (existing) |
+| Batch Processing | `design/batch.design.md` v1.0 | ✅ Design created |
+| Video Extension Workflow | `design/chain.design.md` v1.0 | ✅ Design created |
+
+**New Design Documents:**
+- `batch.design.md` — Batch processing module: multi-format input (txt/json/csv), parallel generation, cost estimation, resume support
+- `chain.design.md` — Video extension workflow: automated chain extension (N segments), 3 prompt modes (auto/manual/list), smart AI prompt continuation, review mode, FFmpeg concatenation
+
+**Note:** Design only — implementation deferred to later phase.
+
+---
 
 ### Version 4.9 (2026-02-10)
 
