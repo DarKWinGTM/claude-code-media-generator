@@ -1,11 +1,23 @@
 # 📜 Changelog - Master Design Document
 
 > **Parent Document:** [design.md](../design/design.md)
-> **Current Version:** 5.1
+> **Current Version:** 5.2
 
 ---
 
 ## Version History
+
+### Version 5.2 (2026-02-19)
+
+**Documentation Consolidation: Pages as Single Source of Truth**
+
+- Updated policy: documentation source is `pages/docs` only
+- Removed wiki-first plan from TODO and switched Task 14 to pages-docs-only scope
+- Marked GitHub Wiki section as legacy snapshot in TODO
+- Updated TODO references to point to GitHub Pages docs instead of `./wiki/`
+- Updated all `pages/docs` references from `generated_*` to `+generated_*` (12 files)
+
+---
 
 ### Version 5.1 (2026-02-15)
 

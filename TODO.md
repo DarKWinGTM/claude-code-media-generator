@@ -1,7 +1,7 @@
 # 📋 TODO - Claude Code Media Generator
 
-> **Last Updated:** 2026-02-15
-> **Version:** 4.2
+> **Last Updated:** 2026-02-19
+> **Version:** 4.4
 
 ---
 
@@ -197,13 +197,26 @@ After:  Scripts อยู่ที่ ~/.claude/skills/generative/ → Output �
 | 10 | ตรวจสอบ config.py: 3-tier search (CWD → Skill dir → Home) | ✅ |
 | 11 | ตรวจสอบ SKILL.md: 0 bare paths, 16 absolute paths | ✅ |
 
-#### 8.4 Documentation ✅ COMPLETED
+#### 8.4 Documentation ✅ COMPLETED (README+design+pages docs ✅)
 
 | # | Task | Status |
 |---|------|--------|
 | 12 | อัพเดท README.md installation section → global install | ✅ |
 | 13 | อัพเดท design docs ที่อ้าง `generated_images/` → `+generated_images/` | ✅ (already updated) |
-| 14 | อัพเดท pages/wiki docs (ถ้าจำเป็น) | ⏳ |
+| 14 | อัพเดท pages docs ให้ใช้ `+generated_*` ทั้งหมด (single source) | ✅ |
+
+**Task 14 Completed (pages docs):**
+
+| Area | Applied Update |
+|------|----------------|
+| `pages/docs/getting-started/*.md` | ✅ output examples เป็น `+generated_*` |
+| `pages/docs/cli/*.md` | ✅ default `--output` เป็น `+generated_*` |
+| `pages/docs/image/*.md` | ✅ Output section เป็น `+generated_images/` |
+| `pages/docs/skills/*.md` | ✅ ผลลัพธ์ตัวอย่างเป็น `+generated_*` |
+| `pages/docs/advanced/*.md` | ✅ automation paths และตัวอย่างใช้ `+generated_*` |
+| `pages/docs/archive/*.md` | ✅ อัพเดท naming ให้สอดคล้องกับ `+generated_*` |
+
+**Policy:** ยกเลิกการใช้ wiki เป็นแหล่ง docs หลัก และให้ docs อยู่ใน `pages/docs` เท่านั้น
 
 ---
 
@@ -397,21 +410,16 @@ After:  Scripts อยู่ที่ ~/.claude/skills/generative/ → Output �
 
 ---
 
-### ✅ Completed: GitHub Wiki Documentation (2026-01-23)
-- [x] **GitHub Wiki** - Complete documentation site
-  - [x] Home.md - Landing page with feature overview
-  - [x] _Sidebar.md / _Footer.md - Navigation
-  - [x] Getting Started (Installation, Authentication, Quick-Start)
-  - [x] Video Generation (Overview, 8 Modes, Models, Reference Images, Video Extension)
-  - [x] Image Generation guide
-  - [x] CLI Reference (video_gen, image_gen, check_api)
-  - [x] Guides (GCS Storage, Presets, Troubleshooting)
-  - [x] Changelog page
+### ✅ Completed: GitHub Wiki Documentation (Legacy - 2026-01-23)
+- [x] **GitHub Wiki** - Historical documentation snapshot
+  - [x] Legacy pages were created during initial documentation phase
+  - [x] Source of truth has moved to `pages/docs` (MkDocs)
+  - [x] New policy: no duplicate docs maintenance across wiki + pages
 
 ### ✅ Completed: MkDocs Material for GitHub Pages (2026-01-23)
 - [x] **MkDocs Material** - Professional documentation site
   - [x] Created `docs/` directory structure
-  - [x] Converted wiki files to MkDocs format (with admonitions, tabs, icons)
+  - [x] Migrated documentation into MkDocs pages/docs (with admonitions, tabs, icons)
   - [x] Created `mkdocs.yml` configuration
     - [x] Material theme with dark/light mode
     - [x] Navigation tabs, sections, search
@@ -879,6 +887,6 @@ python video_gen.py "Add dramatic lighting" --remix long_video.mp4 --remix-start
 ## 🔗 References
 
 - [Design Documents](./design/)
-- [GitHub Wiki](./wiki/) - Full documentation
+- [GitHub Pages Docs](https://darkwingtm.github.io/claude-code-media-generator/) - Full documentation
 - [Google Veo API Docs](https://cloud.google.com/vertex-ai/docs/generative-ai/video/overview)
 - [Google Imagen API Docs](https://cloud.google.com/vertex-ai/docs/generative-ai/image/overview)
