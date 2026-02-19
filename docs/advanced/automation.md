@@ -221,7 +221,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: generated-videos
-          path: generated_videos/
+          path: +generated_videos/
           retention-days: 7
 ```
 
@@ -264,7 +264,7 @@ pipeline {
 
         stage('Archive') {
             steps {
-                archiveArtifacts artifacts: 'generated_videos/*', fingerprint: true
+                archiveArtifacts artifacts: '+generated_videos/*', fingerprint: true
             }
         }
     }
@@ -446,7 +446,7 @@ time.sleep(5)  # Between requests
 
 ```python
 # Check if output already exists
-output_path = f"generated_videos/{prompt_hash}.mp4"
+output_path = f"+generated_videos/{prompt_hash}.mp4"
 if os.path.exists(output_path):
     print("Already generated, skipping")
     continue

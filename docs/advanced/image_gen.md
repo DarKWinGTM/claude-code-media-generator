@@ -31,7 +31,7 @@ python image_gen.py PROMPT [OPTIONS]
 | `--model` | string | gemini-3-pro-image-preview | Model to use |
 | `--aspect-ratio` | string | 1:1 | 1:1, 16:9, 9:16, 4:3, 3:4 |
 | `--image-size` | string | 1K | 1K or 2K |
-| `--output` | path | generated_images/ | Output directory |
+| `--output` | path | +generated_images/ | Output directory |
 
 ### Authentication
 
@@ -126,7 +126,7 @@ python image_gen.py "Test image" --estimate-cost
 Images are saved with timestamp:
 
 ```
-generated_images/
++generated_images/
 └── image_20260123_123456.png
 ```
 

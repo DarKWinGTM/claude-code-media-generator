@@ -102,8 +102,8 @@ claude-code-media-generator/
 │   └── skills/
 │       └── generative/
 │           └── SKILL.md  # Skill definition (1,500+ lines)
-├── generated_videos/   # Output directory
-└── generated_images/   # Output directory
+├── +generated_videos/   # Output directory
+└── +generated_images/   # Output directory
 ```
 
 ---

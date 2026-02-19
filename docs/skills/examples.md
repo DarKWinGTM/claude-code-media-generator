@@ -12,7 +12,7 @@ Real-world examples of using the `/generative` skill for various use cases.
 /generative image "A serene lake at sunrise with mountains in the background"
 ```
 
-**Result:** A beautiful landscape image saved to `generated_images/`
+**Result:** A beautiful landscape image saved to `+generated_images/`
 
 ### Generate a Simple Video
 
@@ -20,7 +20,7 @@ Real-world examples of using the `/generative` skill for various use cases.
 /generative video "Ocean waves gently rolling onto a sandy beach"
 ```
 
-**Result:** A 5-second video saved to `generated_videos/`
+**Result:** A 5-second video saved to `+generated_videos/`
 
 ---
 

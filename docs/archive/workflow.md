@@ -82,7 +82,7 @@ User Terminal
 │  - Save metadata with prompt                             │
 └─────────────────────────────────────────────────────────┘
   ↓
-  Output: ./generated_images/
+  Output: ./+generated_images/
     - image_YYYYMMDD_HHMMSS_0.png
     - metadata_YYYYMMDD_HHMMSS.json (includes prompt)
 ```
@@ -189,7 +189,7 @@ Response Format:
        │ PNG file + metadata.json
        ↓
 ┌──────────────────┐
-│ File System      │ → ./generated_images/
+│ File System      │ → ./+generated_images/
 └──────────────────┘
 ```
 
@@ -201,7 +201,7 @@ Response Format:
 | `~/.ccs/gemini.settings.json` | Gemini profile settings |
 | `~/.ccs/cliproxy/auth/*.json` | OAuth tokens |
 | `image_gen.py` | Main script |
-| `./generated_images/metadata_*.json` | Prompt and image metadata |
+| `./+generated_images/metadata_*.json` | Prompt and image metadata |
 
 ## Authentication Flow
 

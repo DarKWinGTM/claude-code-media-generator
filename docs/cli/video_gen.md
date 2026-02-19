@@ -31,7 +31,7 @@ python video_gen.py PROMPT [OPTIONS]
 | `--model` | string | veo-3.1-generate-preview | Model to use |
 | `--duration` | int | 5 | Video duration (5-8 seconds) |
 | `--aspect-ratio` | string | 16:9 | 16:9, 9:16, or 1:1 |
-| `--output` | path | generated_videos/ | Output directory |
+| `--output` | path | +generated_videos/ | Output directory |
 
 ### Presets
 

@@ -111,10 +111,10 @@ Output:
 
 ## Output
 
-Images are saved to `generated_images/` directory:
+Images are saved to `+generated_images/` directory:
 
 ```
-generated_images/
++generated_images/
 ├── image_20260123_123456.png
 ├── image_20260123_123500.png
 └── ...

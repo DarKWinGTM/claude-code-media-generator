@@ -227,7 +227,7 @@ Step 8: Client Processing
   - Decode and save as PNG
   - Save metadata
   ↓
-Output: ./generated_images/image_YYYYMMDD_HHMMSS.png
+Output: ./+generated_images/image_YYYYMMDD_HHMMSS.png
 ```
 
 ### Video Generation (Planned - Asynchronous)
@@ -282,7 +282,7 @@ Step 10: Client Processing
   - Extract base64 data
   - Decode and save as MP4
   ↓
-Output: ./generated_videos/video_YYYYMMDD_HHMMSS.mp4
+Output: ./+generated_videos/video_YYYYMMDD_HHMMSS.mp4
 ```
 
 ---
@@ -340,8 +340,8 @@ Local Machine
 │   ├── image_gen.py (working)
 │   └── video_gen.py (planned)
 └── Output Directories
-    ├── ./generated_images/
-    └── ./generated_videos/ (planned)
+    ├── ./+generated_images/
+    └── ./+generated_videos/ (planned)
 ```
 
 ### Configuration Files
@@ -512,10 +512,10 @@ claude-code-image-generator/
 ├── README.md                    # Project overview
 ├── issue/                       # GitHub issues
 │   └── veo-video-generation-support.md
-├── generated_images/            # Output directory
+├── +generated_images/            # Output directory
 │   ├── image_YYYYMMDD_HHMMSS_0.png
 │   └── metadata_YYYYMMDD_HHMMSS.json
-└── generated_videos/            # Output directory (planned)
+└── +generated_videos/            # Output directory (planned)
     └── video_YYYYMMDD_HHMMSS.mp4
 ```
 

@@ -197,7 +197,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: generated-video
-          path: generated_videos/
+          path: +generated_videos/
 ```
 
 ---

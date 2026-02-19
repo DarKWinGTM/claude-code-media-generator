@@ -27,7 +27,7 @@ Generate your first video and image in minutes.
     **Output:**
     ```
     🖼️ Generating image...
-    ✅ Image saved: generated_images/image_20260123_123456.png
+    ✅ Image saved: +generated_images/image_20260123_123456.png
     ```
 
     ### Generate a Video
@@ -39,7 +39,7 @@ Generate your first video and image in minutes.
     **Output:**
     ```
     🎬 Generating video...
-    ✅ Video saved: generated_videos/video_20260123_123456.mp4
+    ✅ Video saved: +generated_videos/video_20260123_123456.mp4
     ```
 
     ### With Options
@@ -73,7 +73,7 @@ Generate your first video and image in minutes.
     🖼️ Image Generation via Gemini
     Model: gemini-3-pro-image-preview
     ...
-    ✅ Image saved: generated_images/image_20260123_123456.png
+    ✅ Image saved: +generated_images/image_20260123_123456.png
     ```
 
     ### Generate a Video
@@ -89,7 +89,7 @@ Generate your first video and image in minutes.
     Mode: text_to_video
     Model: veo-3.1-generate-preview
     ...
-    ✅ Video saved: generated_videos/video_20260123_123456.mp4
+    ✅ Video saved: +generated_videos/video_20260123_123456.mp4
     ```
 
     ### With Options
